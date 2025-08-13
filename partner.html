@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner With Us - Joy Africa International Foundation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html"><img src="images/logo.png" alt="Joy Africa Foundation Logo" class="logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="partner.html">Partner</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="index.html#donate" class="btn-donate-header">Donate Now</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="partner" class="container section">
+            <h2>Partner With Us</h2>
+            <p class="subtitle">Join forces with us to create lasting change. We believe in the power of collaboration to transform communities and build a brighter future for the children of Uganda.</p>
+            <form name="partner-form" method="POST" data-netlify="true">
+                <fieldset>
+                    <legend>Section A: Organization / Personal Details</legend>
+                    <div class="form-group">
+                        <label for="partner-name">Full Name (Individual or Contact Person)</label>
+                        <input type="text" id="partner-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="partner-org">Organization / Company Name (if applicable)</label>
+                        <input type="text" id="partner-org" name="organization">
+                    </div>
+                    <div class="form-group">
+                        <label for="partner-email">Email Address</label>
+                        <input type="email" id="partner-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="partner-phone">Phone / WhatsApp Number</label>
+                        <input type="tel" id="partner-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="partner-links">Website / Social Media Links</label>
+                        <input type="url" id="partner-links" name="links">
+                    </div>
+                    <div class="form-group">
+                        <label for="partner-address">Physical Address / Country</label>
+                        <input type="text" id="partner-address" name="address" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Section B: Partnership Interests</legend>
+                    <div class="form-group">
+                        <label>Type of Partnership (tick all that apply)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="partnership_type[]" value="Financial Support"> Financial Support</label>
+                            <label><input type="checkbox" name="partnership_type[]" value="Joint Projects"> Joint Projects</label>
+                            <label><input type="checkbox" name="partnership_type[]" value="Resource Sharing"> Resource Sharing</label>
+                            <label><input type="checkbox" name="partnership_type[]" value="Awareness Campaigns"> Awareness Campaigns</label>
+                            <label><input type="checkbox" name="partnership_type[]" value="Technical Support"> Technical Support</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partner-why">Why do you want to partner with us?</label>
+                        <textarea id="partner-why" name="why_partner" rows="4" required></textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="partner-contribute">How do you hope to contribute?</label>
+                        <textarea id="partner-contribute" name="how_contribute" rows="6" required></textarea>
+                    </div>
+                </fieldset>
+                
+                <button type="submit" class="btn">Submit Partnership Application</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
