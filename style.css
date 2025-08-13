@@ -368,3 +368,74 @@ footer {
 .project-details ul li {
     margin-bottom: 5px;
 }
+
+/* Form Styling */
+form {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    margin-top: 30px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
+
+legend {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 0 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="url"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.checkbox-group, .radio-group {
+    padding-top: 10px;
+}
+
+.checkbox-group label, .radio-group label {
+    display: block;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+form .btn {
+    display: block;
+    width: 100%;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
