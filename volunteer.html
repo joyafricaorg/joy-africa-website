@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer With Us - Joy Africa International Foundation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html"><img src="images/logo.png" alt="Joy Africa Foundation Logo" class="logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="partner.html">Partner</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="index.html#donate" class="btn-donate-header">Donate Now</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="volunteer" class="container section">
+            <h2>Be a Volunteer</h2>
+            <p class="subtitle">Give the gift of your time and skills. Volunteers are the heartbeat of our foundation, bringing passion and energy to our projects and making a direct impact on children's lives.</p>
+            <form name="volunteer-form" method="POST" data-netlify="true">
+                <fieldset>
+                    <legend>Section A: Personal Details</legend>
+                    <div class="form-group">
+                        <label for="volunteer-name">Full Name</label>
+                        <input type="text" id="volunteer-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-dob">Date of Birth</label>
+                        <input type="date" id="volunteer-dob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-gender">Gender</label>
+                        <select id="volunteer-gender" name="gender" required>
+                            <option value="">Select...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-email">Email Address</label>
+                        <input type="email" id="volunteer-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-phone">Phone / WhatsApp Number</label>
+                        <input type="tel" id="volunteer-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-emergency">Emergency Contact Name & Number</label>
+                        <input type="text" id="volunteer-emergency" name="emergency_contact" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Section B: Volunteering Interests</legend>
+                    <div class="form-group">
+                        <label for="volunteer-why">Why do you want to volunteer with us?</label>
+                        <textarea id="volunteer-why" name="why_volunteer" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Skills / Talents you can offer</label>
+                         <div class="checkbox-group">
+                            <label><input type="checkbox" name="skills[]" value="Teaching"> Teaching / Tutoring</label>
+                            <label><input type="checkbox" name="skills[]" value="Child Care"> Child Care</label>
+                            <label><input type="checkbox" name="skills[]" value="Medical"> Medical Assistance</label>
+                            <label><input type="checkbox" name="skills[]" value="Fundraising"> Fundraising</label>
+                            <label><input type="checkbox" name="skills[]" value="Social Media"> Social Media / Photography</label>
+                            <label><input type="checkbox" name="skills[]" value="Construction"> Manual Labor / Construction</label>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Section D: Additional Information</legend>
+                     <div class="form-group">
+                         <label>Do you require accommodation during volunteering?</label>
+                         <div class="radio-group">
+                            <label><input type="radio" name="accommodation" value="Yes" required> Yes</label>
+                            <label><input type="radio" name="accommodation" value="No" required> No</label>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                         <label>I consent to a background check.</label>
+                         <div class="radio-group">
+                            <label><input type="radio" name="background_check" value="Yes" required> Yes</label>
+                            <label><input type="radio" name="background_check" value="No" required> No</label>
+                        </div>
+                     </div>
+                </fieldset>
+                
+                <button type="submit" class="btn">Submit Volunteer Application</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
+    </footer>
+    
+</body>
+</html>
