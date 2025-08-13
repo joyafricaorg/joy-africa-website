@@ -13,14 +13,14 @@
 
     <header>
         <div class="container">
-            <a href="#home"><img src="images/logo.png" alt="Joy Africa Foundation Logo" class="logo"></a>
+            <a href="index.html"><img src="images/logo.png" alt="Joy Africa Foundation Logo" class="logo"></a>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#projects">Our Projects</a></li>
-                    <li><a href="#partner">Partner</a></li>
-                    <li><a href="#volunteer">Volunteer</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="partner.html">Partner</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -30,157 +30,207 @@
 
     <main>
         <section id="home" class="hero" style="background-image: url('images/hero-image.png');">
-            </section>
-        <section id="about" class="container section">
-            </section>
-        <section id="projects" class="section section-gray">
-            </section>
-
-        <section id="partner" class="container section">
-            <h2>Partner With Us</h2>
-            <p class="subtitle">Join forces with us to create lasting change. We believe in the power of collaboration to transform communities and build a brighter future for the children of Uganda.</p>
-            <form name="partner-form" method="POST" data-netlify="true">
-                <fieldset>
-                    <legend>Section A: Organization / Personal Details</legend>
-                    <div class="form-group">
-                        <label for="partner-name">Full Name (Individual or Contact Person)</label>
-                        <input type="text" id="partner-name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="partner-org">Organization / Company Name (if applicable)</label>
-                        <input type="text" id="partner-org" name="organization">
-                    </div>
-                    <div class="form-group">
-                        <label for="partner-email">Email Address</label>
-                        <input type="email" id="partner-email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="partner-phone">Phone / WhatsApp Number</label>
-                        <input type="tel" id="partner-phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="partner-links">Website / Social Media Links</label>
-                        <input type="url" id="partner-links" name="links">
-                    </div>
-                    <div class="form-group">
-                        <label for="partner-address">Physical Address / Country</label>
-                        <input type="text" id="partner-address" name="address" required>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Section B: Partnership Interests</legend>
-                    <div class="form-group">
-                        <label>Type of Partnership (tick all that apply)</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="partnership_type[]" value="Financial Support"> Financial Support</label>
-                            <label><input type="checkbox" name="partnership_type[]" value="Joint Projects"> Joint Projects</label>
-                            <label><input type="checkbox" name="partnership_type[]" value="Resource Sharing"> Resource Sharing</label>
-                            <label><input type="checkbox" name="partnership_type[]" value="Awareness Campaigns"> Awareness Campaigns</label>
-                            <label><input type="checkbox" name="partnership_type[]" value="Technical Support"> Technical Support</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="partner-why">Why do you want to partner with us?</label>
-                        <textarea id="partner-why" name="why_partner" rows="4" required></textarea>
-                    </div>
-                     <div class="form-group">
-                        <label for="partner-contribute">How do you hope to contribute?</label>
-                        <textarea id="partner-contribute" name="how_contribute" rows="6" required></textarea>
-                    </div>
-                </fieldset>
-                
-                <button type="submit" class="btn">Submit Partnership Application</button>
-            </form>
+            <div class="hero-content">
+                <h1>Bringing Hope and Joy to the Children of Uganda</h1>
+                <p>Making Africa a Safe Home for the Young Generation.</p>
+                <a href="#donate" class="btn">Donate Now &rarr;</a>
+                <a href="#projects" class="btn btn-secondary">Our Projects &rarr;</a>
+            </div>
         </section>
 
-        <section id="volunteer" class="section section-gray">
-            <div class="container">
-                <h2>Be a Volunteer</h2>
-                <p class="subtitle">Give the gift of your time and skills. Volunteers are the heartbeat of our foundation, bringing passion and energy to our projects and making a direct impact on children's lives.</p>
-                <form name="volunteer-form" method="POST" data-netlify="true">
-                    <fieldset>
-                        <legend>Section A: Personal Details</legend>
-                        <div class="form-group">
-                            <label for="volunteer-name">Full Name</label>
-                            <input type="text" id="volunteer-name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="volunteer-dob">Date of Birth</label>
-                            <input type="date" id="volunteer-dob" name="dob" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="volunteer-gender">Gender</label>
-                            <select id="volunteer-gender" name="gender" required>
-                                <option value="">Select...</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="volunteer-email">Email Address</label>
-                            <input type="email" id="volunteer-email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="volunteer-phone">Phone / WhatsApp Number</label>
-                            <input type="tel" id="volunteer-phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="volunteer-emergency">Emergency Contact Name & Number</label>
-                            <input type="text" id="volunteer-emergency" name="emergency_contact" required>
-                        </div>
-                    </fieldset>
+        <section id="about" class="container section">
+            <h2>Our Story: Faith, Experience, and a Mission for Change</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <img src="images/founder.jpg" alt="Tumusiime Gonzaga, Founder of Joy Africa" class="founder-photo">
+                    <h3>Meet Our Founder: Tumusiime Gonzaga</h3>
+                    <p>Born in a Kampala slum and educated through the generosity of an NGO, Gonzaga's life experience fuels his passion. He started Joy Africa as a symbol of hope, ensuring other children get the opportunities they deserve.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/collage.png" alt="Collage of children in Joy Africa Foundation programs">
+                </div>
+            </div>
+        </section>
 
-                    <fieldset>
-                        <legend>Section B: Volunteering Interests</legend>
-                        <div class="form-group">
-                            <label for="volunteer-why">Why do you want to volunteer with us?</label>
-                            <textarea id="volunteer-why" name="why_volunteer" rows="4" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Skills / Talents you can offer</label>
-                             <div class="checkbox-group">
-                                <label><input type="checkbox" name="skills[]" value="Teaching"> Teaching / Tutoring</label>
-                                <label><input type="checkbox" name="skills[]" value="Child Care"> Child Care</label>
-                                <label><input type="checkbox" name="skills[]" value="Medical"> Medical Assistance</label>
-                                <label><input type="checkbox" name="skills[]" value="Fundraising"> Fundraising</label>
-                                <label><input type="checkbox" name="skills[]" value="Social Media"> Social Media / Photography</label>
-                                <label><input type="checkbox" name="skills[]" value="Construction"> Manual Labor / Construction</label>
-                            </div>
-                        </div>
-                    </fieldset>
+        <section id="get-involved-hub" class="section section-gray">
+            <div class="container">
+                <h2>Get Involved</h2>
+                <p class="subtitle">You have the power to change a life. Whether you wish to donate, partner with us, or volunteer your time, every action brings us closer to a brighter future for a child in need.</p>
+                <div class="hub-grid">
+                    <a href="#donate" class="hub-card">
+                        <h3>Donate</h3>
+                        <p>Provide immediate support through a financial gift or by donating essential materials.</p>
+                        <span>Make a Donation &rarr;</span>
+                    </a>
+                    <a href="partner.html" class="hub-card">
+                        <h3>Partner With Us</h3>
+                        <p>Collaborate with us on a deeper level as an organization, company, or sponsor to fund major projects.</p>
+                        <span>Become a Partner &rarr;</span>
+                    </a>
+                    <a href="volunteer.html" class="hub-card">
+                        <h3>Be a Volunteer</h3>
+                        <p>Give the invaluable gift of your time and skills to make a direct, hands-on impact on the ground.</p>
+                        <span>Apply to Volunteer &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2>Our Projects</h2>
+                <div class="project-grid">
                     
-                    <fieldset>
-                        <legend>Section D: Additional Information</legend>
-                         <div class="form-group">
-                             <label>Do you require accommodation during volunteering?</label>
-                             <div class="radio-group">
-                                <label><input type="radio" name="accommodation" value="Yes" required> Yes</label>
-                                <label><input type="radio" name="accommodation" value="No" required> No</label>
-                            </div>
-                         </div>
-                         <div class="form-group">
-                             <label>I consent to a background check.</label>
-                             <div class="radio-group">
-                                <label><input type="radio" name="background_check" value="Yes" required> Yes</label>
-                                <label><input type="radio" name="background_check" value="No" required> No</label>
-                            </div>
-                         </div>
-                    </fieldset>
+                    <div class="project-card">
+                        <img src="images/project-house.png" alt="Joy Africa Kids House Project">
+                        <h3>JOY AFRICA KIDS HOUSE</h3>
+                        <p>A comprehensive initiative aimed at providing a safe and nurturing environment for homeless children in Uganda.</p>
+                        <div class="project-details">
+                            <h4>Project Objectives:</h4>
+                            <ul>
+                                <li>Provide a safe and secure shelter for homeless children.</li>
+                                <li>Create a nurturing environment that supports physical, emotional, and educational development.</li>
+                                <li>Offer a playground that promotes physical activity and socialization.</li>
+                                <li>Foster a sense of community and belonging.</li>
+                            </ul>
+                            <h4>Budget: $200,000</h4>
+                            <ul>
+                                <li>Land Acquisition: $45,000</li>
+                                <li>House Construction: $100,000</li>
+                                <li>Playground Construction: $20,000</li>
+                                <li>Furniture & Equipment: $15,000</li>
+                                <li>Project Management: $20,000</li>
+                            </ul>
+                        </div>
+                        <a href="#donate" class="btn">Help Build Their Home</a>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="images/project-water.png" alt="Everyone Can Drink Healthy Project">
+                        <h3>EVERYONE CAN DRINK HEALTHY</h3>
+                        <p>In Uganda, 83% of the population lacks reliable access to safe water. This project combats waterborne diseases by building wells, boreholes, and rainwater tanks.</p>
+                        <div class="project-details">
+                             <h4>Our Plan:</h4>
+                            <p>With your help, we will reduce these numbers by building proper wells, rain collection tanks, boreholes, and teaching communities how to keep their water safe. You can support by donating or by ordering a project T-shirt for $15.</p>
+                            <h4>Budget: $120,000</h4>
+                            <ul>
+                                <li>Wells & Boreholes: $70,000</li>
+                                <li>Rainwater Collection Tanks: $30,000</li>
+                                <li>Hygiene & Safety Training: $10,000</li>
+                                <li>Administration & Logistics: $5,000</li>
+                                <li>Transportation: $5,000</li>
+                            </ul>
+                        </div>
+                        <a href="#donate" class="btn">Give the Gift of Water</a>
+                    </div>
                     
-                    <button type="submit" class="btn">Submit Volunteer Application</button>
-                </form>
+                    <div class="project-card">
+                        <img src="images/project-education.png" alt="Educational Sponsorship Project">
+                        <h3>Educational Sponsorship & Support</h3>
+                        <p>Ensuring every child we encounter has the tools and support to succeed in school and break the cycle of poverty.</p>
+                        <div class="project-details">
+                             <h4>Our Plan:</h4>
+                            <ul>
+                                <li>Pay tuition fees for children out of school due to financial hardship.</li>
+                                <li>Provide school supplies, uniforms, and shoes.</li>
+                                <li>Offer after-school tutoring and mentorship programs.</li>
+                            </ul>
+                            <h4>Annual Budget: $35,000</h4>
+                            <ul>
+                                <li>Tuition Support: $20,000</li>
+                                <li>Supplies & Uniforms: $10,000</li>
+                                <li>Mentorship & Tutoring: $5,000</li>
+                            </ul>
+                        </div>
+                        <a href="#donate" class="btn">Sponsor a Child</a>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="images/project-girls.png" alt="Girls' Dignity Program">
+                        <h3>Girls’ Dignity Program</h3>
+                        <p>Ensuring girls stay in school by providing safe, reusable sanitary pads and vital hygiene education.</p>
+                        <div class="project-details">
+                            <h4>Our Plan:</h4>
+                            <ul>
+                                <li>Distribute sanitary kits and hygiene materials.</li>
+                                <li>Conduct menstrual health education workshops in schools.</li>
+                                <li>Train local women to make sanitary pads for a sustainable community solution.</li>
+                            </ul>
+                            <h4>Annual Budget: $20,000</h4>
+                            <ul>
+                                <li>Materials & Kits: $10,000</li>
+                                <li>Education Workshops: $5,000</li>
+                                <li>Training for Local Women: $5,000</li>
+                            </ul>
+                        </div>
+                        <a href="#donate" class="btn">Empower a Girl</a>
+                    </div>
+                     
+                    <div class="project-card">
+                        <img src="images/project-giveaway.png" alt="Joy Charity Give Away">
+                        <h3>JOY CHARITY GIVE AWAY</h3>
+                        <p>Our upcoming November charity project to provide immediate relief and joy to communities in need.</p>
+                         <div class="project-details">
+                            <h4>Project Aims:</h4>
+                            <ul>
+                                <li>Bless young girls with new and safe sanitary pads.</li>
+                                <li>Provide scholastic materials to children who cannot afford them.</li>
+                                <li>Distribute proper clothing and shoes.</li>
+                                <li>Offer tuition assistance to children out of school.</li>
+                            </ul>
+                            <h4>Project Budget: $10,000</h4>
+                        </div>
+                        <a href="#donate" class="btn">Contribute Now</a>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <section id="get-involved-and-donate-sections-etc">
-            </section>
-        
+        <section id="donate" class="section section-gray">
+             <div class="container">
+                <h2>Your Gift Changes Everything</h2>
+                <div class="donation-methods">
+                    <div class="donation-card">
+                        <h3>1. Donate via Bank Transfer</h3>
+                        <p><strong>Bank Name:</strong> EQUITY BANK UGANDA</p>
+                        <p><strong>Account Name:</strong> GONZAGA TUMUSIIME</p>
+                        <p><strong>Account Number:</strong> 1000102285006</p>
+                        <p class="note">Please email us at joyafrica.org@gmail.com with transaction details so we can thank you!</p>
+                    </div>
+                    <div class="donation-card">
+                        <h3>2. Donate via Mobile Money</h3>
+                        <p>A quick and easy way to give within Uganda.</p>
+                        <p><strong>Mobile Money Number:</strong> +256 775 092 014</p>
+                         <p><strong>Name:</strong> GONZAGA TUMUSIIME</p>
+                    </div>
+                    <div class="donation-card">
+                        <h3>3. Donate Materials</h3>
+                        <p>We gratefully accept clothes, blankets, toys, school supplies, medicine, and instant foods.</p>
+                        <p><strong>Contact us to arrange a donation:</strong></p>
+                        <p>+256 775 092 014</p>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <section id="contact" class="container section">
+            <h2>Get in Touch</h2>
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:joyafrica.org@gmail.com">joyafrica.org@gmail.com</a></p>
+                <p><strong>WhatsApp:</strong> +256 775 092 014</p>
+                <p><strong>Phone Calls:</strong> +256 756 386 352</p>
+            </div>
+            <div class="socials">
+                <a href="https://www.instagram.com/joy_kids.ug" target="_blank">Instagram (Kids)</a>
+                <a href="https://www.instagram.com/joy_africa.foundation" target="_blank">Instagram (Foundation)</a>
+                <a href="https://www.tiktok.com/@joy_africa.foundation" target="_blank">TikTok</a>
+            </div>
+        </section>
     </main>
 
     <footer>
-        </footer>
+        <p>&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
