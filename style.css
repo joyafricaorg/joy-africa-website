@@ -342,3 +342,29 @@ footer {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
+
+/* Project Details Styling */
+.project-details {
+    text-align: left;
+    padding: 0 20px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.project-details h4 {
+    color: var(--primary-color);
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.project-details ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.project-details ul li {
+    margin-bottom: 5px;
+}
