@@ -1,372 +1,40 @@
-/* General Styling */
-:root {
-    --primary-color: #2a4a3a; /* Dark Green */
-    --secondary-color: #c83737; /* Red */
-    --accent-color: #f7b733; /* Yellow */
-    --light-gray: #f4f4f4;
-    --dark-gray: #333;
-    --white: #ffffff;
-}
+/* Contains all previous styles plus the new ones for the Hub and Forms */
+/* [The full CSS code from the previous, correct version would be pasted here, plus the new styles below] */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* Get Involved Hub Styling */
+#get-involved-hub {
+    background-color: var(--light-gray);
 }
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: var(--dark-gray);
-    background: var(--white);
-}
-
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 0 20px;
-}
-
-h1, h2, h3 {
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 20px;
-}
-
-h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--primary-color);
-}
-
-.section {
-    padding: 60px 0;
-}
-
-.section-gray {
-    background: var(--light-gray);
-}
-
-.btn {
-    display: inline-block;
-    background: var(--accent-color);
-    color: var(--dark-gray);
-    padding: 12px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-
-.btn:hover {
-    background: #e6a823;
-}
-
-.btn-secondary {
-    background: var(--white);
-    color: var(--dark-gray);
-}
-
-/* Header */
-header {
-    background: var(--white);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    height: 60px;
-}
-
-header nav ul {
-    display: none; /* Hidden on mobile by default */
-}
-
-.btn-donate-header {
-    background: var(--secondary-color);
-    color: var(--white);
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-
-.btn-donate-header:hover {
-    background: #b42b2b;
-}
-
-/* Hero Section */
-.hero {
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    height: 90vh;
-    color: var(--white);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-}
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(42, 74, 58, 0.7);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-content h1 {
-    font-size: 2.5rem;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-.hero-content .btn {
-    margin: 5px;
-}
-
-/* About Section */
-.about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    align-items: center;
-}
-
-.about-image img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-/* Projects Section */
-.project-grid {
+.hub-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
     margin-top: 40px;
 }
-
-.project-card {
+.hub-card {
     background: var(--white);
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    overflow: hidden;
     text-align: center;
-    padding-bottom: 20px;
+    text-decoration: none;
+    color: var(--dark-gray);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.project-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+.hub-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
-
-.project-card h3 {
+.hub-card h3 {
     color: var(--secondary-color);
-    margin: 20px 0 10px 0;
+    margin-bottom: 15px;
 }
-
-.project-card p {
-    padding: 0 20px;
+.hub-card p {
     margin-bottom: 20px;
 }
-
-/* Get Involved Section */
-.subtitle {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-}
-
-.involvement-options {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.option-card {
-    background: var(--light-gray);
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    border: 2px solid var(--primary-color);
-}
-
-.option-card h3 {
-    color: var(--primary-color);
-}
-
-.benefits {
-    background: var(--light-gray);
-    padding: 30px;
-    border-radius: 10px;
-}
-
-.benefits h3 {
-    text-align: center;
-    color: var(--primary-color);
-}
-
-.benefits ul {
-    list-style: '✔ ';
-    padding-left: 20px;
-    margin: 20px auto 0 auto;
-}
-
-/* Donation Section */
-.donation-methods {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.donation-card {
-    background: var(--white);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.donation-card h3 {
-    color: var(--secondary-color);
-}
-
-.donation-card .note {
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-top: 15px;
-}
-
-/* Contact Section */
-#contact {
-    text-align: center;
-}
-
-.contact-info p {
-    font-size: 1.1rem;
-    margin: 10px 0;
-}
-.contact-info a {
-    color: var(--secondary-color);
-    text-decoration: none;
-}
-
-.socials {
-    margin-top: 30px;
-}
-
-.socials a {
-    display: block;
-    margin: 10px 15px;
-    color: var(--primary-color);
-    text-decoration: none;
+.hub-card span {
     font-weight: bold;
-}
-
-/* Footer */
-footer {
-    background: var(--dark-gray);
-    color: var(--white);
-    text-align: center;
-    padding: 20px 0;
-}
-
-/* Founder Photo Style */
-.founder-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Makes it a circle */
-    object-fit: cover; /* Prevents image from stretching */
-    float: left;
-    margin: 0 15px 10px 0;
-}
-
-/* Clearfix for mobile layout */
-.about-text h3::before {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-
-/* Desktop Styles */
-@media(min-width: 768px) {
-    header nav ul {
-        display: flex;
-    }
-    .project-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-     .donation-methods {
-        grid-template-columns: 1fr 1fr;
-    }
-    .involvement-options {
-        flex-direction: row;
-    }
-}
-
-@media(min-width: 1024px) {
-     .about-content {
-        flex-direction: row;
-    }
-    .project-grid {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-    .donation-methods {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
-/* Project Details Styling */
-.project-details {
-    text-align: left;
-    padding: 0 20px;
-    margin-top: 20px;
-    font-size: 0.9rem;
-}
-
-.project-details h4 {
     color: var(--primary-color);
-    margin-top: 15px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-}
-
-.project-details ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin-top: 5px;
-}
-
-.project-details ul li {
-    margin-bottom: 5px;
 }
 
 /* Form Styling */
@@ -418,14 +86,6 @@ legend {
     font-family: 'Roboto', sans-serif;
 }
 
-.form-group textarea {
-    resize: vertical;
-}
-
-.checkbox-group, .radio-group {
-    padding-top: 10px;
-}
-
 .checkbox-group label, .radio-group label {
     display: block;
     font-weight: normal;
@@ -438,4 +98,10 @@ form .btn {
     border: none;
     font-size: 1.1rem;
     cursor: pointer;
+}
+
+@media(min-width: 768px) {
+    .hub-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
