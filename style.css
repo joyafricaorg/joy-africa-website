@@ -335,3 +335,124 @@ footer a:hover {
     right: 20px;
     z-index: 1001;
 }
+
+/* ADD THESE STYLES TO THE BOTTOM OF YOUR STYLE.CSS FILE */
+
+body.form-page-body {
+    background-color: #f8f9fa; /* Light grey background for the new pages */
+}
+
+.action-section {
+    background-color: #004085;
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+}
+.action-section h2 {
+    color: #fff;
+}
+.action-section .section-intro {
+    color: #e9ecef;
+}
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.action-button {
+    background-color: #ffc107;
+    color: #333;
+    padding: 15px 35px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: all 0.3s;
+}
+.action-button:hover {
+    background-color: #e0a800;
+    transform: translateY(-3px);
+}
+
+.form-section {
+    padding: 60px 0;
+}
+
+form {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px 40px 40px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+form h3 {
+    font-size: 1.5em;
+    color: #0056b3;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ffc107;
+    padding-bottom: 10px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="url"],
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+form fieldset {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+form legend {
+    font-weight: 600;
+    padding: 0 10px;
+    color: #0056b3;
+}
+form fieldset label {
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+form input[type="checkbox"],
+form input[type="radio"] {
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+form .submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 30px;
+}
