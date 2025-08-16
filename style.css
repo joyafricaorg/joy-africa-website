@@ -1,215 +1,142 @@
-/* ==== JOY AFRICA FOUNDATION - NEW VIBRANT STYLE V1.0 ==== */
+/* ==== JOY AFRICA FOUNDATION - V3.0 INSPIRED DESIGN ==== */
 
-/* -- 1. FONTS & COLORS -- */
-/* We are importing a new, elegant font for headings */
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Poppins:wght@300;400;600&display=swap');
+/* -- 1. SETUP: FONTS, COLORS, AND GENERAL STYLES -- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Lato:wght@400;700&display=swap');
 
-/* Defining our new color palette for easy changes later */
 :root {
-    --primary-blue: #1d3557;   /* A deep, trustworthy navy blue for text */
-    --accent-orange: #f77f00;  /* A joyful, energetic orange for buttons */
-    --accent-yellow: #fcbf49;  /* A warm yellow for highlights */
-    --light-bg: #fefae0;      /* A warm, earthy cream for backgrounds */
-    --white: #ffffff;         /* Clean white */
-    --dark-grey: #454545;     /* Softer text color */
+    --primary-dark-teal: #1e3a3a;  /* Professional, deep background color from your example */
+    --accent-orange: #e85d04;      /* Vibrant, hopeful orange for action items */
+    --light-background: #f8f9fa;  /* Clean, light grey for text sections */
+    --white: #ffffff;
+    --text-light: #f1f1f1;       /* Soft white for text on dark backgrounds */
+    --text-dark: #333333;        /* Standard dark text */
 }
 
-/* -- 2. GENERAL STYLES -- */
 body {
-    /* Poppins is a clean, professional font for paragraphs */
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif; /* Clean and highly readable, like the example */
     margin: 0;
-    padding: 0;
-    color: var(--dark-grey);
+    color: var(--text-dark);
     background-color: var(--white);
     line-height: 1.7;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .container {
     width: 90%;
     max-width: 1100px;
-    margin: auto;
-    overflow: hidden;
+    margin: 0 auto;
 }
 
-/* Headings use the elegant 'Lora' font for a professional but gentle feel */
 h1, h2, h3, h4 {
-    font-family: 'Lora', serif;
-    color: var(--primary-blue);
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 2.8em;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-h3 {
-    font-size: 1.8em;
+    font-family: 'Montserrat', sans-serif; /* Strong, modern, and trustworthy like the example */
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--primary-dark-teal);
 }
 
 section {
     padding: 80px 0;
+    border-bottom: 1px solid #eee;
 }
 
-/* Adds the earthy cream background to every other section for warmth */
-section:nth-child(even) {
-    background-color: var(--light-bg);
-}
-
-
-/* -- 3. HEADER & NAVIGATION -- */
+/* -- 2. HEADER & NAVIGATION -- */
 header {
     background: var(--white);
-    border-bottom: 1px solid #eee;
     padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-header .logo img {
-    height: 55px;
-    margin-right: 15px;
-}
-header h1 {
-    font-size: 1.1em;
-    margin: 0;
-}
-header nav a {
-    text-decoration: none;
-    color: var(--primary-blue);
-    font-weight: 600;
-    margin-left: 30px;
-    transition: color 0.3s;
-}
-header nav a:hover {
-    color: var(--accent-orange);
-}
-
-
-/* -- 4. HERO SECTION -- */
-.hero {
-    /* The hero image is set in your index.html file */
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
-    padding: 120px 0;
-    text-align: center;
-    position: relative;
-}
-.hero::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(29, 53, 87, 0.6); /* Dark blue overlay */
-    z-index: 1;
-}
-.hero-text {
-    z-index: 2;
-    position: relative;
-}
-.hero-text h2 {
-    font-size: 3.5em;
-    color: var(--white);
-    margin-bottom: 20px;
-}
-.cta-button {
+header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; text-decoration: none; color: var(--primary-dark-teal); font-weight: 700; }
+.logo img { height: 60px; margin-right: 15px; }
+nav a { text-decoration: none; color: var(--primary-dark-teal); margin-left: 30px; font-weight: 700; transition: color 0.3s; }
+nav a:hover { color: var(--accent-orange); }
+.nav-button {
     background-color: var(--accent-orange);
     color: var(--white);
-    padding: 15px 35px;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 50px; /* Rounded corners for a playful feel */
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-.cta-button:hover {
-    background-color: var(--accent-yellow);
-    color: var(--primary-blue);
-    transform: translateY(-3px);
-}
-
-
-/* -- 5. PROJECT CARDS -- */
-/* This makes the project cards feel clean and modern */
-.project-card {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    margin-bottom: 60px;
-    background: var(--white);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
     transition: all 0.3s;
 }
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.2);
-}
-.project-card.reverse {
-    flex-direction: row-reverse;
-}
-.project-card .project-images {
-    flex: 1;
-}
-.project-card .project-images img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.project-card .project-details {
-    flex: 1;
-    padding: 40px;
-}
-.project-details ul {
-    list-style: none;
-    padding: 0;
-}
-.project-details li::before {
-    content: '✓';
-    color: var(--accent-orange);
-    margin-right: 10px;
-    font-weight: 600;
-}
-
-
-/* -- 6. DONATION & FOOTER -- */
-#donate {
-    background-color: var(--primary-blue);
-}
-#donate h2 {
+.nav-button:hover {
+    background-color: #d05303;
     color: var(--white);
 }
-.donation-methods {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+
+/* -- 3. HERO SECTION -- */
+#hero {
+    background-color: var(--primary-dark-teal);
+    color: var(--text-light);
+    padding: 100px 20px;
     text-align: center;
 }
-.method-card {
-    background: var(--white);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: var(--white);
+    margin: 0;
 }
-.method-card h3 {
-    border-bottom: 3px solid var(--accent-yellow);
-    padding-bottom: 10px;
+.hero-content p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 20px auto 40px;
+    opacity: 0.9;
+}
+.hero-button {
+    background: var(--accent-orange);
+    color: var(--white);
+    padding: 18px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+.hero-button:hover {
+    background: var(--white);
+    color: var(--primary-dark-teal);
+    transform: scale(1.05);
 }
 
-footer {
-    background-color: var(--light-bg);
-    padding: 40px 0;
+/* -- 4. CONTENT SECTIONS -- */
+#about {
+    background-color: var(--light-background);
+}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-image img { width: 100%; border-radius: 12px; }
+
+/* -- 5. PROJECTS -- */
+#projects {
+    background-color: var(--white);
+}
+.project-card {
+    background: var(--light-background);
+    border-left: 7px solid var(--accent-orange);
+    border-radius: 10px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.project-image-container { display: grid; grid-template-columns: 1fr 1fr; }
+.project-image-container img { width: 100%; height: 300px; object-fit: cover; }
+.project-details { padding: 30px 40px 40px 40px; }
+.budget { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-weight: 700; color: var(--primary-dark-teal); }
+
+/* -- 6. DONATION SECTION -- */
+#donate {
+    background-color: var(--primary-dark-teal);
+    color: var(--text-light);
     text-align: center;
-    border-top: 5px solid var(--accent-yellow);
+}
+#donate h2, #donate .section-intro { color: var(--white); }
+.donation-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+.method-card { background: var(--light-background); color: var(--text-dark); padding: 40px; border-radius: 12px; }
+
+/* -- 7. FOOTER -- */
+footer {
+    background: #e9ecef;
+    color: #555;
+    padding: 60px 0;
+    text-align: center;
 }
