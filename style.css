@@ -1,458 +1,215 @@
-/* General Body Styles */
+/* ==== JOY AFRICA FOUNDATION - NEW VIBRANT STYLE V1.0 ==== */
+
+/* -- 1. FONTS & COLORS -- */
+/* We are importing a new, elegant font for headings */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Poppins:wght@300;400;600&display=swap');
+
+/* Defining our new color palette for easy changes later */
+:root {
+    --primary-blue: #1d3557;   /* A deep, trustworthy navy blue for text */
+    --accent-orange: #f77f00;  /* A joyful, energetic orange for buttons */
+    --accent-yellow: #fcbf49;  /* A warm yellow for highlights */
+    --light-bg: #fefae0;      /* A warm, earthy cream for backgrounds */
+    --white: #ffffff;         /* Clean white */
+    --dark-grey: #454545;     /* Softer text color */
+}
+
+/* -- 2. GENERAL STYLES -- */
 body {
+    /* Poppins is a clean, professional font for paragraphs */
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
-    background-color: #f9f9f9;
-    line-height: 1.6;
+    color: var(--dark-grey);
+    background-color: var(--white);
+    line-height: 1.7;
+    font-size: 16px;
 }
 
 .container {
-    width: 85%;
+    width: 90%;
+    max-width: 1100px;
     margin: auto;
     overflow: hidden;
-    padding: 20px 0;
 }
 
-/* Header and Navigation */
+/* Headings use the elegant 'Lora' font for a professional but gentle feel */
+h1, h2, h3, h4 {
+    font-family: 'Lora', serif;
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.8em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.8em;
+}
+
+section {
+    padding: 80px 0;
+}
+
+/* Adds the earthy cream background to every other section for warmth */
+section:nth-child(even) {
+    background-color: var(--light-bg);
+}
+
+
+/* -- 3. HEADER & NAVIGATION -- */
 header {
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+    background: var(--white);
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    width: 100%;
 }
-
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-header .logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #333;
-}
-
 header .logo img {
-    height: 50px;
+    height: 55px;
     margin-right: 15px;
 }
-
 header h1 {
+    font-size: 1.1em;
     margin: 0;
-    font-size: 1.2em;
-    font-weight: 600;
 }
-
-header nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-header nav ul li {
-    display: inline-block;
-    margin-left: 25px;
-}
-
-header nav ul li a {
+header nav a {
     text-decoration: none;
-    color: #555;
+    color: var(--primary-blue);
     font-weight: 600;
+    margin-left: 30px;
     transition: color 0.3s;
 }
-
-header nav ul li a:hover {
-    color: #0056b3;
+header nav a:hover {
+    color: var(--accent-orange);
 }
 
-/* Hero Section */
-.hero-image {
-    height: 70vh;
+
+/* -- 4. HERO SECTION -- */
+.hero {
+    /* The hero image is set in your index.html file */
     background-size: cover;
     background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: var(--white);
+    padding: 120px 0;
     text-align: center;
-    color: white;
     position: relative;
 }
-
-.hero-image::after { /* Dark overlay for text readability */
+.hero::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(29, 53, 87, 0.6); /* Dark blue overlay */
     z-index: 1;
 }
-
 .hero-text {
     z-index: 2;
-    max-width: 800px;
-    padding: 20px;
+    position: relative;
 }
-
 .hero-text h2 {
-    font-size: 2.8em;
+    font-size: 3.5em;
+    color: var(--white);
     margin-bottom: 20px;
 }
-
-.hero-text p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-}
-
 .cta-button {
-    background-color: #ffc107; /* A warm, joyful yellow */
-    color: #333;
-    padding: 15px 30px;
+    background-color: var(--accent-orange);
+    color: var(--white);
+    padding: 15px 35px;
     text-decoration: none;
     font-weight: 600;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 50px; /* Rounded corners for a playful feel */
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
-
 .cta-button:hover {
-    background-color: #e0a800;
-    transform: translateY(-2px);
+    background-color: var(--accent-yellow);
+    color: var(--primary-blue);
+    transform: translateY(-3px);
 }
 
-/* General Section Styling */
-section {
-    padding: 60px 0;
-}
 
-h2 {
-    text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #004085; /* A trustworthy blue */
-}
-
-.section-intro {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 40px auto;
-    color: #555;
-}
-
-/* About Us Section */
-#about .about-content {
+/* -- 5. PROJECT CARDS -- */
+/* This makes the project cards feel clean and modern */
+.project-card {
     display: flex;
     gap: 40px;
     align-items: center;
+    margin-bottom: 60px;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
 }
-#about .about-text { flex: 1; }
-#about .about-image { flex: 1; }
-#about .about-image img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-#about ul {
-    list-style-type: '✔ ';
-    padding-left: 20px;
-}
-
-/* Founder Section */
-.founder-section {
-    margin-top: 60px;
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    background-color: #e9ecef;
-    padding: 40px;
-    border-radius: 8px;
-}
-.founder-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid #fff;
-}
-.founder-bio h3 {
-    margin-top: 0;
-    color: #004085;
-}
-
-/* Projects Section */
-.project-card {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 50px;
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    align-items: center;
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.2);
 }
 .project-card.reverse {
     flex-direction: row-reverse;
 }
 .project-card .project-images {
     flex: 1;
-    display: flex;
-    gap: 15px;
 }
 .project-card .project-images img {
-    width: 50%;
-    border-radius: 8px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
 }
 .project-card .project-details {
-    flex: 1.2;
+    flex: 1;
+    padding: 40px;
 }
-.project-card h3 {
-    color: #0056b3;
-    font-size: 1.8em;
-    margin-top: 0;
+.project-details ul {
+    list-style: none;
+    padding: 0;
 }
-.project-card ul {
-    padding-left: 20px;
-    list-style-type: '— ';
+.project-details li::before {
+    content: '✓';
+    color: var(--accent-orange);
+    margin-right: 10px;
+    font-weight: 600;
 }
 
-/* Donation Section */
+
+/* -- 6. DONATION & FOOTER -- */
 #donate {
-    background-color: #e9f5ff; /* Light blue background for emphasis */
-    text-align: center;
+    background-color: var(--primary-blue);
 }
-
-.donation-options {
-    margin: 40px 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+#donate h2 {
+    color: var(--white);
 }
-
-.donation-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    font-size: 1.1em;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.donation-button:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
-}
-
-.donation-selection-message {
-    font-size: 1.2em;
-    color: #004085;
-    margin: 30px 0;
-    font-weight: 600;
-}
-
 .donation-methods {
     display: flex;
-    gap: 20px;
     justify-content: center;
-    text-align: left;
-    flex-wrap: wrap;
-    margin-top: 20px;
+    gap: 30px;
+    text-align: center;
 }
-
 .method-card {
-    background: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    flex: 1;
-    min-width: 280px;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 .method-card h3 {
-    margin-top: 0;
-    color: #0056b3;
-    border-bottom: 2px solid #ffc107;
+    border-bottom: 3px solid var(--accent-yellow);
     padding-bottom: 10px;
 }
 
-/* Footer/Contact Section */
 footer {
-    background-color: #343a40;
-    color: #f8f9fa;
-    text-align: center;
+    background-color: var(--light-bg);
     padding: 40px 0;
-}
-
-footer h3 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-}
-
-footer a {
-    color: #ffc107;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-.contact-info p {
-    margin: 10px 0;
-    font-size: 1.1em;
-}
-
-.social-media {
-    margin: 20px 0;
-}
-
-.social-media a {
-    margin: 0 15px;
-    font-size: 1.1em;
-    font-weight: 600;
-}
-
-.copyright {
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #adb5bd;
-}
-
-/* Language Translator Style */
-#google_translate_element {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    z-index: 1001;
-}
-
-/* ADD THESE STYLES TO THE BOTTOM OF YOUR STYLE.CSS FILE */
-
-body.form-page-body {
-    background-color: #f8f9fa; /* Light grey background for the new pages */
-}
-
-.action-section {
-    background-color: #004085;
-    color: #fff;
-    padding: 60px 0;
     text-align: center;
-}
-.action-section h2 {
-    color: #fff;
-}
-.action-section .section-intro {
-    color: #e9ecef;
-}
-.action-buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-.action-button {
-    background-color: #ffc107;
-    color: #333;
-    padding: 15px 35px;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 5px;
-    font-size: 1.1em;
-    transition: all 0.3s;
-}
-.action-button:hover {
-    background-color: #e0a800;
-    transform: translateY(-3px);
-}
-
-.form-section {
-    padding: 60px 0;
-}
-
-form {
-    max-width: 800px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 20px 40px 40px 40px;
-    border-radius: 8px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-}
-
-form h3 {
-    font-size: 1.5em;
-    color: #0056b3;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ffc107;
-    padding-bottom: 10px;
-}
-
-form label {
-    display: block;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #333;
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="tel"],
-form input[type="url"],
-form input[type="date"],
-form textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-top: 5px;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-form fieldset {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-}
-form legend {
-    font-weight: 600;
-    padding: 0 10px;
-    color: #0056b3;
-}
-form fieldset label {
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-form input[type="checkbox"],
-form input[type="radio"] {
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-
-form .submit-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 30px;
+    border-top: 5px solid var(--accent-yellow);
 }
