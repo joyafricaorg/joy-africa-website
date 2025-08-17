@@ -1,142 +1,299 @@
-/* ==== JOY AFRICA FOUNDATION - V3.0 INSPIRED DESIGN ==== */
+/* ==== JOY AFRICA FOUNDATION - FINAL PROFESSIONAL DESIGN ==== */
 
 /* -- 1. SETUP: FONTS, COLORS, AND GENERAL STYLES -- */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
 
 :root {
-    --primary-dark-teal: #1e3a3a;  /* Professional, deep background color from your example */
-    --accent-orange: #e85d04;      /* Vibrant, hopeful orange for action items */
-    --light-background: #f8f9fa;  /* Clean, light grey for text sections */
+    --primary-blue: #0B2447;      /* A deep, professional, trustworthy navy blue */
+    --accent-orange: #F28C28;     /* A vibrant, joyful, and hopeful sunrise orange */
+    --light-background: #F8F7F4;  /* A warm, earthy, and clean off-white */
     --white: #ffffff;
-    --text-light: #f1f1f1;       /* Soft white for text on dark backgrounds */
-    --text-dark: #333333;        /* Standard dark text */
+    --text-color: #333333;
+    --text-light: #f1f1f1;
 }
 
 body {
-    font-family: 'Lato', sans-serif; /* Clean and highly readable, like the example */
+    font-family: 'Roboto', sans-serif; /* Clean, modern, and highly readable */
     margin: 0;
-    color: var(--text-dark);
+    color: var(--text-color);
     background-color: var(--white);
-    line-height: 1.7;
+    line-height: 1.8;
     font-size: 18px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .container {
     width: 90%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Montserrat', sans-serif; /* Strong, modern, and trustworthy like the example */
-    font-weight: 900;
+    font-family: 'Oswald', sans-serif; /* Strong, bold, and modern for headings */
+    font-weight: 700;
     line-height: 1.2;
-    color: var(--primary-dark-teal);
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 section {
-    padding: 80px 0;
-    border-bottom: 1px solid #eee;
+    padding: 100px 0;
 }
+
+.section-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: -30px auto 60px;
+    font-size: 1.1rem;
+    color: #666;
+}
+
 
 /* -- 2. HEADER & NAVIGATION -- */
 header {
     background: var(--white);
     padding: 15px 0;
-    position: sticky; top: 0; z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.07);
 }
-header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { display: flex; align-items: center; text-decoration: none; color: var(--primary-dark-teal); font-weight: 700; }
-.logo img { height: 60px; margin-right: 15px; }
-nav a { text-decoration: none; color: var(--primary-dark-teal); margin-left: 30px; font-weight: 700; transition: color 0.3s; }
-nav a:hover { color: var(--accent-orange); }
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary-blue);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 0.9em;
+    line-height: 1.2;
+}
+.logo img {
+    height: 60px;
+    margin-right: 15px;
+}
+nav a {
+    text-decoration: none;
+    color: var(--primary-blue);
+    margin-left: 35px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+nav a:hover {
+    color: var(--accent-orange);
+}
 .nav-button {
     background-color: var(--accent-orange);
     color: var(--white);
     padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: 700;
-    transition: all 0.3s;
+    border-radius: 50px;
+    transition: all 0.3s ease;
 }
 .nav-button:hover {
-    background-color: #d05303;
+    background-color: var(--primary-blue);
     color: var(--white);
 }
 
+
 /* -- 3. HERO SECTION -- */
 #hero {
-    background-color: var(--primary-dark-teal);
-    color: var(--text-light);
-    padding: 100px 20px;
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    color: var(--white);
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(11, 36, 71, 0.7); /* Dark blue overlay for text readability */
+}
+.hero-content {
+    position: relative;
+    max-width: 850px;
 }
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     color: var(--white);
-    margin: 0;
+    margin: 0 0 20px 0;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 .hero-content p {
-    font-size: 1.3rem;
-    max-width: 700px;
-    margin: 20px auto 40px;
+    font-size: 1.4rem;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 40px;
     opacity: 0.9;
 }
 .hero-button {
     background: var(--accent-orange);
     color: var(--white);
-    padding: 18px 40px;
-    border-radius: 8px;
+    padding: 20px 45px;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
     transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-transform: uppercase;
 }
 .hero-button:hover {
     background: var(--white);
-    color: var(--primary-dark-teal);
+    color: var(--primary-blue);
     transform: scale(1.05);
 }
 
-/* -- 4. CONTENT SECTIONS -- */
-#about {
+
+/* -- 4. FOUNDER & ABOUT SECTION -- */
+#founder, #about {
     background-color: var(--light-background);
 }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.about-image img { width: 100%; border-radius: 12px; }
+.founder-grid, .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: center;
+}
+.founder-image img, .about-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.3);
+}
+.founder-text h2, .about-text h2 {
+    margin-top: 0;
+    font-size: 3rem;
+}
 
-/* -- 5. PROJECTS -- */
+
+/* -- 5. PROJECTS SECTION -- */
 #projects {
     background-color: var(--white);
 }
 .project-card {
     background: var(--light-background);
-    border-left: 7px solid var(--accent-orange);
-    border-radius: 10px;
-    margin-bottom: 50px;
+    border-radius: 16px;
+    margin-bottom: 60px;
+    box-shadow: 0 15px 40px rgba(11, 36, 71, 0.08);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border: 1px solid #eee;
 }
-.project-image-container { display: grid; grid-template-columns: 1fr 1fr; }
-.project-image-container img { width: 100%; height: 300px; object-fit: cover; }
-.project-details { padding: 30px 40px 40px 40px; }
-.budget { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-weight: 700; color: var(--primary-dark-teal); }
+.project-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.project-images img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+.project-images img:only-child {
+    grid-column: 1 / -1;
+    height: 450px;
+}
+.project-content {
+    padding: 40px;
+}
+.project-content h3 {
+    margin-top: 0;
+    font-size: 2rem;
+}
+.budget {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid var(--accent-orange);
+}
+.budget h4 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    color: #888;
+}
+.budget p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+.budget ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
 
 /* -- 6. DONATION SECTION -- */
 #donate {
-    background-color: var(--primary-dark-teal);
-    color: var(--text-light);
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+#donate h2, #donate .section-intro {
+    color: var(--white);
+}
+.donation-methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 50px;
+}
+.method-card {
+    background: var(--white);
+    color: var(--text-color);
+    padding: 40px;
+    border-radius: 12px;
     text-align: center;
 }
-#donate h2, #donate .section-intro { color: var(--white); }
-.donation-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-.method-card { background: var(--light-background); color: var(--text-dark); padding: 40px; border-radius: 12px; }
+.method-card h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.method-card .fa-university, .method-card .fa-mobile-alt {
+    color: var(--accent-orange);
+    font-size: 1.5rem;
+}
 
 /* -- 7. FOOTER -- */
 footer {
-    background: #e9ecef;
-    color: #555;
+    background-color: #1a1a1a;
+    color: #a0a0a0;
     padding: 60px 0;
     text-align: center;
+}
+footer h3 {
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+}
+.footer-icons {
+    margin: 30px 0;
+}
+.footer-icons a {
+    color: var(--white);
+    font-size: 1.8rem;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+.footer-icons a:hover {
+    color: var(--accent-orange);
+}
+.copyright {
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 1px solid #444;
+    padding-top: 40px;
 }
