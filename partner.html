@@ -6,7 +6,6 @@
     <title>Partner With Us - JOY AFRICA INTERNATIONAL FOUNDATION</title>
     
     <link rel="stylesheet" href="style.css">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -34,28 +33,66 @@
             <form action="YOUR_FORMSPREE_PARTNER_URL" method="POST">
                 
                 <h3>Section A: Organization / Personal Details</h3>
-                <label for="partner-name">Full Name (or Contact Person)</label>
-                <input type="text" id="partner-name" name="Full Name" required>
+                <label for="p_name">Full Name (Individual or Contact Person)</label>
+                <input type="text" id="p_name" name="Full Name" required>
 
-                <label for="partner-org">Organization / Company Name</label>
-                <input type="text" id="partner-org" name="Organization">
+                <label for="p_org">Organization / Company Name (if applicable)</label>
+                <input type="text" id="p_org" name="Organization">
 
-                <label for="partner-email">Email Address</label>
-                <input type="email" id="partner-email" name="Email" required>
+                <label for="p_role">Position / Role</label>
+                <input type="text" id="p_role" name="Position / Role">
 
-                <label for="partner-phone">Phone / WhatsApp Number</label>
-                <input type="tel" id="partner-phone" name="Phone">
+                <label for="p_email">Email Address</label>
+                <input type="email" id="p_email" name="Email" required>
+
+                <label for="p_phone">Phone / WhatsApp Number</label>
+                <input type="tel" id="p_phone" name="Phone / WhatsApp">
+
+                <label for="p_social">Website / Social Media Links</label>
+                <input type="url" id="p_social" name="Website / Social Media">
+
+                <label for="p_address">Physical Address / Country</label>
+                <input type="text" id="p_address" name="Address / Country">
 
                 <h3>Section B: Partnership Interests</h3>
                 <fieldset>
-                    <legend>Type of Partnership (select all that apply)</legend>
+                    <legend>Type of Partnership (tick all that apply)</legend>
                     <label><input type="checkbox" name="Partnership Type" value="Financial Support"> Financial Support / Sponsorship</label>
                     <label><input type="checkbox" name="Partnership Type" value="Joint Projects"> Joint Projects / Programs</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Resource Sharing"> Resource Sharing</label>
+                    <label><input type="checkbox" name="Partnership Type" value="Resource Sharing"> Resource Sharing (materials, equipment, etc.)</label>
+                    <label><input type="checkbox" name="Partnership Type" value="Awareness Campaign"> Awareness Campaign Collaboration</label>
+                    <label><input type="checkbox" name="Partnership Type" value="Technical Support"> Technical / Professional Support</label>
+                    <label>Other (please specify) <input type="text" name="Partnership Type (Other)"></label>
                 </fieldset>
 
-                <label for="partner-reason">Why do you want to partner with us?</label>
-                <textarea id="partner-reason" name="Reason to Partner" rows="5"></textarea>
+                <label for="p_why">Why do you want to partner with JOY AFRICA INTERNATIONAL FOUNDATION? (short answer)</label>
+                <textarea id="p_why" name="Reason to Partner" rows="4"></textarea>
+
+                <label for="p_contrib">How do you hope to contribute? (detailed answer)</label>
+                <textarea id="p_contrib" name="Contribution" rows="6"></textarea>
+                
+                <fieldset>
+                    <legend>Areas of interest (tick all that apply)</legend>
+                    <label><input type="checkbox" name="Area of Interest" value="Children’s Shelter"> Children’s Shelter</label>
+                    <label><input type="checkbox" name="Area of Interest" value="Education"> Education for Underprivileged & Disabled Children</label>
+                    <label><input type="checkbox" name="Area of Interest" value="Clean Water"> Clean Water Projects</label>
+                    <label><input type="checkbox" name="Area of Interest" value="Youth Empowerment"> Youth Empowerment</label>
+                    <label><input type="checkbox" name="Area of Interest" value="Health Services"> Health Services</label>
+                    <label>Other (please specify) <input type="text" name="Area of Interest (Other)"></label>
+                </fieldset>
+
+                <h3>Section C: Additional Information</h3>
+                <label for="p_prev">Previous partnerships or similar projects done (optional)</label>
+                <input type="text" id="p_prev" name="Previous Partnerships">
+
+                <label for="p_duration">Expected duration of partnership</label>
+                <input type="text" id="p_duration" name="Partnership Duration">
+
+                <label for="p_comm">Preferred communication method</label>
+                <input type="text" id="p_comm" name="Communication Method">
+
+                <label for="p_reqs">Any special requirements or agreements?</label>
+                <textarea id="p_reqs" name="Special Requirements" rows="4"></textarea>
 
                 <button type="submit">Submit Partnership Application</button>
             </form>
