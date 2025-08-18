@@ -11,6 +11,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .expandable-image {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .expandable-image:hover {
+            opacity: 0.7;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+    </style>
 </head>
 <body>
 
@@ -44,7 +99,7 @@
             <div class="container">
                 <div class="founder-grid">
                     <div class="founder-image">
-                        <img src="images/founder.jpg" alt="Founder, Tumusiime Gonzaga">
+                        <img src="images/founder.jpg" alt="Founder, Tumusiime Gonzaga" class="expandable-image">
                     </div>
                     <div class="founder-text">
                         <h2>Meet Our Founder</h2>
@@ -62,7 +117,7 @@
                 <p class="section-intro">Your support brings these projects to life. Each one is a detailed plan for a better future.</p>
                 
                 <div class="project-card">
-                    <div class="project-images"><img src="images/house1.jpg" alt="Joy Africa Kids House"><img src="images/house2.jpg" alt="Children playing safely"></div>
+                    <div class="project-images"><img src="images/house1.jpg" alt="Joy Africa Kids House" class="expandable-image"><img src="images/house2.jpg" alt="Children playing safely" class="expandable-image"></div>
                     <div class="project-content">
                         <h3>1. The JOY AFRICA KIDS HOUSE</h3>
                         <p><strong>Goal:</strong> To provide a safe and nurturing environment for homeless children in Uganda. The project involves buying land and constructing a house with a playground, offering a holistic approach to supporting their physical, emotional, and educational needs.</p>
@@ -81,7 +136,7 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-images"><img src="images/water1.jpg" alt="Clean water project"><img src="images/water2.jpg" alt="Children drinking clean water"></div>
+                    <div class="project-images"><img src="images/water1.jpg" alt="Clean water project" class="expandable-image"><img src="images/water2.jpg" alt="Children drinking clean water" class="expandable-image"></div>
                     <div class="project-content">
                         <h3>2. EVERYONE CAN DRINK HEALTHY</h3>
                         <p><strong>Goal:</strong> To combat the water crisis where 38 million people in Uganda lack access to a reliable, safely managed source of water. We will build proper wells, rainwater collection tanks, and boreholes, and teach communities how to keep their water safe.</p>
@@ -100,7 +155,7 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-images"><img src="images/education1.jpg" alt="Child studying"><img src="images/education2.jpg" alt="Children in classroom"></div>
+                    <div class="project-images"><img src="images/education1.jpg" alt="Child studying" class="expandable-image"><img src="images/education2.jpg" alt="Children in classroom" class="expandable-image"></div>
                     <div class="project-content">
                         <h3>3. Educational Sponsorship & Support Program</h3>
                         <p><strong>Goal:</strong> To ensure every child we encounter has the tools and support to succeed in school. The plan is to pay tuition fees for children out of school due to financial hardship, provide school supplies, uniforms, shoes, and offer after-school tutoring and mentorship programs.</p>
@@ -117,7 +172,7 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-images"><img src="images/girl.jpg" alt="Girls' Dignity Program"></div>
+                    <div class="project-images"><img src="images/girl.jpg" alt="Girls' Dignity Program" class="expandable-image"></div>
                     <div class="project-content">
                         <h3>4. Girls’ Dignity Program</h3>
                         <p><strong>Goal:</strong> To ensure girls stay in school by providing safe, reusable sanitary pads and hygiene education. We will distribute sanitary kits, conduct menstrual health education in schools, and train local women to make sanitary pads for sustainability.</p>
@@ -134,7 +189,7 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-images"><img src="images/giveaway1.jpg" alt="Charity giveaway event"><img src="images/giveaway2.jpg" alt="Distributing supplies"></div>
+                    <div class="project-images"><img src="images/giveaway1.jpg" alt="Charity giveaway event" class="expandable-image"><img src="images/giveaway2.jpg" alt="Distributing supplies" class="expandable-image"></div>
                     <div class="project-content">
                         <h3>5. JOY CHARITY GIVE AWAY</h3>
                         <p><strong>Goal:</strong> Our upcoming charity giveaway project this November aims to bless young girls with new sanitary pads, provide scholastic materials to children who cannot afford them, distribute proper clothing and shoes, and offer tuition assistance to children out of school due to financial challenges.</p>
@@ -143,7 +198,7 @@
                 </div>
 
                  <div class="project-card">
-                    <div class="project-images"><img src="images/collage.jpg" alt="A collage of children from the foundation"></div>
+                    <div class="project-images"><img src="images/collage.jpg" alt="A collage of children from the foundation" class="expandable-image"></div>
                     <div class="project-content">
                         <h3>Our Community</h3>
                         <p>Every photo tells a story of hope, resilience, and joy. Our mission is written on the faces of these incredible children, and your support helps us write the next chapter.</p>
@@ -178,6 +233,36 @@
             <p class="copyright">&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        var images = document.getElementsByClassName("expandable-image");
+
+        for (var i = 0; i < images.length; i++) {
+            images[i].onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        }
+
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
