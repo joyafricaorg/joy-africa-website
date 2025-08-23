@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteer With Us - JOY AFRICA INTERNATIONAL FOUNDATION</title>
-    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="form-page">
-
     <header>
         <div class="container">
             <a href="index.html" class="logo">
@@ -29,40 +27,77 @@
             </nav>
         </div>
     </header>
-
     <main class="form-container">
         <div class="container">
             <h2>Become a Volunteer</h2>
             <p class="section-intro">Lend your time and talent to make a direct impact. Join our team to bring hope and joy to those in need.</p>
-            
             <form action="https://formspree.io/f/xqaljaqv" method="POST">
                 <h3>Section A: Personal Details</h3>
                 <label for="v_name">Full Name</label>
                 <input type="text" id="v_name" name="Full Name" required>
                 <label for="v_dob">Date of Birth</label>
                 <input type="date" id="v_dob" name="Date of Birth">
-
                 <label for="v_gender">Gender</label>
                 <input type="text" id="v_gender" name="Gender">
-                
                 <label for="v_nat">Nationality</label>
                 <input type="text" id="v_nat" name="Nationality">
-
                 <label for="v_email">Email Address</label>
                 <input type="email" id="v_email" name="Email" required>
-
                 <label for="v_phone">Phone / WhatsApp Number</label>
                 <input type="tel" id="v_phone" name="Phone / WhatsApp">
-                
+                <label for="v_address">Physical Address / Country</label>
+                <input type="text" id="v_address" name="Address / Country">
+                <label for="v_emergency">Emergency Contact Name & Number</label>
+                <input type="text" id="v_emergency" name="Emergency Contact">
                 <h3>Section B: Volunteering Interests</h3>
-                <label for="v_why">Why do you want to volunteer with JOY AFRICA INTERNATIONAL FOUNDATION?</label>
+                <label for="v_why">Why do you want to volunteer with JOY AFRICA INTERNATIONAL FOUNDATION? (short answer)</label>
                 <textarea id="v_why" name="Reason to Volunteer" rows="4"></textarea>
-
+                <fieldset>
+                    <legend>Skills / Talents you can offer (tick or list)</legend>
+                    <label><input type="checkbox" name="Skills" value="Teaching"> Teaching / Tutoring</label>
+                    <label><input type="checkbox" name="Skills" value="Child Care"> Child Care</label>
+                    <label><input type="checkbox" name="Skills" value="Medical Assistance"> Medical Assistance</label>
+                    <label><input type="checkbox" name="Skills" value="Fundraising"> Fundraising</label>
+                    <label><input type="checkbox" name="Skills" value="Event Planning"> Event Planning</label>
+                    <label><input type="checkbox" name="Skills" value="Media"> Social Media / Photography / Videography</label>
+                    <label><input type="checkbox" name="Skills" value="Manual Labor"> Manual Labor / Construction</label>
+                    <label>Other (please specify) <input type="text" name="Skills (Other)"></label>
+                </fieldset>
+                <fieldset>
+                    <legend>Areas you wish to volunteer in</legend>
+                    <label><input type="checkbox" name="Volunteer Area" value="Children’s Shelter"> Children’s Shelter</label>
+                    <label><input type="checkbox" name="Volunteer Area" value="Education"> Education</label>
+                    <label><input type="checkbox" name="Volunteer Area" value="Clean Water"> Clean Water Projects</label>
+                    <label><input type="checkbox" name="Volunteer Area" value="Youth Empowerment"> Youth Empowerment</label>
+                    <label><input type="checkbox" name="Volunteer Area" value="Health Services"> Health Services</label>
+                    <label>Other (please specify) <input type="text" name="Volunteer Area (Other)"></label>
+                </fieldset>
+                <h3>Section C: Availability</h3>
+                <label for="v_start">Preferred volunteering start date</label>
+                <input type="date" id="v_start" name="Start Date">
+                <label for="v_duration">How long can you volunteer? (days/weeks/months)</label>
+                <input type="text" id="v_duration" name="Volunteer Duration">
+                <label for="v_avail">Days and hours available per week</label>
+                <input type="text" id="v_avail" name="Weekly Availability">
+                <h3>Section D: Additional Information</h3>
+                <label for="v_lang">Languages spoken</label>
+                <input type="text" id="v_lang" name="Languages">
+                <label for="v_med">Do you have any medical conditions or allergies we should know about?</label>
+                <textarea id="v_med" name="Medical Conditions" rows="3"></textarea>
+                <fieldset>
+                    <legend>Do you require accommodation during volunteering?</legend>
+                    <label><input type="radio" name="Accommodation" value="Yes"> Yes</label>
+                    <label><input type="radio" name="Accommodation" value="No"> No</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Consent to background check</legend>
+                    <label><input type="radio" name="Background Check" value="Yes" required> Yes</label>
+                    <label><input type="radio" name="Background Check" value="No"> No</label>
+                </fieldset>
                 <button type="submit">Submit Volunteer Application</button>
             </form>
         </div>
     </main>
-
     <section id="donate">
         <div class="container">
             <h2>Become a Partner in Hope</h2>
@@ -78,7 +113,6 @@
             </div>
         </div>
     </section>
-
     <footer>
         <div class="container">
             <h3>JOY AFRICA INTERNATIONAL FOUNDATION</h3>
@@ -93,6 +127,5 @@
             <p class="copyright">&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
         </div>
     </footer>
-
 </body>
 </html>
