@@ -12,52 +12,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        .expandable-image {
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .expandable-image:hover {
-            opacity: 0.7;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000; /* High z-index to appear over everything */
-            padding-top: 50px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.9);
-        }
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 800px;
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        @keyframes zoom {
-            from {transform:scale(0)}
-            to {transform:scale(1)}
-        }
+        .expandable-image { cursor: pointer; transition: 0.3s; }
+        .expandable-image:hover { opacity: 0.7; }
+        .modal { display: none; position: fixed; z-index: 2000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); }
+        .modal-content { margin: auto; display: block; width: 80%; max-width: 800px; animation-name: zoom; animation-duration: 0.6s; }
+        .close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; }
+        .close:hover, .close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
+        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
     </style>
 </head>
 <body>
@@ -90,10 +51,9 @@
         </section>
 
         <section id="about-foundation">
-            <div class="container">
+             <div class="container">
                 <h2>ABOUT OUR FOUNDATION</h2>
                 <p class="section-intro">JOY AFRICA INTERNATIONAL FOUNDATION is a Christian-founded organization.</p>
-                
                 <div class="history-timeline">
                     <div class="timeline-item">
                         <h3>2022 - The Beginning</h3>
@@ -112,7 +72,6 @@
                         <p>In 2025, the launch of new projects raises hope of reaching more communities and helping more people in need.</p>
                     </div>
                 </div>
-
                 <div class="mission-grid">
                     <div>
                         <h3>Purpose:</h3>
@@ -153,13 +112,11 @@
         </section>
 
         <section id="leadership" style="background-color: var(--light-background);">
-            <div class="container">
+           <div class="container">
                 <h2>OUR LEADERSHIP STRUCTURE</h2>
                 <p class="section-intro">Since we are raising future leaders, we must also lead by example. That’s why we have a strong leadership structure at JOY AFRICA INTERNATIONAL FOUNDATION. The diagram below shows our leadership levels.</p>
                 <img src="images/leadership.jpg" alt="JOY AFRICA INTERNATIONAL FOUNDATION LEADERSHIP STRUCTURE" class="structure-image expandable-image">
-                
                 <h2 style="margin-top: 80px;">MEET OUR FOUNDER AND DIRECTOR</h2>
-                
                 <div class="team-member-card">
                     <div class="team-member-image">
                         <img src="images/founder.jpg" alt="Founder, Tumusiime Gonzaga" class="expandable-image">
@@ -169,11 +126,10 @@
                         <p>Tumusiime Gonzaga is a Ugandan man born on October 21st, 2002, in a small slum town called Kosovo in Kampala, Uganda. Raised in a God-fearing Christian family, his education was sponsored by an NGO called VISION FOR AFRICA INTERNATIONAL MINISTRIES, from Primary One through his diploma in Journalism and Media Studies. While growing up, he faced many challenges, such as the lack of a good health center, high levels of insecurity in the slum, and a lack of proper schools for his friends. All of this inspired him to start an NGO that would help other kids avoid the same problems he and his friends faced. JOY AFRICA INTERNATIONAL FOUNDATION acts as a symbol of change for these communities.</p>
                         <div class="message-box">
                             <h5>Message from the Director</h5>
-                            <blockquote>"Dear Friends,<br><br>Welcome to JOY AFRICA INTERNATIONAL FOUNDATION. It is with great joy and gratitude that I extend my heartfelt greetings to you. Our organization was founded on the belief that every child deserves a chance to live a life filled with hope, love, and opportunity.<br><br>At JOY AFRICA, we are dedicated to transforming lives by providing shelter, education, healthcare, clean and safe water, and a nurturing environment for children and communities across Uganda and Africa at large. Through our programs, we strive to empower the underprivileged, support the disabled, and create sustainable change for future generations.<br><br>Your visit to our website means a lot to us. Whether you are here to learn, to support, or to join hands with us in our mission, you are now part of a growing family that believes in compassion and action. Together, we can make a lasting difference in the lives of those who need it most.<br><br>Thank you for taking the time to connect with our vision. I warmly invite you to explore our initiatives, share our story, and, if you are able, stand with us in creating a brighter, more hopeful future for children in Uganda and beyond.<br><br>With gratitude and hope,<br>Tumusiime Gonzaga<br>Director, JOY AFRICA INTERNATIONAL FOUNDATION"</blockquote>
+                            <blockquote>"Dear Friends,<br><br>Welcome to JOY AFRICA INTERNATIONAL FOUNDATION. It is with great joy and gratitude that I extend my heartfelt greetings to you. Our organization was founded on the belief that every child deserves a chance to live a life filled with hope, love, and opportunity... With gratitude and hope,<br>Tumusiime Gonzaga<br>Director, JOY AFRICA INTERNATIONAL FOUNDATION"</blockquote>
                         </div>
                     </div>
                 </div>
-
                 <h2 style="margin-top: 80px;">MEET OUR ASSISTANT DIRECTOR</h2>
                 <div class="team-member-card reverse">
                     <div class="team-member-image">
@@ -184,11 +140,10 @@
                         <p>Born on April 4th, 1987, in the town of Kireka in Kampala, Uganda, Newton was raised by a God-fearing family. He is a loving father of three children, well-educated, and a professional chef. Despite being a family and working man, he took a major step in 2024 to join JOY AFRICA INTERNATIONAL FOUNDATION as our Assistant Director, supporting our Director on his journey.</p>
                         <div class="message-box">
                             <h5>A WORD FROM OUR ASSISTANT DIRECTOR</h5>
-                            <blockquote>“JOY AFRICA INTERNATIONAL FOUNDATION represents one of the most positive and wonderful emotional states we can create for our children. It is a feeling of contentment and belonging that fills us with vitality, optimism, and delight. It brings contagious energy to all around.<br><br>At JOY AFRICA INTERNATIONAL FOUNDATION, we aim to enable all homeless children in Uganda and Africa at large to live a fulfilled and carefree childhood by providing them with a protective and nurturing home environment.<br><br>We believe in a world where every homeless child in Uganda and across Africa can live joyfully and experience a fulfilled, carefree childhood – irrespective of gender, place of birth, nationality, religion, or social status.”</blockquote>
+                            <blockquote>“JOY AFRICA INTERNATIONAL FOUNDATION represents one of the most positive and wonderful emotional states we can create for our children... We believe in a world where every homeless child in Uganda and across Africa can live joyfully and experience a fulfilled, carefree childhood – irrespective of gender, place of birth, nationality, religion, or social status.”</blockquote>
                         </div>
                     </div>
                 </div>
-
                 <h2 style="margin-top: 80px;">MEET OUR PROJECTS DIRECTOR</h2>
                 <div class="team-member-card">
                     <div class="team-member-image">
@@ -198,7 +153,7 @@
                         <h4>KULUBYA PAUL</h4>
                         <div class="message-box">
                             <h5>Message from the Projects Director</h5>
-                            <blockquote>"Dear Visitors,<br><br>It is a pleasure to welcome you to JOY AFRICA INTERNATIONAL FOUNDATION. As the Projects Director, I am honored to oversee programs that are bringing real change to communities across Uganda and beyond.<br><br>Our work is rooted in love and commitment—providing homeless children with safe shelter, improving access to clean water, empowering the youth, supporting the disabled, and delivering education and healthcare to those who need it most. Each project we implement is designed with care, driven by impact, and focused on building a brighter tomorrow.<br><br>I believe that every contribution, whether big or small, makes a difference. By visiting our website, you have taken a step towards understanding our mission and becoming a part of this journey of hope and transformation.<br><br>Together, we can continue to bring lasting joy and opportunity to children and families who deserve a better future.<br><br>Thank you for your support and interest in our work.<br><br>Warm regards,<br>Kulubya Paul<br>Projects Director, JOY AFRICA INTERNATIONAL FOUNDATION"</blockquote>
+                            <blockquote>"Dear Visitors,<br><br>It is a pleasure to welcome you to JOY AFRICA INTERNATIONAL FOUNDATION... Together, we can continue to bring lasting joy and opportunity to children and families who deserve a better future. Thank you for your support and interest in our work.<br><br>Warm regards,<br>Kulubya Paul<br>Projects Director, JOY AFRICA INTERNATIONAL FOUNDATION"</blockquote>
                         </div>
                     </div>
                 </div>
@@ -206,16 +161,31 @@
         </section>
 
         <section id="community-showcase">
-             <div class="container">
+            <div class="container">
                  <h2>Our Mission in Action</h2>
                  <p class="section-intro">Every photo tells a story of hope, resilience, and joy. Your support helps us write the next chapter.</p>
                  <img src="images/collage.jpg" alt="A collage of children from the foundation" class="structure-image expandable-image">
-             </div>
+            </div>
         </section>
-
     </main>
 
-    <footer id="donate">
+    <section id="donate">
+        <div class="container">
+            <h2>Become a Partner in Hope</h2>
+            <p class="section-intro">Your generous gift is a direct investment in a child's future. 100% of your donation goes directly to funding these life-changing projects.</p>
+            <div class="donation-methods">
+                <div class="method-card"><h3><i class="fas fa-university"></i> Bank Transfer</h3><p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p></div>
+                <div class="method-card"><h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3><p>Send directly to our secure line:<br><strong>Number:</strong> +256 775 092 014</p></div>
+                <div class="method-card">
+                    <h3><i class="fab fa-paypal"></i> PayPal</h3>
+                    <p>Click below to make a secure donation with your PayPal account or card.</p>
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JOY+AFRICA+INTERNATIONAL+FOUNDATION&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
         <div class="container">
             <h3>JOY AFRICA INTERNATIONAL FOUNDATION</h3>
             <p>A Christian foundation, rooted in faith and dedicated to action.</p>
@@ -230,31 +200,12 @@
         </div>
     </footer>
 
-    <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-    </div>
-
+    <div id="myModal" class="modal"><span class="close">&times;</span><img class="modal-content" id="img01"></div>
     <script>
-        var modal = document.getElementById("myModal");
-        var modalImg = document.getElementById("img01");
-        var images = document.getElementsByClassName("expandable-image");
-        for (var i = 0; i < images.length; i++) {
-            images[i].onclick = function(){
-                modal.style.display = "block";
-                modalImg.src = this.src;
-            }
-        }
-        var span = document.getElementsByClassName("close")[0];
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+        var modal = document.getElementById("myModal"), modalImg = document.getElementById("img01"), images = document.getElementsByClassName("expandable-image");
+        for (var i = 0; i < images.length; i++) { images[i].onclick = function(){ modal.style.display = "block"; modalImg.src = this.src; } }
+        document.getElementsByClassName("close")[0].onclick = function() { modal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
     </script>
-
 </body>
 </html>
