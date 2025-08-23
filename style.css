@@ -635,5 +635,10 @@ form button[type="submit"]:hover {
 #projects-list {
     padding: 80px 0;
 }
+/* Styling for icon inside project donate button */
+.project-donate-button .fa-heart {
+    margin-right: 8px;
+}
+
 
 
