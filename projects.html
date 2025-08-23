@@ -10,6 +10,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .expandable-image {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .expandable-image:hover {
+            opacity: 0.7;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+    </style>
 </head>
 <body>
 
@@ -45,19 +93,45 @@
                 <div class="project-card">
                     <div class="project-images"><img src="images/house1.jpg" alt="Joy Africa Kids House" class="expandable-image"><img src="images/house2.jpg" alt="Children playing safely" class="expandable-image"></div>
                     <div class="project-content">
-                        <h3>1. The JOY AFRICA KIDS HOUSE</h3>
-                        <p><strong>Goal:</strong> To provide a safe and nurturing environment for homeless children in Uganda. The project involves buying land and constructing a house with a playground, offering a holistic approach to supporting their physical, emotional, and educational needs.</p>
+                        <h3>JOY AFRICA KIDS HOUSE</h3>
+                        <h4>Project Overview:</h4>
+                        <p>JOY AFRICA INTERNATIONAL FOUNDATION is proud to present the JOY AFRICA KIDS HOUSE project, a comprehensive initiative aimed at providing a safe and nurturing environment for homeless children in Uganda. The project involves buying land and constructing a house with a playground, offering a holistic approach to supporting the physical, emotional, and educational needs of vulnerable children.</p>
+                        
+                        <h4>Project Objectives:</h4>
+                        <ul>
+                            <li>Provide a safe and secure shelter for homeless children.</li>
+                            <li>Create a nurturing environment that supports their physical, emotional, and educational development.</li>
+                            <li>Offer a playground that promotes physical activity, socialization, and recreation.</li>
+                            <li>Foster a sense of community and belonging among the children.</li>
+                        </ul>
+
+                        <h4>Project Scope:</h4>
+                        <ol>
+                            <li><strong>Land Acquisition:</strong> Purchase a suitable plot of land for the project.</li>
+                            <li><strong>Design and Construction:</strong> Design and build a safe, secure, and functional house.</li>
+                            <li><strong>Playground Construction:</strong> Build a playground with play equipment, seating areas, and safety surfacing.</li>
+                            <li><strong>Furniture and Equipment:</strong> Provide essential furniture and equipment for the house and playground.</li>
+                        </ol>
+
+                        <h4>Project Timeline:</h4>
+                        <p><strong>Month 1-2:</strong> Land acquisition and planning<br>
+                           <strong>Month 3-6:</strong> Design and construction of the house<br>
+                           <strong>Month 7-9:</strong> Construction of the playground<br>
+                           <strong>Month 10:</strong> Completion and furnishing of the house and playground</p>
+
                         <div class="budget">
-                            <h4>Budget Breakdown</h4>
-                            <p><strong>Total: $200,000</strong></p>
+                            <h4>Budget: $200,000</h4>
                             <ul>
-                                <li><strong>$45,000</strong> - Land Acquisition</li>
-                                <li><strong>$100,000</strong> - House Construction</li>
-                                <li><strong>$20,000</strong> - Playground Construction</li>
-                                <li><strong>$15,000</strong> - Furniture & Equipment</li>
-                                <li><strong>$20,000</strong> - Project Management</li>
+                                <li><strong>Land Acquisition:</strong> $45,000</li>
+                                <li><strong>House Construction:</strong> $100,000</li>
+                                <li><strong>Playground Construction:</strong> $20,000</li>
+                                <li><strong>Furniture & Equipment:</strong> $15,000</li>
+                                <li><strong>Project Management:</strong> $20,000</li>
                             </ul>
                         </div>
+
+                        <h4>Project Impact:</h4>
+                        <p>The JOY AFRICA KIDS HOUSE project will have a transformative impact on the lives of homeless children in Uganda. By providing a safe and nurturing environment, we will improve their physical and emotional well-being, enhance their educational outcomes, foster a sense of community, and provide a platform for them to grow and thrive.</p>
                         <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
                     </div>
                 </div>
@@ -65,77 +139,119 @@
                 <div class="project-card">
                     <div class="project-images"><img src="images/water1.jpg" alt="Clean water project" class="expandable-image"><img src="images/water2.jpg" alt="Children drinking clean water" class="expandable-image"></div>
                     <div class="project-content">
-                        <h3>2. EVERYONE CAN DRINK HEALTHY</h3>
-                        <p><strong>Goal:</strong> To combat the water crisis where 38 million people in Uganda lack access to a reliable, safely managed source of water. We will build proper wells, rainwater collection tanks, and boreholes, and teach communities how to keep their water safe.</p>
+                        <h3>EVERYONE CAN DRINK HEALTHY</h3>
+                        <p>Water is essential for survival—it is used for cooking, drinking, feeding animals, and watering plants. However, in some parts of Uganda, access to clean and safe water is impossible, forcing people to drink contaminated water.</p>
+                        <p>Out of a population of 45 million, 38 million people (83% of the population) lack access to a reliable, safely managed source of water. Those who can access clean water often pay up to 22% of their daily income for it. Tragically, many deaths are caused by illnesses related to the lack of clean water.</p>
+                        <p>But together, you and I can stop this right now. JOY AFRICA INTERNATIONAL FOUNDATION is ready to take the lead. With your help, we want to reduce these numbers by building proper wells, rainwater collection tanks, and boreholes, while also teaching communities how to keep their water safe. With your support, we are ready to join hands with the government to make this happen and bring smiles back to everyone.</p>
+
                         <div class="budget">
-                            <h4>Budget Breakdown</h4>
-                            <p><strong>Total: $120,000</strong></p>
+                            <h4>Budget: $120,000</h4>
                             <ul>
-                                <li><strong>$70,000</strong> - Wells & Boreholes</li>
-                                <li><strong>$30,000</strong> - Rainwater Collection Tanks</li>
-                                <li><strong>$10,000</strong> - Hygiene & Safety Training</li>
-                                <li><strong>$5,000</strong> - Administration & Logistics</li>
-                                <li><strong>$5,000</strong> - Transportation</li>
+                                <li><strong>Wells & Boreholes:</strong> $70,000</li>
+                                <li><strong>Rainwater Collection Tanks:</strong> $30,000</li>
+                                <li><strong>Hygiene & Safety Training:</strong> $10,000</li>
+                                <li><strong>Administration & Logistics:</strong> $5,000</li>
+                                <li><strong>Transportation:</strong> $5,000</li>
                             </ul>
                         </div>
-                        <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
+                        <div class="message-box" style="margin-top: 20px;">
+                            <blockquote>"You can support us by donating to our Organisation or by ordering a project t-shirt for $15. All this money will be helpful in the project. Thank you."<br><br><strong>- Tumusiime Gonzaga, Director of JOY AFRICA INTERNATIONAL FOUNDATION</strong></blockquote>
+                        </div>
+                         <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-images"><img src="images/education1.jpg" alt="Child studying" class="expandable-image"><img src="images/education2.jpg" alt="Children in classroom" class="expandable-image"></div>
                     <div class="project-content">
-                        <h3>3. Educational Sponsorship & Support Program</h3>
-                        <p><strong>Goal:</strong> To ensure every child we encounter has the tools and support to succeed in school. The plan is to pay tuition fees for children out of school due to financial hardship, provide school supplies, uniforms, shoes, and offer after-school tutoring and mentorship programs.</p>
+                        <h3>EDUCATIONAL SPONSORSHIP & SUPPORT PROGRAM</h3>
+                        <p><strong>Goal:</strong> To ensure every child we encounter has the tools and support to succeed in school.</p>
+                        <h4>Our Plan:</h4>
+                        <ul>
+                            <li>Pay tuition fees for children out of school due to financial hardship.</li>
+                            <li>Provide essential school supplies, uniforms, and shoes.</li>
+                            <li>Offer after-school tutoring and mentorship programs.</li>
+                        </ul>
                         <div class="budget">
-                            <h4>Budget Breakdown</h4>
-                            <p><strong>Annual Total: $35,000</strong></p>
+                            <h4>Budget: $35,000 annually</h4>
                             <ul>
-                                <li><strong>$20,000</strong> - Tuition Support</li>
-                                <li><strong>$10,000</strong> - Supplies & Uniforms</li>
-                                <li><strong>$5,000</strong> - Mentorship & Tutoring</li>
+                                <li><strong>Tuition Support:</strong> $20,000</li>
+                                <li><strong>Supplies & Uniforms:</strong> $10,000</li>
+                                <li><strong>Mentorship & Tutoring:</strong> $5,000</li>
                             </ul>
                         </div>
-                        <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
+                        <p><strong>Impact:</strong> Increased school enrollment, reduced dropout rates, and improved academic performance.</p>
+                         <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-images"><img src="images/girl.jpg" alt="Girls' Dignity Program" class="expandable-image"></div>
                     <div class="project-content">
-                        <h3>4. Girls’ Dignity Program</h3>
-                        <p><strong>Goal:</strong> To ensure girls stay in school by providing safe, reusable sanitary pads and hygiene education. We will distribute sanitary kits, conduct menstrual health education in schools, and train local women to make sanitary pads for sustainability.</p>
+                        <h3>GIRLS’ DIGNITY PROGRAM</h3>
+                        <p><strong>Goal:</strong> To ensure girls stay in school by providing safe, reusable sanitary pads and hygiene education.</p>
+                        <h4>Our Plan:</h4>
+                        <ul>
+                            <li>Distribute sanitary kits and essential hygiene materials.</li>
+                            <li>Conduct menstrual health education workshops in schools.</li>
+                            <li>Train local women to make sanitary pads, ensuring sustainability.</li>
+                        </ul>
                         <div class="budget">
-                            <h4>Budget Breakdown</h4>
-                            <p><strong>Annual Total: $20,000</strong></p>
+                            <h4>Budget: $20,000 annually</h4>
                             <ul>
-                                <li><strong>$10,000</strong> - Materials & Kits</li>
-                                <li><strong>$5,000</strong> - Education Workshops</li>
-                                <li><strong>$5,000</strong> - Training for Local Women</li>
+                                <li><strong>Materials & Kits:</strong> $10,000</li>
+                                <li><strong>Education Workshops:</strong> $5,000</li>
+                                <li><strong>Training for Local Women:</strong> $5,000</li>
                             </ul>
                         </div>
-                        <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
+                        <p><strong>Impact:</strong> Reduced absenteeism among girls, improved hygiene, and community empowerment through local pad-making.</p>
+                         <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-images"><img src="images/giveaway1.jpg" alt="Charity giveaway event" class="expandable-image"><img src="images/giveaway2.jpg" alt="Distributing supplies" class="expandable-image"></div>
                     <div class="project-content">
-                        <h3>5. JOY CHARITY GIVE AWAY</h3>
-                        <p><strong>Goal:</strong> Our upcoming charity giveaway project this November aims to bless young girls with new sanitary pads, provide scholastic materials to children who cannot afford them, distribute proper clothing and shoes, and offer tuition assistance to children out of school due to financial challenges.</p>
-                        <div class="budget"><h4>Budget: $10,000</h4></div>
-                        <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
+                        <h3>JOY CHARITY GIVE AWAY</h3>
+                        <p>We are currently preparing for our next charity giveaway project this November. This project aims to:</p>
+                        <ul>
+                            <li>Bless young girls with new and safe sanitary pads.</li>
+                            <li>Provide scholastic materials to children who cannot afford quality educational supplies.</li>
+                            <li>Distribute proper clothing and shoes.</li>
+                            <li>Offer tuition assistance to children who are out of school due to financial challenges.</li>
+                        </ul>
+                        <div class="budget">
+                            <h4>Budget: $10,000</h4>
+                        </div>
+                         <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
                     </div>
                 </div>
 
-                 <div class="project-card">
-                    <div class="project-images"><img src="images/collage.jpg" alt="A collage of children from the foundation" class="expandable-image"></div>
+                <div class="project-card">
                     <div class="project-content">
-                        <h3>Our Community</h3>
-                        <p>Every photo tells a story of hope, resilience, and joy. Our mission is written on the faces of these incredible children, and your support helps us write the next chapter.</p>
-                        <a href="index.html#donate" class="project-donate-button">Donate to this Project</a>
+                        <h3>SUPPORT OUR MISSION</h3>
+                        <h4>Donor and Sponsor Benefits:</h4>
+                        <ul>
+                            <li>The opportunity to make a meaningful difference in the lives of vulnerable children.</li>
+                            <li>Recognition and branding opportunities for donors and sponsors.</li>
+                            <li>Regular project updates and impact reports.</li>
+                            <li>An invitation to project launch and anniversary celebrations.</li>
+                        </ul>
+
+                        <h4>Project Sustainability:</h4>
+                        <p>JOY AFRICA INTERNATIONAL FOUNDATION is committed to ensuring the long-term sustainability of all our projects. We will:</p>
+                        <ul>
+                            <li>Establish a strong management team to oversee project operations.</li>
+                            <li>Develop a comprehensive maintenance plan for all infrastructure.</li>
+                            <li>Foster partnerships with local organizations and communities to support project activities.</li>
+                        </ul>
+
+                        <h4>A Call to Action:</h4>
+                        <p>We invite you to join us in making a difference in the lives of children in Uganda. Your support will help us provide a safe and nurturing environment for these vulnerable children. Together, we can create a brighter future for Africa's children.</p>
+                        <a href="index.html#donate" class="project-donate-button">Become a Partner in Hope</a>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
@@ -146,7 +262,7 @@
             <p>A Christian foundation, rooted in faith and dedicated to action.</p>
             <div class="footer-icons">
                 <a href="https://www.instagram.com/joy_africa.foundation" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@joy_africa.foundation" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.tiktok.com/@joy_africa.foundation" target="_blank"aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                 <a href="https://wa.me/256775092014" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 <a href="mailto:joyafrica.org@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 <a href="tel:+256756386352" aria-label="Call Us"><i class="fas fa-phone"></i></a>
@@ -154,6 +270,32 @@
             <p class="copyright">&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        var images = document.getElementsByClassName("expandable-image");
+        for (var i = 0; i < images.length; i++) {
+            images[i].onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        }
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
