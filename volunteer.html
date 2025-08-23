@@ -20,12 +20,12 @@
                 <span>JOY AFRICA<br>INTERNATIONAL FOUNDATION</span>
             </a>
             <nav>
-                <a href="index.html#founder">About</a>
-                <a href="index.html#projects">Projects</a>
+                <a href="index.html">About</a>
+                <a href="projects.html">Projects</a>
                 <a href="bible-verse.html">Weekly Verse</a>
                 <a href="partner.html">Partner</a>
                 <a href="volunteer.html">Volunteer</a>
-                <a href="index.html#donate" class="nav-button">Donate Now</a>
+                <a href="#donate" class="nav-button">Donate Now</a>
             </nav>
         </div>
     </header>
@@ -36,11 +36,9 @@
             <p class="section-intro">Lend your time and talent to make a direct impact. Join our team to bring hope and joy to those in need.</p>
             
             <form action="https://formspree.io/f/xqaljaqv" method="POST">
-                
                 <h3>Section A: Personal Details</h3>
                 <label for="v_name">Full Name</label>
                 <input type="text" id="v_name" name="Full Name" required>
-
                 <label for="v_dob">Date of Birth</label>
                 <input type="date" id="v_dob" name="Date of Birth">
 
@@ -55,72 +53,31 @@
 
                 <label for="v_phone">Phone / WhatsApp Number</label>
                 <input type="tel" id="v_phone" name="Phone / WhatsApp">
-
-                <label for="v_address">Physical Address / Country</label>
-                <input type="text" id="v_address" name="Address / Country">
-
-                <label for="v_emergency">Emergency Contact Name & Number</label>
-                <input type="text" id="v_emergency" name="Emergency Contact">
-
+                
                 <h3>Section B: Volunteering Interests</h3>
-                <label for="v_why">Why do you want to volunteer with JOY AFRICA INTERNATIONAL FOUNDATION? (short answer)</label>
+                <label for="v_why">Why do you want to volunteer with JOY AFRICA INTERNATIONAL FOUNDATION?</label>
                 <textarea id="v_why" name="Reason to Volunteer" rows="4"></textarea>
-                
-                <fieldset>
-                    <legend>Skills / Talents you can offer (tick or list)</legend>
-                    <label><input type="checkbox" name="Skills" value="Teaching"> Teaching / Tutoring</label>
-                    <label><input type="checkbox" name="Skills" value="Child Care"> Child Care</label>
-                    <label><input type="checkbox" name="Skills" value="Medical Assistance"> Medical Assistance</label>
-                    <label><input type="checkbox" name="Skills" value="Fundraising"> Fundraising</label>
-                    <label><input type="checkbox" name="Skills" value="Event Planning"> Event Planning</label>
-                    <label><input type="checkbox" name="Skills" value="Media"> Social Media / Photography / Videography</label>
-                    <label><input type="checkbox" name="Skills" value="Manual Labor"> Manual Labor / Construction</label>
-                    <label>Other (please specify) <input type="text" name="Skills (Other)"></label>
-                </fieldset>
-                
-                <fieldset>
-                    <legend>Areas you wish to volunteer in</legend>
-                    <label><input type="checkbox" name="Volunteer Area" value="Children’s Shelter"> Children’s Shelter</label>
-                    <label><input type="checkbox" name="Volunteer Area" value="Education"> Education</label>
-                    <label><input type="checkbox" name="Volunteer Area" value="Clean Water"> Clean Water Projects</label>
-                    <label><input type="checkbox" name="Volunteer Area" value="Youth Empowerment"> Youth Empowerment</label>
-                    <label><input type="checkbox" name="Volunteer Area" value="Health Services"> Health Services</label>
-                    <label>Other (please specify) <input type="text" name="Volunteer Area (Other)"></label>
-                </fieldset>
-
-                <h3>Section C: Availability</h3>
-                <label for="v_start">Preferred volunteering start date</label>
-                <input type="date" id="v_start" name="Start Date">
-
-                <label for="v_duration">How long can you volunteer? (days/weeks/months)</label>
-                <input type="text" id="v_duration" name="Volunteer Duration">
-
-                <label for="v_avail">Days and hours available per week</label>
-                <input type="text" id="v_avail" name="Weekly Availability">
-
-                <h3>Section D: Additional Information</h3>
-                <label for="v_lang">Languages spoken</label>
-                <input type="text" id="v_lang" name="Languages">
-
-                <label for="v_med">Do you have any medical conditions or allergies we should know about?</label>
-                <textarea id="v_med" name="Medical Conditions" rows="3"></textarea>
-                
-                <fieldset>
-                    <legend>Do you require accommodation during volunteering?</legend>
-                    <label><input type="radio" name="Accommodation" value="Yes"> Yes</label>
-                    <label><input type="radio" name="Accommodation" value="No"> No</label>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Consent to background check</legend>
-                    <label><input type="radio" name="Background Check" value="Yes" required> Yes</label>
-                    <label><input type="radio" name="Background Check" value="No"> No</label>
-                </fieldset>
 
                 <button type="submit">Submit Volunteer Application</button>
             </form>
         </div>
     </main>
+
+    <section id="donate">
+        <div class="container">
+            <h2>Become a Partner in Hope</h2>
+            <p class="section-intro">Your generous gift is a direct investment in a child's future. 100% of your donation goes directly to funding these life-changing projects.</p>
+            <div class="donation-methods">
+                <div class="method-card"><h3><i class="fas fa-university"></i> Bank Transfer</h3><p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p></div>
+                <div class="method-card"><h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3><p>Send directly to our secure line:<br><strong>Number:</strong> +256 775 092 014</p></div>
+                <div class="method-card">
+                    <h3><i class="fab fa-paypal"></i> PayPal</h3>
+                    <p>Click below to make a secure donation with your PayPal account or card.</p>
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JOY+AFRICA+INTERNATIONAL+FOUNDATION&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
