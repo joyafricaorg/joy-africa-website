@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sponsor a Child - JoyRise Africa Foundation</title>
+    <title>Ask Admin to Decide - JoyRise Africa Foundation</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== SPONSOR PAGE STYLES ===== */
         :root {
             --sponsor-orange: #FF6B35;
             --sponsor-gold: #F7C948;
@@ -18,187 +17,180 @@
             --sponsor-cream: #FFF8F0;
         }
 
-        .sponsor-hero {
+        .contact-bar {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+        .contact-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .contact-bar a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 6px;
+            transition: color 0.3s ease;
+        }
+        .contact-bar a:hover {
+            color: var(--accent-orange);
+        }
+        .contact-bar .social-links a {
+            margin: 0 5px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .contact-bar .social-links a:hover {
+            transform: scale(1.2);
+        }
+        .contact-bar .social-links .fa-instagram { color: #E4405F; }
+        .contact-bar .social-links .fa-tiktok { color: #ffffff; }
+        .contact-bar .social-links .fa-youtube { color: #FF0000; }
+        .contact-bar .social-links .fa-whatsapp { color: #25D366; }
+        .contact-bar .social-links .fa-envelope { color: #EA4335; }
+        .contact-bar .social-links .fa-phone { color: #34B7F1; }
+
+        header {
+            background: var(--white);
+            padding: 10px 0;
+            position: sticky;
+            top: 38px;
+            z-index: 1000;
+            width: 100%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 0.85em;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+        .logo img {
+            height: 50px;
+            margin-right: 12px;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            padding: 6px 10px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.1);
+        }
+        nav a.active {
+            color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.15);
+        }
+        .nav-button {
+            background-color: var(--accent-orange);
+            color: var(--white) !important;
+            padding: 6px 16px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: var(--primary-blue);
+            color: var(--white) !important;
+            transform: scale(1.05);
+        }
+
+        .back-button-container {
+            padding: 12px 0 0 0;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(11, 36, 71, 0.08);
+        }
+        .back-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(-3px);
+        }
+        .back-button i {
+            font-size: 1rem;
+        }
+
+        .form-page-hero {
             background: linear-gradient(135deg, var(--sponsor-orange), var(--sponsor-gold));
             color: white;
-            padding: 80px 20px 60px;
+            padding: 60px 20px 40px;
             text-align: center;
         }
-        .sponsor-hero h1 {
+        .form-page-hero h1 {
             color: white;
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
-        .sponsor-hero p {
-            font-size: 1.2rem;
+        .form-page-hero p {
+            font-size: 1.1rem;
             opacity: 0.95;
             max-width: 700px;
             margin: 0 auto;
         }
 
-        .sponsor-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .sponsor-option-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            border: 3px solid transparent;
-        }
-        .sponsor-option-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-        .sponsor-option-card .icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-        .sponsor-option-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--primary-blue);
-        }
-        .sponsor-option-card p {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .sponsor-option-card .btn-sponsor {
-            display: inline-block;
-            padding: 14px 40px;
-            background: var(--sponsor-green);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .sponsor-option-card .btn-sponsor:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
-        }
-        .sponsor-option-card.ask-admin {
-            border-color: var(--sponsor-orange);
-        }
-        .sponsor-option-card.choose-child {
-            border-color: var(--sponsor-gold);
-        }
-        .sponsor-option-card.ask-admin .icon { color: var(--sponsor-orange); }
-        .sponsor-option-card.choose-child .icon { color: var(--sponsor-gold); }
-
-        /* ===== CHILDREN GALLERY ===== */
-        .children-gallery {
-            padding: 60px 20px;
-            background: var(--sponsor-cream);
-        }
-        .children-gallery h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: var(--primary-blue);
-        }
-        .children-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .child-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-        }
-        .child-card:hover {
-            transform: translateY(-5px);
-        }
-        .child-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        .child-card .child-info {
-            padding: 20px;
-        }
-        .child-card .child-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            color: var(--primary-blue);
-        }
-        .child-card .child-info .age-location {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-        .child-card .child-info .story {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-        }
-        .child-card .btn-sponsor-now {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background: var(--sponsor-green);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .child-card .btn-sponsor-now:hover {
-            background: #27AE60;
-            transform: scale(1.02);
-        }
-
-        /* ===== FORMS ===== */
         .form-container {
-            display: none;
             padding: 40px 20px;
             max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-top: 40px;
-        }
-        .form-container.active {
-            display: block;
+            margin-top: -30px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
         }
         .form-container h2 {
             text-align: center;
             font-size: 2rem;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             color: var(--primary-blue);
         }
-        .form-container .close-form {
-            float: right;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #999;
-        }
-        .form-container .close-form:hover {
-            color: #333;
+        .form-container .form-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
         }
         .form-container form label {
             display: block;
@@ -217,6 +209,7 @@
             font-size: 1rem;
             font-family: inherit;
             transition: border-color 0.3s ease;
+            box-sizing: border-box;
         }
         .form-container form input:focus,
         .form-container form textarea:focus,
@@ -242,8 +235,7 @@
             gap: 8px;
             font-size: 0.95rem;
         }
-        .form-container form .checkbox-group input[type="checkbox"],
-        .form-container form .checkbox-group input[type="radio"] {
+        .form-container form .checkbox-group input[type="checkbox"] {
             width: auto;
             margin-right: 5px;
         }
@@ -281,36 +273,93 @@
             transform: scale(1.02);
         }
 
-        /* ===== RESPONSIVE ===== */
+        footer {
+            background-color: #1a1a1a;
+            color: #a0a0a0;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        footer h3 {
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+        }
+        .footer-icons {
+            margin: 30px 0;
+        }
+        .footer-icons a {
+            display: inline-block;
+            font-size: 1.8rem;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+        }
+        .footer-icons a:hover {
+            transform: scale(1.2) translateY(-3px);
+        }
+        .footer-icons .fa-instagram { color: #E4405F; }
+        .footer-icons .fa-tiktok { color: #ffffff; }
+        .footer-icons .fa-youtube { color: #FF0000; }
+        .footer-icons .fa-whatsapp { color: #25D366; }
+        .footer-icons .fa-envelope { color: #EA4335; }
+        .footer-icons .fa-phone { color: #34B7F1; }
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 30px;
+        }
+
         @media (max-width: 768px) {
-            .sponsor-options {
-                grid-template-columns: 1fr;
+            .contact-bar .container {
+                flex-direction: column;
+                text-align: center;
             }
-            .sponsor-hero h1 {
-                font-size: 2rem;
+            header .container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
             }
-            .children-grid {
-                grid-template-columns: 1fr 1fr;
+            .logo {
+                justify-content: center;
+            }
+            nav {
+                justify-content: center;
+                gap: 2px;
+            }
+            nav a {
+                font-size: 0.65rem;
+                padding: 4px 6px;
+            }
+            .nav-button {
+                padding: 4px 10px;
+                font-size: 0.65rem;
             }
             .form-container form .checkbox-group {
                 grid-template-columns: 1fr;
             }
+            .form-page-hero h1 {
+                font-size: 1.8rem;
+            }
         }
         @media (max-width: 480px) {
-            .children-grid {
-                grid-template-columns: 1fr;
+            nav a {
+                font-size: 0.55rem;
+                padding: 3px 4px;
             }
-            .sponsor-hero {
-                padding: 60px 15px 40px;
+            .nav-button {
+                padding: 3px 8px;
+                font-size: 0.55rem;
             }
-            .sponsor-hero h1 {
-                font-size: 1.6rem;
+            .form-page-hero {
+                padding: 40px 15px 30px;
+            }
+            .form-page-hero h1 {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ===== CONTACT BAR ===== -->
     <div class="contact-bar">
         <div class="container">
             <div>
@@ -327,7 +376,6 @@
         </div>
     </div>
 
-    <!-- ===== HEADER ===== -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">
@@ -347,63 +395,25 @@
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main>
-        <!-- Back Button -->
-        <div class="container back-button-container show" style="padding-top: 12px;">
-            <a href="javascript:history.back()" class="back-button">
-                <i class="fas fa-arrow-left"></i> Back
+        <div class="container back-button-container">
+            <a href="sponsor-child.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Options
             </a>
         </div>
 
-        <!-- ===== SPONSOR HERO ===== -->
-        <section class="sponsor-hero">
-            <h1>🌟 Sponsor a Child</h1>
-            <p>Change a child's life forever. Your sponsorship provides education, healthcare, and hope.</p>
+        <section class="form-page-hero">
+            <h1>🤝 Ask Admin to Decide</h1>
+            <p>Fill in your details and our team will match you with a child who needs your support.</p>
         </section>
 
-        <!-- ===== SPONSOR OPTIONS ===== -->
-        <section class="sponsor-options">
-            <div class="sponsor-option-card ask-admin" onclick="openForm('ask-admin-form')">
-                <span class="icon">🤝</span>
-                <h3>Ask Admin to Decide</h3>
-                <p>Let our team match you with a child who needs your support the most.</p>
-                <button class="btn-sponsor">Ask Admin</button>
-            </div>
+        <div class="form-container">
+            <h2>📋 Sponsorship Application</h2>
+            <p class="form-subtitle">Please complete all sections below</p>
 
-            <div class="sponsor-option-card choose-child" onclick="document.getElementById('children-gallery').scrollIntoView({behavior: 'smooth'})">
-                <span class="icon">👧🏾</span>
-                <h3>Choose a Child</h3>
-                <p>Browse through our children and pick the one you'd like to sponsor.</p>
-                <button class="btn-sponsor" style="background: var(--sponsor-gold);">View Children</button>
-            </div>
-        </section>
-
-        <!-- ===== CHILDREN GALLERY ===== -->
-        <section class="children-gallery" id="children-gallery">
-            <h2>👧🏾 Children Waiting for Sponsorship</h2>
-            <div class="children-grid" id="childrenGrid">
-                <!-- Children will be loaded from admin panel -->
-                <div class="child-card">
-                    <img src="images/child-placeholder.jpg" alt="Child">
-                    <div class="child-info">
-                        <h3>Loading Children...</h3>
-                        <p class="age-location">Please check back soon</p>
-                        <p class="story">Children profiles will appear here once uploaded by admin.</p>
-                        <button class="btn-sponsor-now" onclick="openForm('sponsor-form')">SPONSOR NOW</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== FORM 1: ASK ADMIN TO DECIDE ===== -->
-        <div class="form-container" id="ask-admin-form">
-            <button class="close-form" onclick="closeForm('ask-admin-form')">&times;</button>
-            <h2>📋 Ask Admin to Decide</h2>
-            <p style="text-align:center; color:#666; margin-bottom:20px;">Fill in your details and our team will match you with a child.</p>
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <h3 style="margin-top: 0; color: var(--sponsor-orange);">SECTION A: ORGANIZATION / PERSONAL DETAILS</h3>
-                <label>Full Name (Individual or Contact Person)</label>
+                <label>Full Name (Individual or Contact Person) *</label>
                 <input type="text" name="Full Name" required>
 
                 <label>Organization / Company Name (if applicable)</label>
@@ -412,7 +422,7 @@
                 <label>Position / Role</label>
                 <input type="text" name="Position">
 
-                <label>Email Address</label>
+                <label>Email Address *</label>
                 <input type="email" name="Email" required>
 
                 <label>Phone / WhatsApp Number</label>
@@ -435,7 +445,7 @@
                     <label><input type="text" name="Sponsorship Type Other" placeholder="Other (please specify)"></label>
                 </div>
 
-                <label>Why do you want to sponsor a child? (short answer)</label>
+                <label>Why do you want to sponsor a child? (short answer) *</label>
                 <textarea name="Reason" rows="3" required></textarea>
 
                 <label>Choose the sex of the child you wish to sponsor:</label>
@@ -445,143 +455,4 @@
                     <label><input type="radio" name="Child Sex" value="Rather not say"> Rather not say</label>
                 </div>
 
-                <h3 style="color: var(--sponsor-green);">SECTION C: ADDITIONAL INFORMATION</h3>
-                <label>Previous partnerships or similar projects done (optional)</label>
-                <textarea name="Previous Partnerships" rows="3"></textarea>
-
-                <label>Expected duration of partnership</label>
-                <input type="text" name="Duration">
-
-                <label>Preferred communication method</label>
-                <input type="text" name="Communication Method">
-
-                <label>Any special requirements or agreements?</label>
-                <textarea name="Special Requirements" rows="3"></textarea>
-
-                <button type="submit" class="submit-btn">Submit Application</button>
-            </form>
-        </div>
-
-        <!-- ===== FORM 2: SPONSOR NOW (Direct Child Sponsorship) ===== -->
-        <div class="form-container" id="sponsor-form">
-            <button class="close-form" onclick="closeForm('sponsor-form')">&times;</button>
-            <h2>💚 Sponsor This Child</h2>
-            <p style="text-align:center; color:#666; margin-bottom:20px;">Complete this form to sponsor a child directly.</p>
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="hidden" name="Child ID" id="sponsor-child-id" value="Not specified">
-
-                <h3 style="margin-top: 0; color: var(--sponsor-orange);">SECTION A: ORGANIZATION / PERSONAL DETAILS</h3>
-                <label>Full Name (Individual or Contact Person)</label>
-                <input type="text" name="Full Name" required>
-
-                <label>Organization / Company Name (if applicable)</label>
-                <input type="text" name="Organization Name">
-
-                <label>Position / Role</label>
-                <input type="text" name="Position">
-
-                <label>Email Address</label>
-                <input type="email" name="Email" required>
-
-                <label>Phone / WhatsApp Number</label>
-                <input type="tel" name="Phone">
-
-                <label>Website / Social Media Links</label>
-                <input type="text" name="Website">
-
-                <label>Physical Address / Country</label>
-                <input type="text" name="Address">
-
-                <h3 style="color: var(--sponsor-gold);">SECTION B: SPONSOR INTERESTS</h3>
-                <label>Type of Partnership (tick all that apply)</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="Partnership Type" value="Full Financial Support"> Full Financial Support</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Education Programs"> Education Programs Only</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Share Materials"> Share Materials/Equipment</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Health Care"> Health Care Only</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Technical Support"> Technical/Professional Support</label>
-                    <label><input type="text" name="Partnership Type Other" placeholder="Other (please specify)"></label>
-                </div>
-
-                <label>Why do you want to sponsor this particular child? (short answer)</label>
-                <textarea name="Reason" rows="3" required></textarea>
-
-                <h3 style="color: var(--sponsor-green);">SECTION C: ADDITIONAL INFORMATION</h3>
-                <label>Previous partnerships or similar projects done (optional)</label>
-                <textarea name="Previous Partnerships" rows="3"></textarea>
-
-                <label>Expected duration of partnership</label>
-                <input type="text" name="Duration">
-
-                <label>Preferred communication method</label>
-                <input type="text" name="Communication Method">
-
-                <label>Any special requirements or agreements?</label>
-                <textarea name="Special Requirements" rows="3"></textarea>
-
-                <button type="submit" class="submit-btn">Submit Application</button>
-            </form>
-        </div>
-    </main>
-
-    <!-- ===== DONATE SECTION ===== -->
-    <section id="donate">
-        <div class="container">
-            <h2>Become a Partner in Hope</h2>
-            <p class="section-intro">Your generous gift is a direct investment in a child's future.</p>
-            <div class="donation-methods">
-                <div class="method-card"><h3><i class="fas fa-university"></i> Bank Transfer</h3><p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p></div>
-                <div class="method-card"><h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3><p><strong>Number:</strong> +256 775 092 014</p></div>
-                <div class="method-card"><h3><i class="fab fa-paypal"></i> PayPal</h3><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JoyRise+Africa+Foundation&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="container">
-            <h3>JoyRise Africa Foundation</h3>
-            <p>A Christian foundation, rooted in faith and dedicated to action.</p>
-            <div class="footer-icons">
-                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank"><i class="fab fa-tiktok"></i></a>
-                <a href="https://youtube.com/@joyriseafricaug" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+256756386352"><i class="fas fa-phone"></i></a>
-            </div>
-            <p class="copyright">&copy; 2025 JoyRise Africa Foundation. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- ===== SCRIPTS ===== -->
-    <script>
-        // Open Form
-        function openForm(formId) {
-            document.getElementById(formId).classList.add('active');
-            document.getElementById(formId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Close Form
-        function closeForm(formId) {
-            document.getElementById(formId).classList.remove('active');
-        }
-
-        // Set Child ID for Sponsorship
-        function setChildId(childId) {
-            document.getElementById('sponsor-child-id').value = childId;
-            openForm('sponsor-form');
-        }
-
-        // Close forms when clicking outside
-        document.addEventListener('click', function(event) {
-            var forms = document.querySelectorAll('.form-container');
-            forms.forEach(function(form) {
-                if (event.target === form) {
-                    form.classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                <h3 style="color: var(--sponsor-green);">SECTION C:
