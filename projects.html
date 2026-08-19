@@ -3,40 +3,539 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Projects - JOY AFRICA INTERNATIONAL FOUNDATION</title>
+    <title>Our Projects - JoyRise Africa Foundation</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        .expandable-image { cursor: pointer; transition: 0.3s; }
-        .expandable-image:hover { opacity: 0.7; }
-        .modal { display: none; position: fixed; z-index: 2000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); }
-        .modal-content { margin: auto; display: block; width: 80%; max-width: 800px; animation-name: zoom; animation-duration: 0.6s; }
-        .close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; }
-        .close:hover, .close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
-        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+        /* ===== PROJECTS PAGE STYLES ===== */
+        :root {
+            --primary-blue: #0B2447;
+            --accent-orange: #F28C28;
+            --light-background: #F8F7F4;
+            --white: #ffffff;
+            --text-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--white);
+            line-height: 1.8;
+            font-size: 18px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CONTACT BAR ===== */
+        .contact-bar {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+        .contact-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .contact-bar a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 6px;
+            transition: color 0.3s ease;
+        }
+        .contact-bar a:hover { color: var(--accent-orange); }
+        .contact-bar .social-links a {
+            margin: 0 5px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .contact-bar .social-links a:hover { transform: scale(1.2); }
+        .contact-bar .social-links .fa-instagram { color: #E4405F; }
+        .contact-bar .social-links .fa-tiktok { color: #ffffff; }
+        .contact-bar .social-links .fa-youtube { color: #FF0000; }
+        .contact-bar .social-links .fa-whatsapp { color: #25D366; }
+        .contact-bar .social-links .fa-envelope { color: #EA4335; }
+        .contact-bar .social-links .fa-phone { color: #34B7F1; }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background: var(--white);
+            padding: 10px 0;
+            position: sticky;
+            top: 38px;
+            z-index: 1000;
+            width: 100%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 0.85em;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+        .logo img { height: 50px; margin-right: 12px; }
+        .logo span { color: var(--primary-blue); }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            padding: 6px 10px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.1);
+        }
+        nav a.active {
+            color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.15);
+        }
+        .nav-button {
+            background-color: var(--accent-orange);
+            color: var(--white) !important;
+            padding: 6px 16px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: var(--primary-blue);
+            color: var(--white) !important;
+            transform: scale(1.05);
+        }
+
+        /* ===== BACK BUTTON ===== */
+        .back-button-container { padding: 12px 0 0 0; }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(11, 36, 71, 0.08);
+        }
+        .back-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(-3px);
+        }
+        .back-button i { font-size: 1rem; }
+
+        /* ===== PAGE HERO ===== */
+        .page-hero {
+            position: relative;
+            height: 50vh;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary-blue), #1a3a5c);
+            overflow: hidden;
+        }
+        .page-hero .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 36, 71, 0.7);
+        }
+        .page-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+        .page-hero h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== PROJECTS LIST ===== */
+        #projects-list {
+            padding: 60px 20px;
+            background: var(--light-background);
+        }
+        #projects-list .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 16px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 40px rgba(11, 36, 71, 0.08);
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(11, 36, 71, 0.12);
+        }
+        .project-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+        .project-images img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .project-images img:hover {
+            transform: scale(1.02);
+        }
+        .project-images img:only-child {
+            grid-column: 1 / -1;
+            height: 400px;
+        }
+        .project-content {
+            padding: 40px;
+        }
+        .project-content h3 {
+            margin-top: 0;
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+        .project-content h4 {
+            font-size: 1.1rem;
+            color: var(--accent-orange);
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+        .project-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .project-content ul, .project-content ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .project-content ul li, .project-content ol li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .budget {
+            margin-top: 20px;
+            padding: 20px 25px;
+            background: var(--light-background);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-orange);
+        }
+        .budget h4 {
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            color: var(--primary-blue);
+        }
+        .budget p {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        .budget ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+        .budget ul li {
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .budget ul li:last-child {
+            border-bottom: none;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 25px;
+            background: var(--light-background);
+            border-left: 5px solid var(--accent-orange);
+            border-radius: 0 8px 8px 0;
+        }
+        .message-box blockquote {
+            margin: 0;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        .message-box blockquote strong {
+            color: var(--primary-blue);
+        }
+
+        .project-donate-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 35px;
+            background: var(--accent-orange);
+            color: var(--white);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .project-donate-button i {
+            margin-right: 8px;
+        }
+        .project-donate-button:hover {
+            background: var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        /* ===== DONATE SECTION ===== */
+        #donate {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 80px 0;
+        }
+        #donate h2, #donate .section-intro { color: var(--white); }
+        #donate .section-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: -10px auto 50px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .donation-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .method-card {
+            background: var(--white);
+            color: var(--text-color);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .method-card h3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: var(--primary-blue);
+        }
+        .method-card p { color: #666; }
+        .method-card .fa-university, .method-card .fa-mobile-alt {
+            color: var(--accent-orange);
+            font-size: 1.5rem;
+        }
+        .paypal-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0070BA;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .paypal-button:hover {
+            background: #005a8c;
+            transform: scale(1.05);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #1a1a1a;
+            color: #a0a0a0;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        footer h3 {
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+        }
+        .footer-icons { margin: 30px 0; }
+        .footer-icons a {
+            display: inline-block;
+            font-size: 1.8rem;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+        }
+        .footer-icons a:hover { transform: scale(1.2) translateY(-3px); }
+        .footer-icons .fa-instagram { color: #E4405F; }
+        .footer-icons .fa-tiktok { color: #ffffff; }
+        .footer-icons .fa-youtube { color: #FF0000; }
+        .footer-icons .fa-whatsapp { color: #25D366; }
+        .footer-icons .fa-envelope { color: #EA4335; }
+        .footer-icons .fa-phone { color: #34B7F1; }
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 30px;
+        }
+
+        /* ===== IMAGE MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.95);
+        }
+        .modal.active { display: block; }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 8px;
+        }
+        .modal .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .modal .close-modal:hover { color: var(--accent-orange); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2.5rem; }
+            .project-images { grid-template-columns: 1fr; }
+            .project-images img { height: 250px; }
+            .project-content { padding: 25px; }
+            .donation-methods { grid-template-columns: 1fr; }
+            .contact-bar .container { flex-direction: column; text-align: center; }
+            header .container { flex-direction: column; align-items: stretch; gap: 6px; }
+            .logo { justify-content: center; }
+            nav { justify-content: center; gap: 2px; }
+            nav a { font-size: 0.65rem; padding: 4px 6px; }
+            .nav-button { padding: 4px 10px; font-size: 0.65rem; }
+        }
+        @media (max-width: 480px) {
+            .page-hero h1 { font-size: 1.8rem; }
+            .page-hero { min-height: 250px; }
+            .project-content h3 { font-size: 1.5rem; }
+            nav a { font-size: 0.55rem; padding: 3px 4px; }
+            .nav-button { padding: 3px 8px; font-size: 0.55rem; }
+            .budget { padding: 15px; }
+        }
     </style>
 </head>
 <body>
+    <!-- ===== CONTACT BAR ===== -->
+    <div class="contact-bar">
+        <div class="container">
+            <div>
+                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i> joyafrica.org@gmail.com</a>
+                <a href="tel:+256756386352"><i class="fas fa-phone"></i> +256 756 386 352</a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER WITH FULL NAVIGATION ===== -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="JOY AFRICA Logo">
-                <span>JOY AFRICA<br>INTERNATIONAL FOUNDATION</span>
+                <img src="images/logo.png" alt="JoyRise Africa Foundation Logo">
+                <span>JoyRise<br>Africa Foundation</span>
             </a>
             <nav>
                 <a href="index.html">About</a>
-                <a href="projects.html">Projects</a>
+                <a href="projects.html" class="active">Projects</a>
                 <a href="bible-verse.html">Weekly Verse</a>
+                <a href="sponsor-child.html">Sponsor a Child</a>
+                <a href="kids-choir.html">Kids Choir</a>
                 <a href="partner.html">Partner</a>
                 <a href="volunteer.html">Volunteer</a>
                 <a href="#donate" class="nav-button">Donate Now</a>
             </nav>
         </div>
     </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
     <main>
+        <!-- Back Button -->
+        <div class="container back-button-container" id="backButtonContainer">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <!-- ===== PAGE HERO ===== -->
         <section class="page-hero">
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -44,14 +543,22 @@
                 <p>Your support brings these projects to life. Each one is a detailed plan for a better future.</p>
             </div>
         </section>
+
+        <!-- ===== PROJECTS LIST ===== -->
         <section id="projects-list">
             <div class="container">
+
+                <!-- PROJECT 1: JoyRise Kids House -->
                 <div class="project-card">
-                    <div class="project-images"><img src="images/house1.jpg" alt="Joy Africa Kids House" class="expandable-image"><img src="images/house2.jpg" alt="Children playing safely" class="expandable-image"></div>
+                    <div class="project-images">
+                        <img src="images/house1.jpg" alt="JoyRise Kids House" onclick="openModal(this.src)">
+                        <img src="images/house2.jpg" alt="Children playing safely" onclick="openModal(this.src)">
+                    </div>
                     <div class="project-content">
-                        <h3>JOY AFRICA KIDS HOUSE</h3>
+                        <h3>JoyRise Kids House</h3>
                         <h4>Project Overview:</h4>
-                        <p>JOY AFRICA INTERNATIONAL FOUNDATION is proud to present the JOY AFRICA KIDS HOUSE project, a comprehensive initiative aimed at providing a safe and nurturing environment for homeless children in Uganda. The project involves buying land and constructing a house with a playground, offering a holistic approach to supporting the physical, emotional, and educational needs of vulnerable children.</p>
+                        <p>JoyRise Africa Foundation is proud to present the JoyRise Kids House project, a comprehensive initiative aimed at providing a safe and nurturing environment for homeless children in Uganda. The project involves buying land and constructing a house with a playground, offering a holistic approach to supporting the physical, emotional, and educational needs of vulnerable children.</p>
+
                         <h4>Project Objectives:</h4>
                         <ul>
                             <li>Provide a safe and secure shelter for homeless children.</li>
@@ -59,6 +566,7 @@
                             <li>Offer a playground that promotes physical activity, socialization, and recreation.</li>
                             <li>Foster a sense of community and belonging among the children.</li>
                         </ul>
+
                         <h4>Project Scope:</h4>
                         <ol>
                             <li><strong>Land Acquisition:</strong> Purchase a suitable plot of land for the project.</li>
@@ -66,99 +574,133 @@
                             <li><strong>Playground Construction:</strong> Build a playground with play equipment, seating areas, and safety surfacing.</li>
                             <li><strong>Furniture and Equipment:</strong> Provide essential furniture and equipment for the house and playground.</li>
                         </ol>
+
                         <h4>Project Timeline:</h4>
                         <p><strong>Month 1-2:</strong> Land acquisition and planning<br>
                            <strong>Month 3-6:</strong> Design and construction of the house<br>
                            <strong>Month 7-9:</strong> Construction of the playground<br>
                            <strong>Month 10:</strong> Completion and furnishing of the house and playground</p>
+
                         <div class="budget">
                             <h4>Budget: $200,000</h4>
                             <ul>
                                 <li><strong>Land Acquisition:</strong> $45,000</li>
                                 <li><strong>House Construction:</strong> $100,000</li>
                                 <li><strong>Playground Construction:</strong> $20,000</li>
-                                <li><strong>Furniture & Equipment:</strong> $15,000</li>
+                                <li><strong>Furniture &amp; Equipment:</strong> $15,000</li>
                                 <li><strong>Project Management:</strong> $20,000</li>
                             </ul>
                         </div>
+
                         <h4>Project Impact:</h4>
-                        <p>The JOY AFRICA KIDS HOUSE project will have a transformative impact on the lives of homeless children in Uganda. By providing a safe and nurturing environment, we will improve their physical and emotional well-being, enhance their educational outcomes, foster a sense of community, and provide a platform for them to grow and thrive.</p>
+                        <p>The JoyRise Kids House project will have a transformative impact on the lives of homeless children in Uganda. By providing a safe and nurturing environment, we will improve their physical and emotional well-being, enhance their educational outcomes, foster a sense of community, and provide a platform for them to grow and thrive.</p>
+
                         <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
                     </div>
                 </div>
+
+                <!-- PROJECT 2: Everyone Can Drink Healthy -->
                 <div class="project-card">
-                    <div class="project-images"><img src="images/water1.jpg" alt="Clean water project" class="expandable-image"><img src="images/water2.jpg" alt="Children drinking clean water" class="expandable-image"></div>
+                    <div class="project-images">
+                        <img src="images/water1.jpg" alt="Clean water project" onclick="openModal(this.src)">
+                        <img src="images/water2.jpg" alt="Children drinking clean water" onclick="openModal(this.src)">
+                    </div>
                     <div class="project-content">
-                        <h3>EVERYONE CAN DRINK HEALTHY</h3>
+                        <h3>Everyone Can Drink Healthy</h3>
                         <p>Water is essential for survival—it is used for cooking, drinking, feeding animals, and watering plants. However, in some parts of Uganda, access to clean and safe water is impossible, forcing people to drink contaminated water.</p>
                         <p>Out of a population of 45 million, 38 million people (83% of the population) lack access to a reliable, safely managed source of water. Those who can access clean water often pay up to 22% of their daily income for it. Tragically, many deaths are caused by illnesses related to the lack of clean water.</p>
-                        <p>But together, you and I can stop this right now. JOY AFRICA INTERNATIONAL FOUNDATION is ready to take the lead. With your help, we want to reduce these numbers by building proper wells, rainwater collection tanks, and boreholes, while also teaching communities how to keep their water safe. With your support, we are ready to join hands with the government to make this happen and bring smiles back to everyone.</p>
+                        <p>But together, you and I can stop this right now. JoyRise Africa Foundation is ready to take the lead. With your help, we want to reduce these numbers by building proper wells, rainwater collection tanks, and boreholes, while also teaching communities how to keep their water safe. With your support, we are ready to join hands with the government to make this happen and bring smiles back to everyone.</p>
+
                         <div class="budget">
                             <h4>Budget: $120,000</h4>
                             <ul>
-                                <li><strong>Wells & Boreholes:</strong> $70,000</li>
+                                <li><strong>Wells &amp; Boreholes:</strong> $70,000</li>
                                 <li><strong>Rainwater Collection Tanks:</strong> $30,000</li>
-                                <li><strong>Hygiene & Safety Training:</strong> $10,000</li>
-                                <li><strong>Administration & Logistics:</strong> $5,000</li>
+                                <li><strong>Hygiene &amp; Safety Training:</strong> $10,000</li>
+                                <li><strong>Administration &amp; Logistics:</strong> $5,000</li>
                                 <li><strong>Transportation:</strong> $5,000</li>
                             </ul>
                         </div>
-                        <div class="message-box" style="margin-top: 20px;">
-                            <blockquote>"You can support us by donating to our Organisation or by ordering a project t-shirt for $15. All this money will be helpful in the project. Thank you."<br><br><strong>- Tumusiime Gonzaga, Director of JOY AFRICA INTERNATIONAL FOUNDATION</strong></blockquote>
+
+                        <div class="message-box">
+                            <blockquote>"You can support us by donating to our Organisation or by ordering a project t-shirt for $15. All this money will be helpful in the project. Thank you."<br><br><strong>- Tumusiime Gonzaga, Director of JoyRise Africa Foundation</strong></blockquote>
                         </div>
-                         <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
+
+                        <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
                     </div>
                 </div>
+
+                <!-- PROJECT 3: Educational Sponsorship -->
                 <div class="project-card">
-                    <div class="project-images"><img src="images/education1.jpg" alt="Child studying" class="expandable-image"><img src="images/education2.jpg" alt="Children in classroom" class="expandable-image"></div>
+                    <div class="project-images">
+                        <img src="images/education1.jpg" alt="Child studying" onclick="openModal(this.src)">
+                        <img src="images/education2.jpg" alt="Children in classroom" onclick="openModal(this.src)">
+                    </div>
                     <div class="project-content">
-                        <h3>EDUCATIONAL SPONSORSHIP & SUPPORT PROGRAM</h3>
+                        <h3>Educational Sponsorship &amp; Support Program</h3>
                         <p><strong>Goal:</strong> To ensure every child we encounter has the tools and support to succeed in school.</p>
+
                         <h4>Our Plan:</h4>
                         <ul>
                             <li>Pay tuition fees for children out of school due to financial hardship.</li>
                             <li>Provide essential school supplies, uniforms, and shoes.</li>
                             <li>Offer after-school tutoring and mentorship programs.</li>
                         </ul>
+
                         <div class="budget">
                             <h4>Budget: $35,000 annually</h4>
                             <ul>
                                 <li><strong>Tuition Support:</strong> $20,000</li>
-                                <li><strong>Supplies & Uniforms:</strong> $10,000</li>
-                                <li><strong>Mentorship & Tutoring:</strong> $5,000</li>
+                                <li><strong>Supplies &amp; Uniforms:</strong> $10,000</li>
+                                <li><strong>Mentorship &amp; Tutoring:</strong> $5,000</li>
                             </ul>
                         </div>
+
                         <p><strong>Impact:</strong> Increased school enrollment, reduced dropout rates, and improved academic performance.</p>
-                         <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
+
+                        <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
                     </div>
                 </div>
+
+                <!-- PROJECT 4: Girls' Dignity Program -->
                 <div class="project-card">
-                    <div class="project-images"><img src="images/girl.jpg" alt="Girls' Dignity Program" class="expandable-image"></div>
+                    <div class="project-images">
+                        <img src="images/girl.jpg" alt="Girls' Dignity Program" onclick="openModal(this.src)">
+                    </div>
                     <div class="project-content">
-                        <h3>GIRLS’ DIGNITY PROGRAM</h3>
+                        <h3>Girls' Dignity Program</h3>
                         <p><strong>Goal:</strong> To ensure girls stay in school by providing safe, reusable sanitary pads and hygiene education.</p>
+
                         <h4>Our Plan:</h4>
                         <ul>
                             <li>Distribute sanitary kits and essential hygiene materials.</li>
                             <li>Conduct menstrual health education workshops in schools.</li>
                             <li>Train local women to make sanitary pads, ensuring sustainability.</li>
                         </ul>
+
                         <div class="budget">
                             <h4>Budget: $20,000 annually</h4>
                             <ul>
-                                <li><strong>Materials & Kits:</strong> $10,000</li>
+                                <li><strong>Materials &amp; Kits:</strong> $10,000</li>
                                 <li><strong>Education Workshops:</strong> $5,000</li>
                                 <li><strong>Training for Local Women:</strong> $5,000</li>
                             </ul>
                         </div>
+
                         <p><strong>Impact:</strong> Reduced absenteeism among girls, improved hygiene, and community empowerment through local pad-making.</p>
-                         <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
+
+                        <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
                     </div>
                 </div>
+
+                <!-- PROJECT 5: Joy Charity Give Away -->
                 <div class="project-card">
-                    <div class="project-images"><img src="images/giveaway1.jpg" alt="Charity giveaway event" class="expandable-image"><img src="images/giveaway2.jpg" alt="Distributing supplies" class="expandable-image"></div>
+                    <div class="project-images">
+                        <img src="images/giveaway1.jpg" alt="Charity giveaway event" onclick="openModal(this.src)">
+                        <img src="images/giveaway2.jpg" alt="Distributing supplies" onclick="openModal(this.src)">
+                    </div>
                     <div class="project-content">
-                        <h3>JOY CHARITY GIVE AWAY</h3>
+                        <h3>Joy Charity Give Away</h3>
                         <p>We are currently preparing for our next charity giveaway project this November. This project aims to:</p>
                         <ul>
                             <li>Bless young girls with new and safe sanitary pads.</li>
@@ -166,15 +708,20 @@
                             <li>Distribute proper clothing and shoes.</li>
                             <li>Offer tuition assistance to children who are out of school due to financial challenges.</li>
                         </ul>
+
                         <div class="budget">
                             <h4>Budget: $10,000</h4>
                         </div>
-                         <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
+
+                        <a href="#donate" class="project-donate-button"><i class="fas fa-heart"></i> Support This Project</a>
                     </div>
                 </div>
+
+                <!-- PROJECT 6: Support Our Mission -->
                 <div class="project-card">
                     <div class="project-content">
-                        <h3>SUPPORT OUR MISSION</h3>
+                        <h3>Support Our Mission</h3>
+
                         <h4>Donor and Sponsor Benefits:</h4>
                         <ul>
                             <li>The opportunity to make a meaningful difference in the lives of vulnerable children.</li>
@@ -182,56 +729,104 @@
                             <li>Regular project updates and impact reports.</li>
                             <li>An invitation to project launch and anniversary celebrations.</li>
                         </ul>
+
                         <h4>Project Sustainability:</h4>
-                        <p>JOY AFRICA INTERNATIONAL FOUNDATION is committed to ensuring the long-term sustainability of all our projects. We will:</p>
+                        <p>JoyRise Africa Foundation is committed to ensuring the long-term sustainability of all our projects. We will:</p>
                         <ul>
                             <li>Establish a strong management team to oversee project operations.</li>
                             <li>Develop a comprehensive maintenance plan for all infrastructure.</li>
                             <li>Foster partnerships with local organizations and communities to support project activities.</li>
                         </ul>
+
                         <h4>A Call to Action:</h4>
                         <p>We invite you to join us in making a difference in the lives of children in Uganda. Your support will help us provide a safe and nurturing environment for these vulnerable children. Together, we can create a brighter future for Africa's children.</p>
+
                         <a href="#donate" class="project-donate-button">Become a Partner in Hope</a>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
+
+    <!-- ===== DONATE SECTION ===== -->
     <section id="donate">
         <div class="container">
             <h2>Become a Partner in Hope</h2>
             <p class="section-intro">Your generous gift is a direct investment in a child's future. 100% of your donation goes directly to funding these life-changing projects.</p>
             <div class="donation-methods">
-                <div class="method-card"><h3><i class="fas fa-university"></i> Bank Transfer</h3><p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p></div>
-                <div class="method-card"><h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3><p>Send directly to our secure line:<br><strong>Number:</strong> +256 775 092 014</p></div>
+                <div class="method-card">
+                    <h3><i class="fas fa-university"></i> Bank Transfer</h3>
+                    <p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p>
+                </div>
+                <div class="method-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3>
+                    <p>Send directly to our secure line:<br><strong>Number:</strong> +256 775 092 014</p>
+                </div>
                 <div class="method-card">
                     <h3><i class="fab fa-paypal"></i> PayPal</h3>
                     <p>Click below to make a secure donation with your PayPal account or card.</p>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JOY+AFRICA+INTERNATIONAL+FOUNDATION&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JoyRise+Africa+Foundation&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
-            <h3>JOY AFRICA INTERNATIONAL FOUNDATION</h3>
+            <h3>JoyRise Africa Foundation</h3>
             <p>A Christian foundation, rooted in faith and dedicated to action.</p>
             <div class="footer-icons">
-                <a href="https://www.instagram.com/joy_africa.foundation" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@joy_africa.foundation" target="_blank"aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/256775092014" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:joyafrica.org@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+256756386352" aria-label="Call Us"><i class="fas fa-phone"></i></a>
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+256756386352"><i class="fas fa-phone"></i></a>
             </div>
-            <p class="copyright">&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
+            <p class="copyright">&copy; 2025 JoyRise Africa Foundation. All Rights Reserved.</p>
         </div>
     </footer>
-    <div id="myModal" class="modal"><span class="close">&times;</span><img class="modal-content" id="img01"></div>
+
+    <!-- ===== IMAGE MODAL ===== -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
     <script>
-        var modal = document.getElementById("myModal"), modalImg = document.getElementById("img01"), images = document.getElementsByClassName("expandable-image");
-        for (var i = 0; i < images.length; i++) { images[i].onclick = function(){ modal.style.display = "block"; modalImg.src = this.src; } }
-        document.getElementsByClassName("close")[0].onclick = function() { modal.style.display = "none"; }
-        window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+        // ===== IMAGE MODAL =====
+        function openModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('imageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal on click outside
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // ===== BACK BUTTON LOGIC =====
+        if (window.history.length <= 1 || document.referrer === "") {
+            document.getElementById('backButtonContainer').style.display = 'none';
+        }
     </script>
 </body>
 </html>
