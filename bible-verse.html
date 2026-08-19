@@ -11,14 +11,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== BIBLE VERSE STYLES ===== */
+        /* ===== HEAVENLY COLOR SCHEME ===== */
         :root {
-            --verse-gold: #FDCB6E;
-            --verse-dark: #0a0a0a;
-            --verse-dark-blue: #0B1A2E;
-            --verse-cream: #FFF8F0;
-            --verse-purple: #6C5CE7;
-            --verse-teal: #00CEC9;
+            --heaven-gold: #F7DC6F;
+            --heaven-light-gold: #F9E79F;
+            --heaven-sky: #85C1E9;
+            --heaven-blue: #2E86C1;
+            --heaven-dark-blue: #1B2631;
+            --heaven-purple: #8E44AD;
+            --heaven-light-purple: #D2B4DE;
+            --heaven-white: #FDFEFE;
+            --heaven-cream: #FEF9E7;
+            --heaven-glow: rgba(255, 215, 0, 0.3);
             --primary-blue: #0B2447;
             --accent-orange: #F28C28;
             --white: #ffffff;
@@ -45,14 +49,14 @@
 
         /* ===== CONTACT BAR ===== */
         .contact-bar {
-            background: var(--verse-dark);
+            background: var(--heaven-dark-blue);
             color: var(--white);
             padding: 8px 0;
             font-size: 0.8rem;
             position: sticky;
             top: 0;
             z-index: 1001;
-            border-bottom: 2px solid var(--verse-gold);
+            border-bottom: 2px solid var(--heaven-gold);
         }
         .contact-bar .container {
             display: flex;
@@ -67,7 +71,7 @@
             margin: 0 6px;
             transition: color 0.3s ease;
         }
-        .contact-bar a:hover { color: var(--verse-gold); }
+        .contact-bar a:hover { color: var(--heaven-gold); }
         .contact-bar .social-links a {
             margin: 0 5px;
             font-size: 1rem;
@@ -84,7 +88,7 @@
 
         /* ===== HEADER & NAVIGATION ===== */
         header {
-            background: var(--verse-dark);
+            background: var(--heaven-dark-blue);
             padding: 10px 0;
             position: sticky;
             top: 38px;
@@ -131,23 +135,25 @@
             white-space: nowrap;
         }
         nav a:hover {
-            color: var(--verse-gold);
-            background: rgba(253, 203, 110, 0.1);
+            color: var(--heaven-gold);
+            background: rgba(247, 220, 111, 0.1);
         }
         nav a.active {
-            color: var(--verse-gold);
-            background: rgba(253, 203, 110, 0.15);
+            color: var(--heaven-gold);
+            background: rgba(247, 220, 111, 0.15);
         }
         .nav-button {
-            background: linear-gradient(135deg, var(--accent-orange), #FF6B35);
-            color: var(--white) !important;
+            background: linear-gradient(135deg, var(--heaven-gold), var(--heaven-light-gold));
+            color: var(--heaven-dark-blue) !important;
             padding: 6px 16px;
             border-radius: 50px;
             transition: all 0.3s ease;
+            font-weight: 700;
         }
         .nav-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255,107,53,0.4);
+            box-shadow: 0 0 30px rgba(247, 220, 111, 0.4);
+            color: var(--heaven-dark-blue) !important;
         }
 
         /* ===== BACK BUTTON ===== */
@@ -156,132 +162,227 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: var(--verse-gold);
+            color: var(--heaven-gold);
             text-decoration: none;
             font-weight: 700;
             font-size: 0.9rem;
             transition: all 0.3s ease;
             padding: 8px 16px;
             border-radius: 8px;
-            background: rgba(253, 203, 110, 0.1);
+            background: rgba(247, 220, 111, 0.1);
         }
         .back-button:hover {
-            background: var(--verse-gold);
-            color: var(--verse-dark);
+            background: var(--heaven-gold);
+            color: var(--heaven-dark-blue);
             transform: translateX(-3px);
         }
         .back-button i { font-size: 1rem; }
 
-        /* ===== VERSE HERO ===== */
+        /* ===== VERSE HERO WITH BIBLE VERSE IMAGE BACKGROUND ===== */
         .verse-hero {
             position: relative;
-            height: 60vh;
-            min-height: 400px;
+            height: 70vh;
+            min-height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--verse-dark), var(--verse-dark-blue));
+            background: var(--heaven-dark-blue);
         }
-        .verse-hero::before {
-            content: '✝ ♱ ✝ ♱ ✝';
+        .verse-hero .hero-bg-image {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            font-size: 8rem;
-            opacity: 0.05;
-            letter-spacing: 30px;
-            animation: floatCrosses 30s linear infinite;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.6;
         }
-        @keyframes floatCrosses {
-            0% { transform: translateX(-200px); }
-            50% { transform: translateX(200px); }
-            100% { transform: translateX(-200px); }
-        }
+        /* Heavenly glow overlay */
         .verse-hero .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(10,10,10,0.7), rgba(11,26,46,0.5));
+            background: linear-gradient(135deg, 
+                rgba(27, 38, 49, 0.8) 0%, 
+                rgba(46, 134, 193, 0.4) 40%,
+                rgba(142, 68, 173, 0.3) 70%,
+                rgba(247, 220, 111, 0.2) 100%
+            );
+            z-index: 2;
+        }
+        /* Heavenly glow effect */
+        .verse-hero .heavenly-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(247, 220, 111, 0.15), transparent 70%);
+            animation: heavenlyPulse 4s ease-in-out infinite;
             z-index: 1;
+        }
+        @keyframes heavenlyPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        /* Floating heavenly particles */
+        .verse-hero .heavenly-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .verse-hero .heavenly-particles span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(247, 220, 111, 0.6), transparent);
+            border-radius: 50%;
+            animation: floatParticles 15s linear infinite;
+        }
+        .verse-hero .heavenly-particles span:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .verse-hero .heavenly-particles span:nth-child(2) { top: 80%; left: 20%; animation-delay: 2s; width: 30px; height: 30px; }
+        .verse-hero .heavenly-particles span:nth-child(3) { top: 20%; left: 80%; animation-delay: 4s; }
+        .verse-hero .heavenly-particles span:nth-child(4) { top: 70%; left: 85%; animation-delay: 1s; width: 15px; height: 15px; }
+        .verse-hero .heavenly-particles span:nth-child(5) { top: 50%; left: 50%; animation-delay: 3s; width: 40px; height: 40px; opacity: 0.3; }
+        @keyframes floatParticles {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.5; }
+            50% { transform: translateY(-100px) rotate(180deg) scale(1.5); opacity: 0.8; }
+            100% { transform: translateY(-200px) rotate(360deg) scale(1); opacity: 0.2; }
         }
         .verse-hero .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             padding: 20px;
+            max-width: 900px;
         }
         .verse-hero h1 {
             color: white;
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 15px;
             text-shadow: 0 4px 30px rgba(0,0,0,0.5);
-            background: linear-gradient(135deg, var(--verse-gold), var(--verse-purple));
+            background: linear-gradient(135deg, var(--heaven-gold), var(--heaven-light-gold), var(--heaven-sky), var(--heaven-light-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: glowText 3s ease-in-out infinite;
+        }
+        @keyframes glowText {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(247, 220, 111, 0.3)); }
+            50% { filter: drop-shadow(0 0 60px rgba(247, 220, 111, 0.6)) drop-shadow(0 0 90px rgba(142, 68, 173, 0.3)); }
         }
         .verse-hero p {
-            font-size: 1.3rem;
-            opacity: 0.9;
+            font-size: 1.4rem;
+            opacity: 0.95;
             max-width: 700px;
             margin: 0 auto;
             color: var(--white);
             -webkit-text-fill-color: white;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        .verse-hero .heavenly-icons {
+            font-size: 3rem;
+            margin-top: 20px;
+            opacity: 0.8;
+            animation: floatIcons 3s ease-in-out infinite;
+            color: var(--heaven-gold);
+        }
+        @keyframes floatIcons {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
         }
 
         /* ===== VERSE CONTENT ===== */
         .verse-content {
             padding: 60px 20px;
-            background: linear-gradient(180deg, var(--verse-dark), var(--verse-dark-blue));
+            background: linear-gradient(180deg, var(--heaven-dark-blue), #1a2a3a, var(--heaven-dark-blue));
+            position: relative;
+        }
+        .verse-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at top, rgba(247, 220, 111, 0.05), transparent 70%);
+            pointer-events: none;
         }
         .verse-content .verse-intro {
             text-align: center;
             max-width: 800px;
             margin: 0 auto 40px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             font-size: 1.1rem;
             line-height: 1.9;
+            position: relative;
+        }
+        .verse-content .verse-intro p {
+            color: rgba(255,255,255,0.8);
         }
 
         .verse-week-title {
             text-align: center;
             font-size: 1.8rem;
-            color: var(--verse-gold);
+            color: var(--heaven-gold);
             letter-spacing: 5px;
             margin-bottom: 40px;
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(247, 220, 111, 0.2);
         }
 
         /* ===== VERSE HIGHLIGHT BOX ===== */
         .verse-highlight-box {
             background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             max-width: 850px;
             margin: 0 auto 60px;
             padding: 50px 60px;
             border-radius: 16px;
-            border-left: 8px solid var(--verse-gold);
+            border-left: 8px solid var(--heaven-gold);
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(247, 220, 111, 0.1);
             transition: all 0.3s ease;
+            position: relative;
+        }
+        .verse-highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(247, 220, 111, 0.1), rgba(142, 68, 173, 0.1));
+            z-index: -1;
         }
         .verse-highlight-box:hover {
             transform: translateY(-3px);
             box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            border-color: var(--heaven-gold);
         }
         .verse-highlight-box h4 {
             font-family: 'Oswald', sans-serif;
             font-size: 2rem;
-            color: var(--verse-gold);
+            color: var(--heaven-gold);
             margin-bottom: 25px;
             letter-spacing: 3px;
-            -webkit-text-fill-color: var(--verse-gold);
+            -webkit-text-fill-color: var(--heaven-gold);
+            text-shadow: 0 0 30px rgba(247, 220, 111, 0.2);
         }
         .verse-highlight-box blockquote {
             font-family: 'Lora', serif;
@@ -296,11 +397,12 @@
         .verse-highlight-box blockquote::before {
             content: '\201C';
             font-size: 5rem;
-            color: var(--verse-gold);
+            color: var(--heaven-gold);
             opacity: 0.3;
             position: absolute;
             top: -30px;
             left: -40px;
+            font-family: 'Lora', serif;
         }
 
         /* ===== VERSE EXPLANATION ===== */
@@ -308,15 +410,17 @@
             max-width: 850px;
             margin: 0 auto;
             color: rgba(255,255,255,0.8);
+            position: relative;
         }
         .verse-explanation h3 {
             font-size: 2rem;
-            border-bottom: 2px solid rgba(253, 203, 110, 0.2);
+            border-bottom: 2px solid rgba(247, 220, 111, 0.2);
             padding-bottom: 15px;
             margin-top: 50px;
             margin-bottom: 25px;
-            color: var(--verse-gold);
-            -webkit-text-fill-color: var(--verse-gold);
+            color: var(--heaven-gold);
+            -webkit-text-fill-color: var(--heaven-gold);
+            text-shadow: 0 0 30px rgba(247, 220, 111, 0.1);
         }
         .verse-explanation h3:first-of-type {
             margin-top: 0;
@@ -325,7 +429,7 @@
             font-size: 1.05rem;
             line-height: 1.9;
             margin-bottom: 20px;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.85);
         }
         .verse-explanation ol {
             list-style: none;
@@ -338,11 +442,11 @@
             font-size: 1.05rem;
             display: flex;
             align-items: flex-start;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.85);
         }
         .verse-explanation ol li::before {
             content: counter(verse-counter);
-            background: linear-gradient(135deg, var(--verse-gold), var(--verse-purple));
+            background: linear-gradient(135deg, var(--heaven-gold), var(--heaven-purple));
             color: var(--white);
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
@@ -355,16 +459,23 @@
             margin-right: 20px;
             flex-shrink: 0;
             font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(247, 220, 111, 0.2);
         }
 
         /* ===== DONATE SECTION ===== */
         #donate {
-            background: var(--verse-dark);
+            background: var(--heaven-dark-blue);
             color: var(--white);
             padding: 80px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(247, 220, 111, 0.1);
         }
         #donate h2, #donate .section-intro { color: var(--white); }
+        #donate h2 {
+            background: linear-gradient(135deg, var(--heaven-gold), var(--heaven-light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .donation-methods {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -373,19 +484,27 @@
         }
         .method-card {
             background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             color: var(--white);
             padding: 40px;
             border-radius: 12px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(247, 220, 111, 0.05);
+            transition: all 0.3s ease;
+        }
+        .method-card:hover {
+            border-color: var(--heaven-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         .method-card h3 {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
-            color: var(--white);
-            -webkit-text-fill-color: white;
+            color: var(--heaven-gold);
+            -webkit-text-fill-color: var(--heaven-gold);
         }
         .method-card p { color: rgba(255,255,255,0.7); }
         .paypal-button {
@@ -401,6 +520,7 @@
         .paypal-button:hover {
             background: #005a8c;
             transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0,112,186,0.3);
         }
 
         /* ===== FOOTER ===== */
@@ -409,13 +529,13 @@
             color: rgba(255,255,255,0.5);
             padding: 60px 0 30px;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(247, 220, 111, 0.05);
         }
         footer h3 {
-            color: var(--white);
+            color: var(--heaven-gold);
             font-family: 'Oswald', sans-serif;
             font-size: 1.5rem;
-            -webkit-text-fill-color: white;
+            -webkit-text-fill-color: var(--heaven-gold);
         }
         .footer-icons { margin: 30px 0; }
         .footer-icons a {
@@ -434,7 +554,7 @@
         .copyright {
             font-size: 0.9rem;
             margin-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(247, 220, 111, 0.05);
             padding-top: 30px;
         }
 
@@ -453,10 +573,11 @@
             nav { justify-content: center; gap: 2px; }
             nav a { font-size: 0.65rem; padding: 4px 6px; }
             .nav-button { padding: 4px 10px; font-size: 0.65rem; }
+            .verse-hero .heavenly-particles span { display: none; }
         }
         @media (max-width: 480px) {
             .verse-hero h1 { font-size: 1.8rem; }
-            .verse-hero { min-height: 300px; }
+            .verse-hero { min-height: 350px; height: 60vh; }
             .verse-highlight-box blockquote { font-size: 1.3rem; }
             .verse-highlight-box h4 { font-size: 1.3rem; }
             .verse-week-title { font-size: 1.2rem; }
@@ -512,12 +633,26 @@
             </a>
         </div>
 
-        <!-- ===== VERSE HERO ===== -->
-        <section class="verse-hero">
+        <!-- ===== VERSE HERO WITH BIBLE VERSE IMAGE BACKGROUND ===== -->
+        <section class="verse-hero" id="verseHero">
+            <!-- Bible Verse Image Background - Uploaded by Admin -->
+            <img src="images/bibleverse.jpg" alt="Bible Verse Background" class="hero-bg-image" id="heroBgImage">
+            <div class="heavenly-glow"></div>
+            
+            <!-- Heavenly Floating Particles -->
+            <div class="heavenly-particles">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>📖 Weekly Bible Verse</h1>
                 <p>Learn and understand bible verses with us.</p>
+                <div class="heavenly-icons">✝ ♱ ✝ ♱ ✝</div>
             </div>
         </section>
 
@@ -591,7 +726,6 @@
     <!-- ===== SCRIPTS ===== -->
     <script>
         // ===== VERSE DATA (Admin can edit via admin panel) =====
-        // All content below can be updated by the admin website
         const verseData = {
             weekNumber: 'WEEK ONE',
             reference: 'PROVERBS 31:8-9',
@@ -617,20 +751,13 @@
 
         // ===== LOAD VERSE DATA =====
         function loadVerseData() {
-            // Update Week Title
             document.getElementById('verseWeekTitle').textContent = verseData.weekNumber;
-            
-            // Update Verse Reference
             document.getElementById('verseReference').textContent = verseData.reference;
-            
-            // Update Verse Text
             document.getElementById('verseText').textContent = verseData.verseText;
             
-            // Update Intro
             const introContainer = document.getElementById('verseIntro');
             introContainer.innerHTML = verseData.intro.map(p => `<p>${p}</p>`).join('');
             
-            // Update Explanation
             const explanationParagraphs = document.querySelectorAll('#explanationText, #explanationText2, #explanationText3, #explanationText4');
             verseData.explanation.forEach((text, index) => {
                 if (explanationParagraphs[index]) {
@@ -638,23 +765,29 @@
                 }
             });
             
-            // Update Application
-            const applicationList = document.getElementById('applicationList');
-            applicationList.innerHTML = verseData.application.map(item => `<li>${item}</li>`).join('');
-            
-            // Update Summary
+            document.getElementById('applicationList').innerHTML = verseData.application.map(item => `<li>${item}</li>`).join('');
             document.getElementById('summaryText').textContent = verseData.summary;
         }
+
+        // ===== ADMIN CAN CHANGE BACKGROUND IMAGE =====
+        // To change the background image, update this variable:
+        const bgImageUrl = 'images/bibleverse.jpg';
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgImage = document.getElementById('heroBgImage');
+            if (bgImage) {
+                bgImage.src = bgImageUrl;
+                bgImage.onerror = function() {
+                    // If image fails to load, use gradient fallback
+                    this.style.display = 'none';
+                };
+            }
+            loadVerseData();
+        });
 
         // ===== BACK BUTTON LOGIC =====
         if (window.history.length <= 1 || document.referrer === "") {
             document.getElementById('backButtonContainer').style.display = 'none';
         }
-
-        // ===== INITIALIZE =====
-        document.addEventListener('DOMContentLoaded', function() {
-            loadVerseData();
-        });
     </script>
 </body>
 </html>
