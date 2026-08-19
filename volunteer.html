@@ -3,57 +3,525 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer With Us - JOY AFRICA INTERNATIONAL FOUNDATION</title>
+    <title>Volunteer With Us - JoyRise Africa Foundation</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== VOLUNTEER PAGE STYLES ===== */
+        :root {
+            --primary-blue: #0B2447;
+            --accent-orange: #F28C28;
+            --volunteer-green: #2ECC71;
+            --light-background: #F8F7F4;
+            --white: #ffffff;
+            --text-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--white);
+            line-height: 1.8;
+            font-size: 18px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CONTACT BAR ===== */
+        .contact-bar {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+        .contact-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .contact-bar a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 6px;
+            transition: color 0.3s ease;
+        }
+        .contact-bar a:hover { color: var(--accent-orange); }
+        .contact-bar .social-links a {
+            margin: 0 5px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .contact-bar .social-links a:hover { transform: scale(1.2); }
+        .contact-bar .social-links .fa-instagram { color: #E4405F; }
+        .contact-bar .social-links .fa-tiktok { color: #ffffff; }
+        .contact-bar .social-links .fa-youtube { color: #FF0000; }
+        .contact-bar .social-links .fa-whatsapp { color: #25D366; }
+        .contact-bar .social-links .fa-envelope { color: #EA4335; }
+        .contact-bar .social-links .fa-phone { color: #34B7F1; }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background: var(--white);
+            padding: 10px 0;
+            position: sticky;
+            top: 38px;
+            z-index: 1000;
+            width: 100%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 0.85em;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+        .logo img { height: 50px; margin-right: 12px; }
+        .logo span { color: var(--primary-blue); }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            padding: 6px 10px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.1);
+        }
+        nav a.active {
+            color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.15);
+        }
+        .nav-button {
+            background-color: var(--accent-orange);
+            color: var(--white) !important;
+            padding: 6px 16px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: var(--primary-blue);
+            color: var(--white) !important;
+            transform: scale(1.05);
+        }
+
+        /* ===== BACK BUTTON ===== */
+        .back-button-container { padding: 12px 0 0 0; }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(11, 36, 71, 0.08);
+        }
+        .back-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(-3px);
+        }
+        .back-button i { font-size: 1rem; }
+
+        /* ===== FORM PAGE STYLES ===== */
+        .form-page-hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--volunteer-green));
+            color: white;
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+        }
+        .form-page-hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .form-page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            padding: 60px 20px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .form-container form {
+            background: var(--white);
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+        .form-container form h3 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--volunteer-green);
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+        }
+        .form-container form h3:first-of-type {
+            margin-top: 0;
+        }
+        .form-container form label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .form-container form input[type="text"],
+        .form-container form input[type="email"],
+        .form-container form input[type="tel"],
+        .form-container form input[type="date"],
+        .form-container form textarea,
+        .form-container form select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        .form-container form input:focus,
+        .form-container form textarea:focus,
+        .form-container form select:focus {
+            border-color: var(--volunteer-green);
+            outline: none;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
+        }
+        .form-container form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .form-container form fieldset {
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+        }
+        .form-container form fieldset legend {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            padding: 0 12px;
+            font-weight: 700;
+        }
+        .form-container form fieldset label {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .form-container form fieldset label input[type="checkbox"],
+        .form-container form fieldset label input[type="radio"] {
+            width: auto;
+            margin-right: 12px;
+            transform: scale(1.1);
+        }
+        .form-container form .radio-group {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .form-container form .radio-group label {
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-container form .radio-group input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
+        }
+        .form-container form .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--volunteer-green);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .form-container form .submit-btn:hover {
+            background: var(--primary-blue);
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(11, 36, 71, 0.3);
+        }
+
+        /* ===== DONATE SECTION ===== */
+        #donate {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 80px 0;
+        }
+        #donate h2, #donate .section-intro { color: var(--white); }
+        #donate .section-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: -10px auto 50px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .donation-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .method-card {
+            background: var(--white);
+            color: var(--text-color);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .method-card h3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: var(--primary-blue);
+        }
+        .method-card p { color: #666; }
+        .method-card .fa-university, .method-card .fa-mobile-alt {
+            color: var(--accent-orange);
+            font-size: 1.5rem;
+        }
+        .paypal-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0070BA;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .paypal-button:hover {
+            background: #005a8c;
+            transform: scale(1.05);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #1a1a1a;
+            color: #a0a0a0;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        footer h3 {
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+        }
+        .footer-icons { margin: 30px 0; }
+        .footer-icons a {
+            display: inline-block;
+            font-size: 1.8rem;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+        }
+        .footer-icons a:hover { transform: scale(1.2) translateY(-3px); }
+        .footer-icons .fa-instagram { color: #E4405F; }
+        .footer-icons .fa-tiktok { color: #ffffff; }
+        .footer-icons .fa-youtube { color: #FF0000; }
+        .footer-icons .fa-whatsapp { color: #25D366; }
+        .footer-icons .fa-envelope { color: #EA4335; }
+        .footer-icons .fa-phone { color: #34B7F1; }
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 30px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .form-page-hero h1 { font-size: 2.5rem; }
+            .form-container form { padding: 25px; }
+            .donation-methods { grid-template-columns: 1fr; }
+            .contact-bar .container { flex-direction: column; text-align: center; }
+            header .container { flex-direction: column; align-items: stretch; gap: 6px; }
+            .logo { justify-content: center; }
+            nav { justify-content: center; gap: 2px; }
+            nav a { font-size: 0.65rem; padding: 4px 6px; }
+            .nav-button { padding: 4px 10px; font-size: 0.65rem; }
+            .form-container form fieldset { padding: 15px; }
+        }
+        @media (max-width: 480px) {
+            .form-page-hero h1 { font-size: 1.8rem; }
+            .form-page-hero { padding: 60px 15px 40px; }
+            .form-container form { padding: 15px; }
+            nav a { font-size: 0.55rem; padding: 3px 4px; }
+            .nav-button { padding: 3px 8px; font-size: 0.55rem; }
+            .form-container form h3 { font-size: 1.3rem; }
+        }
+    </style>
 </head>
-<body class="form-page">
+<body>
+    <!-- ===== CONTACT BAR ===== -->
+    <div class="contact-bar">
+        <div class="container">
+            <div>
+                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i> joyafrica.org@gmail.com</a>
+                <a href="tel:+256756386352"><i class="fas fa-phone"></i> +256 756 386 352</a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER WITH FULL NAVIGATION ===== -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="JOY AFRICA Logo">
-                <span>JOY AFRICA<br>INTERNATIONAL FOUNDATION</span>
+                <img src="images/logo.png" alt="JoyRise Africa Foundation Logo">
+                <span>JoyRise<br>Africa Foundation</span>
             </a>
             <nav>
                 <a href="index.html">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="bible-verse.html">Weekly Verse</a>
+                <a href="sponsor-child.html">Sponsor a Child</a>
+                <a href="kids-choir.html">Kids Choir</a>
                 <a href="partner.html">Partner</a>
-                <a href="volunteer.html">Volunteer</a>
+                <a href="volunteer.html" class="active">Volunteer</a>
                 <a href="#donate" class="nav-button">Donate Now</a>
             </nav>
         </div>
     </header>
-    <main class="form-container">
-        <div class="container">
-            <h2>Become a Volunteer</h2>
-            <p class="section-intro">Lend your time and talent to make a direct impact. Join our team to bring hope and joy to those in need.</p>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+        <!-- Back Button -->
+        <div class="container back-button-container" id="backButtonContainer">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <!-- ===== FORM PAGE HERO ===== -->
+        <section class="form-page-hero">
+            <h1>🙋 Become a Volunteer</h1>
+            <p>Lend your time and talent to make a direct impact. Join our team to bring hope and joy to those in need.</p>
+        </section>
+
+        <!-- ===== VOLUNTEER FORM ===== -->
+        <section class="form-container">
             <form action="https://formspree.io/f/xqaljaqv" method="POST">
+                <input type="hidden" name="_subject" value="New Volunteer Application">
+                <input type="hidden" name="_replyto" value="joyafrica.org@gmail.com">
+
+                <h3>📋 Volunteer Application</h3>
+                <p style="color: #666; margin-bottom: 25px; font-size: 0.95rem;">Please fill in all required fields to become a volunteer.</p>
+
+                <!-- SECTION A: PERSONAL DETAILS -->
                 <h3>Section A: Personal Details</h3>
-                <label for="v_name">Full Name</label>
+
+                <label for="v_name">Full Name *</label>
                 <input type="text" id="v_name" name="Full Name" required>
+
                 <label for="v_dob">Date of Birth</label>
                 <input type="date" id="v_dob" name="Date of Birth">
+
                 <label for="v_gender">Gender</label>
-                <input type="text" id="v_gender" name="Gender">
+                <select id="v_gender" name="Gender">
+                    <option value="">Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                    <option value="Rather not say">Rather not say</option>
+                </select>
+
                 <label for="v_nat">Nationality</label>
                 <input type="text" id="v_nat" name="Nationality">
-                <label for="v_email">Email Address</label>
+
+                <label for="v_email">Email Address *</label>
                 <input type="email" id="v_email" name="Email" required>
+
                 <label for="v_phone">Phone / WhatsApp Number</label>
                 <input type="tel" id="v_phone" name="Phone / WhatsApp">
+
                 <label for="v_address">Physical Address / Country</label>
                 <input type="text" id="v_address" name="Address / Country">
-                <label for="v_emergency">Emergency Contact Name & Number</label>
+
+                <label for="v_emergency">Emergency Contact Name &amp; Number</label>
                 <input type="text" id="v_emergency" name="Emergency Contact">
+
+                <!-- SECTION B: VOLUNTEERING INTERESTS -->
                 <h3>Section B: Volunteering Interests</h3>
-                <label for="v_why">Why do you want to volunteer with JOY AFRICA INTERNATIONAL FOUNDATION? (short answer)</label>
-                <textarea id="v_why" name="Reason to Volunteer" rows="4"></textarea>
+
+                <label for="v_why">Why do you want to volunteer with JoyRise Africa Foundation? (short answer) *</label>
+                <textarea id="v_why" name="Reason to Volunteer" rows="4" required></textarea>
+
+                <label>Skills / Talents you can offer (tick or list)</label>
                 <fieldset>
-                    <legend>Skills / Talents you can offer (tick or list)</legend>
                     <label><input type="checkbox" name="Skills" value="Teaching"> Teaching / Tutoring</label>
                     <label><input type="checkbox" name="Skills" value="Child Care"> Child Care</label>
                     <label><input type="checkbox" name="Skills" value="Medical Assistance"> Medical Assistance</label>
@@ -61,71 +529,103 @@
                     <label><input type="checkbox" name="Skills" value="Event Planning"> Event Planning</label>
                     <label><input type="checkbox" name="Skills" value="Media"> Social Media / Photography / Videography</label>
                     <label><input type="checkbox" name="Skills" value="Manual Labor"> Manual Labor / Construction</label>
-                    <label>Other (please specify) <input type="text" name="Skills (Other)"></label>
+                    <label><input type="text" name="Skills (Other)" placeholder="Other (please specify)" style="margin-top:10px;"></label>
                 </fieldset>
+
+                <label>Areas you wish to volunteer in</label>
                 <fieldset>
-                    <legend>Areas you wish to volunteer in</legend>
-                    <label><input type="checkbox" name="Volunteer Area" value="Children’s Shelter"> Children’s Shelter</label>
+                    <label><input type="checkbox" name="Volunteer Area" value="Children's Shelter"> Children's Shelter</label>
                     <label><input type="checkbox" name="Volunteer Area" value="Education"> Education</label>
                     <label><input type="checkbox" name="Volunteer Area" value="Clean Water"> Clean Water Projects</label>
                     <label><input type="checkbox" name="Volunteer Area" value="Youth Empowerment"> Youth Empowerment</label>
                     <label><input type="checkbox" name="Volunteer Area" value="Health Services"> Health Services</label>
-                    <label>Other (please specify) <input type="text" name="Volunteer Area (Other)"></label>
+                    <label><input type="text" name="Volunteer Area (Other)" placeholder="Other (please specify)" style="margin-top:10px;"></label>
                 </fieldset>
+
+                <!-- SECTION C: AVAILABILITY -->
                 <h3>Section C: Availability</h3>
+
                 <label for="v_start">Preferred volunteering start date</label>
                 <input type="date" id="v_start" name="Start Date">
+
                 <label for="v_duration">How long can you volunteer? (days/weeks/months)</label>
                 <input type="text" id="v_duration" name="Volunteer Duration">
+
                 <label for="v_avail">Days and hours available per week</label>
                 <input type="text" id="v_avail" name="Weekly Availability">
+
+                <!-- SECTION D: ADDITIONAL INFORMATION -->
                 <h3>Section D: Additional Information</h3>
+
                 <label for="v_lang">Languages spoken</label>
                 <input type="text" id="v_lang" name="Languages">
+
                 <label for="v_med">Do you have any medical conditions or allergies we should know about?</label>
                 <textarea id="v_med" name="Medical Conditions" rows="3"></textarea>
-                <fieldset>
-                    <legend>Do you require accommodation during volunteering?</legend>
+
+                <label>Do you require accommodation during volunteering?</label>
+                <div class="radio-group">
                     <label><input type="radio" name="Accommodation" value="Yes"> Yes</label>
                     <label><input type="radio" name="Accommodation" value="No"> No</label>
-                </fieldset>
-                <fieldset>
-                    <legend>Consent to background check</legend>
+                </div>
+
+                <label>Consent to background check</label>
+                <div class="radio-group">
                     <label><input type="radio" name="Background Check" value="Yes" required> Yes</label>
                     <label><input type="radio" name="Background Check" value="No"> No</label>
-                </fieldset>
-                <button type="submit">Submit Volunteer Application</button>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Volunteer Application</button>
             </form>
-        </div>
+        </section>
     </main>
+
+    <!-- ===== DONATE SECTION ===== -->
     <section id="donate">
         <div class="container">
             <h2>Become a Partner in Hope</h2>
             <p class="section-intro">Your generous gift is a direct investment in a child's future. 100% of your donation goes directly to funding these life-changing projects.</p>
             <div class="donation-methods">
-                <div class="method-card"><h3><i class="fas fa-university"></i> Bank Transfer</h3><p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p></div>
-                <div class="method-card"><h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3><p>Send directly to our secure line:<br><strong>Number:</strong> +256 775 092 014</p></div>
+                <div class="method-card">
+                    <h3><i class="fas fa-university"></i> Bank Transfer</h3>
+                    <p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p>
+                </div>
+                <div class="method-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3>
+                    <p>Send directly to our secure line:<br><strong>Number:</strong> +256 775 092 014</p>
+                </div>
                 <div class="method-card">
                     <h3><i class="fab fa-paypal"></i> PayPal</h3>
                     <p>Click below to make a secure donation with your PayPal account or card.</p>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JOY+AFRICA+INTERNATIONAL+FOUNDATION&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JoyRise+Africa+Foundation&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
-            <h3>JOY AFRICA INTERNATIONAL FOUNDATION</h3>
+            <h3>JoyRise Africa Foundation</h3>
             <p>A Christian foundation, rooted in faith and dedicated to action.</p>
             <div class="footer-icons">
-                <a href="https://www.instagram.com/joy_africa.foundation" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@joy_africa.foundation" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/256775092014" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:joyafrica.org@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+256756386352" aria-label="Call Us"><i class="fas fa-phone"></i></a>
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+256756386352"><i class="fas fa-phone"></i></a>
             </div>
-            <p class="copyright">&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
+            <p class="copyright">&copy; 2025 JoyRise Africa Foundation. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // ===== BACK BUTTON LOGIC =====
+        if (window.history.length <= 1 || document.referrer === "") {
+            document.getElementById('backButtonContainer').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
