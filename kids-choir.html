@@ -16,6 +16,10 @@
             --choir-pink: #FD79A8;
             --choir-gold: #FDCB6E;
             --choir-teal: #00CEC9;
+            --choir-orange: #FF6B35;
+            --choir-red: #FF0000;
+            --choir-blue: #0984E3;
+            --choir-green: #00B894;
             --choir-cream: #FFF8F0;
             --primary-blue: #0B2447;
             --accent-orange: #F28C28;
@@ -168,66 +172,143 @@
         }
         .back-button i { font-size: 1rem; }
 
-        /* ===== CHOIR HERO ===== */
+        /* ===== CHOIR HERO WITH VIDEO BACKGROUND ===== */
         .choir-hero {
-            background: linear-gradient(135deg, var(--choir-purple), var(--choir-pink), var(--choir-gold));
-            color: white;
-            padding: 80px 20px 60px;
-            text-align: center;
             position: relative;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
             overflow: hidden;
         }
-        .choir-hero::before {
-            content: '♪ ♫ ♪ ♫ ♪ ♫';
+        .choir-hero video {
             position: absolute;
-            top: 10px;
-            left: 0;
-            right: 0;
-            font-size: 4rem;
-            opacity: 0.2;
-            letter-spacing: 30px;
-            animation: floatNotes 20s linear infinite;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
         }
-        @keyframes floatNotes {
-            0% { transform: translateX(-100px); }
-            50% { transform: translateX(100px); }
-            100% { transform: translateX(-100px); }
+        .choir-hero .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        .choir-hero .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 20px;
         }
         .choir-hero h1 {
             color: white;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: relative;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            animation: glow 3s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255,107,53,0.5); }
+            50% { text-shadow: 0 0 40px rgba(108,92,231,0.8), 0 0 60px rgba(253,121,168,0.5); }
         }
         .choir-hero p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             opacity: 0.95;
             max-width: 700px;
             margin: 0 auto;
-            position: relative;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .choir-hero .music-notes {
-            font-size: 3rem;
+            font-size: 4rem;
             margin-top: 20px;
             opacity: 0.8;
             animation: bounce 2s ease-in-out infinite;
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
+        }
+        .choir-hero .hero-video-control {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 4;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
-        /* ===== PAGE SECTIONS ===== */
-        .page-section {
-            display: none;
-            padding: 40px 20px;
+        /* ===== COLORFUL MUSIC OPTIONS ===== */
+        .music-options-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--choir-cream), #fff5e6);
         }
-        .page-section.active {
-            display: block;
+        .music-options-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--choir-red), var(--choir-orange), var(--choir-gold), var(--choir-green), var(--choir-blue), var(--choir-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .music-options-section .music-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
         }
 
-        /* ===== CHOIR GALLERY ===== */
+        .music-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .music-option-card {
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .music-option-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .music-option-card .icon { font-size: 3rem; margin-bottom: 10px; display: block; }
+        .music-option-card h3 { font-size: 1.3rem; margin-bottom: 5px; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .music-option-card p { font-size: 0.85rem; opacity: 0.9; color: rgba(255,255,255,0.9); }
+        .music-option-card.watch { background: linear-gradient(135deg, #FF0000, #FF6B6B); }
+        .music-option-card.perform { background: linear-gradient(135deg, #6C5CE7, #A29BFE); }
+        .music-option-card.stream { background: linear-gradient(135deg, #00CEC9, #00B894); }
+        .music-option-card.buy { background: linear-gradient(135deg, #FDCB6E, #FF6B35); }
+        .music-option-card.tour { background: linear-gradient(135deg, #0984E3, #74B9FF); }
+
+        /* ===== MEDIA GALLERY ===== */
         .choir-gallery {
             padding: 60px 20px;
             background: var(--choir-cream);
@@ -245,8 +326,8 @@
         }
         .choir-media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -256,6 +337,7 @@
             overflow: hidden;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
+            position: relative;
         }
         .choir-media-card:hover { transform: translateY(-5px); }
         .choir-media-card img,
@@ -267,13 +349,13 @@
         }
         .choir-media-card .media-info { padding: 20px; }
         .choir-media-card .media-info h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--primary-blue);
             margin-bottom: 5px;
         }
         .choir-media-card .media-info .media-description {
             color: #666;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
         }
         .choir-media-card .media-info .media-tag {
@@ -286,62 +368,51 @@
             text-transform: uppercase;
             margin-top: 10px;
         }
-
-        /* ===== MUSIC SECTIONS ===== */
-        .music-section {
-            padding: 60px 20px;
-            background: white;
-        }
-        .music-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        .music-section .music-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-        }
-
-        .music-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .music-option-card {
-            background: var(--choir-cream);
-            border-radius: 16px;
-            padding: 40px 20px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .choir-media-card .download-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 15px;
+            background: var(--choir-teal);
+            color: white;
+            border: none;
+            border-radius: 20px;
             cursor: pointer;
-            border: 3px solid transparent;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
         }
-        .music-option-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .choir-media-card .download-btn:hover { background: var(--choir-green); }
+        .choir-media-card .view-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 15px;
+            background: var(--choir-blue);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+            margin-right: 8px;
         }
-        .music-option-card .icon { font-size: 3rem; margin-bottom: 15px; display: block; }
-        .music-option-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .music-option-card p { color: #666; font-size: 0.95rem; }
-        .music-option-card.watch { border-color: #FF0000; }
-        .music-option-card.stream { border-color: var(--choir-teal); }
-        .music-option-card.buy { border-color: var(--choir-gold); }
-        .music-option-card.watch .icon { color: #FF0000; }
-        .music-option-card.stream .icon { color: var(--choir-teal); }
-        .music-option-card.buy .icon { color: var(--choir-gold); }
+        .choir-media-card .view-btn:hover { background: #0652DD; }
+
+        /* ===== PAGE SECTIONS ===== */
+        .page-section {
+            display: none;
+            padding: 40px 20px;
+        }
+        .page-section.active {
+            display: block;
+        }
 
         /* ===== MUSIC PROJECTS GRID ===== */
         .music-projects {
-            display: none;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 30px auto;
         }
-        .music-projects.active { display: grid; }
         .music-project-card {
             background: white;
             border-radius: 16px;
@@ -353,17 +424,17 @@
         .music-project-card:hover { transform: translateY(-5px); }
         .music-project-card img {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
         }
-        .music-project-card .project-info { padding: 20px; }
+        .music-project-card .project-info { padding: 15px; text-align: center; }
         .music-project-card .project-info h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 5px;
         }
         .music-project-card .project-info p {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .music-project-card .project-info .project-type {
             display: inline-block;
@@ -379,23 +450,24 @@
 
         /* ===== STREAMING LINKS ===== */
         .streaming-links {
-            display: none;
+            display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
             margin-top: 20px;
             padding: 20px;
+            background: var(--choir-cream);
+            border-radius: 16px;
         }
-        .streaming-links.active { display: flex; }
         .streaming-links a {
             display: inline-block;
-            padding: 12px 25px;
+            padding: 10px 22px;
             border-radius: 50px;
             color: white;
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .streaming-links a:hover { transform: scale(1.05); }
         .streaming-links .spotify { background: #1DB954; }
@@ -407,13 +479,12 @@
 
         /* ===== YOUTUBE VIDEOS ===== */
         .youtube-grid {
-            display: none;
+            display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
             max-width: 1200px;
             margin: 30px auto;
         }
-        .youtube-grid.active { display: grid; }
         .youtube-video {
             background: white;
             border-radius: 16px;
@@ -437,7 +508,6 @@
 
         /* ===== PURCHASE FORM ===== */
         .purchase-form-container {
-            display: none;
             max-width: 600px;
             margin: 30px auto;
             background: white;
@@ -445,7 +515,6 @@
             padding: 40px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-        .purchase-form-container.active { display: block; }
         .purchase-form-container .close-form {
             float: right;
             background: none;
@@ -502,7 +571,7 @@
         .purchase-form-container form .submit-btn {
             width: 100%;
             padding: 16px;
-            background: var(--choir-purple);
+            background: var(--choir-orange);
             color: white;
             border: none;
             border-radius: 12px;
@@ -515,6 +584,59 @@
         .purchase-form-container form .submit-btn:hover {
             background: var(--primary-blue);
             transform: scale(1.02);
+        }
+
+        /* ===== TOUR / CONCERT SECTION ===== */
+        .tour-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f5f5f5, var(--choir-cream));
+        }
+        .tour-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--choir-blue);
+            margin-bottom: 10px;
+        }
+        .tour-section .tour-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .tour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tour-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        .tour-card:hover { transform: translateY(-5px); }
+        .tour-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .tour-card .tour-info { padding: 20px; }
+        .tour-card .tour-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--choir-blue);
+        }
+        .tour-card .tour-info .tour-details {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .tour-card .tour-info .tour-details i {
+            color: var(--choir-orange);
+            margin-right: 8px;
+            width: 20px;
         }
 
         /* ===== DONATE SECTION ===== */
@@ -591,13 +713,62 @@
             padding-top: 30px;
         }
 
+        /* ===== IMAGE MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal.active { display: block; }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+        }
+        .modal .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .modal .close-modal:hover { color: #bbb; }
+        .modal .download-modal-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 30px;
+            background: var(--choir-green);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .modal .download-modal-btn:hover { background: #00A381; }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .choir-hero h1 { font-size: 2.5rem; }
-            .music-options { grid-template-columns: 1fr; }
+            .choir-hero p { font-size: 1.2rem; }
+            .music-options { grid-template-columns: 1fr 1fr; }
             .choir-media-grid { grid-template-columns: 1fr; }
             .youtube-grid { grid-template-columns: 1fr; }
             .music-projects { grid-template-columns: 1fr 1fr; }
+            .tour-grid { grid-template-columns: 1fr; }
             .donation-methods { grid-template-columns: 1fr; }
             .contact-bar .container { flex-direction: column; text-align: center; }
             header .container { flex-direction: column; align-items: stretch; gap: 6px; }
@@ -609,7 +780,8 @@
         }
         @media (max-width: 480px) {
             .choir-hero h1 { font-size: 1.8rem; }
-            .choir-hero { padding: 60px 15px 40px; }
+            .choir-hero { min-height: 400px; }
+            .music-options { grid-template-columns: 1fr; }
             .music-projects { grid-template-columns: 1fr; }
             nav a { font-size: 0.55rem; padding: 3px 4px; }
             .nav-button { padding: 3px 8px; font-size: 0.55rem; }
@@ -664,14 +836,60 @@
             </a>
         </div>
 
-        <!-- ===== CHOIR HERO ===== -->
-        <section class="choir-hero">
-            <h1>🎵 JoyRise Kids Choir</h1>
-            <p>Raising voices, spreading joy, and sharing hope through the power of music.</p>
-            <div class="music-notes">♪ ♫ ♪ ♫ ♪ ♫</div>
+        <!-- ===== CHOIR HERO WITH VIDEO BACKGROUND ===== -->
+        <section class="choir-hero" id="choirHero">
+            <video id="heroVideo" autoplay muted loop playsinline>
+                <source src="images/choir-hero.mp4" type="video/mp4">
+                <!-- Fallback image if video doesn't load -->
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>🎵 JoyRise Kids Choir</h1>
+                <p>Raising voices, spreading joy, and sharing hope through the power of music.</p>
+                <div class="music-notes">♪ ♫ ♪ ♫ ♪ ♫</div>
+            </div>
+            <button class="hero-video-control" onclick="toggleHeroVideo()">
+                <i class="fas fa-pause"></i> Pause
+            </button>
         </section>
 
-        <!-- ===== CHOIR GALLERY ===== -->
+        <!-- ===== COLORFUL MUSIC OPTIONS ===== -->
+        <section class="music-options-section">
+            <div class="container">
+                <h2>🎶 Experience Our Music</h2>
+                <p class="music-subtitle">Watch, stream, or own our music. Every purchase supports the choir.</p>
+
+                <div class="music-options">
+                    <div class="music-option-card watch" onclick="navigateTo('watch')">
+                        <span class="icon">▶️</span>
+                        <h3>Watch Our Music Videos</h3>
+                        <p>View our latest performances on YouTube</p>
+                    </div>
+                    <div class="music-option-card perform" onclick="navigateTo('perform')">
+                        <span class="icon">🎭</span>
+                        <h3>Watch Performances & Concerts</h3>
+                        <p>Full shows and concert recordings</p>
+                    </div>
+                    <div class="music-option-card stream" onclick="navigateTo('stream')">
+                        <span class="icon">🎧</span>
+                        <h3>Stream Our Music</h3>
+                        <p>Listen on all major platforms</p>
+                    </div>
+                    <div class="music-option-card buy" onclick="navigateTo('buy')">
+                        <span class="icon">💿</span>
+                        <h3>Buy Hard Copy</h3>
+                        <p>Singles, EPs, and Albums</p>
+                    </div>
+                    <div class="music-option-card tour" onclick="navigateTo('tour')">
+                        <span class="icon">🎤</span>
+                        <h3>See Our Next Tour, Show & Concert</h3>
+                        <p>Upcoming events and performances</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CHOIR GALLERY (Rehearsals & Performances) ===== -->
         <section class="choir-gallery">
             <div class="container">
                 <h2>🎤 Rehearsals & Performances</h2>
@@ -682,52 +900,88 @@
             </div>
         </section>
 
-        <!-- ===== MUSIC OPTIONS ===== -->
-        <section class="music-section">
+        <!-- ===== PAGE SECTIONS ===== -->
+
+        <!-- ===== WATCH MUSIC VIDEOS ===== -->
+        <div class="page-section" id="watch-section">
             <div class="container">
-                <h2>🎶 Experience Our Music</h2>
-                <p class="music-subtitle">Watch, stream, or own our music. Every purchase supports the choir.</p>
+                <h2 style="text-align:center; font-size:2.5rem; color:var(--choir-red);">▶️ Watch Our Music Videos</h2>
+                <p style="text-align:center; color:#666; margin-bottom:30px;">All videos play directly on our YouTube channel</p>
+                <div class="youtube-grid" id="youtubeGrid">
+                    <!-- YouTube videos loaded from JavaScript -->
+                </div>
+            </div>
+        </div>
 
-                <div class="music-options">
-                    <div class="music-option-card watch" onclick="showMusicSection('watch')">
-                        <span class="icon">▶️</span>
-                        <h3>Watch Our Music Videos</h3>
-                        <p>View our latest performances and music videos on YouTube.</p>
+        <!-- ===== PERFORMANCES & CONCERTS ===== -->
+        <div class="page-section" id="perform-section">
+            <div class="container">
+                <h2 style="text-align:center; font-size:2.5rem; color:var(--choir-purple);">🎭 Watch Our Performances & Concerts</h2>
+                <p style="text-align:center; color:#666; margin-bottom:30px;">Full shows and concert recordings</p>
+                <div class="youtube-grid" id="performGrid">
+                    <!-- Performance videos loaded from JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== STREAM MUSIC ===== -->
+        <div class="page-section" id="stream-section">
+            <div class="container">
+                <h2 style="text-align:center; font-size:2.5rem; color:var(--choir-teal);">🎧 Stream Our Music</h2>
+                <p style="text-align:center; color:#666; margin-bottom:30px;">Choose a category below</p>
+                <div class="music-options" style="max-width:600px; margin:0 auto 40px;">
+                    <div class="music-option-card" style="background:linear-gradient(135deg,#FF6B6B,#ee5a24); cursor:pointer;" onclick="filterStreamProjects('single')">
+                        <h3>🎵 Singles</h3>
                     </div>
-                    <div class="music-option-card stream" onclick="showMusicSection('stream')">
-                        <span class="icon">🎧</span>
-                        <h3>Stream Our Music</h3>
-                        <p>Listen to our music on all major streaming platforms.</p>
+                    <div class="music-option-card" style="background:linear-gradient(135deg,#4ECDC4,#00B894); cursor:pointer;" onclick="filterStreamProjects('ep')">
+                        <h3>📀 EPs</h3>
                     </div>
-                    <div class="music-option-card buy" onclick="showMusicSection('buy')">
-                        <span class="icon">💿</span>
-                        <h3>Buy Hard Copy</h3>
-                        <p>Purchase singles, EPs, and albums to support our choir.</p>
+                    <div class="music-option-card" style="background:linear-gradient(135deg,#FFD93D,#FDCB6E); cursor:pointer;" onclick="filterStreamProjects('album')">
+                        <h3>💿 Albums</h3>
                     </div>
                 </div>
+                <div class="music-projects" id="streamProjects">
+                    <!-- Music projects loaded from JavaScript -->
+                </div>
+            </div>
+        </div>
 
-                <!-- ===== WATCH SECTION ===== -->
-                <div class="page-section" id="watch-section">
-                    <div class="youtube-grid" id="youtubeGrid">
-                        <!-- YouTube videos loaded from JavaScript -->
+        <!-- ===== BUY HARD COPY ===== -->
+        <div class="page-section" id="buy-section">
+            <div class="container">
+                <h2 style="text-align:center; font-size:2.5rem; color:var(--choir-gold);">💿 Buy Hard Copy</h2>
+                <p style="text-align:center; color:#666; margin-bottom:30px;">Choose a category below</p>
+                <div class="music-options" style="max-width:600px; margin:0 auto 40px;">
+                    <div class="music-option-card" style="background:linear-gradient(135deg,#FF6B6B,#ee5a24); cursor:pointer;" onclick="filterBuyProjects('single')">
+                        <h3>🎵 Singles</h3>
+                    </div>
+                    <div class="music-option-card" style="background:linear-gradient(135deg,#4ECDC4,#00B894); cursor:pointer;" onclick="filterBuyProjects('ep')">
+                        <h3>📀 EPs</h3>
+                    </div>
+                    <div class="music-option-card" style="background:linear-gradient(135deg,#FFD93D,#FDCB6E); cursor:pointer;" onclick="filterBuyProjects('album')">
+                        <h3>💿 Albums</h3>
                     </div>
                 </div>
-
-                <!-- ===== STREAM SECTION ===== -->
-                <div class="page-section" id="stream-section">
-                    <div class="music-projects" id="streamProjects">
-                        <!-- Music projects loaded from JavaScript -->
-                    </div>
+                <div class="music-projects" id="buyProjects">
+                    <!-- Music projects loaded from JavaScript -->
                 </div>
+            </div>
+        </div>
 
-                <!-- ===== BUY SECTION ===== -->
-                <div class="page-section" id="buy-section">
-                    <div class="music-projects" id="buyProjects">
-                        <!-- Music projects loaded from JavaScript -->
-                    </div>
+        <!-- ===== TOUR / CONCERT SECTION ===== -->
+        <div class="page-section" id="tour-section">
+            <div class="container">
+                <h2 style="text-align:center; font-size:2.5rem; color:var(--choir-blue);">🎤 See Our Next Tour, Show & Concert</h2>
+                <p style="text-align:center; color:#666; margin-bottom:30px;">Stay updated with our upcoming events</p>
+                <div class="tour-grid" id="tourGrid">
+                    <!-- Tour data loaded from JavaScript -->
                 </div>
+            </div>
+        </div>
 
-                <!-- ===== PURCHASE FORM ===== -->
+        <!-- ===== PURCHASE FORM ===== -->
+        <div class="page-section" id="purchase-section">
+            <div class="container">
                 <div class="purchase-form-container" id="purchaseForm">
                     <button class="close-form" onclick="closePurchaseForm()">&times;</button>
                     <h2>💿 Purchase</h2>
@@ -780,7 +1034,8 @@
                     </form>
                 </div>
             </div>
-        </section>
+        </div>
+
     </main>
 
     <!-- ===== DONATE SECTION ===== -->
@@ -813,22 +1068,53 @@
         </div>
     </footer>
 
+    <!-- ===== IMAGE MODAL ===== -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <button class="download-modal-btn" onclick="downloadModalImage()">
+            <i class="fas fa-download"></i> Download Image
+        </button>
+    </div>
+
     <!-- ===== SCRIPTS ===== -->
     <script>
         // ===== CHOIR MEDIA DATA (Admin can edit/upload via admin panel) =====
         const choirMediaData = [
+            // Images - Admin can add up to 20+
             { id: 1, type: 'image', title: 'Choir Rehearsal - August 2025', description: 'Our kids practicing for the upcoming Christmas concert.', file: 'images/choir1.jpg', tag: 'Rehearsal' },
             { id: 2, type: 'image', title: 'Sunday Service Performance', description: 'The choir leading worship at the Sunday service.', file: 'images/choir2.jpg', tag: 'Performance' },
             { id: 3, type: 'image', title: 'Recording Session', description: 'Recording our new album "Voices of Hope" at the studio.', file: 'images/choir3.jpg', tag: 'Recording' },
             { id: 4, type: 'image', title: 'Choir Camp 2025', description: 'Our annual choir camp where kids learn music and build friendships.', file: 'images/choir4.jpg', tag: 'Camp' },
             { id: 5, type: 'image', title: 'Community Concert', description: 'Performing at the community center for families and friends.', file: 'images/choir5.jpg', tag: 'Concert' },
             { id: 6, type: 'image', title: 'Morning Practice', description: 'Early morning vocal warm-ups before the big performance.', file: 'images/choir6.jpg', tag: 'Practice' },
-            { id: 7, type: 'video', title: 'Choir Performance - "Rise Up"', description: 'Watch our full performance of "Rise Up" at the charity gala.', file: 'https://www.youtube.com/embed/VIDEO_ID_1', tag: 'Performance' },
-            { id: 8, type: 'video', title: 'Behind the Scenes - Recording', description: 'Go behind the scenes of our album recording session.', file: 'https://www.youtube.com/embed/VIDEO_ID_2', tag: 'Behind the Scenes' },
-            { id: 9, type: 'video', title: 'Kids Choir - "Joyful Sound"', description: 'Our kids singing "Joyful Sound" with the full band.', file: 'https://www.youtube.com/embed/VIDEO_ID_3', tag: 'Music Video' }
+            { id: 7, type: 'image', title: 'Christmas Choir 2024', description: 'Our annual Christmas concert performance.', file: 'images/choir7.jpg', tag: 'Concert' },
+            { id: 8, type: 'image', title: 'Kids Choir Workshop', description: 'Learning new songs and harmonies.', file: 'images/choir8.jpg', tag: 'Workshop' },
+            // Videos - Admin can add up to 20+
+            { id: 9, type: 'video', title: 'Choir Performance - "Rise Up"', description: 'Watch our full performance of "Rise Up" at the charity gala.', file: 'https://www.youtube.com/embed/dQw4w9WgXcQ', tag: 'Performance' },
+            { id: 10, type: 'video', title: 'Behind the Scenes - Recording', description: 'Go behind the scenes of our album recording session.', file: 'https://www.youtube.com/embed/dQw4w9WgXcQ', tag: 'Behind the Scenes' },
+            { id: 11, type: 'video', title: 'Kids Choir - "Joyful Sound"', description: 'Our kids singing "Joyful Sound" with the full band.', file: 'https://www.youtube.com/embed/dQw4w9WgXcQ', tag: 'Music Video' },
+            { id: 12, type: 'video', title: 'Sunday Worship - Full Set', description: 'The full worship set from our Sunday service.', file: 'https://www.youtube.com/embed/dQw4w9WgXcQ', tag: 'Worship' },
+            { id: 13, type: 'video', title: 'Choir Rehearsal - New Song', description: 'Learning and practicing a new original song.', file: 'https://www.youtube.com/embed/dQw4w9WgXcQ', tag: 'Rehearsal' }
         ];
 
-        // ===== MUSIC PROJECTS DATA (Admin can edit/upload via admin panel) =====
+        // ===== YOUTUBE VIDEOS DATA =====
+        const youtubeVideos = [
+            { id: 1, title: 'JoyRise Kids Choir - "Rise Up" (Official Music Video)', description: 'Our debut music video. Watch our kids shine!', videoId: 'dQw4w9WgXcQ' },
+            { id: 2, title: 'JoyRise Kids Choir - "Joyful Sound" (Live Performance)', description: 'Live performance at the charity gala.', videoId: 'dQw4w9WgXcQ' },
+            { id: 3, title: 'JoyRise Kids Choir - "We Are One" (Official Music Video)', description: 'A powerful anthem of unity and love.', videoId: 'dQw4w9WgXcQ' },
+            { id: 4, title: 'Behind the Scenes - Recording Session', description: 'Go behind the scenes of our album recording.', videoId: 'dQw4w9WgXcQ' }
+        ];
+
+        // ===== PERFORMANCE VIDEOS DATA =====
+        const performanceVideos = [
+            { id: 1, title: 'Christmas Concert 2024 - Full Performance', description: 'Our annual Christmas concert at the community center.', videoId: 'dQw4w9WgXcQ' },
+            { id: 2, title: 'Charity Gala Performance - "Rise Up"', description: 'Performing at the charity gala for children\'s rights.', videoId: 'dQw4w9WgXcQ' },
+            { id: 3, title: 'Sunday Worship - Full Service Performance', description: 'Leading worship at the Sunday service.', videoId: 'dQw4w9WgXcQ' },
+            { id: 4, title: 'Choir Camp 2025 - Final Concert', description: 'The final concert performance from choir camp.', videoId: 'dQw4w9WgXcQ' }
+        ];
+
+        // ===== MUSIC PROJECTS DATA =====
         const musicProjects = [
             // Singles
             { id: 1, type: 'single', title: 'Rise Up', cover: 'images/single1.jpg', description: 'Our debut single that started it all.', streamingLinks: ['spotify', 'apple', 'youtube-music'], year: '2025' },
@@ -842,6 +1128,14 @@
             { id: 7, type: 'album', title: 'Children of Africa', cover: 'images/album2.jpg', description: 'Celebrating the spirit and resilience of African children.', streamingLinks: ['spotify', 'apple', 'youtube-music'], year: '2025' }
         ];
 
+        // ===== TOUR DATA (Admin can edit/upload) =====
+        const tourData = [
+            { id: 1, title: 'Christmas Concert 2025', poster: 'images/tour1.jpg', date: 'December 15, 2025', location: 'Kampala, Uganda', time: '7:00 PM EAT' },
+            { id: 2, title: 'JoyRise Kids Choir Tour - Kampala', poster: 'images/tour2.jpg', date: 'January 20, 2026', location: 'Kampala, Uganda', time: '6:00 PM EAT' },
+            { id: 3, title: 'Community Concert - Jinja', poster: 'images/tour3.jpg', date: 'February 10, 2026', location: 'Jinja, Uganda', time: '5:00 PM EAT' },
+            { id: 4, title: 'Charity Gala Performance', poster: 'images/tour4.jpg', date: 'March 5, 2026', location: 'Entebbe, Uganda', time: '8:00 PM EAT' }
+        ];
+
         // ===== LOAD CHOIR MEDIA =====
         function loadChoirMedia() {
             const grid = document.getElementById('choirMediaGrid');
@@ -850,40 +1144,48 @@
             choirMediaData.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'choir-media-card';
+                
+                let mediaHtml = '';
                 if (item.type === 'image') {
-                    card.innerHTML = `
-                        <img src="${item.file}" alt="${item.title}" onerror="this.src='images/placeholder.jpg'">
+                    mediaHtml = `
+                        <img src="${item.file}" alt="${item.title}" onclick="openModal('${item.file}')" style="cursor:pointer;">
                         <div class="media-info">
                             <h3>${item.title}</h3>
                             <p class="media-description">${item.description}</p>
                             <span class="media-tag">${item.tag}</span>
+                            <button class="view-btn" onclick="openModal('${item.file}')"><i class="fas fa-eye"></i> View</button>
+                            <button class="download-btn" onclick="downloadFile('${item.file}', '${item.title}')"><i class="fas fa-download"></i> Download</button>
                         </div>
                     `;
                 } else {
-                    card.innerHTML = `
-                        <iframe src="${item.file}" allowfullscreen></iframe>
+                    mediaHtml = `
+                        <video controls preload="metadata">
+                            <source src="${item.file}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="media-info">
                             <h3>${item.title}</h3>
                             <p class="media-description">${item.description}</p>
                             <span class="media-tag">${item.tag}</span>
+                            <button class="download-btn" onclick="downloadFile('${item.file}', '${item.title}')"><i class="fas fa-download"></i> Download</button>
                         </div>
                     `;
                 }
+                card.innerHTML = mediaHtml;
                 grid.appendChild(card);
             });
         }
 
         // ===== LOAD YOUTUBE VIDEOS =====
-        function loadYouTubeVideos() {
-            const grid = document.getElementById('youtubeGrid');
-            const videoData = choirMediaData.filter(item => item.type === 'video');
+        function loadYouTubeVideos(containerId, videos) {
+            const grid = document.getElementById(containerId);
             grid.innerHTML = '';
             
-            videoData.forEach(item => {
+            videos.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'youtube-video';
                 card.innerHTML = `
-                    <iframe src="${item.file}" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe>
                     <div class="video-info">
                         <h3>${item.title}</h3>
                         <p>${item.description}</p>
@@ -921,24 +1223,24 @@
             });
         }
 
-        // ===== SHOW STREAMING LINKS =====
-        function showStreamingLinks(project) {
-            const links = document.querySelector('.streaming-links');
-            if (!links) {
-                const container = document.getElementById('stream-section');
-                const linksDiv = document.createElement('div');
-                linksDiv.className = 'streaming-links active';
-                container.appendChild(linksDiv);
-                populateStreamingLinks(linksDiv, project);
-            } else {
-                links.classList.toggle('active');
-                if (links.classList.contains('active')) {
-                    populateStreamingLinks(links, project);
-                }
-            }
+        // ===== FILTER STREAM PROJECTS =====
+        function filterStreamProjects(type) {
+            const container = document.getElementById('streamProjects');
+            container.innerHTML = '';
+            loadMusicProjects(type, 'streamProjects');
+            container.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function populateStreamingLinks(container, project) {
+        // ===== FILTER BUY PROJECTS =====
+        function filterBuyProjects(type) {
+            const container = document.getElementById('buyProjects');
+            container.innerHTML = '';
+            loadMusicProjects(type, 'buyProjects');
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== SHOW STREAMING LINKS =====
+        function showStreamingLinks(project) {
             const platforms = {
                 spotify: { name: 'Spotify', class: 'spotify', icon: 'fa-brands fa-spotify' },
                 apple: { name: 'Apple Music', class: 'apple', icon: 'fa-brands fa-apple' },
@@ -948,7 +1250,13 @@
                 tidal: { name: 'Tidal', class: 'tidal', icon: 'fa-brands fa-tidal' }
             };
             
-            container.innerHTML = '';
+            // Remove existing streaming links
+            const existing = document.querySelector('.streaming-links');
+            if (existing) existing.remove();
+            
+            const linksDiv = document.createElement('div');
+            linksDiv.className = 'streaming-links';
+            
             project.streamingLinks.forEach(key => {
                 const platform = platforms[key];
                 if (platform) {
@@ -960,45 +1268,73 @@
                         e.preventDefault();
                         alert(`Stream "${project.title}" on ${platform.name}! (Add your streaming link here)`);
                     };
-                    container.appendChild(link);
+                    linksDiv.appendChild(link);
                 }
             });
+            
+            // Insert after the project grid
+            const container = document.getElementById('streamProjects');
+            container.parentNode.insertBefore(linksDiv, container.nextSibling);
+            linksDiv.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // ===== SHOW MUSIC SECTION =====
-        function showMusicSection(type) {
+        // ===== NAVIGATE TO SECTION =====
+        function navigateTo(type) {
             // Hide all sections
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             
-            // Hide streaming links
-            const links = document.querySelector('.streaming-links');
-            if (links) links.classList.remove('active');
-            
-            // Hide purchase form
-            document.getElementById('purchaseForm').classList.remove('active');
-            
             // Show selected section
-            const section = document.getElementById(`${type}-section`);
-            section.classList.add('active');
+            const sectionMap = {
+                'watch': 'watch-section',
+                'perform': 'perform-section',
+                'stream': 'stream-section',
+                'buy': 'buy-section',
+                'tour': 'tour-section'
+            };
             
-            // Load content
-            if (type === 'watch') {
-                loadYouTubeVideos();
-                document.getElementById('youtubeGrid').classList.add('active');
-            } else if (type === 'stream') {
-                loadMusicProjects('single', 'streamProjects');
-                loadMusicProjects('ep', 'streamProjects');
-                loadMusicProjects('album', 'streamProjects');
-                document.getElementById('streamProjects').classList.add('active');
-            } else if (type === 'buy') {
-                loadMusicProjects('single', 'buyProjects');
-                loadMusicProjects('ep', 'buyProjects');
-                loadMusicProjects('album', 'buyProjects');
-                document.getElementById('buyProjects').classList.add('active');
+            const sectionId = sectionMap[type];
+            if (sectionId) {
+                const section = document.getElementById(sectionId);
+                section.classList.add('active');
+                
+                // Load content based on type
+                if (type === 'watch') {
+                    loadYouTubeVideos('youtubeGrid', youtubeVideos);
+                } else if (type === 'perform') {
+                    loadYouTubeVideos('performGrid', performanceVideos);
+                } else if (type === 'stream') {
+                    loadMusicProjects('single', 'streamProjects');
+                } else if (type === 'buy') {
+                    loadMusicProjects('single', 'buyProjects');
+                } else if (type === 'tour') {
+                    loadTourData();
+                }
+                
+                section.scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        // ===== LOAD TOUR DATA =====
+        function loadTourData() {
+            const grid = document.getElementById('tourGrid');
+            grid.innerHTML = '';
             
-            // Scroll to section
-            section.scrollIntoView({ behavior: 'smooth' });
+            tourData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'tour-card';
+                card.innerHTML = `
+                    <img src="${item.poster}" alt="${item.title}" onerror="this.src='images/tour-placeholder.jpg'">
+                    <div class="tour-info">
+                        <h3>${item.title}</h3>
+                        <div class="tour-details">
+                            <p><i class="fas fa-calendar-alt"></i> ${item.date}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> ${item.location}</p>
+                            <p><i class="fas fa-clock"></i> ${item.time}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
         }
 
         // ===== OPEN PURCHASE FORM =====
@@ -1008,13 +1344,72 @@
             document.getElementById('purchaseType').textContent = project.type.toUpperCase() + ' • ' + project.year;
             document.getElementById('purchaseProjectType').value = project.type;
             document.getElementById('purchaseProjectTitle').value = project.title;
-            document.getElementById('purchaseForm').classList.add('active');
-            document.getElementById('purchaseForm').scrollIntoView({ behavior: 'smooth' });
+            
+            // Show purchase section
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('purchase-section').classList.add('active');
+            document.getElementById('purchase-section').scrollIntoView({ behavior: 'smooth' });
         }
 
         // ===== CLOSE PURCHASE FORM =====
         function closePurchaseForm() {
-            document.getElementById('purchaseForm').classList.remove('active');
+            document.getElementById('purchase-section').classList.remove('active');
+            // Show main page again
+            document.getElementById('purchase-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== IMAGE MODAL =====
+        function openModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('imageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function downloadModalImage() {
+            const imageSrc = document.getElementById('modalImage').src;
+            downloadFile(imageSrc, 'choir-image');
+        }
+
+        // ===== DOWNLOAD FILE =====
+        function downloadFile(fileUrl, fileName) {
+            fetch(fileUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName + '.' + fileUrl.split('.').pop();
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                })
+                .catch(() => {
+                    alert('Download started. Please check your downloads folder.');
+                    window.open(fileUrl, '_blank');
+                });
+        }
+
+        // ===== HERO VIDEO CONTROL =====
+        let heroVideoPlaying = true;
+
+        function toggleHeroVideo() {
+            const video = document.getElementById('heroVideo');
+            const btn = document.querySelector('.hero-video-control');
+            if (heroVideoPlaying) {
+                video.pause();
+                btn.innerHTML = '<i class="fas fa-play"></i> Play';
+                heroVideoPlaying = false;
+            } else {
+                video.play();
+                btn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                heroVideoPlaying = true;
+            }
         }
 
         // ===== BACK BUTTON LOGIC =====
@@ -1022,9 +1417,28 @@
             document.getElementById('backButtonContainer').style.display = 'none';
         }
 
+        // ===== CLOSE MODAL ON ESCAPE =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // ===== CLOSE MODAL ON CLICK OUTSIDE =====
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
         // ===== INITIALIZE =====
         document.addEventListener('DOMContentLoaded', function() {
             loadChoirMedia();
+            loadTourData();
+            
+            // Load initial stream and buy projects
+            loadMusicProjects('single', 'streamProjects');
+            loadMusicProjects('single', 'buyProjects');
         });
     </script>
 </body>
