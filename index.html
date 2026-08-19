@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - JOY AFRICA INTERNATIONAL FOUNDATION</title>
+    <title>About Us - JoyRise Africa Foundation</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,25 +17,83 @@
         .close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; }
         .close:hover, .close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
         @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+        
+        /* Contact Info Bar - New */
+        .contact-bar {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+        .contact-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .contact-bar a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .contact-bar a:hover {
+            color: var(--accent-orange);
+        }
+        .contact-bar .social-links a {
+            margin: 0 8px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-bar .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-bar .social-links {
+                margin-top: 5px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- NEW: Contact Bar at Top -->
+    <div class="contact-bar">
+        <div class="container">
+            <div>
+                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i> joyafrica.org@gmail.com</a>
+                <a href="tel:+256756386352"><i class="fas fa-phone"></i> +256 756 386 352</a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/256775092014" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="JOY AFRICA Logo">
-                <span>JOY AFRICA<br>INTERNATIONAL FOUNDATION</span>
+                <img src="images/logo.png" alt="JoyRise Africa Foundation Logo">
+                <span>JoyRise<br>Africa Foundation</span>
             </a>
             <nav>
                 <a href="index.html">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="bible-verse.html">Weekly Verse</a>
+                <a href="sponsor-child.html">Sponsor a Child</a>
+                <a href="kids-choir.html">Kids Choir</a>
                 <a href="partner.html">Partner</a>
                 <a href="volunteer.html">Volunteer</a>
                 <a href="#donate" class="nav-button">Donate Now</a>
             </nav>
         </div>
     </header>
+
     <main>
         <section id="hero" style="background-image: url('images/hero.jpg');">
             <div class="hero-overlay"></div>
@@ -45,10 +103,11 @@
                 <a href="projects.html" class="hero-button">Explore Our Work</a>
             </div>
         </section>
+
         <section id="about-foundation">
             <div class="container">
                 <h2>ABOUT OUR FOUNDATION</h2>
-                <p class="section-intro">JOY AFRICA INTERNATIONAL FOUNDATION is a Christian-founded organization.</p>
+                <p class="section-intro">JoyRise Africa Foundation is a Christian-founded organization.</p>
                 <div class="history-timeline">
                     <div class="timeline-item">
                         <h3>2022 - The Beginning</h3>
@@ -70,7 +129,7 @@
                 <div class="mission-grid">
                     <div>
                         <h3>Purpose:</h3>
-                        <p>The purpose of JOY AFRICA INTERNATIONAL FOUNDATION is to improve the lives of children in communities around Uganda by providing them with access to quality education, healthcare, protection, and clean, safe water, empowering them to reach their full potential.</p>
+                        <p>The purpose of JoyRise Africa Foundation is to improve the lives of children in communities around Uganda by providing them with access to quality education, healthcare, protection, and clean, safe water, empowering them to reach their full potential.</p>
                         <h3>Aims:</h3>
                         <ul>
                             <li>To provide a safe and nurturing environment for children to grow and develop.</li>
@@ -105,11 +164,13 @@
                 </div>
             </div>
         </section>
+
         <section id="leadership" style="background-color: var(--light-background);">
             <div class="container">
                 <h2>OUR LEADERSHIP STRUCTURE</h2>
-                <p class="section-intro">Since we are raising future leaders, we must also lead by example. That’s why we have a strong leadership structure at JOY AFRICA INTERNATIONAL FOUNDATION. The diagram below shows our leadership levels.</p>
-                <img src="images/leadership.jpg" alt="JOY AFRICA INTERNATIONAL FOUNDATION LEADERSHIP STRUCTURE" class="structure-image expandable-image">
+                <p class="section-intro">Since we are raising future leaders, we must also lead by example. That's why we have a strong leadership structure at JoyRise Africa Foundation. The diagram below shows our leadership levels.</p>
+                <img src="images/leadership.jpg" alt="JoyRise Africa Foundation Leadership Structure" class="structure-image expandable-image">
+                
                 <h2 style="margin-top: 80px;">MEET OUR FOUNDER AND DIRECTOR</h2>
                 <div class="team-member-card">
                     <div class="team-member-image">
@@ -117,13 +178,14 @@
                     </div>
                     <div class="team-member-info">
                         <h4>TUMUSIIME GONZAGA</h4>
-                        <p>Tumusiime Gonzaga is a Ugandan man born on October 21st, 2002, in a small slum town called Kosovo in Kampala, Uganda. Raised in a God-fearing Christian family, his education was sponsored by an NGO called VISION FOR AFRICA INTERNATIONAL MINISTRIES, from Primary One through his diploma in Journalism and Media Studies. While growing up, he faced many challenges, such as the lack of a good health center, high levels of insecurity in the slum, and a lack of proper schools for his friends. All of this inspired him to start an NGO that would help other kids avoid the same problems he and his friends faced. JOY AFRICA INTERNATIONAL FOUNDATION acts as a symbol of change for these communities.</p>
+                        <p>Tumusiime Gonzaga is a Ugandan man born on October 21st, 2002, in a small slum town called Kosovo in Kampala, Uganda. Raised in a God-fearing Christian family, his education was sponsored by an NGO called VISION FOR AFRICA INTERNATIONAL MINISTRIES, from Primary One through his diploma in Journalism and Media Studies. While growing up, he faced many challenges, such as the lack of a good health center, high levels of insecurity in the slum, and a lack of proper schools for his friends. All of this inspired him to start an NGO that would help other kids avoid the same problems he and his friends faced. JoyRise Africa Foundation acts as a symbol of change for these communities.</p>
                         <div class="message-box">
                             <h5>Message from the Director</h5>
-                            <blockquote>"Dear Friends,<br><br>Welcome to JOY AFRICA INTERNATIONAL FOUNDATION. It is with great joy and gratitude that I extend my heartfelt greetings to you. Our organization was founded on the belief that every child deserves a chance to live a life filled with hope, love, and opportunity.<br><br>At JOY AFRICA, we are dedicated to transforming lives by providing shelter, education, healthcare, clean and safe water, and a nurturing environment for children and communities across Uganda and Africa at large. Through our programs, we strive to empower the underprivileged, support the disabled, and create sustainable change for future generations.<br><br>Your visit to our website means a lot to us. Whether you are here to learn, to support, or to join hands with us in our mission, you are now part of a growing family that believes in compassion and action. Together, we can make a lasting difference in the lives of those who need it most.<br><br>Thank you for taking the time to connect with our vision. I warmly invite you to explore our initiatives, share our story, and, if you are able, stand with us in creating a brighter, more hopeful future for children in Uganda and beyond.<br><br>With gratitude and hope,<br>Tumusiime Gonzaga<br>Director, JOY AFRICA INTERNATIONAL FOUNDATION"</blockquote>
+                            <blockquote>"Dear Friends,<br><br>Welcome to JoyRise Africa Foundation. It is with great joy and gratitude that I extend my heartfelt greetings to you. Our organization was founded on the belief that every child deserves a chance to live a life filled with hope, love, and opportunity.<br><br>At JoyRise Africa, we are dedicated to transforming lives by providing shelter, education, healthcare, clean and safe water, and a nurturing environment for children and communities across Uganda and Africa at large. Through our programs, we strive to empower the underprivileged, support the disabled, and create sustainable change for future generations.<br><br>Your visit to our website means a lot to us. Whether you are here to learn, to support, or to join hands with us in our mission, you are now part of a growing family that believes in compassion and action. Together, we can make a lasting difference in the lives of those who need it most.<br><br>Thank you for taking the time to connect with our vision. I warmly invite you to explore our initiatives, share our story, and, if you are able, stand with us in creating a brighter, more hopeful future for children in Uganda and beyond.<br><br>With gratitude and hope,<br>Tumusiime Gonzaga<br>Director, JoyRise Africa Foundation"</blockquote>
                         </div>
                     </div>
                 </div>
+
                 <h2 style="margin-top: 80px;">MEET OUR ASSISTANT DIRECTOR</h2>
                 <div class="team-member-card reverse">
                     <div class="team-member-image">
@@ -131,13 +193,14 @@
                     </div>
                     <div class="team-member-info">
                         <h4>MULOCHO NEWTON NDEMEZO</h4>
-                        <p>Born on April 4th, 1987, in the town of Kireka in Kampala, Uganda, Newton was raised by a God-fearing family. He is a loving father of three children, well-educated, and a professional chef. Despite being a family and working man, he took a major step in 2024 to join JOY AFRICA INTERNATIONAL FOUNDATION as our Assistant Director, supporting our Director on his journey.</p>
+                        <p>Born on April 4th, 1987, in the town of Kireka in Kampala, Uganda, Newton was raised by a God-fearing family. He is a loving father of three children, well-educated, and a professional chef. Despite being a family and working man, he took a major step in 2024 to join JoyRise Africa Foundation as our Assistant Director, supporting our Director on his journey.</p>
                         <div class="message-box">
                             <h5>A WORD FROM OUR ASSISTANT DIRECTOR</h5>
-                            <blockquote>“JOY AFRICA INTERNATIONAL FOUNDATION represents one of the most positive and wonderful emotional states we can create for our children. It is a feeling of contentment and belonging that fills us with vitality, optimism, and delight. It brings contagious energy to all around.<br><br>At JOY AFRICA INTERNATIONAL FOUNDATION, we aim to enable all homeless children in Uganda and Africa at large to live a fulfilled and carefree childhood by providing them with a protective and nurturing home environment.<br><br>We believe in a world where every homeless child in Uganda and across Africa can live joyfully and experience a fulfilled, carefree childhood – irrespective of gender, place of birth, nationality, religion, or social status.”</blockquote>
+                            <blockquote>"JoyRise Africa Foundation represents one of the most positive and wonderful emotional states we can create for our children. It is a feeling of contentment and belonging that fills us with vitality, optimism, and delight. It brings contagious energy to all around.<br><br>At JoyRise Africa Foundation, we aim to enable all homeless children in Uganda and Africa at large to live a fulfilled and carefree childhood by providing them with a protective and nurturing home environment.<br><br>We believe in a world where every homeless child in Uganda and across Africa can live joyfully and experience a fulfilled, carefree childhood – irrespective of gender, place of birth, nationality, religion, or social status."</blockquote>
                         </div>
                     </div>
                 </div>
+
                 <h2 style="margin-top: 80px;">MEET OUR PROJECTS DIRECTOR</h2>
                 <div class="team-member-card">
                     <div class="team-member-image">
@@ -147,12 +210,13 @@
                         <h4>KULUBYA PAUL</h4>
                         <div class="message-box">
                             <h5>Message from the Projects Director</h5>
-                            <blockquote>"Dear Visitors,<br><br>It is a pleasure to welcome you to JOY AFRICA INTERNATIONAL FOUNDATION. As the Projects Director, I am honored to oversee programs that are bringing real change to communities across Uganda and beyond.<br><br>Our work is rooted in love and commitment—providing homeless children with safe shelter, improving access to clean water, empowering the youth, supporting the disabled, and delivering education and healthcare to those who need it most. Each project we implement is designed with care, driven by impact, and focused on building a brighter tomorrow.<br><br>I believe that every contribution, whether big or small, makes a difference. By visiting our website, you have taken a step towards understanding our mission and becoming a part of this journey of hope and transformation.<br><br>Together, we can continue to bring lasting joy and opportunity to children and families who deserve a better future.<br><br>Thank you for your support and interest in our work.<br><br>Warm regards,<br>Kulubya Paul<br>Projects Director, JOY AFRICA INTERNATIONAL FOUNDATION"</blockquote>
+                            <blockquote>"Dear Visitors,<br><br>It is a pleasure to welcome you to JoyRise Africa Foundation. As the Projects Director, I am honored to oversee programs that are bringing real change to communities across Uganda and beyond.<br><br>Our work is rooted in love and commitment—providing homeless children with safe shelter, improving access to clean water, empowering the youth, supporting the disabled, and delivering education and healthcare to those who need it most. Each project we implement is designed with care, driven by impact, and focused on building a brighter tomorrow.<br><br>I believe that every contribution, whether big or small, makes a difference. By visiting our website, you have taken a step towards understanding our mission and becoming a part of this journey of hope and transformation.<br><br>Together, we can continue to bring lasting joy and opportunity to children and families who deserve a better future.<br><br>Thank you for your support and interest in our work.<br><br>Warm regards,<br>Kulubya Paul<br>Projects Director, JoyRise Africa Foundation"</blockquote>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <section id="community-showcase">
             <div class="container">
                 <h2>Our Mission in Action</h2>
@@ -161,6 +225,7 @@
             </div>
         </section>
     </main>
+
     <section id="donate">
         <div class="container">
             <h2>Become a Partner in Hope</h2>
@@ -171,25 +236,28 @@
                 <div class="method-card">
                     <h3><i class="fab fa-paypal"></i> PayPal</h3>
                     <p>Click below to make a secure donation with your PayPal account or card.</p>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JOY+AFRICA+INTERNATIONAL+FOUNDATION&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JoyRise+Africa+Foundation&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
                 </div>
             </div>
         </div>
     </section>
+
     <footer>
         <div class="container">
-            <h3>JOY AFRICA INTERNATIONAL FOUNDATION</h3>
+            <h3>JoyRise Africa Foundation</h3>
             <p>A Christian foundation, rooted in faith and dedicated to action.</p>
             <div class="footer-icons">
-                <a href="https://www.instagram.com/joy_africa.foundation" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@joy_africa.foundation" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://wa.me/256775092014" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 <a href="mailto:joyafrica.org@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 <a href="tel:+256756386352" aria-label="Call Us"><i class="fas fa-phone"></i></a>
             </div>
-            <p class="copyright">&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
+            <p class="copyright">&copy; 2025 JoyRise Africa Foundation. All Rights Reserved.</p>
         </div>
     </footer>
+
     <div id="myModal" class="modal"><span class="close">&times;</span><img class="modal-content" id="img01"></div>
     <script>
         var modal = document.getElementById("myModal"), modalImg = document.getElementById("img01"), images = document.getElementsByClassName("expandable-image");
