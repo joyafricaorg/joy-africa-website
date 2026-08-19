@@ -18,38 +18,42 @@
         .close:hover, .close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
         @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
         
-        /* Contact Info Bar */
+        /* ===== CONTACT BAR ===== */
         .contact-bar {
             background: var(--primary-blue);
             color: var(--white);
-            padding: 10px 0;
-            font-size: 0.85rem;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
         }
         .contact-bar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .contact-bar a {
             color: var(--white);
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 6px;
             transition: color 0.3s ease;
         }
         .contact-bar a:hover {
             color: var(--accent-orange);
         }
         .contact-bar .social-links a {
-            margin: 0 6px;
-            font-size: 1.1rem;
+            margin: 0 5px;
+            font-size: 1rem;
             transition: transform 0.3s ease;
+            display: inline-block;
         }
         .contact-bar .social-links a:hover {
             transform: scale(1.2);
         }
-        /* Colored Social Icons in Contact Bar */
+        /* Colored Social Icons - Contact Bar */
         .contact-bar .social-links .fa-instagram { color: #E4405F; }
         .contact-bar .social-links .fa-tiktok { color: #ffffff; }
         .contact-bar .social-links .fa-youtube { color: #FF0000; }
@@ -57,87 +61,204 @@
         .contact-bar .social-links .fa-envelope { color: #EA4335; }
         .contact-bar .social-links .fa-phone { color: #34B7F1; }
         
-        /* Navigation - Mobile Friendly */
+        /* ===== BACK BUTTON ===== */
+        .back-button-container {
+            padding: 10px 0 0 0;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(11, 36, 71, 0.08);
+        }
+        .back-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(-3px);
+        }
+        .back-button i {
+            font-size: 1rem;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background: var(--white);
+            padding: 12px 0;
+            position: sticky;
+            top: 38px;
+            z-index: 1000;
+            width: 100%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 0.85em;
+            line-height: 1.2;
+        }
+        .logo img {
+            height: 50px;
+            margin-right: 12px;
+        }
+        
+        /* Navigation */
         nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 4px;
+            align-items: center;
         }
         nav a {
             text-decoration: none;
             color: var(--primary-blue);
-            margin-left: 20px;
+            padding: 6px 12px;
             font-weight: 700;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            border-radius: 6px;
             white-space: nowrap;
         }
         nav a:hover {
             color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.1);
+        }
+        nav a.active {
+            color: var(--accent-orange);
+            background: rgba(242, 140, 40, 0.15);
         }
         .nav-button {
             background-color: var(--accent-orange);
             color: var(--white) !important;
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 50px;
             transition: all 0.3s ease;
         }
         .nav-button:hover {
             background-color: var(--primary-blue);
             color: var(--white) !important;
+            transform: scale(1.05);
         }
         
-        /* Footer Colored Social Icons */
-        .footer-icons a {
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #1a1a1a;
+            color: #a0a0a0;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        footer h3 {
             color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+        }
+        .footer-icons {
+            margin: 30px 0;
+        }
+        .footer-icons a {
+            display: inline-block;
             font-size: 1.8rem;
-            margin: 0 15px;
+            margin: 0 12px;
             transition: all 0.3s ease;
         }
         .footer-icons a:hover {
-            transform: scale(1.2);
+            transform: scale(1.2) translateY(-3px);
         }
+        /* Colored Social Icons - Footer */
         .footer-icons .fa-instagram { color: #E4405F; }
         .footer-icons .fa-tiktok { color: #ffffff; }
         .footer-icons .fa-youtube { color: #FF0000; }
         .footer-icons .fa-whatsapp { color: #25D366; }
         .footer-icons .fa-envelope { color: #EA4335; }
         .footer-icons .fa-phone { color: #34B7F1; }
-        
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 30px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            nav a {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+            .nav-button {
+                padding: 6px 14px;
+                font-size: 0.7rem;
+            }
+        }
         @media (max-width: 768px) {
             .contact-bar .container {
                 flex-direction: column;
                 text-align: center;
             }
             .contact-bar .social-links {
-                margin-top: 5px;
+                margin-top: 4px;
+            }
+            header .container {
+                flex-direction: column;
+                gap: 8px;
+            }
+            nav {
+                justify-content: center;
             }
             nav a {
-                margin-left: 10px;
-                font-size: 0.75rem;
+                font-size: 0.65rem;
+                padding: 4px 6px;
             }
             .nav-button {
-                padding: 6px 12px;
+                padding: 4px 12px;
+                font-size: 0.65rem;
+            }
+            .logo img {
+                height: 40px;
+            }
+            .logo span {
                 font-size: 0.75rem;
+            }
+            .back-button {
+                font-size: 0.8rem;
+                padding: 6px 12px;
             }
         }
         @media (max-width: 480px) {
-            nav {
-                gap: 3px;
-            }
             nav a {
-                margin-left: 5px;
-                font-size: 0.65rem;
+                font-size: 0.55rem;
+                padding: 3px 5px;
             }
             .nav-button {
-                padding: 4px 10px;
-                font-size: 0.65rem;
+                padding: 3px 10px;
+                font-size: 0.55rem;
+            }
+            .contact-bar {
+                font-size: 0.7rem;
+            }
+            .contact-bar .social-links a {
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Contact Bar at Top -->
+    <!-- ===== CONTACT BAR ===== -->
     <div class="contact-bar">
         <div class="container">
             <div>
@@ -154,6 +275,7 @@
         </div>
     </div>
 
+    <!-- ===== HEADER ===== -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">
@@ -161,7 +283,7 @@
                 <span>JoyRise<br>Africa Foundation</span>
             </a>
             <nav>
-                <a href="index.html">About</a>
+                <a href="index.html" class="active">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="bible-verse.html">Weekly Verse</a>
                 <a href="sponsor-child.html">Sponsor a Child</a>
@@ -173,7 +295,15 @@
         </div>
     </header>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <main>
+        <!-- Back Button -->
+        <div class="container back-button-container">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+
         <section id="hero" style="background-image: url('images/hero.jpg');">
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -305,6 +435,7 @@
         </section>
     </main>
 
+    <!-- ===== DONATE SECTION ===== -->
     <section id="donate">
         <div class="container">
             <h2>Become a Partner in Hope</h2>
@@ -321,6 +452,7 @@
         </div>
     </section>
 
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <h3>JoyRise Africa Foundation</h3>
@@ -337,6 +469,7 @@
         </div>
     </footer>
 
+    <!-- ===== IMAGE MODAL ===== -->
     <div id="myModal" class="modal"><span class="close">&times;</span><img class="modal-content" id="img01"></div>
     <script>
         var modal = document.getElementById("myModal"), modalImg = document.getElementById("img01"), images = document.getElementsByClassName("expandable-image");
