@@ -63,7 +63,11 @@
         
         /* ===== BACK BUTTON ===== */
         .back-button-container {
-            padding: 10px 0 0 0;
+            padding: 12px 0 0 0;
+            display: none; /* Hidden on index.html by default */
+        }
+        .back-button-container.show {
+            display: block;
         }
         .back-button {
             display: inline-flex;
@@ -90,7 +94,7 @@
         /* ===== HEADER & NAVIGATION ===== */
         header {
             background: var(--white);
-            padding: 12px 0;
+            padding: 10px 0;
             position: sticky;
             top: 38px;
             z-index: 1000;
@@ -102,6 +106,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 8px;
         }
         .logo {
             display: flex;
@@ -112,25 +117,26 @@
             font-weight: 700;
             font-size: 0.85em;
             line-height: 1.2;
+            flex-shrink: 0;
         }
         .logo img {
             height: 50px;
             margin-right: 12px;
         }
         
-        /* Navigation */
+        /* Navigation - ALWAYS VISIBLE ON ALL PAGES */
         nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 3px;
             align-items: center;
         }
         nav a {
             text-decoration: none;
             color: var(--primary-blue);
-            padding: 6px 12px;
+            padding: 6px 10px;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             transition: all 0.3s ease;
             border-radius: 6px;
             white-space: nowrap;
@@ -146,7 +152,7 @@
         .nav-button {
             background-color: var(--accent-orange);
             color: var(--white) !important;
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 50px;
             transition: all 0.3s ease;
         }
@@ -195,14 +201,36 @@
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 992px) {
+        @media (max-width: 1100px) {
             nav a {
                 font-size: 0.7rem;
-                padding: 4px 8px;
+                padding: 5px 7px;
             }
             .nav-button {
-                padding: 6px 14px;
+                padding: 5px 12px;
                 font-size: 0.7rem;
+            }
+        }
+        @media (max-width: 900px) {
+            header .container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+            .logo {
+                justify-content: center;
+            }
+            nav {
+                justify-content: center;
+                gap: 2px;
+            }
+            nav a {
+                font-size: 0.65rem;
+                padding: 4px 6px;
+            }
+            .nav-button {
+                padding: 4px 10px;
+                font-size: 0.65rem;
             }
         }
         @media (max-width: 768px) {
@@ -212,21 +240,6 @@
             }
             .contact-bar .social-links {
                 margin-top: 4px;
-            }
-            header .container {
-                flex-direction: column;
-                gap: 8px;
-            }
-            nav {
-                justify-content: center;
-            }
-            nav a {
-                font-size: 0.65rem;
-                padding: 4px 6px;
-            }
-            .nav-button {
-                padding: 4px 12px;
-                font-size: 0.65rem;
             }
             .logo img {
                 height: 40px;
@@ -239,20 +252,30 @@
                 padding: 6px 12px;
             }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 500px) {
             nav a {
                 font-size: 0.55rem;
-                padding: 3px 5px;
+                padding: 3px 4px;
             }
             .nav-button {
-                padding: 3px 10px;
+                padding: 3px 8px;
                 font-size: 0.55rem;
             }
             .contact-bar {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
             }
             .contact-bar .social-links a {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+            }
+        }
+        @media (max-width: 400px) {
+            nav a {
+                font-size: 0.5rem;
+                padding: 2px 3px;
+            }
+            .nav-button {
+                padding: 2px 6px;
+                font-size: 0.5rem;
             }
         }
     </style>
@@ -297,9 +320,9 @@
 
     <!-- ===== MAIN CONTENT ===== -->
     <main>
-        <!-- Back Button -->
-        <div class="container back-button-container">
-            <a href="javascript:history.back()" class="back-button">
+        <!-- Back Button - Hidden on index.html (main page) -->
+        <div class="container back-button-container" id="backButtonContainer">
+            <a href="javascript:history.back()" class="back-button" id="backButton">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
         </div>
@@ -307,9 +330,9 @@
         <section id="hero" style="background-image: url('images/hero.jpg');">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1>A Foundation Built on Faith, Hope, and Action.</h1>
+                <h1>A FOUNDATION BUILT ON<br>FAITH, HOPE, AND ACTION.</h1>
                 <p>Learn about our journey, our mission, and the leaders guiding our path to change lives across Uganda.</p>
-                <a href="projects.html" class="hero-button">Explore Our Work</a>
+                <a href="projects.html" class="hero-button">EXPLORE OUR WORK</a>
             </div>
         </section>
 
@@ -472,10 +495,20 @@
     <!-- ===== IMAGE MODAL ===== -->
     <div id="myModal" class="modal"><span class="close">&times;</span><img class="modal-content" id="img01"></div>
     <script>
+        // Image Modal
         var modal = document.getElementById("myModal"), modalImg = document.getElementById("img01"), images = document.getElementsByClassName("expandable-image");
         for (var i = 0; i < images.length; i++) { images[i].onclick = function(){ modal.style.display = "block"; modalImg.src = this.src; } }
         document.getElementsByClassName("close")[0].onclick = function() { modal.style.display = "none"; }
         window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+        
+        // Back Button Logic - Hide on main page (index.html)
+        // Check if we're on the main page (no previous page in history)
+        // or if the page was loaded directly
+        if (window.history.length <= 1 || document.referrer === "") {
+            document.getElementById('backButtonContainer').classList.remove('show');
+        } else {
+            document.getElementById('backButtonContainer').classList.add('show');
+        }
     </script>
 </body>
 </html>
