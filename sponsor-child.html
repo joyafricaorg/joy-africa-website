@@ -230,23 +230,49 @@
         .sponsor-option-card.ask-admin .icon { color: var(--sponsor-orange); }
         .sponsor-option-card.choose-child .icon { color: var(--sponsor-gold); }
 
+        /* ===== PAGE SECTIONS (Hidden by default) ===== */
+        .page-section {
+            display: none;
+            padding: 40px 20px;
+        }
+        .page-section.active {
+            display: block;
+        }
+
         /* ===== CHILDREN GALLERY ===== */
         .children-gallery {
-            padding: 60px 20px;
             background: var(--sponsor-cream);
+            padding: 60px 20px;
+            border-radius: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
         }
-        .children-gallery h2 {
-            text-align: center;
-            font-size: 2.5rem;
+        .children-gallery .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 40px;
-            color: var(--primary-blue);
+            flex-wrap: wrap;
         }
+        .children-gallery .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin: 0;
+        }
+        .children-gallery .close-gallery {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+            padding: 10px;
+        }
+        .children-gallery .close-gallery:hover { color: #333; }
         .children-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
         }
         .child-card {
             background: white;
@@ -278,6 +304,10 @@
             line-height: 1.6;
             font-size: 0.95rem;
             margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .child-card .btn-sponsor-now {
             display: block;
@@ -296,23 +326,48 @@
             background: #27AE60;
             transform: scale(1.02);
         }
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .load-more-btn {
+            padding: 15px 50px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .load-more-btn:hover {
+            background: var(--sponsor-orange);
+            transform: scale(1.05);
+        }
 
         /* ===== FORMS CONTAINER ===== */
         .form-container {
-            display: none;
-            padding: 40px 20px;
             max-width: 800px;
-            margin: 40px auto;
+            margin: 20px auto;
             background: white;
             border-radius: 20px;
+            padding: 40px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            position: relative;
         }
-        .form-container.active { display: block; }
-        .form-container .close-form {
-            position: absolute;
-            top: 15px;
-            right: 25px;
+        .form-container .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .form-container .form-header h2 {
+            font-size: 2rem;
+            margin: 0;
+            color: var(--primary-blue);
+        }
+        .form-container .form-header .close-form {
             background: none;
             border: none;
             font-size: 2rem;
@@ -320,13 +375,7 @@
             color: #999;
             transition: color 0.3s ease;
         }
-        .form-container .close-form:hover { color: #333; }
-        .form-container h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--primary-blue);
-        }
+        .form-container .form-header .close-form:hover { color: #333; }
         .form-container .form-subtitle {
             text-align: center;
             color: #666;
@@ -500,6 +549,7 @@
             nav { justify-content: center; gap: 2px; }
             nav a { font-size: 0.65rem; padding: 4px 6px; }
             .nav-button { padding: 4px 10px; font-size: 0.65rem; }
+            .form-container { padding: 20px; }
         }
         @media (max-width: 480px) {
             .children-grid { grid-template-columns: 1fr; }
@@ -565,14 +615,14 @@
 
         <!-- ===== SPONSOR OPTIONS ===== -->
         <section class="sponsor-options" id="mainOptions">
-            <div class="sponsor-option-card ask-admin" onclick="showForm('ask-admin-form')">
+            <div class="sponsor-option-card ask-admin" onclick="showSection('ask-admin-section')">
                 <span class="icon">🤝</span>
                 <h3>Ask Admin to Decide</h3>
                 <p>Let our team match you with a child who needs your support the most.</p>
                 <button class="btn-sponsor">Ask Admin</button>
             </div>
 
-            <div class="sponsor-option-card choose-child" onclick="showGallery()">
+            <div class="sponsor-option-card choose-child" onclick="showSection('children-section')">
                 <span class="icon">👧🏾</span>
                 <h3>Choose a Child</h3>
                 <p>Browse through our children and pick the one you'd like to sponsor.</p>
@@ -580,184 +630,144 @@
             </div>
         </section>
 
-        <!-- ===== CHILDREN GALLERY ===== -->
-        <section class="children-gallery" id="childrenGallery" style="display: none;">
-            <div class="container">
-                <button onclick="hideGallery()" style="float:right; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#999;">&times; Close</button>
-                <h2>👧🏾 Children Waiting for Sponsorship</h2>
-                <div class="children-grid">
-                    <!-- Child 1 -->
-                    <div class="child-card" data-child-id="1">
-                        <img src="images/child-placeholder.jpg" alt="Sarah">
-                        <div class="child-info">
-                            <h3>Sarah A.</h3>
-                            <p class="age-location">Age 8 • Kampala, Uganda</p>
-                            <p class="story">Sarah loves school and wants to become a doctor. She needs support for her education.</p>
-                            <button class="btn-sponsor-now" onclick="showSponsorForm(1)">SPONSOR NOW</button>
-                        </div>
-                    </div>
-                    <!-- Child 2 -->
-                    <div class="child-card" data-child-id="2">
-                        <img src="images/child-placeholder.jpg" alt="David">
-                        <div class="child-info">
-                            <h3>David M.</h3>
-                            <p class="age-location">Age 10 • Jinja, Uganda</p>
-                            <p class="story">David is passionate about soccer and dreams of playing professionally one day.</p>
-                            <button class="btn-sponsor-now" onclick="showSponsorForm(2)">SPONSOR NOW</button>
-                        </div>
-                    </div>
-                    <!-- Child 3 -->
-                    <div class="child-card" data-child-id="3">
-                        <img src="images/child-placeholder.jpg" alt="Grace">
-                        <div class="child-info">
-                            <h3>Grace N.</h3>
-                            <p class="age-location">Age 6 • Gulu, Uganda</p>
-                            <p class="story">Grace is a bright and curious child who loves reading and drawing.</p>
-                            <button class="btn-sponsor-now" onclick="showSponsorForm(3)">SPONSOR NOW</button>
-                        </div>
-                    </div>
-                    <!-- Child 4 -->
-                    <div class="child-card" data-child-id="4">
-                        <img src="images/child-placeholder.jpg" alt="James">
-                        <div class="child-info">
-                            <h3>James O.</h3>
-                            <p class="age-location">Age 12 • Mbale, Uganda</p>
-                            <p class="story">James is a talented musician who leads his school's choir.</p>
-                            <button class="btn-sponsor-now" onclick="showSponsorForm(4)">SPONSOR NOW</button>
-                        </div>
-                    </div>
-                    <!-- Child 5 -->
-                    <div class="child-card" data-child-id="5">
-                        <img src="images/child-placeholder.jpg" alt="Faith">
-                        <div class="child-info">
-                            <h3>Faith K.</h3>
-                            <p class="age-location">Age 9 • Mbarara, Uganda</p>
-                            <p class="story">Faith dreams of becoming a teacher and helping other children learn.</p>
-                            <button class="btn-sponsor-now" onclick="showSponsorForm(5)">SPONSOR NOW</button>
-                        </div>
-                    </div>
-                    <!-- Child 6 -->
-                    <div class="child-card" data-child-id="6">
-                        <img src="images/child-placeholder.jpg" alt="Peter">
-                        <div class="child-info">
-                            <h3>Peter W.</h3>
-                            <p class="age-location">Age 7 • Entebbe, Uganda</p>
-                            <p class="story">Peter loves science and wants to be an engineer when he grows up.</p>
-                            <button class="btn-sponsor-now" onclick="showSponsorForm(6)">SPONSOR NOW</button>
-                        </div>
-                    </div>
+        <!-- ===== SECTION: ASK ADMIN FORM ===== -->
+        <div class="page-section" id="ask-admin-section">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>🤝 Ask Admin to Decide</h2>
+                    <button class="close-form" onclick="hideSection('ask-admin-section')">&times;</button>
                 </div>
+                <p class="form-subtitle">Fill in your details and our team will match you with a child.</p>
+                <form action="https://formspree.io/f/xqaljaqv" method="POST">
+                    <input type="hidden" name="_subject" value="New Ask Admin Sponsorship Request">
+                    <input type="hidden" name="_replyto" value="joyafrica.org@gmail.com">
+                    <input type="hidden" name="Form Type" value="Ask Admin to Decide">
+                    
+                    <h3 style="margin-top:0; color:var(--sponsor-orange);">SECTION A: ORGANIZATION / PERSONAL DETAILS</h3>
+                    <label>Full Name (Individual or Contact Person) *</label>
+                    <input type="text" name="Full Name" required>
+                    <label>Organization / Company Name (if applicable)</label>
+                    <input type="text" name="Organization Name">
+                    <label>Position / Role</label>
+                    <input type="text" name="Position">
+                    <label>Email Address *</label>
+                    <input type="email" name="Email" required>
+                    <label>Phone / WhatsApp Number</label>
+                    <input type="tel" name="Phone">
+                    <label>Website / Social Media Links</label>
+                    <input type="text" name="Website">
+                    <label>Physical Address / Country</label>
+                    <input type="text" name="Address">
+
+                    <h3 style="color:var(--sponsor-gold);">SECTION B: SPONSOR INTERESTS</h3>
+                    <label>Type of Sponsorship (tick all that apply)</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="Sponsorship Type" value="Full Financial Support"> Full Financial Support</label>
+                        <label><input type="checkbox" name="Sponsorship Type" value="Education Programs"> Education Programs Only</label>
+                        <label><input type="checkbox" name="Sponsorship Type" value="Share Materials"> Share Materials/Equipment</label>
+                        <label><input type="checkbox" name="Sponsorship Type" value="Health Care"> Health Care Only</label>
+                        <label><input type="checkbox" name="Sponsorship Type" value="Technical Support"> Technical/Professional Support</label>
+                        <label><input type="text" name="Sponsorship Type Other" placeholder="Other (please specify)"></label>
+                    </div>
+                    <label>Why do you want to sponsor a child? (short answer) *</label>
+                    <textarea name="Reason" rows="3" required></textarea>
+                    <label>Choose the sex of the child you wish to sponsor:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Child Sex" value="Male"> Male</label>
+                        <label><input type="radio" name="Child Sex" value="Female"> Female</label>
+                        <label><input type="radio" name="Child Sex" value="Rather not say"> Rather not say</label>
+                    </div>
+
+                    <h3 style="color:var(--sponsor-green);">SECTION C: ADDITIONAL INFORMATION</h3>
+                    <label>Previous partnerships or similar projects done (optional)</label>
+                    <textarea name="Previous Partnerships" rows="3"></textarea>
+                    <label>Expected duration of partnership</label>
+                    <input type="text" name="Duration">
+                    <label>Preferred communication method</label>
+                    <input type="text" name="Communication Method">
+                    <label>Any special requirements or agreements?</label>
+                    <textarea name="Special Requirements" rows="3"></textarea>
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </form>
             </div>
-        </section>
-
-        <!-- ===== FORM 1: ASK ADMIN TO DECIDE ===== -->
-        <div class="form-container" id="ask-admin-form">
-            <button class="close-form" onclick="closeForm('ask-admin-form')">&times;</button>
-            <h2>🤝 Ask Admin to Decide</h2>
-            <p class="form-subtitle">Fill in your details and our team will match you with a child.</p>
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="hidden" name="Form Type" value="Ask Admin to Decide">
-                <h3 style="margin-top:0; color:var(--sponsor-orange);">SECTION A: ORGANIZATION / PERSONAL DETAILS</h3>
-                <label>Full Name (Individual or Contact Person) *</label>
-                <input type="text" name="Full Name" required>
-                <label>Organization / Company Name (if applicable)</label>
-                <input type="text" name="Organization Name">
-                <label>Position / Role</label>
-                <input type="text" name="Position">
-                <label>Email Address *</label>
-                <input type="email" name="Email" required>
-                <label>Phone / WhatsApp Number</label>
-                <input type="tel" name="Phone">
-                <label>Website / Social Media Links</label>
-                <input type="text" name="Website">
-                <label>Physical Address / Country</label>
-                <input type="text" name="Address">
-
-                <h3 style="color:var(--sponsor-gold);">SECTION B: SPONSOR INTERESTS</h3>
-                <label>Type of Sponsorship (tick all that apply)</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="Sponsorship Type" value="Full Financial Support"> Full Financial Support</label>
-                    <label><input type="checkbox" name="Sponsorship Type" value="Education Programs"> Education Programs Only</label>
-                    <label><input type="checkbox" name="Sponsorship Type" value="Share Materials"> Share Materials/Equipment</label>
-                    <label><input type="checkbox" name="Sponsorship Type" value="Health Care"> Health Care Only</label>
-                    <label><input type="checkbox" name="Sponsorship Type" value="Technical Support"> Technical/Professional Support</label>
-                    <label><input type="text" name="Sponsorship Type Other" placeholder="Other (please specify)"></label>
-                </div>
-                <label>Why do you want to sponsor a child? (short answer) *</label>
-                <textarea name="Reason" rows="3" required></textarea>
-                <label>Choose the sex of the child you wish to sponsor:</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="Child Sex" value="Male"> Male</label>
-                    <label><input type="radio" name="Child Sex" value="Female"> Female</label>
-                    <label><input type="radio" name="Child Sex" value="Rather not say"> Rather not say</label>
-                </div>
-
-                <h3 style="color:var(--sponsor-green);">SECTION C: ADDITIONAL INFORMATION</h3>
-                <label>Previous partnerships or similar projects done (optional)</label>
-                <textarea name="Previous Partnerships" rows="3"></textarea>
-                <label>Expected duration of partnership</label>
-                <input type="text" name="Duration">
-                <label>Preferred communication method</label>
-                <input type="text" name="Communication Method">
-                <label>Any special requirements or agreements?</label>
-                <textarea name="Special Requirements" rows="3"></textarea>
-                <button type="submit" class="submit-btn">Submit Application</button>
-            </form>
         </div>
 
-        <!-- ===== FORM 2: SPONSOR A CHILD (Direct) ===== -->
-        <div class="form-container" id="sponsor-form">
-            <button class="close-form" onclick="closeForm('sponsor-form')">&times;</button>
-            <h2>💚 Sponsor This Child</h2>
-            <p class="form-subtitle">Complete this form to sponsor a child directly.</p>
-            <div class="child-info-box" id="childInfoBox">
-                <p><strong>👧🏾 Child:</strong> <span id="childName">Loading...</span></p>
-                <p><strong>📍 Location:</strong> <span id="childLocation">Loading...</span></p>
-                <p><strong>📖 Story:</strong> <span id="childStory">Loading...</span></p>
-            </div>
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="hidden" name="Child ID" id="childId" value="Not specified">
-                <input type="hidden" name="Form Type" value="Direct Sponsorship">
-                <h3 style="margin-top:0; color:var(--sponsor-orange);">SECTION A: ORGANIZATION / PERSONAL DETAILS</h3>
-                <label>Full Name (Individual or Contact Person) *</label>
-                <input type="text" name="Full Name" required>
-                <label>Organization / Company Name (if applicable)</label>
-                <input type="text" name="Organization Name">
-                <label>Position / Role</label>
-                <input type="text" name="Position">
-                <label>Email Address *</label>
-                <input type="email" name="Email" required>
-                <label>Phone / WhatsApp Number</label>
-                <input type="tel" name="Phone">
-                <label>Website / Social Media Links</label>
-                <input type="text" name="Website">
-                <label>Physical Address / Country</label>
-                <input type="text" name="Address">
-
-                <h3 style="color:var(--sponsor-gold);">SECTION B: SPONSOR INTERESTS</h3>
-                <label>Type of Partnership (tick all that apply)</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="Partnership Type" value="Full Financial Support"> Full Financial Support</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Education Programs"> Education Programs Only</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Share Materials"> Share Materials/Equipment</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Health Care"> Health Care Only</label>
-                    <label><input type="checkbox" name="Partnership Type" value="Technical Support"> Technical/Professional Support</label>
-                    <label><input type="text" name="Partnership Type Other" placeholder="Other (please specify)"></label>
+        <!-- ===== SECTION: CHILDREN GALLERY ===== -->
+        <div class="page-section" id="children-section">
+            <div class="children-gallery">
+                <div class="section-header">
+                    <h2>👧🏾 Children Waiting for Sponsorship</h2>
+                    <button class="close-gallery" onclick="hideSection('children-section')">&times; Close</button>
                 </div>
-                <label>Why do you want to sponsor this particular child? (short answer) *</label>
-                <textarea name="Reason" rows="3" required></textarea>
+                <div class="children-grid" id="childrenGrid">
+                    <!-- Children loaded from JavaScript -->
+                </div>
+                <div class="load-more-container" id="loadMoreContainer" style="display:none;">
+                    <button class="load-more-btn" onclick="loadMoreChildren()">Load More Children</button>
+                </div>
+            </div>
+        </div>
 
-                <h3 style="color:var(--sponsor-green);">SECTION C: ADDITIONAL INFORMATION</h3>
-                <label>Previous partnerships or similar projects done (optional)</label>
-                <textarea name="Previous Partnerships" rows="3"></textarea>
-                <label>Expected duration of partnership</label>
-                <input type="text" name="Duration">
-                <label>Preferred communication method</label>
-                <input type="text" name="Communication Method">
-                <label>Any special requirements or agreements?</label>
-                <textarea name="Special Requirements" rows="3"></textarea>
-                <button type="submit" class="submit-btn">Submit Application</button>
-            </form>
+        <!-- ===== SECTION: SPONSOR FORM (Direct) ===== -->
+        <div class="page-section" id="sponsor-form-section">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>💚 Sponsor This Child</h2>
+                    <button class="close-form" onclick="hideSection('sponsor-form-section')">&times;</button>
+                </div>
+                <p class="form-subtitle">Complete this form to sponsor a child directly.</p>
+                <div class="child-info-box" id="childInfoBox">
+                    <p><strong>👧🏾 Child:</strong> <span id="childName">Loading...</span></p>
+                    <p><strong>📍 Location:</strong> <span id="childLocation">Loading...</span></p>
+                    <p><strong>📖 Story:</strong> <span id="childStory">Loading...</span></p>
+                </div>
+                <form action="https://formspree.io/f/xqaljaqv" method="POST">
+                    <input type="hidden" name="_subject" value="New Direct Child Sponsorship Request">
+                    <input type="hidden" name="_replyto" value="joyafrica.org@gmail.com">
+                    <input type="hidden" name="Child ID" id="childId" value="Not specified">
+                    <input type="hidden" name="Form Type" value="Direct Sponsorship">
+                    
+                    <h3 style="margin-top:0; color:var(--sponsor-orange);">SECTION A: ORGANIZATION / PERSONAL DETAILS</h3>
+                    <label>Full Name (Individual or Contact Person) *</label>
+                    <input type="text" name="Full Name" required>
+                    <label>Organization / Company Name (if applicable)</label>
+                    <input type="text" name="Organization Name">
+                    <label>Position / Role</label>
+                    <input type="text" name="Position">
+                    <label>Email Address *</label>
+                    <input type="email" name="Email" required>
+                    <label>Phone / WhatsApp Number</label>
+                    <input type="tel" name="Phone">
+                    <label>Website / Social Media Links</label>
+                    <input type="text" name="Website">
+                    <label>Physical Address / Country</label>
+                    <input type="text" name="Address">
+
+                    <h3 style="color:var(--sponsor-gold);">SECTION B: SPONSOR INTERESTS</h3>
+                    <label>Type of Partnership (tick all that apply)</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="Partnership Type" value="Full Financial Support"> Full Financial Support</label>
+                        <label><input type="checkbox" name="Partnership Type" value="Education Programs"> Education Programs Only</label>
+                        <label><input type="checkbox" name="Partnership Type" value="Share Materials"> Share Materials/Equipment</label>
+                        <label><input type="checkbox" name="Partnership Type" value="Health Care"> Health Care Only</label>
+                        <label><input type="checkbox" name="Partnership Type" value="Technical Support"> Technical/Professional Support</label>
+                        <label><input type="text" name="Partnership Type Other" placeholder="Other (please specify)"></label>
+                    </div>
+                    <label>Why do you want to sponsor this particular child? (short answer) *</label>
+                    <textarea name="Reason" rows="3" required></textarea>
+
+                    <h3 style="color:var(--sponsor-green);">SECTION C: ADDITIONAL INFORMATION</h3>
+                    <label>Previous partnerships or similar projects done (optional)</label>
+                    <textarea name="Previous Partnerships" rows="3"></textarea>
+                    <label>Expected duration of partnership</label>
+                    <input type="text" name="Duration">
+                    <label>Preferred communication method</label>
+                    <input type="text" name="Communication Method">
+                    <label>Any special requirements or agreements?</label>
+                    <textarea name="Special Requirements" rows="3"></textarea>
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </form>
+            </div>
         </div>
     </main>
 
@@ -793,76 +803,158 @@
 
     <!-- ===== SCRIPTS ===== -->
     <script>
-        // Child Data
-        const children = {
-            '1': { name: 'Sarah A.', location: 'Kampala, Uganda', story: 'Sarah loves school and wants to become a doctor.' },
-            '2': { name: 'David M.', location: 'Jinja, Uganda', story: 'David is passionate about soccer and dreams of playing professionally.' },
-            '3': { name: 'Grace N.', location: 'Gulu, Uganda', story: 'Grace is a bright and curious child who loves reading and drawing.' },
-            '4': { name: 'James O.', location: 'Mbale, Uganda', story: 'James is a talented musician who leads his school\'s choir.' },
-            '5': { name: 'Faith K.', location: 'Mbarara, Uganda', story: 'Faith dreams of becoming a teacher and helping other children learn.' },
-            '6': { name: 'Peter W.', location: 'Entebbe, Uganda', story: 'Peter loves science and wants to be an engineer.' }
-        };
+        // ===== 18 CHILDREN DATA (Admin can edit/upload via admin panel) =====
+        const allChildrenData = [
+            // First 6 - Initially visible
+            { id: 1, name: 'Sarah A.', location: 'Kampala, Uganda', story: 'Sarah loves school and wants to become a doctor. She needs support for her education.', image: 'images/child1.jpg', age: '8', gender: 'Female' },
+            { id: 2, name: 'David M.', location: 'Jinja, Uganda', story: 'David is passionate about soccer and dreams of playing professionally.', image: 'images/child2.jpg', age: '10', gender: 'Male' },
+            { id: 3, name: 'Grace N.', location: 'Gulu, Uganda', story: 'Grace is a bright and curious child who loves reading and drawing.', image: 'images/child3.jpg', age: '6', gender: 'Female' },
+            { id: 4, name: 'James O.', location: 'Mbale, Uganda', story: 'James is a talented musician who leads his school\'s choir.', image: 'images/child4.jpg', age: '12', gender: 'Male' },
+            { id: 5, name: 'Faith K.', location: 'Mbarara, Uganda', story: 'Faith dreams of becoming a teacher and helping other children learn.', image: 'images/child5.jpg', age: '9', gender: 'Female' },
+            { id: 6, name: 'Peter W.', location: 'Entebbe, Uganda', story: 'Peter loves science and wants to be an engineer.', image: 'images/child6.jpg', age: '7', gender: 'Male' },
+            // Next 6 - Load More
+            { id: 7, name: 'Mary A.', location: 'Kampala, Uganda', story: 'Mary loves art and wants to become a painter. She needs support for her education.', image: 'images/child7.jpg', age: '11', gender: 'Female' },
+            { id: 8, name: 'John K.', location: 'Jinja, Uganda', story: 'John is a brilliant student who wants to become a pilot.', image: 'images/child8.jpg', age: '9', gender: 'Male' },
+            { id: 9, name: 'Esther N.', location: 'Gulu, Uganda', story: 'Esther loves music and dreams of becoming a singer.', image: 'images/child9.jpg', age: '7', gender: 'Female' },
+            { id: 10, name: 'Samuel O.', location: 'Mbale, Uganda', story: 'Samuel is passionate about helping others and wants to be a doctor.', image: 'images/child10.jpg', age: '10', gender: 'Male' },
+            { id: 11, name: 'Ruth K.', location: 'Mbarara, Uganda', story: 'Ruth loves reading and wants to become a writer.', image: 'images/child11.jpg', age: '8', gender: 'Female' },
+            { id: 12, name: 'Daniel W.', location: 'Entebbe, Uganda', story: 'Daniel loves nature and wants to be a farmer.', image: 'images/child12.jpg', age: '6', gender: 'Male' },
+            // Final 6 - Load More
+            { id: 13, name: 'Eunice A.', location: 'Kampala, Uganda', story: 'Eunice loves sports and wants to become a professional athlete.', image: 'images/child13.jpg', age: '10', gender: 'Female' },
+            { id: 14, name: 'Isaac K.', location: 'Jinja, Uganda', story: 'Isaac is a great leader and wants to become a lawyer.', image: 'images/child14.jpg', age: '11', gender: 'Male' },
+            { id: 15, name: 'Deborah N.', location: 'Gulu, Uganda', story: 'Deborah loves helping others and wants to be a nurse.', image: 'images/child15.jpg', age: '9', gender: 'Female' },
+            { id: 16, name: 'Joseph O.', location: 'Mbale, Uganda', story: 'Joseph is a hardworking child who wants to become a teacher.', image: 'images/child16.jpg', age: '8', gender: 'Male' },
+            { id: 17, name: 'Miriam K.', location: 'Mbarara, Uganda', story: 'Miriam loves cooking and wants to become a chef.', image: 'images/child17.jpg', age: '10', gender: 'Female' },
+            { id: 18, name: 'Timothy W.', location: 'Entebbe, Uganda', story: 'Timothy loves technology and wants to become an engineer.', image: 'images/child18.jpg', age: '7', gender: 'Male' }
+        ];
 
-        // Hide all sections except main
-        function hideAllSections() {
-            document.getElementById('childrenGallery').style.display = 'none';
-            document.querySelectorAll('.form-container').forEach(f => f.classList.remove('active'));
-        }
+        // ===== STATE =====
+        let currentDisplayCount = 6;
+        const loadMoreCount = 6;
 
-        // Show Gallery
-        function showGallery() {
-            hideAllSections();
-            document.getElementById('childrenGallery').style.display = 'block';
-            document.getElementById('childrenGallery').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Hide Gallery
-        function hideGallery() {
-            document.getElementById('childrenGallery').style.display = 'none';
-        }
-
-        // Show Form (Ask Admin)
-        function showForm(formId) {
-            hideAllSections();
-            document.getElementById(formId).classList.add('active');
-            document.getElementById(formId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Show Sponsor Form (Direct)
-        function showSponsorForm(childId) {
-            hideAllSections();
-            const form = document.getElementById('sponsor-form');
-            form.classList.add('active');
+        // ===== SECTION NAVIGATION =====
+        function showSection(sectionId, childId = null) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             
-            // Populate child info
-            const child = children[childId];
+            // Hide main options and hero
+            document.getElementById('mainOptions').style.display = 'none';
+            document.getElementById('mainHero').style.display = 'none';
+            
+            // Show selected section
+            const section = document.getElementById(sectionId);
+            section.classList.add('active');
+            
+            // If child ID provided, populate child info
+            if (childId && sectionId === 'sponsor-form-section') {
+                populateChildInfo(childId);
+            }
+            
+            // If children section, load children
+            if (sectionId === 'children-section') {
+                loadChildren();
+            }
+            
+            // Scroll to section
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function hideSection(sectionId) {
+            document.getElementById(sectionId).classList.remove('active');
+            
+            // Reset display count when closing
+            if (sectionId === 'children-section') {
+                currentDisplayCount = 6;
+            }
+            
+            // Show main options again
+            document.getElementById('mainOptions').style.display = 'grid';
+            document.getElementById('mainHero').style.display = 'block';
+            
+            // Scroll to top
+            document.getElementById('mainHero').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== LOAD CHILDREN =====
+        function loadChildren() {
+            const grid = document.getElementById('childrenGrid');
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            const visibleChildren = allChildrenData.slice(0, currentDisplayCount);
+            
+            grid.innerHTML = '';
+            
+            visibleChildren.forEach(child => {
+                const card = document.createElement('div');
+                card.className = 'child-card';
+                card.dataset.childId = child.id;
+                card.innerHTML = `
+                    <img src="${child.image}" alt="${child.name}" onerror="this.src='images/child-placeholder.jpg'">
+                    <div class="child-info">
+                        <h3>${child.name}</h3>
+                        <p class="age-location">Age ${child.age} • ${child.location}</p>
+                        <p class="story">${child.story}</p>
+                        <button class="btn-sponsor-now" onclick="showSection('sponsor-form-section', ${child.id})">SPONSOR NOW</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Show/hide load more button
+            if (currentDisplayCount < allChildrenData.length) {
+                loadMoreContainer.style.display = 'block';
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        }
+
+        // ===== LOAD MORE CHILDREN =====
+        function loadMoreChildren() {
+            currentDisplayCount += loadMoreCount;
+            if (currentDisplayCount > allChildrenData.length) {
+                currentDisplayCount = allChildrenData.length;
+            }
+            loadChildren();
+            
+            // Smooth scroll to show new children
+            document.getElementById('childrenGrid').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== POPULATE CHILD INFO FOR FORM =====
+        function populateChildInfo(childId) {
+            const child = allChildrenData.find(c => c.id === childId);
             if (child) {
                 document.getElementById('childId').value = childId;
                 document.getElementById('childName').textContent = child.name;
-                document.getElementById('childLocation').textContent = child.location;
+                document.getElementById('childLocation').textContent = `Age ${child.age} • ${child.location}`;
                 document.getElementById('childStory').textContent = child.story;
+            } else {
+                document.getElementById('childName').textContent = 'Not specified';
+                document.getElementById('childLocation').textContent = 'To be determined';
+                document.getElementById('childStory').textContent = 'Please contact us for more information.';
             }
-            form.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Close Form
-        function closeForm(formId) {
-            document.getElementById(formId).classList.remove('active');
-        }
-
-        // Close forms when clicking outside
-        document.addEventListener('click', function(event) {
-            document.querySelectorAll('.form-container').forEach(function(form) {
-                if (event.target === form) {
-                    form.classList.remove('active');
-                }
-            });
-        });
-
-        // Back button logic - hide on main page
+        // ===== BACK BUTTON LOGIC =====
         if (window.history.length <= 1 || document.referrer === "") {
             document.getElementById('backButtonContainer').style.display = 'none';
         }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial children if section is visible
+            if (document.getElementById('children-section').classList.contains('active')) {
+                loadChildren();
+            }
+        });
+
+        // ===== CLOSE SECTIONS ON ESCAPE =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.page-section.active').forEach(s => {
+                    hideSection(s.id);
+                });
+            }
+        });
     </script>
 </body>
 </html>
