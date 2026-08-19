@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - JoyRise Africa Foundation</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== ADMIN LOGIN STYLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0B2447, #1a3a5c, #2E86C1);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+        .login-box {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .login-box .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-box .logo img {
+            height: 70px;
+            margin-bottom: 10px;
+        }
+        .login-box .logo h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: #0B2447;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .login-box .logo p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .login-box .form-group {
+            margin-bottom: 20px;
+        }
+        .login-box .form-group label {
+            display: block;
+            font-weight: 700;
+            color: #0B2447;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        .login-box .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e1e5eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            transition: border-color 0.3s ease;
+            background: #f8f9fa;
+        }
+        .login-box .form-group input:focus {
+            outline: none;
+            border-color: #F28C28;
+            box-shadow: 0 0 0 4px rgba(242, 140, 40, 0.1);
+        }
+        .login-box .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #F28C28, #FF6B35);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        .login-box .login-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(242, 140, 40, 0.3);
+        }
+        .login-box .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .login-box .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .login-box .forgot-password a {
+            color: #F28C28;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        .login-box .forgot-password a:hover {
+            color: #0B2447;
+        }
+        .login-box .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+            border-left: 4px solid #dc2626;
+        }
+        .login-box .error-message.show {
+            display: block;
+        }
+        .login-box .success-message {
+            background: #d1fae5;
+            color: #059669;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+            border-left: 4px solid #059669;
+        }
+        .login-box .success-message.show {
+            display: block;
+        }
+        .login-box .recovery-section {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e1e5eb;
+        }
+        .login-box .recovery-section.show {
+            display: block;
+        }
+        .login-box .recovery-section .form-group {
+            margin-bottom: 15px;
+        }
+        .login-box .recovery-section .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e1e5eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            transition: border-color 0.3s ease;
+            background: #f8f9fa;
+        }
+        .login-box .recovery-section .form-group input:focus {
+            outline: none;
+            border-color: #F28C28;
+            box-shadow: 0 0 0 4px rgba(242, 140, 40, 0.1);
+        }
+        .login-box .recovery-section .recovery-btn {
+            width: 100%;
+            padding: 14px;
+            background: #0B2447;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .login-box .recovery-section .recovery-btn:hover {
+            background: #1a3a5c;
+            transform: scale(1.02);
+        }
+        .login-box .recovery-section .back-to-login {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .login-box .recovery-section .back-to-login a {
+            color: #F28C28;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .login-box .recovery-section .back-to-login a:hover {
+            color: #0B2447;
+        }
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 20px;
+            }
+            .login-box .logo h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="images/logo.png" alt="JoyRise Africa Foundation">
+                <h1>Admin Panel</h1>
+                <p>JoyRise Africa Foundation</p>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText">Invalid credentials</span>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> <span id="successText">Password recovered!</span>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Admin Email</label>
+                    <input type="email" id="email" placeholder="JoyRise.admin001" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">Login</button>
+            </form>
+
+            <!-- Forgot Password Link -->
+            <div class="forgot-password">
+                <a href="#" onclick="showRecovery()"><i class="fas fa-key"></i> Forgot Password?</a>
+            </div>
+
+            <!-- Password Recovery Section -->
+            <div class="recovery-section" id="recoverySection">
+                <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; font-size:1.2rem; margin-bottom:15px; text-transform:uppercase;">Recover Password</h3>
+                <p style="color:#666; font-size:0.9rem; margin-bottom:20px;">Enter your admin email and recovery word to reset your password.</p>
+                <form onsubmit="handleRecovery(event)">
+                    <div class="form-group">
+                        <label for="recoveryEmail"><i class="fas fa-envelope"></i> Admin Email</label>
+                        <input type="email" id="recoveryEmail" placeholder="JoyRise.admin001" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recoveryWord"><i class="fas fa-shield-alt"></i> Recovery Word</label>
+                        <input type="text" id="recoveryWord" placeholder="Your special recovery word" required>
+                    </div>
+                    <button type="submit" class="recovery-btn">Recover Password</button>
+                </form>
+                <div class="back-to-login">
+                    <a onclick="hideRecovery()"><i class="fas fa-arrow-left"></i> Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== ADMIN ACCOUNTS =====
+        const adminAccounts = {
+            'JoyRise.admin001': {
+                password: 'admin123',
+                recoveryWord: 'joyrise001',
+                isMainAdmin: true,
+                displayName: 'Super Admin'
+            },
+            'JoyRise.admin002': {
+                password: 'admin456',
+                recoveryWord: 'joyrise002',
+                isMainAdmin: false,
+                displayName: 'Admin 2'
+            },
+            'JoyRise.admin003': {
+                password: 'admin789',
+                recoveryWord: 'joyrise003',
+                isMainAdmin: false,
+                displayName: 'Admin 3'
+            },
+            'JoyRise.admin004': {
+                password: 'adminabc',
+                recoveryWord: 'joyrise004',
+                isMainAdmin: false,
+                displayName: 'Admin 4'
+            },
+            'JoyRise.admin005': {
+                password: 'adminxyz',
+                recoveryWord: 'joyrise005',
+                isMainAdmin: false,
+                displayName: 'Admin 5'
+            }
+        };
+
+        // ===== ALLOWED EMAILS =====
+        const allowedEmails = ['JoyRise.admin001', 'JoyRise.admin002', 'JoyRise.admin003', 'JoyRise.admin004', 'JoyRise.admin005'];
+
+        // ===== LOGIN HANDLER =====
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            // Hide previous messages
+            errorMsg.classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+
+            // Check if email is allowed
+            if (!allowedEmails.includes(email)) {
+                errorText.textContent = 'Email not authorized. Only 5 admin emails allowed.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            // Check credentials
+            const account = adminAccounts[email];
+            if (account && account.password === password) {
+                // Login successful
+                localStorage.setItem('adminEmail', email);
+                localStorage.setItem('adminName', account.displayName);
+                localStorage.setItem('isMainAdmin', account.isMainAdmin);
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                errorText.textContent = 'Invalid password. Please try again.';
+                errorMsg.classList.add('show');
+            }
+        }
+
+        // ===== SHOW RECOVERY =====
+        function showRecovery() {
+            document.getElementById('recoverySection').classList.add('show');
+            document.querySelector('.forgot-password').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('errorMessage').classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        // ===== HIDE RECOVERY =====
+        function hideRecovery() {
+            document.getElementById('recoverySection').classList.remove('show');
+            document.querySelector('.forgot-password').style.display = 'block';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('errorMessage').classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        // ===== RECOVERY HANDLER =====
+        function handleRecovery(e) {
+            e.preventDefault();
+            const email = document.getElementById('recoveryEmail').value.trim();
+            const word = document.getElementById('recoveryWord').value.trim();
+            const successMsg = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            const errorMsg = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            successMsg.classList.remove('show');
+            errorMsg.classList.remove('show');
+
+            if (!allowedEmails.includes(email)) {
+                errorText.textContent = 'Email not authorized. Only 5 admin emails allowed.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            const account = adminAccounts[email];
+            if (account && account.recoveryWord === word) {
+                successText.textContent = `Password recovered! Your password is: ${account.password}`;
+                successMsg.classList.add('show');
+            } else {
+                errorText.textContent = 'Invalid recovery word. Please try again.';
+                errorMsg.classList.add('show');
+            }
+        }
+
+        // ===== CHECK IF ALREADY LOGGED IN =====
+        if (localStorage.getItem('adminEmail')) {
+            window.location.href = 'admin-dashboard.html';
+        }
+    </script>
+</body>
+</html>
