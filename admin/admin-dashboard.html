@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - JoyRise Africa Foundation</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== ADMIN DASHBOARD STYLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            min-height: 100vh;
+        }
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 260px;
+            background: #0B2447;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .sidebar .logo {
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar .logo img {
+            height: 50px;
+            margin-bottom: 10px;
+            filter: brightness(0) invert(1);
+        }
+        .sidebar .logo h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            color: #F28C28;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .sidebar .logo p {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            color: #ccc;
+        }
+        .sidebar .user-info {
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            margin: 15px 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .sidebar .user-info .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #F28C28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        .sidebar .user-info .name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .sidebar .user-info .email {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            color: #ccc;
+        }
+        .sidebar .user-info .badge {
+            display: inline-block;
+            padding: 2px 12px;
+            background: #F28C28;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .sidebar .nav-menu {
+            list-style: none;
+            padding: 0 10px;
+        }
+        .sidebar .nav-menu li {
+            margin-bottom: 2px;
+        }
+        .sidebar .nav-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .sidebar .nav-menu li a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .sidebar .nav-menu li a.active {
+            background: rgba(242, 140, 40, 0.2);
+            color: #F28C28;
+        }
+        .sidebar .nav-menu li a i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .sidebar .nav-menu li a .badge-count {
+            margin-left: auto;
+            background: #F28C28;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+        .sidebar .nav-menu .nav-section {
+            padding: 15px 16px 8px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        .sidebar .logout-btn {
+            margin: 20px 15px;
+            padding: 12px;
+            background: rgba(220, 38, 38, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .sidebar .logout-btn:hover {
+            background: rgba(220, 38, 38, 0.3);
+        }
+        .sidebar .logout-btn i {
+            margin-right: 8px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            margin-left: 260px;
+            padding: 20px 30px;
+            width: calc(100% - 260px);
+            min-height: 100vh;
+        }
+        .main-content .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .main-content .page-header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: #0B2447;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .main-content .page-header .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .main-content .page-header .header-actions .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .main-content .page-header .header-actions .btn-primary {
+            background: #F28C28;
+            color: white;
+        }
+        .main-content .page-header .header-actions .btn-primary:hover {
+            background: #0B2447;
+            transform: scale(1.02);
+        }
+        .main-content .page-header .header-actions .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        .main-content .page-header .header-actions .btn-danger:hover {
+            background: #b91c1c;
+            transform: scale(1.02);
+        }
+        .main-content .page-header .header-actions .btn-success {
+            background: #059669;
+            color: white;
+        }
+        .main-content .page-header .header-actions .btn-success:hover {
+            background: #047857;
+            transform: scale(1.02);
+        }
+
+        /* ===== STATS CARDS ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #F28C28;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        .stat-card .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0B2447;
+        }
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 4px;
+        }
+        .stat-card .stat-icon {
+            float: right;
+            font-size: 2rem;
+            color: rgba(242, 140, 40, 0.2);
+        }
+        .stat-card.purple { border-left-color: #6C5CE7; }
+        .stat-card.green { border-left-color: #2ECC71; }
+        .stat-card.red { border-left-color: #FF6B6B; }
+        .stat-card.blue { border-left-color: #0984E3; }
+
+        /* ===== CONTENT SECTIONS ===== */
+        .content-section {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .content-section .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: #0B2447;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== TABLES ===== */
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        table th {
+            background: #f8f9fa;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 700;
+            color: #0B2447;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        table tr:hover {
+            background: #f8f9fa;
+        }
+        table .actions {
+            display: flex;
+            gap: 8px;
+        }
+        table .actions button {
+            padding: 5px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        table .actions .edit-btn {
+            background: #F28C28;
+            color: white;
+        }
+        table .actions .edit-btn:hover {
+            background: #0B2447;
+        }
+        table .actions .delete-btn {
+            background: #dc2626;
+            color: white;
+        }
+        table .actions .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* ===== FORMS ===== */
+        .admin-form {
+            max-width: 800px;
+        }
+        .admin-form .form-group {
+            margin-bottom: 20px;
+        }
+        .admin-form .form-group label {
+            display: block;
+            font-weight: 700;
+            color: #0B2447;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        .admin-form .form-group input,
+        .admin-form .form-group textarea,
+        .admin-form .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+        .admin-form .form-group input:focus,
+        .admin-form .form-group textarea:focus,
+        .admin-form .form-group select:focus {
+            outline: none;
+            border-color: #F28C28;
+            box-shadow: 0 0 0 4px rgba(242, 140, 40, 0.1);
+        }
+        .admin-form .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .admin-form .form-group .file-upload {
+            border: 2px dashed #e1e5eb;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        .admin-form .form-group .file-upload:hover {
+            border-color: #F28C28;
+            background: rgba(242, 140, 40, 0.05);
+        }
+        .admin-form .form-group .file-upload i {
+            font-size: 2rem;
+            color: #ccc;
+        }
+        .admin-form .form-group .file-upload p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .admin-form .form-group .preview-image {
+            max-width: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .admin-form .submit-btn {
+            padding: 14px 40px;
+            background: #F28C28;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .admin-form .submit-btn:hover {
+            background: #0B2447;
+            transform: scale(1.02);
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 25px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 999;
+            max-width: 400px;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast.success { background: #059669; }
+        .toast.error { background: #dc2626; }
+        .toast.info { background: #0984E3; }
+
+        /* ===== MOBILE HAMBURGER ===== */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #0B2447;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 15px;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .main-content .page-header h1 {
+                font-size: 1.5rem;
+            }
+            .content-section {
+                padding: 20px 15px;
+            }
+        }
+        @media (max-width: 400px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-content .page-header .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="images/logo.png" alt="JoyRise Africa Foundation">
+                <h2>Admin Panel</h2>
+                <p>JoyRise Africa Foundation</p>
+            </div>
+            <div class="user-info" id="userInfo">
+                <div class="avatar" id="userAvatar">SA</div>
+                <div class="name" id="userName">Super Admin</div>
+                <div class="email" id="userEmail">JoyRise.admin001</div>
+                <div class="badge">Main Admin</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-section">Main</li>
+                <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" onclick="showSection('verse')"><i class="fas fa-bible"></i> Weekly Verse</a></li>
+                <li><a href="#" onclick="showSection('children')"><i class="fas fa-child"></i> Children</a></li>
+                <li class="nav-section">Media</li>
+                <li><a href="#" onclick="showSection('choir-media')"><i class="fas fa-images"></i> Choir Media</a></li>
+                <li><a href="#" onclick="showSection('music')"><i class="fas fa-music"></i> Music Projects</a></li>
+                <li><a href="#" onclick="showSection('tours')"><i class="fas fa-calendar-alt"></i> Tours & Events</a></li>
+                <li class="nav-section">Submissions</li>
+                <li><a href="#" onclick="showSection('partners')"><i class="fas fa-handshake"></i> Partners <span class="badge-count">3</span></a></li>
+                <li><a href="#" onclick="showSection('volunteers')"><i class="fas fa-hands-helping"></i> Volunteers <span class="badge-count">5</span></a></li>
+                <li><a href="#" onclick="showSection('sponsorships')"><i class="fas fa-heart"></i> Sponsorships <span class="badge-count">2</span></a></li>
+                <li class="nav-section">Admin</li>
+                <li><a href="#" onclick="showSection('admins')"><i class="fas fa-users-cog"></i> Manage Admins</a></li>
+            </ul>
+            <div class="logout-btn" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</div>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <div class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-actions" id="headerActions">
+                    <button class="btn btn-primary" onclick="refreshData()"><i class="fas fa-sync"></i> Refresh</button>
+                    <button class="btn btn-success" onclick="previewWebsite()"><i class="fas fa-eye"></i> Preview Site</button>
+                </div>
+            </div>
+
+            <!-- ===== DASHBOARD ===== -->
+            <div class="content-section active" id="section-dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-child"></i></div>
+                        <div class="stat-number" id="statChildren">18</div>
+                        <div class="stat-label">Children Sponsored</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+                        <div class="stat-number" id="statPartners">12</div>
+                        <div class="stat-label">Active Partners</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><i class="fas fa-hands-helping"></i></div>
+                        <div class="stat-number" id="statVolunteers">25</div>
+                        <div class="stat-label">Volunteers</div>
+                    </div>
+                    <div class="stat-card red">
+                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                        <div class="stat-number" id="statSponsorships">8</div>
+                        <div class="stat-label">Active Sponsorships</div>
+                    </div>
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><i class="fas fa-music"></i></div>
+                        <div class="stat-number" id="statMusic">7</div>
+                        <div class="stat-label">Music Projects</div>
+                    </div>
+                </div>
+                <div style="background:#f8f9fa; border-radius:16px; padding:30px; text-align:center; border:2px dashed #e1e5eb;">
+                    <i class="fas fa-chart-line" style="font-size:3rem; color:#ccc;"></i>
+                    <h3 style="color:#666; margin-top:10px;">Welcome to the Admin Dashboard</h3>
+                    <p style="color:#999;">Use the sidebar to manage your content</p>
+                </div>
+            </div>
+
+            <!-- ===== WEEKLY VERSE ===== -->
+            <div class="content-section" id="section-verse">
+                <h2 class="section-title">📖 Edit Weekly Verse</h2>
+                <form class="admin-form" onsubmit="saveVerse(event)">
+                    <div class="form-group">
+                        <label>Week Number</label>
+                        <input type="text" id="verseWeek" value="WEEK ONE" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Verse Reference</label>
+                        <input type="text" id="verseReference" value="PROVERBS 31:8-9" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Verse Text</label>
+                        <textarea id="verseText" rows="3" required>"Speak up for those who cannot speak for themselves, for the rights of all who are destitute. Speak up and judge fairly; defend the rights of the poor and needy."</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Explanation (Paragraph 1)</label>
+                        <textarea id="verseExplanation1" rows="4">Proverbs 31:8-9 is a powerful call to advocacy and justice, particularly for the most vulnerable in society...</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Explanation (Paragraph 2)</label>
+                        <textarea id="verseExplanation2" rows="4">The command to "speak up" implies both vocal advocacy and tangible action...</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Explanation (Paragraph 3)</label>
+                        <textarea id="verseExplanation3" rows="4">This passage also challenges modern believers to evaluate their role in systemic justice...</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Explanation (Paragraph 4)</label>
+                        <textarea id="verseExplanation4" rows="4">Practically, Proverbs 31:8-9 invites communities to create environments where children thrive...</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Application Points (comma separated)</label>
+                        <input type="text" id="verseApplication" value="Advocate: Use your voice in social, legal, or political spheres, Support: Contribute to organizations, Mentor: Engage in relationships, Pray: Seek God's wisdom">
+                    </div>
+                    <div class="form-group">
+                        <label>Summary</label>
+                        <textarea id="verseSummary" rows="3">Proverbs 31:8-9 is a divine mandate to actively defend and uplift vulnerable children, combining advocacy, justice, and practical care.</textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Save Verse</button>
+                </form>
+            </div>
+
+            <!-- ===== CHILDREN ===== -->
+            <div class="content-section" id="section-children">
+                <h2 class="section-title">👧🏾 Manage Children</h2>
+                <form class="admin-form" onsubmit="addChild(event)">
+                    <div class="form-group">
+                        <label>Child's Name *</label>
+                        <input type="text" id="childName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" id="childAge">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="childLocation">
+                    </div>
+                    <div class="form-group">
+                        <label>Story / Description</label>
+                        <textarea id="childStory" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="childGender">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Image</label>
+                        <div class="file-upload" onclick="document.getElementById('childImageInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload child's image</p>
+                            <input type="file" id="childImageInput" accept="image/*" style="display:none;" onchange="previewChildImage(event)">
+                        </div>
+                        <img class="preview-image" id="childImagePreview" style="display:none;">
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Child</button>
+                </form>
+                <hr style="margin:30px 0; border:1px solid #eee;">
+                <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Children</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Age</th><th>Location</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody id="childrenTable">
+                            <tr><td>Sarah A.</td><td>8</td><td>Kampala, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                            <tr><td>David M.</td><td>10</td><td>Jinja, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                            <tr><td>Grace N.</td><td>6</td><td>Gulu, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== CHOIR MEDIA ===== -->
+            <div class="content-section" id="section-choir-media">
+                <h2 class="section-title">🎵 Choir Media</h2>
+                <form class="admin-form" onsubmit="addChoirMedia(event)">
+                    <div class="form-group">
+                        <label>Media Type</label>
+                        <select id="choirMediaType">
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input type="text" id="choirMediaTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="choirMediaDescription" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <input type="text" id="choirMediaTag" placeholder="Rehearsal, Performance, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label>Upload File (Image or Video)</label>
+                        <div class="file-upload" onclick="document.getElementById('choirMediaInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload media file</p>
+                            <input type="file" id="choirMediaInput" accept="image/*,video/*" style="display:none;">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-upload"></i> Upload Media</button>
+                </form>
+                <hr style="margin:30px 0; border:1px solid #eee;">
+                <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Media</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Title</th><th>Type</th><th>Tag</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody id="choirMediaTable">
+                            <tr><td>Choir Rehearsal - August 2025</td><td>Image</td><td>Rehearsal</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                            <tr><td>Sunday Service Performance</td><td>Image</td><td>Performance</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                            <tr><td>Choir Performance - "Rise Up"</td><td>Video</td><td>Performance</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== MUSIC PROJECTS ===== -->
+            <div class="content-section" id="section-music">
+                <h2 class="section-title">🎶 Music Projects</h2>
+                <form class="admin-form" onsubmit="addMusicProject(event)">
+                    <div class="form-group">
+                        <label>Project Type</label>
+                        <select id="musicProjectType">
+                            <option value="single">Single</option>
+                            <option value="ep">EP</option>
+                            <option value="album">Album</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input type="text" id="musicProjectTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="musicProjectDescription" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input type="number" id="musicProjectYear" value="2025">
+                    </div>
+                    <div class="form-group">
+                        <label>Cover Image</label>
+                        <div class="file-upload" onclick="document.getElementById('musicCoverInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload cover image</p>
+                            <input type="file" id="musicCoverInput" accept="image/*" style="display:none;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Streaming Links (comma separated: spotify, apple, youtube-music, amazon, deezer, tidal)</label>
+                        <input type="text" id="musicStreamingLinks" value="spotify, apple, youtube-music">
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Project</button>
+                </form>
+                <hr style="margin:30px 0; border:1px solid #eee;">
+                <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Projects</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Title</th><th>Type</th><th>Year</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody id="musicProjectsTable">
+                            <tr><td>Rise Up</td><td>Single</td><td>2025</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                            <tr><td>Voices of Hope EP</td><td>EP</td><td>2024</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                            <tr><td>Rise & Shine</td><td>Album</td><td>2024</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== TOURS & EVENTS ===== -->
+            <div class="content-section" id="section-tours">
+                <h2 class="section-title">🎤 Tours & Events</h2>
+                <form class="admin-form" onsubmit="addTourEvent(event)">
+                    <div class="form-group">
+                        <label>Event Title *</label>
+                        <input type="text" id="tourTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date *</label>
+                        <input type="text" id="tourDate" placeholder="December 15, 2025" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Location *</label>
+                        <input type="text" id="tourLocation" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="text" id="tourTime" placeholder="7:00 PM EAT">
+                    </div>
+                    <div class="form-group">
+                        <label>Poster / Flyer Image</label>
+                        <div class="file-upload" onclick="document.getElementById('tourPosterInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload poster</p>
+                            <input type="file" id="tourPosterInput" accept="image/*" style="display:none;">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Event</button>
+                </form>
+                <hr style="margin:30px 0; border:1px solid #eee;">
+                <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Upcoming Events</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Title</th><th>Date</th><th>Location</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody id="toursTable">
+                            <tr><td>Christmas Concert 2025</td><td>December 15, 2025</td><td>Kampala, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                            <tr><td>JoyRise Kids Choir Tour - Kampala</td><td>January 20, 2026</td><td>Kampala, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== PARTNERS ===== -->
+            <div class="content-section" id="section-partners">
+                <h2 class="section-title">🤝 Partner Submissions</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Organization</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>John Doe</td><td>ABC Foundation</td><td>john@abc.org</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Approved</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
+                            <tr><td>Jane Smith</td><td>XYZ Charity</td><td>jane@xyz.org</td><td><span style="background:#F28C28; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Pending</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== VOLUNTEERS ===== -->
+            <div class="content-section" id="section-volunteers">
+                <h2 class="section-title">🙋 Volunteer Submissions</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Email</th><th>Skills</th><th>Status</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Mary Johnson</td><td>mary@email.com</td><td>Teaching, Child Care</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Active</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
+                            <tr><td>Peter Ochieng</td><td>peter@email.com</td><td>Medical Assistance</td><td><span style="background:#F28C28; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Pending</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== SPONSORSHIPS ===== -->
+            <div class="content-section" id="section-sponsorships">
+                <h2 class="section-title">💚 Sponsorship Submissions</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Email</th><th>Child</th><th>Status</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Robert Kato</td><td>robert@email.com</td><td>Sarah A.</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Active</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
+                            <tr><td>Susan Nambi</td><td>susan@email.com</td><td>David M.</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Active</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== MANAGE ADMINS ===== -->
+            <div class="content-section" id="section-admins">
+                <h2 class="section-title">👑 Manage Admins</h2>
+                <div id="mainAdminWarning" style="background:#fef3c7; padding:15px 20px; border-radius:10px; margin-bottom:20px; border-left:4px solid #F28C28; display:none;">
+                    <i class="fas fa-exclamation-triangle" style="color:#F28C28;"></i>
+                    <span style="color:#92400e;">Only the Main Admin (JoyRise.admin001) can manage admins.</span>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Email</th><th>Name</th><th>Role</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>JoyRise.admin001</td><td>Super Admin</td><td><span style="background:#F28C28; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Main Admin</span></td><td class="actions"><button class="edit-btn">Edit</button></td></tr>
+                            <tr><td>JoyRise.admin002</td><td>Admin 2</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
+                            <tr><td>JoyRise.admin003</td><td>Admin 3</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
+                            <tr><td>JoyRise.admin004</td><td>Admin 4</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
+                            <tr><td>JoyRise.admin005</td><td>Admin 5</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ===== CHECK LOGIN =====
+        const adminEmail = localStorage.getItem('adminEmail');
+        const isMainAdmin = localStorage.getItem('isMainAdmin') === 'true';
+        const adminName = localStorage.getItem('adminName') || 'Admin';
+
+        if (!adminEmail) {
+            window.location.href = 'admin-login.html';
+        }
+
+        // ===== SET USER INFO =====
+        document.getElementById('userEmail').textContent = adminEmail;
+        document.getElementById('userName').textContent = adminName;
+        document.getElementById('userAvatar').textContent = adminName.split(' ').map(n => n[0]).join('').toUpperCase();
+
+        if (isMainAdmin) {
+            document.querySelector('.badge').textContent = 'Main Admin';
+            document.querySelector('.badge').style.background = '#F28C28';
+        } else {
+            document.querySelector('.badge').textContent = 'Admin';
+            document.querySelector('.badge').style.background = '#6C5CE7';
+        }
+
+        // ===== SIDEBAR TOGGLE =====
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // ===== SHOW SECTION =====
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+
+            // Show selected section
+            const section = document.getElementById(`section-${sectionName}`);
+            if (section) {
+                section.classList.add('active');
+                document.getElementById('pageTitle').textContent = section.querySelector('.section-title')?.textContent || sectionName;
+            }
+
+            // Highlight nav link
+            document.querySelectorAll('.nav-menu a').forEach(a => {
+                if (a.textContent.toLowerCase().includes(sectionName.toLowerCase()) ||
+                    a.textContent.toLowerCase().includes(sectionName.replace('-', ' '))) {
+                    a.classList.add('active');
+                }
+            });
+
+            // Close sidebar on mobile
+            if (window.innerWidth <= 992) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+
+            // Show/hide admin management warning
+            if (sectionName === 'admins') {
+                const warning = document.getElementById('mainAdminWarning');
+                if (isMainAdmin) {
+                    warning.style.display = 'none';
+                } else {
+                    warning.style.display = 'block';
+                }
+            }
+        }
+
+        // ===== TOAST NOTIFICATION =====
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===== REFRESH DATA =====
+        function refreshData() {
+            showToast('Data refreshed successfully!', 'success');
+        }
+
+        // ===== PREVIEW WEBSITE =====
+        function previewWebsite() {
+            window.open('../index.html', '_blank');
+        }
+
+        // ===== SAVE VERSE =====
+        function saveVerse(e) {
+            e.preventDefault();
+            showToast('Weekly Verse saved successfully!', 'success');
+        }
+
+        // ===== ADD CHILD =====
+        function addChild(e) {
+            e.preventDefault();
+            const name = document.getElementById('childName').value;
+            showToast(`Child "${name}" added successfully!`, 'success');
+            document.getElementById('childName').value = '';
+            document.getElementById('childAge').value = '';
+            document.getElementById('childLocation').value = '';
+            document.getElementById('childStory').value = '';
+        }
+
+        // ===== PREVIEW CHILD IMAGE =====
+        function previewChildImage(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.getElementById('childImagePreview');
+                    img.src = event.target.result;
+                    img.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ===== ADD CHOIR MEDIA =====
+        function addChoirMedia(e) {
+            e.preventDefault();
+            const title = document.getElementById('choirMediaTitle').value;
+            showToast(`Media "${title}" uploaded successfully!`, 'success');
+            document.getElementById('choirMediaTitle').value = '';
+            document.getElementById('choirMediaDescription').value = '';
+            document.getElementById('choirMediaTag').value = '';
+        }
+
+        // ===== ADD MUSIC PROJECT =====
+        function addMusicProject(e) {
+            e.preventDefault();
+            const title = document.getElementById('musicProjectTitle').value;
+            showToast(`Music project "${title}" added successfully!`, 'success');
+            document.getElementById('musicProjectTitle').value = '';
+            document.getElementById('musicProjectDescription').value = '';
+        }
+
+        // ===== ADD TOUR EVENT =====
+        function addTourEvent(e) {
+            e.preventDefault();
+            const title = document.getElementById('tourTitle').value;
+            showToast(`Event "${title}" added successfully!`, 'success');
+            document.getElementById('tourTitle').value = '';
+            document.getElementById('tourDate').value = '';
+            document.getElementById('tourLocation').value = '';
+            document.getElementById('tourTime').value = '';
+        }
+
+        // ===== LOGOUT =====
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('adminEmail');
+                localStorage.removeItem('adminName');
+                localStorage.removeItem('isMainAdmin');
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // ===== CLOSE SIDEBAR ON OUTSIDE CLICK =====
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const hamburger = document.querySelector('.hamburger');
+            if (window.innerWidth <= 992) {
+                if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // ===== UPDATE STATS =====
+        // In a real implementation, these would come from the database
+        document.getElementById('statChildren').textContent = 18;
+        document.getElementById('statPartners').textContent = 12;
+        document.getElementById('statVolunteers').textContent = 25;
+        document.getElementById('statSponsorships').textContent = 8;
+        document.getElementById('statMusic').textContent = 7;
+    </script>
+</body>
+</html>
