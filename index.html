@@ -18,12 +18,12 @@
         .close:hover, .close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
         @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
         
-        /* Contact Info Bar - New */
+        /* Contact Info Bar */
         .contact-bar {
             background: var(--primary-blue);
             color: var(--white);
             padding: 10px 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .contact-bar .container {
             display: flex;
@@ -35,16 +35,74 @@
         .contact-bar a {
             color: var(--white);
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 8px;
             transition: color 0.3s ease;
         }
         .contact-bar a:hover {
             color: var(--accent-orange);
         }
         .contact-bar .social-links a {
-            margin: 0 8px;
+            margin: 0 6px;
             font-size: 1.1rem;
+            transition: transform 0.3s ease;
         }
+        .contact-bar .social-links a:hover {
+            transform: scale(1.2);
+        }
+        /* Colored Social Icons in Contact Bar */
+        .contact-bar .social-links .fa-instagram { color: #E4405F; }
+        .contact-bar .social-links .fa-tiktok { color: #ffffff; }
+        .contact-bar .social-links .fa-youtube { color: #FF0000; }
+        .contact-bar .social-links .fa-whatsapp { color: #25D366; }
+        .contact-bar .social-links .fa-envelope { color: #EA4335; }
+        .contact-bar .social-links .fa-phone { color: #34B7F1; }
+        
+        /* Navigation - Mobile Friendly */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            margin-left: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--accent-orange);
+        }
+        .nav-button {
+            background-color: var(--accent-orange);
+            color: var(--white) !important;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: var(--primary-blue);
+            color: var(--white) !important;
+        }
+        
+        /* Footer Colored Social Icons */
+        .footer-icons a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+        .footer-icons a:hover {
+            transform: scale(1.2);
+        }
+        .footer-icons .fa-instagram { color: #E4405F; }
+        .footer-icons .fa-tiktok { color: #ffffff; }
+        .footer-icons .fa-youtube { color: #FF0000; }
+        .footer-icons .fa-whatsapp { color: #25D366; }
+        .footer-icons .fa-envelope { color: #EA4335; }
+        .footer-icons .fa-phone { color: #34B7F1; }
         
         @media (max-width: 768px) {
             .contact-bar .container {
@@ -54,11 +112,32 @@
             .contact-bar .social-links {
                 margin-top: 5px;
             }
+            nav a {
+                margin-left: 10px;
+                font-size: 0.75rem;
+            }
+            .nav-button {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+        @media (max-width: 480px) {
+            nav {
+                gap: 3px;
+            }
+            nav a {
+                margin-left: 5px;
+                font-size: 0.65rem;
+            }
+            .nav-button {
+                padding: 4px 10px;
+                font-size: 0.65rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- NEW: Contact Bar at Top -->
+    <!-- Contact Bar at Top -->
     <div class="contact-bar">
         <div class="container">
             <div>
