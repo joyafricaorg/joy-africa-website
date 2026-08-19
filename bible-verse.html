@@ -3,97 +3,658 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Weekly Bible Verse - JOY AFRICA INTERNATIONAL FOUNDATION</title>
+    <title>Weekly Bible Verse - JoyRise Africa Foundation</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== BIBLE VERSE STYLES ===== */
+        :root {
+            --verse-gold: #FDCB6E;
+            --verse-dark: #0a0a0a;
+            --verse-dark-blue: #0B1A2E;
+            --verse-cream: #FFF8F0;
+            --verse-purple: #6C5CE7;
+            --verse-teal: #00CEC9;
+            --primary-blue: #0B2447;
+            --accent-orange: #F28C28;
+            --white: #ffffff;
+            --text-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--white);
+            line-height: 1.8;
+            font-size: 18px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CONTACT BAR ===== */
+        .contact-bar {
+            background: var(--verse-dark);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            border-bottom: 2px solid var(--verse-gold);
+        }
+        .contact-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .contact-bar a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 6px;
+            transition: color 0.3s ease;
+        }
+        .contact-bar a:hover { color: var(--verse-gold); }
+        .contact-bar .social-links a {
+            margin: 0 5px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .contact-bar .social-links a:hover { transform: scale(1.2); }
+        .contact-bar .social-links .fa-instagram { color: #E4405F; }
+        .contact-bar .social-links .fa-tiktok { color: #ffffff; }
+        .contact-bar .social-links .fa-youtube { color: #FF0000; }
+        .contact-bar .social-links .fa-whatsapp { color: #25D366; }
+        .contact-bar .social-links .fa-envelope { color: #EA4335; }
+        .contact-bar .social-links .fa-phone { color: #34B7F1; }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background: var(--verse-dark);
+            padding: 10px 0;
+            position: sticky;
+            top: 38px;
+            z-index: 1000;
+            width: 100%;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 0.85em;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+        .logo img { height: 50px; margin-right: 12px; filter: brightness(0) invert(1); }
+        .logo span { color: var(--white); }
+        
+        /* ===== FULL NAVIGATION - VISIBLE ON ALL PAGES ===== */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--white);
+            padding: 6px 10px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+        nav a:hover {
+            color: var(--verse-gold);
+            background: rgba(253, 203, 110, 0.1);
+        }
+        nav a.active {
+            color: var(--verse-gold);
+            background: rgba(253, 203, 110, 0.15);
+        }
+        .nav-button {
+            background: linear-gradient(135deg, var(--accent-orange), #FF6B35);
+            color: var(--white) !important;
+            padding: 6px 16px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,107,53,0.4);
+        }
+
+        /* ===== BACK BUTTON ===== */
+        .back-button-container { padding: 12px 0 0 0; }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--verse-gold);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(253, 203, 110, 0.1);
+        }
+        .back-button:hover {
+            background: var(--verse-gold);
+            color: var(--verse-dark);
+            transform: translateX(-3px);
+        }
+        .back-button i { font-size: 1rem; }
+
+        /* ===== VERSE HERO ===== */
+        .verse-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--verse-dark), var(--verse-dark-blue));
+        }
+        .verse-hero::before {
+            content: '✝ ♱ ✝ ♱ ✝';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 8rem;
+            opacity: 0.05;
+            letter-spacing: 30px;
+            animation: floatCrosses 30s linear infinite;
+        }
+        @keyframes floatCrosses {
+            0% { transform: translateX(-200px); }
+            50% { transform: translateX(200px); }
+            100% { transform: translateX(-200px); }
+        }
+        .verse-hero .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10,10,10,0.7), rgba(11,26,46,0.5));
+            z-index: 1;
+        }
+        .verse-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+        .verse-hero h1 {
+            color: white;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, var(--verse-gold), var(--verse-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .verse-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--white);
+            -webkit-text-fill-color: white;
+        }
+
+        /* ===== VERSE CONTENT ===== */
+        .verse-content {
+            padding: 60px 20px;
+            background: linear-gradient(180deg, var(--verse-dark), var(--verse-dark-blue));
+        }
+        .verse-content .verse-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .verse-week-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--verse-gold);
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* ===== VERSE HIGHLIGHT BOX ===== */
+        .verse-highlight-box {
+            background: rgba(255,255,255,0.05);
+            max-width: 850px;
+            margin: 0 auto 60px;
+            padding: 50px 60px;
+            border-radius: 16px;
+            border-left: 8px solid var(--verse-gold);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        .verse-highlight-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+        .verse-highlight-box h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: var(--verse-gold);
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            -webkit-text-fill-color: var(--verse-gold);
+        }
+        .verse-highlight-box blockquote {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--white);
+            margin: 0;
+            position: relative;
+            -webkit-text-fill-color: white;
+        }
+        .verse-highlight-box blockquote::before {
+            content: '\201C';
+            font-size: 5rem;
+            color: var(--verse-gold);
+            opacity: 0.3;
+            position: absolute;
+            top: -30px;
+            left: -40px;
+        }
+
+        /* ===== VERSE EXPLANATION ===== */
+        .verse-explanation {
+            max-width: 850px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.8);
+        }
+        .verse-explanation h3 {
+            font-size: 2rem;
+            border-bottom: 2px solid rgba(253, 203, 110, 0.2);
+            padding-bottom: 15px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            color: var(--verse-gold);
+            -webkit-text-fill-color: var(--verse-gold);
+        }
+        .verse-explanation h3:first-of-type {
+            margin-top: 0;
+        }
+        .verse-explanation p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            color: rgba(255,255,255,0.8);
+        }
+        .verse-explanation ol {
+            list-style: none;
+            padding-left: 0;
+            counter-reset: verse-counter;
+        }
+        .verse-explanation ol li {
+            counter-increment: verse-counter;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: flex-start;
+            color: rgba(255,255,255,0.8);
+        }
+        .verse-explanation ol li::before {
+            content: counter(verse-counter);
+            background: linear-gradient(135deg, var(--verse-gold), var(--verse-purple));
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        /* ===== DONATE SECTION ===== */
+        #donate {
+            background: var(--verse-dark);
+            color: var(--white);
+            padding: 80px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        #donate h2, #donate .section-intro { color: var(--white); }
+        .donation-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .method-card {
+            background: rgba(255,255,255,0.05);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .method-card h3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: var(--white);
+            -webkit-text-fill-color: white;
+        }
+        .method-card p { color: rgba(255,255,255,0.7); }
+        .paypal-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0070BA;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .paypal-button:hover {
+            background: #005a8c;
+            transform: scale(1.05);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #0a0a0a;
+            color: rgba(255,255,255,0.5);
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer h3 {
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            -webkit-text-fill-color: white;
+        }
+        .footer-icons { margin: 30px 0; }
+        .footer-icons a {
+            display: inline-block;
+            font-size: 1.8rem;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+        }
+        .footer-icons a:hover { transform: scale(1.2) translateY(-3px); }
+        .footer-icons .fa-instagram { color: #E4405F; }
+        .footer-icons .fa-tiktok { color: #ffffff; }
+        .footer-icons .fa-youtube { color: #FF0000; }
+        .footer-icons .fa-whatsapp { color: #25D366; }
+        .footer-icons .fa-envelope { color: #EA4335; }
+        .footer-icons .fa-phone { color: #34B7F1; }
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .verse-hero h1 { font-size: 2.5rem; }
+            .verse-hero p { font-size: 1.1rem; }
+            .verse-highlight-box { padding: 30px 25px; }
+            .verse-highlight-box blockquote { font-size: 1.6rem; }
+            .verse-highlight-box blockquote::before { font-size: 3rem; top: -20px; left: -20px; }
+            .verse-explanation h3 { font-size: 1.5rem; }
+            .donation-methods { grid-template-columns: 1fr; }
+            .contact-bar .container { flex-direction: column; text-align: center; }
+            header .container { flex-direction: column; align-items: stretch; gap: 6px; }
+            .logo { justify-content: center; }
+            nav { justify-content: center; gap: 2px; }
+            nav a { font-size: 0.65rem; padding: 4px 6px; }
+            .nav-button { padding: 4px 10px; font-size: 0.65rem; }
+        }
+        @media (max-width: 480px) {
+            .verse-hero h1 { font-size: 1.8rem; }
+            .verse-hero { min-height: 300px; }
+            .verse-highlight-box blockquote { font-size: 1.3rem; }
+            .verse-highlight-box h4 { font-size: 1.3rem; }
+            .verse-week-title { font-size: 1.2rem; }
+            nav a { font-size: 0.55rem; padding: 3px 4px; }
+            .nav-button { padding: 3px 8px; font-size: 0.55rem; }
+        }
+    </style>
 </head>
 <body>
+    <!-- ===== CONTACT BAR ===== -->
+    <div class="contact-bar">
+        <div class="container">
+            <div>
+                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i> joyafrica.org@gmail.com</a>
+                <a href="tel:+256756386352"><i class="fas fa-phone"></i> +256 756 386 352</a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER WITH FULL NAVIGATION ===== -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="JOY AFRICA INTERNATIONAL FOUNDATION Logo">
-                <span>JOY AFRICA<br>INTERNATIONAL FOUNDATION</span>
+                <img src="images/logo.png" alt="JoyRise Africa Foundation Logo">
+                <span>JoyRise<br>Africa Foundation</span>
             </a>
             <nav>
                 <a href="index.html">About</a>
                 <a href="projects.html">Projects</a>
-                <a href="bible-verse.html">Weekly Verse</a>
+                <a href="bible-verse.html" class="active">Weekly Verse</a>
+                <a href="sponsor-child.html">Sponsor a Child</a>
+                <a href="kids-choir.html">Kids Choir</a>
                 <a href="partner.html">Partner</a>
                 <a href="volunteer.html">Volunteer</a>
                 <a href="#donate" class="nav-button">Donate Now</a>
             </nav>
         </div>
     </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
     <main>
-        <section id="verse-hero" style="background-image: url('images/bibleverse.jpg');">
+        <!-- Back Button -->
+        <div class="container back-button-container" id="backButtonContainer">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <!-- ===== VERSE HERO ===== -->
+        <section class="verse-hero">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1>WEEKLY BIBLE VERSE</h1>
+                <h1>📖 Weekly Bible Verse</h1>
                 <p>Learn and understand bible verses with us.</p>
             </div>
         </section>
-        <section id="bible-verse-content">
+
+        <!-- ===== VERSE CONTENT ===== -->
+        <section class="verse-content" id="verseContent">
             <div class="container">
-                <div class="verse-intro">
-                    <p>In JOY AFRICA INTERNATIONAL FOUNDATION we raise our kids in a God fearing way to keep them on the right heavenly path.</p>
+                <div class="verse-intro" id="verseIntro">
+                    <p>In JoyRise Africa Foundation we raise our kids in a God fearing way to keep them on the right heavenly path.</p>
                     <p>Every week we give them a Bible verse to motivate them and take them through the week. We are really glad to be sharing our weekly Bible verse with you. Hope they work for you in your life as they do for us. God bless you.</p>
                 </div>
-                <h2 class="verse-week-title">WEEK ONE</h2>
-                <div class="verse-highlight-box">
-                    <h4>PROVERBS 31:8-9</h4>
-                    <blockquote>"Speak up for those who cannot speak for themselves, for the rights of all who are destitute. Speak up and judge fairly; defend the rights of the poor and needy."</blockquote>
+
+                <h2 class="verse-week-title" id="verseWeekTitle">WEEK ONE</h2>
+
+                <div class="verse-highlight-box" id="verseHighlight">
+                    <h4 id="verseReference">PROVERBS 31:8-9</h4>
+                    <blockquote id="verseText">"Speak up for those who cannot speak for themselves, for the rights of all who are destitute. Speak up and judge fairly; defend the rights of the poor and needy."</blockquote>
                 </div>
-                <div class="verse-explanation">
+
+                <div class="verse-explanation" id="verseExplanation">
                     <h3>Explanation and Reflection</h3>
-                    <p>Proverbs 31:8-9 is a powerful call to advocacy and justice, particularly for the most vulnerable in society, including needy and hopeless children. These verses are part of wisdom literature attributed to King Lemuel’s mother, who imparted guidance on righteous leadership. The passage emphasizes that those with power and voice have a divine obligation to protect those who lack both. For children facing poverty, neglect, or exploitation, this scripture underscores their inability to advocate for themselves and places responsibility on believers to act as their defenders. The term "destitute" encompasses children without parents, resources, or hope, whose plight demands intentional intervention.</p>
-                    <p>The command to "speak up" implies both vocal advocacy and tangible action. In biblical contexts, "defending the rights of the poor and needy" included legal protection, material support, and societal inclusion. For children, this could mean ensuring access to education, shelter, and protection from abuse or exploitation. The imperative to "judge fairly" rejects partiality and calls for systems that prioritize the marginalized. This aligns with God’s character as a defender of the fatherless (Psalm 82:3) and echoes Jesus’ teaching that caring for the "least of these" is equivalent to serving Him (Matthew 25:40).</p>
-                    <p>This passage also challenges modern believers to evaluate their role in systemic justice. It critiques passive religiosity and urges proactive engagement—whether through supporting foster care, opposing child trafficking, or advocating for policies that benefit impoverished youth. The text’s urgency is heightened by its inclusion in a king’s instruction manual, implying that defending the helpless is not optional but central to godly leadership. James 1:27 reinforces this by defining true religion as caring for orphans and widows, further emphasizing children’s place at the heart of justice work.</p>
-                    <p>Practically, Proverbs 31:8-9 invites communities to create environments where children thrive. This includes mentoring programs, financial support for families, and using platforms to amplify their needs. By making this our "Scripture of the Week," we commit to reflecting God’s heart for the young and vulnerable, ensuring that our faith translates into action that restores hope and dignity to those who need it most.</p>
-                    <h3>Application for this Week</h3>
-                    <ol>
-                        <li><strong>Advocate:</strong> Use your voice in social, legal, or political spheres to champion children’s rights.</li>
+                    <p id="explanationText">Proverbs 31:8-9 is a powerful call to advocacy and justice, particularly for the most vulnerable in society, including needy and hopeless children. These verses are part of wisdom literature attributed to King Lemuel's mother, who imparted guidance on righteous leadership. The passage emphasizes that those with power and voice have a divine obligation to protect those who lack both. For children facing poverty, neglect, or exploitation, this scripture underscores their inability to advocate for themselves and places responsibility on believers to act as their defenders. The term "destitute" encompasses children without parents, resources, or hope, whose plight demands intentional intervention.</p>
+                    <p id="explanationText2">The command to "speak up" implies both vocal advocacy and tangible action. In biblical contexts, "defending the rights of the poor and needy" included legal protection, material support, and societal inclusion. For children, this could mean ensuring access to education, shelter, and protection from abuse or exploitation. The imperative to "judge fairly" rejects partiality and calls for systems that prioritize the marginalized. This aligns with God's character as a defender of the fatherless (Psalm 82:3) and echoes Jesus' teaching that caring for the "least of these" is equivalent to serving Him (Matthew 25:40).</p>
+                    <p id="explanationText3">This passage also challenges modern believers to evaluate their role in systemic justice. It critiques passive religiosity and urges proactive engagement—whether through supporting foster care, opposing child trafficking, or advocating for policies that benefit impoverished youth. The text's urgency is heightened by its inclusion in a king's instruction manual, implying that defending the helpless is not optional but central to godly leadership. James 1:27 reinforces this by defining true religion as caring for orphans and widows, further emphasizing children's place at the heart of justice work.</p>
+                    <p id="explanationText4">Practically, Proverbs 31:8-9 invites communities to create environments where children thrive. This includes mentoring programs, financial support for families, and using platforms to amplify their needs. By making this our "Scripture of the Week," we commit to reflecting God's heart for the young and vulnerable, ensuring that our faith translates into action that restores hope and dignity to those who need it most.</p>
+
+                    <h3 id="applicationTitle">Application for this Week</h3>
+                    <ol id="applicationList">
+                        <li><strong>Advocate:</strong> Use your voice in social, legal, or political spheres to champion children's rights.</li>
                         <li><strong>Support:</strong> Contribute to organizations providing education, nutrition, and shelter for needy children.</li>
                         <li><strong>Mentor:</strong> Engage in relationships that offer guidance and hope to at-risk youth.</li>
-                        <li><strong>Pray:</strong> Seek God’s wisdom on how to address systemic issues affecting children locally and globally.</li>
+                        <li><strong>Pray:</strong> Seek God's wisdom on how to address systemic issues affecting children locally and globally.</li>
                     </ol>
-                    <h3>Summary</h3>
-                    <p>Proverbs 31:8-9 is a divine mandate to actively defend and uplift vulnerable children, combining advocacy, justice, and practical care. By embracing this scripture, we align ourselves with God’s passion for the marginalized and commit to transforming hopelessness into hope.</p>
+
+                    <h3 id="summaryTitle">Summary</h3>
+                    <p id="summaryText">Proverbs 31:8-9 is a divine mandate to actively defend and uplift vulnerable children, combining advocacy, justice, and practical care. By embracing this scripture, we align ourselves with God's passion for the marginalized and commit to transforming hopelessness into hope.</p>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- ===== DONATE SECTION ===== -->
     <section id="donate">
         <div class="container">
             <h2>Become a Partner in Hope</h2>
-            <p class="section-intro">Your generous gift is a direct investment in a child's future. 100% of your donation goes directly to funding these life-changing projects.</p>
+            <p class="section-intro">Your generous gift is a direct investment in a child's future.</p>
             <div class="donation-methods">
                 <div class="method-card"><h3><i class="fas fa-university"></i> Bank Transfer</h3><p><strong>Bank:</strong> EQUITY BANK UGANDA<br><strong>Account Name:</strong> GONZAGA TUMUSIIME<br><strong>Account Number:</strong> 1000102285006</p></div>
-                <div class="method-card"><h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3><p>Send directly to our secure line:<br><strong>Number:</strong> +256 775 092 014</p></div>
-                <div class="method-card">
-                    <h3><i class="fab fa-paypal"></i> PayPal</h3>
-                    <p>Click below to make a secure donation with your PayPal account or card.</p>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JOY+AFRICA+INTERNATIONAL+FOUNDATION&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a>
-                </div>
+                <div class="method-card"><h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3><p><strong>Number:</strong> +256 775 092 014</p></div>
+                <div class="method-card"><h3><i class="fab fa-paypal"></i> PayPal</h3><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=joyafrica.org@gmail.com&item_name=Donation+to+JoyRise+Africa+Foundation&currency_code=USD" target="_blank" class="paypal-button">Donate with PayPal</a></div>
             </div>
         </div>
     </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
-            <h3>JOY AFRICA INTERNATIONAL FOUNDATION</h3>
+            <h3>JoyRise Africa Foundation</h3>
             <p>A Christian foundation, rooted in faith and dedicated to action.</p>
             <div class="footer-icons">
-                <a href="https://www.instagram.com/joy_africa.foundation" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@joy_africa.foundation" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/256775092014" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:joyafrica.org@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+256756386352" aria-label="Call Us"><i class="fas fa-phone"></i></a>
+                <a href="https://www.instagram.com/joyrise_africa.foundation" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@joyrise_africafoundation" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://youtube.com/@joyriseafricaug" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/256775092014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:joyafrica.org@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+256756386352"><i class="fas fa-phone"></i></a>
             </div>
-            <p class="copyright">&copy; 2025 JOY AFRICA INTERNATIONAL FOUNDATION. All Rights Reserved.</p>
+            <p class="copyright">&copy; 2025 JoyRise Africa Foundation. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // ===== VERSE DATA (Admin can edit via admin panel) =====
+        // All content below can be updated by the admin website
+        const verseData = {
+            weekNumber: 'WEEK ONE',
+            reference: 'PROVERBS 31:8-9',
+            verseText: '"Speak up for those who cannot speak for themselves, for the rights of all who are destitute. Speak up and judge fairly; defend the rights of the poor and needy."',
+            intro: [
+                'In JoyRise Africa Foundation we raise our kids in a God fearing way to keep them on the right heavenly path.',
+                'Every week we give them a Bible verse to motivate them and take them through the week. We are really glad to be sharing our weekly Bible verse with you. Hope they work for you in your life as they do for us. God bless you.'
+            ],
+            explanation: [
+                'Proverbs 31:8-9 is a powerful call to advocacy and justice, particularly for the most vulnerable in society, including needy and hopeless children. These verses are part of wisdom literature attributed to King Lemuel\'s mother, who imparted guidance on righteous leadership. The passage emphasizes that those with power and voice have a divine obligation to protect those who lack both. For children facing poverty, neglect, or exploitation, this scripture underscores their inability to advocate for themselves and places responsibility on believers to act as their defenders. The term "destitute" encompasses children without parents, resources, or hope, whose plight demands intentional intervention.',
+                'The command to "speak up" implies both vocal advocacy and tangible action. In biblical contexts, "defending the rights of the poor and needy" included legal protection, material support, and societal inclusion. For children, this could mean ensuring access to education, shelter, and protection from abuse or exploitation. The imperative to "judge fairly" rejects partiality and calls for systems that prioritize the marginalized. This aligns with God\'s character as a defender of the fatherless (Psalm 82:3) and echoes Jesus\' teaching that caring for the "least of these" is equivalent to serving Him (Matthew 25:40).',
+                'This passage also challenges modern believers to evaluate their role in systemic justice. It critiques passive religiosity and urges proactive engagement—whether through supporting foster care, opposing child trafficking, or advocating for policies that benefit impoverished youth. The text\'s urgency is heightened by its inclusion in a king\'s instruction manual, implying that defending the helpless is not optional but central to godly leadership. James 1:27 reinforces this by defining true religion as caring for orphans and widows, further emphasizing children\'s place at the heart of justice work.',
+                'Practically, Proverbs 31:8-9 invites communities to create environments where children thrive. This includes mentoring programs, financial support for families, and using platforms to amplify their needs. By making this our "Scripture of the Week," we commit to reflecting God\'s heart for the young and vulnerable, ensuring that our faith translates into action that restores hope and dignity to those who need it most.'
+            ],
+            application: [
+                '<strong>Advocate:</strong> Use your voice in social, legal, or political spheres to champion children\'s rights.',
+                '<strong>Support:</strong> Contribute to organizations providing education, nutrition, and shelter for needy children.',
+                '<strong>Mentor:</strong> Engage in relationships that offer guidance and hope to at-risk youth.',
+                '<strong>Pray:</strong> Seek God\'s wisdom on how to address systemic issues affecting children locally and globally.'
+            ],
+            summary: 'Proverbs 31:8-9 is a divine mandate to actively defend and uplift vulnerable children, combining advocacy, justice, and practical care. By embracing this scripture, we align ourselves with God\'s passion for the marginalized and commit to transforming hopelessness into hope.'
+        };
+
+        // ===== LOAD VERSE DATA =====
+        function loadVerseData() {
+            // Update Week Title
+            document.getElementById('verseWeekTitle').textContent = verseData.weekNumber;
+            
+            // Update Verse Reference
+            document.getElementById('verseReference').textContent = verseData.reference;
+            
+            // Update Verse Text
+            document.getElementById('verseText').textContent = verseData.verseText;
+            
+            // Update Intro
+            const introContainer = document.getElementById('verseIntro');
+            introContainer.innerHTML = verseData.intro.map(p => `<p>${p}</p>`).join('');
+            
+            // Update Explanation
+            const explanationParagraphs = document.querySelectorAll('#explanationText, #explanationText2, #explanationText3, #explanationText4');
+            verseData.explanation.forEach((text, index) => {
+                if (explanationParagraphs[index]) {
+                    explanationParagraphs[index].textContent = text;
+                }
+            });
+            
+            // Update Application
+            const applicationList = document.getElementById('applicationList');
+            applicationList.innerHTML = verseData.application.map(item => `<li>${item}</li>`).join('');
+            
+            // Update Summary
+            document.getElementById('summaryText').textContent = verseData.summary;
+        }
+
+        // ===== BACK BUTTON LOGIC =====
+        if (window.history.length <= 1 || document.referrer === "") {
+            document.getElementById('backButtonContainer').style.display = 'none';
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVerseData();
+        });
+    </script>
 </body>
 </html>
