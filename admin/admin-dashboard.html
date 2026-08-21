@@ -455,6 +455,38 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .cover-option-card {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 5px;
+            border: 3px solid #e1e5eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            text-align: center;
+            min-width: 150px;
+        }
+        .cover-option-card:hover {
+            border-color: #F28C28;
+            background: rgba(242, 140, 40, 0.05);
+        }
+        .cover-option-card.selected {
+            border-color: #F28C28;
+            background: rgba(242, 140, 40, 0.1);
+            box-shadow: 0 0 0 3px rgba(242, 140, 40, 0.2);
+        }
+        .cover-option-card i {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+            color: #0B2447;
+        }
+        .cover-option-card span {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #0B2447;
+        }
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -480,6 +512,13 @@
             }
             .content-section {
                 padding: 20px 15px;
+            }
+            .cover-option-card {
+                min-width: 100px;
+                padding: 10px 15px;
+            }
+            .cover-option-card i {
+                font-size: 1.5rem;
             }
         }
         @media (max-width: 400px) {
@@ -511,6 +550,7 @@
             <ul class="nav-menu">
                 <li class="nav-section">Main</li>
                 <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" onclick="showSection('choir-cover')"><i class="fas fa-film"></i> Edit Choir Cover</a></li>
                 <li><a href="#" onclick="showSection('verse')"><i class="fas fa-bible"></i> Weekly Verse</a></li>
                 <li><a href="#" onclick="showSection('children')"><i class="fas fa-child"></i> Children</a></li>
                 <li class="nav-section">Media</li>
@@ -547,6 +587,72 @@
                     <i class="fas fa-chart-line" style="font-size:3rem; color:#ccc;"></i>
                     <h3 style="color:#666; margin-top:10px;">Welcome to the Admin Dashboard</h3>
                     <p style="color:#999;">Use the sidebar to manage your content</p>
+                </div>
+            </div>
+
+            <!-- ===== EDIT CHOIR COVER ===== -->
+            <div class="content-section" id="section-choir-cover">
+                <h2 class="section-title">🎬 Edit Choir Cover</h2>
+                <p style="color:#666; margin-bottom:20px;">Choose what appears as the cover on the Kids Choir page.</p>
+
+                <form class="admin-form" onsubmit="saveChoirCover(event)">
+                    <!-- Cover Type Selection -->
+                    <div class="form-group">
+                        <label>Select Cover Type</label>
+                        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                            <div class="cover-option-card" id="coverTypeVideo" onclick="selectCoverType('video')">
+                                <i class="fas fa-video"></i>
+                                <span>Video Cover</span>
+                            </div>
+                            <div class="cover-option-card selected" id="coverTypeImage" onclick="selectCoverType('image')">
+                                <i class="fas fa-image"></i>
+                                <span>Image Cover</span>
+                            </div>
+                            <div class="cover-option-card" id="coverTypeSlideshow" onclick="selectCoverType('slideshow')">
+                                <i class="fas fa-images"></i>
+                                <span>Photo Slideshow</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="coverType" value="image">
+                    </div>
+
+                    <!-- Video URL (for Video Cover) -->
+                    <div class="form-group" id="videoUrlGroup" style="display:none;">
+                        <label>Video URL (MP4 format)</label>
+                        <input type="text" id="videoUrl" placeholder="images/choir-hero.mp4">
+                        <p style="font-size:0.8rem; color:#888; margin-top:5px;">Upload your video to the images folder and enter the path here.</p>
+                    </div>
+
+                    <!-- Image URL (for Image Cover) -->
+                    <div class="form-group" id="imageUrlGroup">
+                        <label>Image URL</label>
+                        <input type="text" id="imageUrl" placeholder="images/choir-hero.jpg">
+                        <p style="font-size:0.8rem; color:#888; margin-top:5px;">Upload your image to the images folder and enter the path here.</p>
+                    </div>
+
+                    <!-- Slideshow Images (for Slideshow Cover) -->
+                    <div class="form-group" id="slideshowGroup" style="display:none;">
+                        <label>Slideshow Images (one URL per line)</label>
+                        <textarea id="slideshowImages" rows="4" placeholder="images/choir1.jpg&#10;images/choir2.jpg&#10;images/choir3.jpg"></textarea>
+                        <p style="font-size:0.8rem; color:#888; margin-top:5px;">Enter each image URL on a new line. Images will rotate automatically.</p>
+                    </div>
+
+                    <!-- Slideshow Interval -->
+                    <div class="form-group" id="intervalGroup" style="display:none;">
+                        <label>Slideshow Interval (seconds)</label>
+                        <input type="number" id="slideshowInterval" value="4" min="2" max="10">
+                        <p style="font-size:0.8rem; color:#888; margin-top:5px;">How many seconds before each image changes.</p>
+                    </div>
+
+                    <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Save Cover Settings</button>
+                </form>
+                <div id="coverStatus" style="margin-top:15px; font-weight:700;"></div>
+
+                <!-- Preview Section -->
+                <hr style="margin:30px 0; border:1px solid #eee;">
+                <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Cover Preview</h3>
+                <div id="coverPreview" style="background:#f8f9fa; border-radius:12px; padding:20px; text-align:center; border:2px dashed #e1e5eb; min-height:150px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                    <p style="color:#999;">Loading preview...</p>
                 </div>
             </div>
 
@@ -722,519 +828,4 @@
                         <thead>
                             <tr><th>Title</th><th>Type</th><th>Year</th><th>Actions</th></tr>
                         </thead>
-                        <tbody id="musicProjectsTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== TOURS & EVENTS ===== -->
-            <div class="content-section" id="section-tours">
-                <h2 class="section-title">🎤 Tours & Events</h2>
-                <form class="admin-form" onsubmit="addTourEvent(event)">
-                    <div class="form-group">
-                        <label>Event Title *</label>
-                        <input type="text" id="tourTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Date *</label>
-                        <input type="text" id="tourDate" placeholder="December 15, 2025" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Location *</label>
-                        <input type="text" id="tourLocation" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Time</label>
-                        <input type="text" id="tourTime" placeholder="7:00 PM EAT">
-                    </div>
-                    <div class="form-group">
-                        <label>Poster URL</label>
-                        <input type="text" id="tourPosterUrl" placeholder="images/tour1.jpg">
-                    </div>
-                    <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Event</button>
-                </form>
-                <hr style="margin:30px 0; border:1px solid #eee;">
-                <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Upcoming Events</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>Title</th><th>Date</th><th>Location</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="toursTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== PARTNERS ===== -->
-            <div class="content-section" id="section-partners">
-                <h2 class="section-title">🤝 Partner Submissions</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>Name</th><th>Organization</th><th>Email</th><th>Submitted</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="partnersTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== VOLUNTEERS ===== -->
-            <div class="content-section" id="section-volunteers">
-                <h2 class="section-title">🙋 Volunteer Submissions</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>Name</th><th>Email</th><th>Skills</th><th>Submitted</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="volunteersTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== SPONSORSHIPS ===== -->
-            <div class="content-section" id="section-sponsorships">
-                <h2 class="section-title">💚 Sponsorship Submissions</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>Name</th><th>Email</th><th>Child</th><th>Submitted</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="sponsorshipsTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ===== MANAGE ADMINS ===== -->
-            <div class="content-section" id="section-admins">
-                <h2 class="section-title">👑 Manage Admins</h2>
-                <div id="mainAdminWarning" style="background:#fef3c7; padding:15px 20px; border-radius:10px; margin-bottom:20px; border-left:4px solid #F28C28; display:none;">
-                    <i class="fas fa-exclamation-triangle" style="color:#F28C28;"></i>
-                    <span style="color:#92400e;">Only the Main Admin (JoyRise.admin001) can manage admins.</span>
-                </div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>Email</th><th>Name</th><th>Role</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="adminsTable"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="toast" id="toast"></div>
-
-    <script>
-        // ===== SUPABASE CONFIGURATION =====
-        const SUPABASE_URL = 'https://lvktwbukgisluhftabra.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2a3R3YnVrZ2lzbHVoZnRhYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczNDMxODIsImV4cCI6MjEwMjkxOTE4Mn0.mG7eKnQHOCxo_cidrOivL0PfAzRFo11Z_3qJZYW1eMk';
-
-        // ===== CHECK LOGIN =====
-        const adminEmail = localStorage.getItem('adminEmail');
-        const isMainAdmin = localStorage.getItem('isMainAdmin') === 'true';
-        const adminName = localStorage.getItem('adminName') || 'Admin';
-
-        if (!adminEmail) {
-            window.location.href = 'admin-login.html';
-        }
-
-        document.getElementById('userEmail').textContent = adminEmail;
-        document.getElementById('userName').textContent = adminName;
-        document.getElementById('userAvatar').textContent = adminName.split(' ').map(n => n[0]).join('').toUpperCase();
-
-        if (isMainAdmin) {
-            document.getElementById('userBadge').textContent = 'Main Admin';
-            document.getElementById('userBadge').style.background = '#F28C28';
-        } else {
-            document.getElementById('userBadge').textContent = 'Admin';
-            document.getElementById('userBadge').style.background = '#6C5CE7';
-        }
-
-        async function supabaseFetch(endpoint, options = {}) {
-            const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
-            const headers = {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                'Content-Type': 'application/json'
-            };
-            const config = { headers, ...options };
-            const response = await fetch(url, config);
-            if (!response.ok) throw new Error(await response.text());
-            return response.json();
-        }
-
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `toast ${type} show`;
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-        }
-
-        function showSection(sectionName) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
-
-            const section = document.getElementById(`section-${sectionName}`);
-            if (section) {
-                section.classList.add('active');
-                const title = section.querySelector('.section-title');
-                document.getElementById('pageTitle').textContent = title ? title.textContent : sectionName;
-            }
-
-            document.querySelectorAll('.nav-menu a').forEach(a => {
-                if (a.textContent.toLowerCase().includes(sectionName.toLowerCase())) {
-                    a.classList.add('active');
-                }
-            });
-
-            if (window.innerWidth <= 992) document.getElementById('sidebar').classList.remove('open');
-            if (sectionName === 'admins') document.getElementById('mainAdminWarning').style.display = isMainAdmin ? 'none' : 'block';
-
-            if (sectionName === 'dashboard') loadStats();
-            if (sectionName === 'verse') loadVerse();
-            if (sectionName === 'children') loadChildren();
-            if (sectionName === 'choir-media') loadChoirMedia();
-            if (sectionName === 'music') loadMusicProjects();
-            if (sectionName === 'tours') loadTours();
-            if (sectionName === 'partners') loadPartners();
-            if (sectionName === 'volunteers') loadVolunteers();
-            if (sectionName === 'sponsorships') loadSponsorships();
-            if (sectionName === 'admins') loadAdmins();
-        }
-
-        function refreshData() {
-            const active = document.querySelector('.content-section.active');
-            if (active) showSection(active.id.replace('section-', ''));
-            showToast('Data refreshed!', 'success');
-        }
-
-        function previewWebsite() {
-            window.open('../index.html', '_blank');
-        }
-
-        function handleLogout() {
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.clear();
-                window.location.href = 'admin-login.html';
-            }
-        }
-
-        document.addEventListener('click', function(e) {
-            const sidebar = document.getElementById('sidebar');
-            const hamburger = document.querySelector('.hamburger');
-            if (window.innerWidth <= 992) {
-                if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
-                    sidebar.classList.remove('open');
-                }
-            }
-        });
-
-        // ===== DASHBOARD =====
-        async function loadStats() {
-            try {
-                const [children, partners, volunteers, sponsorships, music] = await Promise.all([
-                    supabaseFetch('children?select=id'),
-                    supabaseFetch('partner_submissions?select=id'),
-                    supabaseFetch('volunteer_submissions?select=id'),
-                    supabaseFetch('sponsorship_submissions?select=id'),
-                    supabaseFetch('music_projects?select=id')
-                ]);
-                document.getElementById('statsGrid').innerHTML = `
-                    <div class="stat-card"><div class="stat-icon"><i class="fas fa-child"></i></div><div class="stat-number">${children.length}</div><div class="stat-label">Children</div></div>
-                    <div class="stat-card purple"><div class="stat-icon"><i class="fas fa-handshake"></i></div><div class="stat-number">${partners.length}</div><div class="stat-label">Partners</div></div>
-                    <div class="stat-card green"><div class="stat-icon"><i class="fas fa-hands-helping"></i></div><div class="stat-number">${volunteers.length}</div><div class="stat-label">Volunteers</div></div>
-                    <div class="stat-card red"><div class="stat-icon"><i class="fas fa-heart"></i></div><div class="stat-number">${sponsorships.length}</div><div class="stat-label">Sponsorships</div></div>
-                    <div class="stat-card blue"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-number">${music.length}</div><div class="stat-label">Music Projects</div></div>
-                `;
-            } catch (error) { console.error('Error loading stats:', error); }
-        }
-
-        // ===== WEEKLY VERSE =====
-        async function loadVerse() {
-            try {
-                const data = await supabaseFetch('weekly_verse?limit=1&order=id.desc');
-                if (data && data.length > 0) {
-                    const v = data[0];
-                    document.getElementById('verseWeek').value = v.week_number || '';
-                    document.getElementById('verseReference').value = v.reference || '';
-                    document.getElementById('verseText').value = v.verse_text || '';
-                    document.getElementById('verseExplanation1').value = v.explanation_1 || '';
-                    document.getElementById('verseExplanation2').value = v.explanation_2 || '';
-                    document.getElementById('verseExplanation3').value = v.explanation_3 || '';
-                    document.getElementById('verseExplanation4').value = v.explanation_4 || '';
-                    document.getElementById('verseApplication').value = v.application || '';
-                    document.getElementById('verseSummary').value = v.summary || '';
-                }
-            } catch (error) { console.error('Error loading verse:', error); }
-        }
-
-        async function saveVerse(e) {
-            e.preventDefault();
-            const data = {
-                week_number: document.getElementById('verseWeek').value,
-                reference: document.getElementById('verseReference').value,
-                verse_text: document.getElementById('verseText').value,
-                explanation_1: document.getElementById('verseExplanation1').value,
-                explanation_2: document.getElementById('verseExplanation2').value,
-                explanation_3: document.getElementById('verseExplanation3').value,
-                explanation_4: document.getElementById('verseExplanation4').value,
-                application: document.getElementById('verseApplication').value,
-                summary: document.getElementById('verseSummary').value,
-                updated_at: new Date().toISOString()
-            };
-            try {
-                const existing = await supabaseFetch('weekly_verse?limit=1');
-                if (existing && existing.length > 0) {
-                    await supabaseFetch(`weekly_verse?id=eq.${existing[0].id}`, { method: 'PATCH', body: JSON.stringify(data) });
-                } else {
-                    await supabaseFetch('weekly_verse', { method: 'POST', body: JSON.stringify(data) });
-                }
-                document.getElementById('verseStatus').textContent = '✅ Verse saved successfully!';
-                document.getElementById('verseStatus').style.color = '#059669';
-                showToast('Weekly Verse saved!', 'success');
-            } catch (error) {
-                console.error('Error saving verse:', error);
-                document.getElementById('verseStatus').textContent = '❌ Error saving verse';
-                document.getElementById('verseStatus').style.color = '#dc2626';
-                showToast('Error saving verse', 'error');
-            }
-        }
-
-        // ===== CHILDREN =====
-        async function loadChildren() {
-            try {
-                const data = await supabaseFetch('children?order=id.desc');
-                document.getElementById('childrenTable').innerHTML = data.map(c => `
-                    <tr><td>${c.name}</td><td>${c.age || '-'}</td><td>${c.location || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteChild(${c.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading children:', error); }
-        }
-
-        async function addChild(e) {
-            e.preventDefault();
-            const data = {
-                name: document.getElementById('childName').value,
-                age: parseInt(document.getElementById('childAge').value) || null,
-                location: document.getElementById('childLocation').value,
-                story: document.getElementById('childStory').value,
-                gender: document.getElementById('childGender').value,
-                image_url: document.getElementById('childImageUrl').value || 'images/child-placeholder.jpg',
-                is_sponsored: false
-            };
-            try {
-                await supabaseFetch('children', { method: 'POST', body: JSON.stringify(data) });
-                document.getElementById('childName').value = '';
-                document.getElementById('childAge').value = '';
-                document.getElementById('childLocation').value = '';
-                document.getElementById('childStory').value = '';
-                document.getElementById('childImageUrl').value = '';
-                loadChildren();
-                showToast('Child added!', 'success');
-            } catch (error) { showToast('Error adding child', 'error'); }
-        }
-
-        async function deleteChild(id) {
-            if (!confirm('Delete this child?')) return;
-            try {
-                await supabaseFetch(`children?id=eq.${id}`, { method: 'DELETE' });
-                loadChildren();
-                showToast('Child deleted!', 'success');
-            } catch (error) { showToast('Error deleting child', 'error'); }
-        }
-
-        // ===== CHOIR MEDIA =====
-        async function loadChoirMedia() {
-            try {
-                const data = await supabaseFetch('choir_media?order=id.desc');
-                document.getElementById('choirMediaTable').innerHTML = data.map(item => `
-                    <tr><td>${item.title}</td><td>${item.type}</td><td>${item.tag || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteChoirMedia(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading choir media:', error); }
-        }
-
-        async function addChoirMedia(e) {
-            e.preventDefault();
-            const data = {
-                type: document.getElementById('choirMediaType').value,
-                title: document.getElementById('choirMediaTitle').value,
-                description: document.getElementById('choirMediaDescription').value,
-                tag: document.getElementById('choirMediaTag').value,
-                file_url: document.getElementById('choirMediaUrl').value
-            };
-            try {
-                await supabaseFetch('choir_media', { method: 'POST', body: JSON.stringify(data) });
-                document.getElementById('choirMediaTitle').value = '';
-                document.getElementById('choirMediaDescription').value = '';
-                document.getElementById('choirMediaTag').value = '';
-                document.getElementById('choirMediaUrl').value = '';
-                loadChoirMedia();
-                showToast('Media uploaded!', 'success');
-            } catch (error) { showToast('Error uploading media', 'error'); }
-        }
-
-        async function deleteChoirMedia(id) {
-            if (!confirm('Delete this media?')) return;
-            try {
-                await supabaseFetch(`choir_media?id=eq.${id}`, { method: 'DELETE' });
-                loadChoirMedia();
-                showToast('Media deleted!', 'success');
-            } catch (error) { showToast('Error deleting media', 'error'); }
-        }
-
-        // ===== MUSIC PROJECTS =====
-        async function loadMusicProjects() {
-            try {
-                const data = await supabaseFetch('music_projects?order=id.desc');
-                document.getElementById('musicProjectsTable').innerHTML = data.map(item => `
-                    <tr><td>${item.title}</td><td>${item.type}</td><td>${item.year || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteMusicProject(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading music projects:', error); }
-        }
-
-        async function addMusicProject(e) {
-            e.preventDefault();
-            const data = {
-                type: document.getElementById('musicProjectType').value,
-                title: document.getElementById('musicProjectTitle').value,
-                description: document.getElementById('musicProjectDescription').value,
-                year: document.getElementById('musicProjectYear').value,
-                cover_url: document.getElementById('musicCoverUrl').value,
-                streaming_links: document.getElementById('musicStreamingLinks').value
-            };
-            try {
-                await supabaseFetch('music_projects', { method: 'POST', body: JSON.stringify(data) });
-                document.getElementById('musicProjectTitle').value = '';
-                document.getElementById('musicProjectDescription').value = '';
-                document.getElementById('musicCoverUrl').value = '';
-                loadMusicProjects();
-                showToast('Music project added!', 'success');
-            } catch (error) { showToast('Error adding music project', 'error'); }
-        }
-
-        async function deleteMusicProject(id) {
-            if (!confirm('Delete this project?')) return;
-            try {
-                await supabaseFetch(`music_projects?id=eq.${id}`, { method: 'DELETE' });
-                loadMusicProjects();
-                showToast('Project deleted!', 'success');
-            } catch (error) { showToast('Error deleting project', 'error'); }
-        }
-
-        // ===== TOURS =====
-        async function loadTours() {
-            try {
-                const data = await supabaseFetch('tours?order=id.desc');
-                document.getElementById('toursTable').innerHTML = data.map(item => `
-                    <tr><td>${item.title}</td><td>${item.date || '-'}</td><td>${item.location || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteTour(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading tours:', error); }
-        }
-
-        async function addTourEvent(e) {
-            e.preventDefault();
-            const data = {
-                title: document.getElementById('tourTitle').value,
-                date: document.getElementById('tourDate').value,
-                location: document.getElementById('tourLocation').value,
-                time: document.getElementById('tourTime').value,
-                poster_url: document.getElementById('tourPosterUrl').value
-            };
-            try {
-                await supabaseFetch('tours', { method: 'POST', body: JSON.stringify(data) });
-                document.getElementById('tourTitle').value = '';
-                document.getElementById('tourDate').value = '';
-                document.getElementById('tourLocation').value = '';
-                document.getElementById('tourTime').value = '';
-                document.getElementById('tourPosterUrl').value = '';
-                loadTours();
-                showToast('Event added!', 'success');
-            } catch (error) { showToast('Error adding event', 'error'); }
-        }
-
-        async function deleteTour(id) {
-            if (!confirm('Delete this event?')) return;
-            try {
-                await supabaseFetch(`tours?id=eq.${id}`, { method: 'DELETE' });
-                loadTours();
-                showToast('Event deleted!', 'success');
-            } catch (error) { showToast('Error deleting event', 'error'); }
-        }
-
-        // ===== SUBMISSIONS =====
-        async function loadPartners() {
-            try {
-                const data = await supabaseFetch('partner_submissions?order=id.desc');
-                document.getElementById('partnersTable').innerHTML = data.length ? data.map(item => `
-                    <tr><td>${item.full_name}</td><td>${item.organization || '-'}</td><td>${item.email}</td>
-                    <td>${new Date(item.submitted_at).toLocaleDateString()}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('View submission','info')"><i class="fas fa-eye"></i></button></td></tr>
-                `).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">No submissions yet.</td></tr>';
-            } catch (error) { console.error('Error loading partners:', error); }
-        }
-
-        async function loadVolunteers() {
-            try {
-                const data = await supabaseFetch('volunteer_submissions?order=id.desc');
-                document.getElementById('volunteersTable').innerHTML = data.length ? data.map(item => `
-                    <tr><td>${item.full_name}</td><td>${item.email}</td><td>${item.skills ? item.skills.substring(0,30)+'...' : '-'}</td>
-                    <td>${new Date(item.submitted_at).toLocaleDateString()}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('View submission','info')"><i class="fas fa-eye"></i></button></td></tr>
-                `).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">No submissions yet.</td></tr>';
-            } catch (error) { console.error('Error loading volunteers:', error); }
-        }
-
-        async function loadSponsorships() {
-            try {
-                const data = await supabaseFetch('sponsorship_submissions?order=id.desc');
-                document.getElementById('sponsorshipsTable').innerHTML = data.length ? data.map(item => `
-                    <tr><td>${item.full_name}</td><td>${item.email}</td><td>${item.child_id ? 'Child #'+item.child_id : 'Not specified'}</td>
-                    <td>${new Date(item.submitted_at).toLocaleDateString()}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('View submission','info')"><i class="fas fa-eye"></i></button></td></tr>
-                `).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">No submissions yet.</td></tr>';
-            } catch (error) { console.error('Error loading sponsorships:', error); }
-        }
-
-        // ===== ADMINS =====
-        async function loadAdmins() {
-            try {
-                const data = await supabaseFetch('users?order=id');
-                document.getElementById('adminsTable').innerHTML = data.map(user => `
-                    <tr>
-                        <td>${user.email}</td>
-                        <td>${user.display_name || '-'}</td>
-                        <td>${user.is_main_admin ? '<span style="background:#F28C28;color:white;padding:2px 12px;border-radius:20px;font-size:0.7rem;">Main Admin</span>' : '<span style="background:#6C5CE7;color:white;padding:2px 12px;border-radius:20px;font-size:0.7rem;">Admin</span>'}</td>
-                        <td class="actions">${!user.is_main_admin && isMainAdmin ? `<button class="delete-btn" onclick="removeAdmin(${user.id})"><i class="fas fa-trash"></i></button>` : '<span style="color:#999;font-size:0.8rem;">Protected</span>'}</td>
-                    </tr>
-                `).join('');
-            } catch (error) { console.error('Error loading admins:', error); }
-        }
-
-        async function removeAdmin(id) {
-            if (!confirm('Remove this admin?')) return;
-            try {
-                await supabaseFetch(`users?id=eq.${id}`, { method: 'DELETE' });
-                loadAdmins();
-                showToast('Admin removed!', 'success');
-            } catch (error) { showToast('Error removing admin', 'error'); }
-        }
-
-        // ===== INITIALIZE =====
-        document.addEventListener('DOMContentLoaded', function() {
-            loadStats();
-        });
-    </script>
-</body>
-</html>
+                        <
