@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - JoyRise Africa Foundation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* ===== COMPLETE ADMIN STYLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 0; margin: 0; display: flex; min-height: 100vh; }
-        
-        /* Sidebar */
-        .sidebar { width: 260px; background: #0B2447; color: white; padding: 20px 0; position: fixed; height: 100vh; overflow-y: auto; }
-        .sidebar .logo { text-align: center; padding: 0 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .sidebar .logo h2 { color: #F28C28; font-size: 1.2rem; }
-        .sidebar .logo p { font-size: 0.7rem; opacity: 0.7; color: #ccc; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; min-height: 100vh; }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar { width: 260px; background: #0B2447; color: white; padding: 20px 0; position: fixed; height: 100vh; overflow-y: auto; z-index: 100; transition: all 0.3s ease; }
+        .sidebar .logo { text-align: center; padding: 0 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+        .sidebar .logo img { height: 60px; margin-bottom: 8px; }
+        .sidebar .logo h2 { color: #F28C28; font-size: 1.1rem; }
+        .sidebar .logo p { font-size: 0.65rem; opacity: 0.7; color: #ccc; }
+
         .sidebar .user-info { padding: 15px 20px; background: rgba(255,255,255,0.05); margin: 15px; border-radius: 10px; text-align: center; }
         .sidebar .user-info .avatar { width: 50px; height: 50px; border-radius: 50%; background: #F28C28; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 1.5rem; font-weight: 700; color: white; }
         .sidebar .user-info .name { font-weight: 700; font-size: 0.95rem; }
         .sidebar .user-info .email { font-size: 0.75rem; opacity: 0.7; color: #ccc; }
         .sidebar .user-info .badge { display: inline-block; padding: 2px 12px; background: #F28C28; border-radius: 20px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
-        
+
         .sidebar .nav-menu { list-style: none; padding: 0 10px; }
         .sidebar .nav-menu li { margin-bottom: 2px; }
         .sidebar .nav-menu li .nav-section { padding: 15px 16px 8px; font-size: 0.65rem; text-transform: uppercase; color: rgba(255,255,255,0.3); letter-spacing: 2px; font-weight: 700; }
@@ -26,20 +30,22 @@
         .sidebar .nav-menu li a:hover { background: rgba(255,255,255,0.1); color: white; }
         .sidebar .nav-menu li a.active { background: rgba(242, 140, 40, 0.2); color: #F28C28; }
         .sidebar .nav-menu li a i { width: 20px; text-align: center; }
+
         .sidebar .logout-btn { margin: 20px 15px; padding: 12px; background: rgba(220, 38, 38, 0.2); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease; font-weight: 700; font-size: 0.9rem; }
         .sidebar .logout-btn:hover { background: rgba(220, 38, 38, 0.3); }
 
-        /* Main Content */
+        /* ===== MAIN CONTENT ===== */
         .main-content { margin-left: 260px; padding: 30px; width: calc(100% - 260px); min-height: 100vh; }
         .main-content .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
         .main-content .page-header h1 { font-size: 2rem; color: #0B2447; }
         .main-content .page-header .btn { padding: 10px 20px; background: #F28C28; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
         .main-content .page-header .btn:hover { background: #0B2447; }
-        
+
         .content-section { display: none; background: white; border-radius: 16px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 30px; }
         .content-section.active { display: block; }
         .content-section .section-title { font-size: 1.5rem; color: #0B2447; margin-bottom: 20px; }
 
+        /* ===== STATS ===== */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: white; padding: 20px 25px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 4px solid #F28C28; }
         .stat-card .stat-number { font-size: 2.2rem; font-weight: 700; color: #0B2447; }
@@ -47,7 +53,37 @@
         .stat-card .stat-icon { float: right; font-size: 2rem; color: rgba(242, 140, 40, 0.2); }
         .stat-card.purple { border-left-color: #6C5CE7; }
         .stat-card.green { border-left-color: #2ECC71; }
+        .stat-card.red { border-left-color: #FF6B6B; }
+        .stat-card.blue { border-left-color: #0984E3; }
 
+        /* ===== UPLOAD BOX (Like Facebook) ===== */
+        .upload-box { border: 3px dashed #d1d5db; border-radius: 16px; padding: 40px 20px; text-align: center; background: #fafafa; transition: all 0.3s ease; cursor: pointer; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .upload-box:hover { border-color: #F28C28; background: rgba(242, 140, 40, 0.05); }
+        .upload-box.dragover { border-color: #F28C28; background: rgba(242, 140, 40, 0.1); }
+        .upload-box i { font-size: 3rem; color: #9ca3af; margin-bottom: 15px; }
+        .upload-box h3 { color: #374151; font-size: 1.1rem; margin-bottom: 5px; }
+        .upload-box p { color: #6b7280; font-size: 0.9rem; }
+        .upload-box .browse-btn { display: inline-block; margin-top: 15px; padding: 10px 30px; background: #F28C28; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; }
+        .upload-box .browse-btn:hover { background: #0B2447; }
+
+        /* ===== FILE PREVIEW ===== */
+        .file-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px; }
+        .file-preview-item { position: relative; border-radius: 10px; overflow: hidden; background: #f3f4f6; border: 1px solid #e5e7eb; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+        .file-preview-item img, .file-preview-item video { width: 100%; height: 100%; object-fit: cover; }
+        .file-preview-item .file-icon { font-size: 2.5rem; color: #9ca3af; }
+        .file-preview-item .remove-file { position: absolute; top: 5px; right: 5px; background: rgba(220, 38, 38, 0.8); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .file-preview-item .remove-file:hover { background: #dc2626; }
+
+        .file-name { font-size: 0.7rem; color: #6b7280; text-align: center; margin-top: 4px; word-break: break-all; }
+
+        /* ===== PUBLISH BUTTON ===== */
+        .publish-section { margin-top: 20px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
+        .publish-btn { padding: 14px 40px; background: #2ECC71; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+        .publish-btn:hover { background: #27AE60; transform: scale(1.02); }
+        .publish-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .publish-status { font-size: 0.9rem; color: #6b7280; }
+
+        /* ===== FORMS ===== */
         .admin-form { max-width: 800px; }
         .admin-form .form-group { margin-bottom: 20px; }
         .admin-form .form-group label { display: block; font-weight: 700; color: #0B2447; margin-bottom: 6px; font-size: 0.9rem; }
@@ -57,12 +93,7 @@
         .admin-form .submit-btn { padding: 14px 40px; background: #F28C28; color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
         .admin-form .submit-btn:hover { background: #0B2447; }
 
-        .toast { position: fixed; bottom: 30px; right: 30px; padding: 16px 25px; border-radius: 12px; color: white; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transform: translateY(100px); opacity: 0; transition: all 0.4s ease; z-index: 999; max-width: 400px; }
-        .toast.show { transform: translateY(0); opacity: 1; }
-        .toast.success { background: #059669; }
-        .toast.error { background: #dc2626; }
-        .toast.info { background: #0984E3; }
-
+        /* ===== TABLES ===== */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         table th { background: #f8f9fa; text-align: left; padding: 12px 15px; font-weight: 700; color: #0B2447; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
@@ -75,35 +106,58 @@
         table .actions .delete-btn { background: #dc2626; color: white; }
         table .actions .delete-btn:hover { background: #b91c1c; }
 
+        /* ===== COVER OPTIONS ===== */
         .cover-option-card { display: inline-block; padding: 15px 25px; margin: 5px; border: 3px solid #e1e5eb; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: #f8f9fa; text-align: center; min-width: 150px; }
         .cover-option-card:hover { border-color: #F28C28; background: rgba(242, 140, 40, 0.05); }
         .cover-option-card.selected { border-color: #F28C28; background: rgba(242, 140, 40, 0.1); }
         .cover-option-card i { font-size: 2rem; display: block; margin-bottom: 8px; color: #0B2447; }
         .cover-option-card span { font-weight: 700; font-size: 0.9rem; color: #0B2447; }
 
+        /* ===== TOAST ===== */
+        .toast { position: fixed; bottom: 30px; right: 30px; padding: 16px 25px; border-radius: 12px; color: white; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transform: translateY(100px); opacity: 0; transition: all 0.4s ease; z-index: 999; max-width: 400px; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { background: #059669; }
+        .toast.error { background: #dc2626; }
+        .toast.info { background: #0984E3; }
+
+        /* ===== RESPONSIVE ===== */
+        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: #0B2447; cursor: pointer; padding: 8px; }
         @media (max-width: 768px) {
-            .sidebar { transform: translateX(-100%); }
+            .sidebar { transform: translateX(-100%); width: 280px; }
             .sidebar.open { transform: translateX(0); }
             .main-content { margin-left: 0; width: 100%; padding: 15px; }
             .hamburger { display: block; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
         }
-        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: #0B2447; cursor: pointer; padding: 8px; }
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .file-preview-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ===== LOADING SPINNER ===== */
+        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <!-- ===== SIDEBAR ===== -->
     <nav class="sidebar" id="sidebar">
-        <div class="logo">
-            <h2>🔐 Admin Panel</h2>
+        <!-- Logo - Click to go to public website -->
+        <div class="logo" onclick="goToHome()">
+            <img src="../images/logo.png" alt="JoyRise Africa Foundation" id="sidebarLogo">
+            <h2>Admin Panel</h2>
             <p>JoyRise Africa Foundation</p>
+            <p style="font-size:0.6rem; opacity:0.5; margin-top:5px;">← Click to visit website</p>
         </div>
+
         <div class="user-info">
             <div class="avatar" id="userAvatar">SA</div>
             <div class="name" id="userName">Super Admin</div>
             <div class="email" id="userEmail">JoyRise.admin001</div>
             <div class="badge" id="userBadge">Main Admin</div>
         </div>
+
         <ul class="nav-menu">
             <li class="nav-section">Main</li>
             <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -143,6 +197,8 @@
                 <div class="stat-card"><div class="stat-icon"><i class="fas fa-child"></i></div><div class="stat-number">0</div><div class="stat-label">Children</div></div>
                 <div class="stat-card purple"><div class="stat-icon"><i class="fas fa-handshake"></i></div><div class="stat-number">0</div><div class="stat-label">Partners</div></div>
                 <div class="stat-card green"><div class="stat-icon"><i class="fas fa-hands-helping"></i></div><div class="stat-number">0</div><div class="stat-label">Volunteers</div></div>
+                <div class="stat-card red"><div class="stat-icon"><i class="fas fa-heart"></i></div><div class="stat-number">0</div><div class="stat-label">Sponsorships</div></div>
+                <div class="stat-card blue"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-number">0</div><div class="stat-label">Music Projects</div></div>
             </div>
             <div style="background:#f8f9fa; border-radius:16px; padding:30px; text-align:center; border:2px dashed #e1e5eb;">
                 <i class="fas fa-chart-line" style="font-size:3rem; color:#ccc;"></i>
@@ -155,6 +211,7 @@
         <div class="content-section" id="section-choir-cover">
             <h2 class="section-title">🎬 Edit Choir Cover</h2>
             <p style="color:#666; margin-bottom:20px;">Choose what appears as the cover on the Kids Choir page.</p>
+
             <form class="admin-form" onsubmit="saveChoirCover(event)">
                 <div class="form-group">
                     <label>Select Cover Type</label>
@@ -213,15 +270,30 @@
         <!-- ===== CHILDREN ===== -->
         <div class="content-section" id="section-children">
             <h2 class="section-title">👧🏾 Manage Children</h2>
-            <form class="admin-form" onsubmit="addChild(event)">
+
+            <!-- Drag & Drop Upload Box -->
+            <div class="upload-box" id="childUploadBox" onclick="document.getElementById('childFileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Child Image</h3>
+                <p>Click or drag and drop an image here</p>
+                <input type="file" id="childFileInput" accept="image/*" style="display:none;" onchange="handleChildFileSelect(event)">
+                <div class="browse-btn">Browse Files</div>
+            </div>
+            <div id="childFilePreview" class="file-preview-grid" style="display:none;"></div>
+
+            <form class="admin-form" onsubmit="addChild(event)" style="margin-top:20px;">
                 <div class="form-group"><label>Child's Name *</label><input type="text" id="childName" required></div>
                 <div class="form-group"><label>Age</label><input type="number" id="childAge"></div>
                 <div class="form-group"><label>Location</label><input type="text" id="childLocation"></div>
                 <div class="form-group"><label>Story / Description</label><textarea id="childStory" rows="3"></textarea></div>
                 <div class="form-group"><label>Gender</label><select id="childGender"><option value="Female">Female</option><option value="Male">Male</option></select></div>
-                <div class="form-group"><label>Image URL</label><input type="text" id="childImageUrl" placeholder="images/child1.jpg"></div>
-                <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Child</button>
+                <input type="hidden" id="childImageUrl" value="">
+                <div class="publish-section">
+                    <button type="submit" class="publish-btn"><i class="fas fa-globe"></i> Publish Child</button>
+                    <span class="publish-status" id="childPublishStatus">Ready to publish</span>
+                </div>
             </form>
+
             <hr style="margin:30px 0; border:1px solid #eee;">
             <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Children</h3>
             <div class="table-container"><table><thead><tr><th>Name</th><th>Age</th><th>Location</th><th>Actions</th></tr></thead><tbody id="childrenTable"></tbody></table></div>
@@ -230,14 +302,29 @@
         <!-- ===== CHOIR MEDIA ===== -->
         <div class="content-section" id="section-choir-media">
             <h2 class="section-title">🎵 Choir Media</h2>
-            <form class="admin-form" onsubmit="addChoirMedia(event)">
+
+            <!-- Drag & Drop Upload Box for Choir Media -->
+            <div class="upload-box" id="choirUploadBox" onclick="document.getElementById('choirFileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Choir Images or Videos</h3>
+                <p>Click or drag and drop files here (JPG, PNG, MP4, MOV)</p>
+                <input type="file" id="choirFileInput" accept="image/*,video/*" multiple style="display:none;" onchange="handleChoirFileSelect(event)">
+                <div class="browse-btn">Browse Files</div>
+            </div>
+            <div id="choirFilePreview" class="file-preview-grid" style="display:none;"></div>
+
+            <form class="admin-form" onsubmit="addChoirMedia(event)" style="margin-top:20px;">
                 <div class="form-group"><label>Media Type</label><select id="choirMediaType"><option value="image">Image</option><option value="video">Video</option></select></div>
                 <div class="form-group"><label>Title *</label><input type="text" id="choirMediaTitle" required></div>
                 <div class="form-group"><label>Description</label><textarea id="choirMediaDescription" rows="2"></textarea></div>
                 <div class="form-group"><label>Tag</label><input type="text" id="choirMediaTag" placeholder="Rehearsal, Performance, etc."></div>
-                <div class="form-group"><label>File URL</label><input type="text" id="choirMediaUrl" placeholder="images/choir1.jpg"></div>
-                <button type="submit" class="submit-btn"><i class="fas fa-upload"></i> Upload Media</button>
+                <input type="hidden" id="choirMediaUrl" value="">
+                <div class="publish-section">
+                    <button type="submit" class="publish-btn"><i class="fas fa-globe"></i> Publish Media</button>
+                    <span class="publish-status" id="choirPublishStatus">Ready to publish</span>
+                </div>
             </form>
+
             <hr style="margin:30px 0; border:1px solid #eee;">
             <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Media</h3>
             <div class="table-container"><table><thead><tr><th>Title</th><th>Type</th><th>Tag</th><th>Actions</th></tr></thead><tbody id="choirMediaTable"></tbody></table></div>
@@ -246,15 +333,30 @@
         <!-- ===== MUSIC PROJECTS ===== -->
         <div class="content-section" id="section-music">
             <h2 class="section-title">🎶 Music Projects</h2>
-            <form class="admin-form" onsubmit="addMusicProject(event)">
+
+            <!-- Drag & Drop Upload Box for Music Covers -->
+            <div class="upload-box" id="musicUploadBox" onclick="document.getElementById('musicFileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Music Cover Art</h3>
+                <p>Click or drag and drop an image here</p>
+                <input type="file" id="musicFileInput" accept="image/*" style="display:none;" onchange="handleMusicFileSelect(event)">
+                <div class="browse-btn">Browse Files</div>
+            </div>
+            <div id="musicFilePreview" class="file-preview-grid" style="display:none;"></div>
+
+            <form class="admin-form" onsubmit="addMusicProject(event)" style="margin-top:20px;">
                 <div class="form-group"><label>Project Type</label><select id="musicProjectType"><option value="single">Single</option><option value="ep">EP</option><option value="album">Album</option></select></div>
                 <div class="form-group"><label>Title *</label><input type="text" id="musicProjectTitle" required></div>
                 <div class="form-group"><label>Description</label><textarea id="musicProjectDescription" rows="2"></textarea></div>
                 <div class="form-group"><label>Year</label><input type="number" id="musicProjectYear" value="2025"></div>
-                <div class="form-group"><label>Cover URL</label><input type="text" id="musicCoverUrl" placeholder="images/album1.jpg"></div>
+                <input type="hidden" id="musicCoverUrl" value="">
                 <div class="form-group"><label>Streaming Links</label><input type="text" id="musicStreamingLinks" value="spotify, apple, youtube-music"></div>
-                <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Project</button>
+                <div class="publish-section">
+                    <button type="submit" class="publish-btn"><i class="fas fa-globe"></i> Publish Project</button>
+                    <span class="publish-status" id="musicPublishStatus">Ready to publish</span>
+                </div>
             </form>
+
             <hr style="margin:30px 0; border:1px solid #eee;">
             <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Projects</h3>
             <div class="table-container"><table><thead><tr><th>Title</th><th>Type</th><th>Year</th><th>Actions</th></tr></thead><tbody id="musicProjectsTable"></tbody></table></div>
@@ -263,14 +365,29 @@
         <!-- ===== TOURS ===== -->
         <div class="content-section" id="section-tours">
             <h2 class="section-title">🎤 Tours & Events</h2>
-            <form class="admin-form" onsubmit="addTourEvent(event)">
+
+            <!-- Drag & Drop Upload Box for Tour Posters -->
+            <div class="upload-box" id="tourUploadBox" onclick="document.getElementById('tourFileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Event Poster</h3>
+                <p>Click or drag and drop an image here</p>
+                <input type="file" id="tourFileInput" accept="image/*" style="display:none;" onchange="handleTourFileSelect(event)">
+                <div class="browse-btn">Browse Files</div>
+            </div>
+            <div id="tourFilePreview" class="file-preview-grid" style="display:none;"></div>
+
+            <form class="admin-form" onsubmit="addTourEvent(event)" style="margin-top:20px;">
                 <div class="form-group"><label>Event Title *</label><input type="text" id="tourTitle" required></div>
                 <div class="form-group"><label>Date *</label><input type="text" id="tourDate" placeholder="December 15, 2025" required></div>
                 <div class="form-group"><label>Location *</label><input type="text" id="tourLocation" required></div>
                 <div class="form-group"><label>Time</label><input type="text" id="tourTime" placeholder="7:00 PM EAT"></div>
-                <div class="form-group"><label>Poster URL</label><input type="text" id="tourPosterUrl" placeholder="images/tour1.jpg"></div>
-                <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Event</button>
+                <input type="hidden" id="tourPosterUrl" value="">
+                <div class="publish-section">
+                    <button type="submit" class="publish-btn"><i class="fas fa-globe"></i> Publish Event</button>
+                    <span class="publish-status" id="tourPublishStatus">Ready to publish</span>
+                </div>
             </form>
+
             <hr style="margin:30px 0; border:1px solid #eee;">
             <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Upcoming Events</h3>
             <div class="table-container"><table><thead><tr><th>Title</th><th>Date</th><th>Location</th><th>Actions</th></tr></thead><tbody id="toursTable"></tbody></table></div>
@@ -305,17 +422,19 @@
         </div>
     </div>
 
+    <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"></div>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <script>
+        // ============================================================
         // ===== SUPABASE CONFIGURATION =====
+        // ============================================================
         const SUPABASE_URL = 'https://lvktwbukgisluhftabra.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2a3R3YnVrZ2lzbHVoZnRhYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczNDMxODIsImV4cCI6MjEwMjkxOTE4Mn0.mG7eKnQHOCxo_cidrOivL0PfAzRFo11Z_3qJZYW1eMk';
 
+        // ============================================================
         // ===== CHECK LOGIN =====
+        // ============================================================
         const adminEmail = localStorage.getItem('adminEmail');
         const isMainAdmin = localStorage.getItem('isMainAdmin') === 'true';
         const adminName = localStorage.getItem('adminName') || 'Admin';
@@ -324,34 +443,84 @@
             window.location.href = 'admin-login.html';
         }
 
+        // ============================================================
         // ===== SET USER INFO =====
+        // ============================================================
         document.getElementById('userEmail').textContent = adminEmail;
         document.getElementById('userName').textContent = adminName;
         document.getElementById('userAvatar').textContent = adminName.split(' ').map(n => n[0]).join('').toUpperCase();
         document.getElementById('userBadge').textContent = isMainAdmin ? 'Main Admin' : 'Admin';
         document.getElementById('userBadge').style.background = isMainAdmin ? '#F28C28' : '#6C5CE7';
 
-        // ===== HELPER FUNCTIONS =====
+        // ============================================================
+        // ===== SIDEBAR FUNCTIONS =====
+        // ============================================================
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        function goToHome() {
+            window.open('../index.html', '_blank');
+        }
+
+        // ============================================================
+        // ===== SUPABASE FETCH HELPER =====
+        // ============================================================
         async function supabaseFetch(endpoint, options = {}) {
             const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
-            const headers = { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json' };
+            const headers = {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json'
+            };
             const response = await fetch(url, { headers, ...options });
             if (!response.ok) throw new Error(await response.text());
             return response.json();
         }
 
+        // ============================================================
+        // ===== SUPABASE STORAGE UPLOAD =====
+        // ============================================================
+        async function uploadFileToSupabase(file, folder = 'uploads') {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+            const filePath = `${folder}/${fileName}`;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch(`${SUPABASE_URL}/storage/v1/object/website-uploads/${filePath}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                    'apikey': SUPABASE_ANON_KEY,
+                },
+                body: file
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Upload failed: ${errorText}`);
+            }
+
+            // Get public URL
+            const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/website-uploads/${filePath}`;
+            return publicUrl;
+        }
+
+        // ============================================================
+        // ===== TOAST NOTIFICATION =====
+        // ============================================================
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.className = `toast ${type} show`;
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-        }
-
+        // ============================================================
         // ===== SHOW SECTION =====
+        // ============================================================
         function showSection(sectionName) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
@@ -406,7 +575,162 @@
             }
         }
 
+        // ============================================================
+        // ===== FILE UPLOAD HANDLERS =====
+        // ============================================================
+
+        // --- Child Image Upload ---
+        let childUploadedFiles = [];
+
+        function handleChildFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                childUploadedFiles = Array.from(files);
+                previewChildFiles();
+            }
+        }
+
+        function previewChildFiles() {
+            const container = document.getElementById('childFilePreview');
+            container.innerHTML = '';
+            container.style.display = 'grid';
+
+            childUploadedFiles.forEach((file, index) => {
+                const url = URL.createObjectURL(file);
+                const div = document.createElement('div');
+                div.className = 'file-preview-item';
+                div.innerHTML = `
+                    <img src="${url}" alt="${file.name}">
+                    <button class="remove-file" onclick="removeChildFile(${index})">&times;</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeChildFile(index) {
+            childUploadedFiles.splice(index, 1);
+            if (childUploadedFiles.length === 0) {
+                document.getElementById('childFilePreview').style.display = 'none';
+            } else {
+                previewChildFiles();
+            }
+        }
+
+        // --- Choir Media Upload ---
+        let choirUploadedFiles = [];
+
+        function handleChoirFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                choirUploadedFiles = Array.from(files);
+                previewChoirFiles();
+            }
+        }
+
+        function previewChoirFiles() {
+            const container = document.getElementById('choirFilePreview');
+            container.innerHTML = '';
+            container.style.display = 'grid';
+
+            choirUploadedFiles.forEach((file, index) => {
+                const url = URL.createObjectURL(file);
+                const div = document.createElement('div');
+                div.className = 'file-preview-item';
+                const isVideo = file.type.startsWith('video/');
+                div.innerHTML = `
+                    ${isVideo ? `<video src="${url}" muted></video>` : `<img src="${url}" alt="${file.name}">`}
+                    <button class="remove-file" onclick="removeChoirFile(${index})">&times;</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeChoirFile(index) {
+            choirUploadedFiles.splice(index, 1);
+            if (choirUploadedFiles.length === 0) {
+                document.getElementById('choirFilePreview').style.display = 'none';
+            } else {
+                previewChoirFiles();
+            }
+        }
+
+        // --- Music Cover Upload ---
+        let musicUploadedFiles = [];
+
+        function handleMusicFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                musicUploadedFiles = Array.from(files);
+                previewMusicFiles();
+            }
+        }
+
+        function previewMusicFiles() {
+            const container = document.getElementById('musicFilePreview');
+            container.innerHTML = '';
+            container.style.display = 'grid';
+
+            musicUploadedFiles.forEach((file, index) => {
+                const url = URL.createObjectURL(file);
+                const div = document.createElement('div');
+                div.className = 'file-preview-item';
+                div.innerHTML = `
+                    <img src="${url}" alt="${file.name}">
+                    <button class="remove-file" onclick="removeMusicFile(${index})">&times;</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeMusicFile(index) {
+            musicUploadedFiles.splice(index, 1);
+            if (musicUploadedFiles.length === 0) {
+                document.getElementById('musicFilePreview').style.display = 'none';
+            } else {
+                previewMusicFiles();
+            }
+        }
+
+        // --- Tour Poster Upload ---
+        let tourUploadedFiles = [];
+
+        function handleTourFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                tourUploadedFiles = Array.from(files);
+                previewTourFiles();
+            }
+        }
+
+        function previewTourFiles() {
+            const container = document.getElementById('tourFilePreview');
+            container.innerHTML = '';
+            container.style.display = 'grid';
+
+            tourUploadedFiles.forEach((file, index) => {
+                const url = URL.createObjectURL(file);
+                const div = document.createElement('div');
+                div.className = 'file-preview-item';
+                div.innerHTML = `
+                    <img src="${url}" alt="${file.name}">
+                    <button class="remove-file" onclick="removeTourFile(${index})">&times;</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeTourFile(index) {
+            tourUploadedFiles.splice(index, 1);
+            if (tourUploadedFiles.length === 0) {
+                document.getElementById('tourFilePreview').style.display = 'none';
+            } else {
+                previewTourFiles();
+            }
+        }
+
+        // ============================================================
         // ===== DASHBOARD =====
+        // ============================================================
         async function loadStats() {
             try {
                 const [children, partners, volunteers, sponsorships, music] = await Promise.all([
@@ -420,13 +744,15 @@
                     <div class="stat-card"><div class="stat-icon"><i class="fas fa-child"></i></div><div class="stat-number">${children.length}</div><div class="stat-label">Children</div></div>
                     <div class="stat-card purple"><div class="stat-icon"><i class="fas fa-handshake"></i></div><div class="stat-number">${partners.length}</div><div class="stat-label">Partners</div></div>
                     <div class="stat-card green"><div class="stat-icon"><i class="fas fa-hands-helping"></i></div><div class="stat-number">${volunteers.length}</div><div class="stat-label">Volunteers</div></div>
-                    <div class="stat-card red" style="border-left-color:#FF6B6B;"><div class="stat-icon"><i class="fas fa-heart"></i></div><div class="stat-number">${sponsorships.length}</div><div class="stat-label">Sponsorships</div></div>
-                    <div class="stat-card blue" style="border-left-color:#0984E3;"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-number">${music.length}</div><div class="stat-label">Music Projects</div></div>
+                    <div class="stat-card red"><div class="stat-icon"><i class="fas fa-heart"></i></div><div class="stat-number">${sponsorships.length}</div><div class="stat-label">Sponsorships</div></div>
+                    <div class="stat-card blue"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-number">${music.length}</div><div class="stat-label">Music Projects</div></div>
                 `;
             } catch (error) { console.error('Stats error:', error); }
         }
 
+        // ============================================================
         // ===== WEEKLY VERSE =====
+        // ============================================================
         async function loadVerse() {
             try {
                 const data = await supabaseFetch('weekly_verse?limit=1&order=id.desc');
@@ -476,7 +802,9 @@
             }
         }
 
+        // ============================================================
         // ===== CHILDREN =====
+        // ============================================================
         async function loadChildren() {
             try {
                 const data = await supabaseFetch('children?order=id.desc');
@@ -490,25 +818,49 @@
 
         async function addChild(e) {
             e.preventDefault();
-            const data = {
-                name: document.getElementById('childName').value,
-                age: parseInt(document.getElementById('childAge').value) || null,
-                location: document.getElementById('childLocation').value,
-                story: document.getElementById('childStory').value,
-                gender: document.getElementById('childGender').value,
-                image_url: document.getElementById('childImageUrl').value || 'images/child-placeholder.jpg',
-                is_sponsored: false
-            };
+            const statusEl = document.getElementById('childPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
             try {
+                let imageUrl = 'images/child-placeholder.jpg';
+
+                if (childUploadedFiles.length > 0) {
+                    const file = childUploadedFiles[0];
+                    imageUrl = await uploadFileToSupabase(file, 'children');
+                    showToast('Image uploaded!', 'success');
+                }
+
+                const data = {
+                    name: document.getElementById('childName').value,
+                    age: parseInt(document.getElementById('childAge').value) || null,
+                    location: document.getElementById('childLocation').value,
+                    story: document.getElementById('childStory').value,
+                    gender: document.getElementById('childGender').value,
+                    image_url: imageUrl,
+                    is_sponsored: false
+                };
+
                 await supabaseFetch('children', { method: 'POST', body: JSON.stringify(data) });
+
+                // Reset form
                 document.getElementById('childName').value = '';
                 document.getElementById('childAge').value = '';
                 document.getElementById('childLocation').value = '';
                 document.getElementById('childStory').value = '';
-                document.getElementById('childImageUrl').value = '';
+                childUploadedFiles = [];
+                document.getElementById('childFilePreview').style.display = 'none';
+                document.getElementById('childFileInput').value = '';
+
                 loadChildren();
-                showToast('Child added!', 'success');
-            } catch (error) { showToast('Error adding child', 'error'); }
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Child published to website!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing child', 'error');
+            }
         }
 
         async function deleteChild(id) {
@@ -520,7 +872,9 @@
             } catch (error) { showToast('Error deleting child', 'error'); }
         }
 
+        // ============================================================
         // ===== CHOIR COVER =====
+        // ============================================================
         function selectCoverType(type) {
             document.getElementById('coverType').value = type;
             document.querySelectorAll('.cover-option-card').forEach(c => c.classList.remove('selected'));
@@ -573,7 +927,9 @@
             }
         }
 
+        // ============================================================
         // ===== CHOIR MEDIA =====
+        // ============================================================
         async function loadChoirMedia() {
             try {
                 const data = await supabaseFetch('choir_media?order=id.desc');
@@ -587,22 +943,46 @@
 
         async function addChoirMedia(e) {
             e.preventDefault();
-            const data = {
-                type: document.getElementById('choirMediaType').value,
-                title: document.getElementById('choirMediaTitle').value,
-                description: document.getElementById('choirMediaDescription').value,
-                tag: document.getElementById('choirMediaTag').value,
-                file_url: document.getElementById('choirMediaUrl').value
-            };
+            const statusEl = document.getElementById('choirPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
             try {
+                let fileUrl = '';
+
+                if (choirUploadedFiles.length > 0) {
+                    const file = choirUploadedFiles[0];
+                    const folder = file.type.startsWith('video/') ? 'choir-videos' : 'choir-images';
+                    fileUrl = await uploadFileToSupabase(file, folder);
+                    showToast('File uploaded!', 'success');
+                }
+
+                const data = {
+                    type: document.getElementById('choirMediaType').value,
+                    title: document.getElementById('choirMediaTitle').value,
+                    description: document.getElementById('choirMediaDescription').value,
+                    tag: document.getElementById('choirMediaTag').value,
+                    file_url: fileUrl
+                };
+
                 await supabaseFetch('choir_media', { method: 'POST', body: JSON.stringify(data) });
+
                 document.getElementById('choirMediaTitle').value = '';
                 document.getElementById('choirMediaDescription').value = '';
                 document.getElementById('choirMediaTag').value = '';
-                document.getElementById('choirMediaUrl').value = '';
+                choirUploadedFiles = [];
+                document.getElementById('choirFilePreview').style.display = 'none';
+                document.getElementById('choirFileInput').value = '';
+
                 loadChoirMedia();
-                showToast('Media uploaded!', 'success');
-            } catch (error) { showToast('Error uploading media', 'error'); }
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Choir media published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing media', 'error');
+            }
         }
 
         async function deleteChoirMedia(id) {
@@ -614,7 +994,9 @@
             } catch (error) { showToast('Error deleting media', 'error'); }
         }
 
+        // ============================================================
         // ===== MUSIC PROJECTS =====
+        // ============================================================
         async function loadMusicProjects() {
             try {
                 const data = await supabaseFetch('music_projects?order=id.desc');
@@ -628,22 +1010,45 @@
 
         async function addMusicProject(e) {
             e.preventDefault();
-            const data = {
-                type: document.getElementById('musicProjectType').value,
-                title: document.getElementById('musicProjectTitle').value,
-                description: document.getElementById('musicProjectDescription').value,
-                year: document.getElementById('musicProjectYear').value,
-                cover_url: document.getElementById('musicCoverUrl').value,
-                streaming_links: document.getElementById('musicStreamingLinks').value
-            };
+            const statusEl = document.getElementById('musicPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
             try {
+                let coverUrl = '';
+
+                if (musicUploadedFiles.length > 0) {
+                    const file = musicUploadedFiles[0];
+                    coverUrl = await uploadFileToSupabase(file, 'music-covers');
+                    showToast('Cover uploaded!', 'success');
+                }
+
+                const data = {
+                    type: document.getElementById('musicProjectType').value,
+                    title: document.getElementById('musicProjectTitle').value,
+                    description: document.getElementById('musicProjectDescription').value,
+                    year: document.getElementById('musicProjectYear').value,
+                    cover_url: coverUrl,
+                    streaming_links: document.getElementById('musicStreamingLinks').value
+                };
+
                 await supabaseFetch('music_projects', { method: 'POST', body: JSON.stringify(data) });
+
                 document.getElementById('musicProjectTitle').value = '';
                 document.getElementById('musicProjectDescription').value = '';
-                document.getElementById('musicCoverUrl').value = '';
+                musicUploadedFiles = [];
+                document.getElementById('musicFilePreview').style.display = 'none';
+                document.getElementById('musicFileInput').value = '';
+
                 loadMusicProjects();
-                showToast('Music project added!', 'success');
-            } catch (error) { showToast('Error adding music project', 'error'); }
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Music project published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing project', 'error');
+            }
         }
 
         async function deleteMusicProject(id) {
@@ -655,7 +1060,9 @@
             } catch (error) { showToast('Error deleting project', 'error'); }
         }
 
+        // ============================================================
         // ===== TOURS =====
+        // ============================================================
         async function loadTours() {
             try {
                 const data = await supabaseFetch('tours?order=id.desc');
@@ -669,23 +1076,46 @@
 
         async function addTourEvent(e) {
             e.preventDefault();
-            const data = {
-                title: document.getElementById('tourTitle').value,
-                date: document.getElementById('tourDate').value,
-                location: document.getElementById('tourLocation').value,
-                time: document.getElementById('tourTime').value,
-                poster_url: document.getElementById('tourPosterUrl').value
-            };
+            const statusEl = document.getElementById('tourPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
             try {
+                let posterUrl = '';
+
+                if (tourUploadedFiles.length > 0) {
+                    const file = tourUploadedFiles[0];
+                    posterUrl = await uploadFileToSupabase(file, 'tour-posters');
+                    showToast('Poster uploaded!', 'success');
+                }
+
+                const data = {
+                    title: document.getElementById('tourTitle').value,
+                    date: document.getElementById('tourDate').value,
+                    location: document.getElementById('tourLocation').value,
+                    time: document.getElementById('tourTime').value,
+                    poster_url: posterUrl
+                };
+
                 await supabaseFetch('tours', { method: 'POST', body: JSON.stringify(data) });
+
                 document.getElementById('tourTitle').value = '';
                 document.getElementById('tourDate').value = '';
                 document.getElementById('tourLocation').value = '';
                 document.getElementById('tourTime').value = '';
-                document.getElementById('tourPosterUrl').value = '';
+                tourUploadedFiles = [];
+                document.getElementById('tourFilePreview').style.display = 'none';
+                document.getElementById('tourFileInput').value = '';
+
                 loadTours();
-                showToast('Event added!', 'success');
-            } catch (error) { showToast('Error adding event', 'error'); }
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Event published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing event', 'error');
+            }
         }
 
         async function deleteTour(id) {
@@ -697,7 +1127,9 @@
             } catch (error) { showToast('Error deleting event', 'error'); }
         }
 
+        // ============================================================
         // ===== SUBMISSIONS =====
+        // ============================================================
         async function loadPartners() {
             try {
                 const data = await supabaseFetch('partner_submissions?order=id.desc');
@@ -731,7 +1163,9 @@
             } catch (error) { console.error('Error loading sponsorships:', error); }
         }
 
+        // ============================================================
         // ===== ADMINS =====
+        // ============================================================
         async function loadAdmins() {
             try {
                 const data = await supabaseFetch('users?order=id');
@@ -755,7 +1189,45 @@
             } catch (error) { showToast('Error removing admin', 'error'); }
         }
 
+        // ============================================================
+        // ===== DRAG AND DROP SUPPORT =====
+        // ============================================================
+        document.querySelectorAll('.upload-box').forEach(box => {
+            box.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            box.addEventListener('dragleave', function(e) {
+                this.classList.remove('dragover');
+            });
+            box.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    // Find which upload box it is
+                    if (this.id === 'childUploadBox') {
+                        childUploadedFiles = Array.from(files);
+                        previewChildFiles();
+                    } else if (this.id === 'choirUploadBox') {
+                        choirUploadedFiles = Array.from(files);
+                        previewChoirFiles();
+                    } else if (this.id === 'musicUploadBox') {
+                        musicUploadedFiles = Array.from(files);
+                        previewMusicFiles();
+                    } else if (this.id === 'tourUploadBox') {
+                        tourUploadedFiles = Array.from(files);
+                        previewTourFiles();
+                    }
+                    showToast(`${files.length} file(s) uploaded!`, 'success');
+                }
+            });
+        });
+
+        // ============================================================
         // ===== CLOSE SIDEBAR ON OUTSIDE CLICK =====
+        // ============================================================
         document.addEventListener('click', function(e) {
             const sidebar = document.getElementById('sidebar');
             const hamburger = document.querySelector('.hamburger');
@@ -766,7 +1238,9 @@
             }
         });
 
-        // ===== LOAD DEFAULT DASHBOARD =====
+        // ============================================================
+        // ===== INITIALIZE =====
+        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             loadStats();
         });
