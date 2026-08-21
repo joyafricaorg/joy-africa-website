@@ -202,6 +202,20 @@
         .login-box .recovery-section .back-to-login a:hover {
             color: #0B2447;
         }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         @media (max-width: 480px) {
             .login-box {
                 padding: 30px 20px;
@@ -217,7 +231,7 @@
         <div class="login-box">
             <!-- Logo -->
             <div class="logo">
-                <img src="images/logo.png" alt="JoyRise Africa Foundation">
+                <img src="../images/logo.png" alt="JoyRise Africa Foundation">
                 <h1>Admin Panel</h1>
                 <p>JoyRise Africa Foundation</p>
             </div>
@@ -273,74 +287,72 @@
     </div>
 
     <script>
-        // ===== ADMIN ACCOUNTS =====
-        const adminAccounts = {
-            'JoyRise.admin001': {
-                password: 'admin123',
-                recoveryWord: 'joyrise001',
-                isMainAdmin: true,
-                displayName: 'Super Admin'
-            },
-            'JoyRise.admin002': {
-                password: 'admin456',
-                recoveryWord: 'joyrise002',
-                isMainAdmin: false,
-                displayName: 'Admin 2'
-            },
-            'JoyRise.admin003': {
-                password: 'admin789',
-                recoveryWord: 'joyrise003',
-                isMainAdmin: false,
-                displayName: 'Admin 3'
-            },
-            'JoyRise.admin004': {
-                password: 'adminabc',
-                recoveryWord: 'joyrise004',
-                isMainAdmin: false,
-                displayName: 'Admin 4'
-            },
-            'JoyRise.admin005': {
-                password: 'adminxyz',
-                recoveryWord: 'joyrise005',
-                isMainAdmin: false,
-                displayName: 'Admin 5'
-            }
-        };
-
-        // ===== ALLOWED EMAILS =====
-        const allowedEmails = ['JoyRise.admin001', 'JoyRise.admin002', 'JoyRise.admin003', 'JoyRise.admin004', 'JoyRise.admin005'];
+        // ===== SUPABASE CONFIGURATION =====
+        const SUPABASE_URL = 'https://lvktwbukgisluhftabra.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2a3R3YnVrZ2lzbHVoZnRhYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczNDMxODIsImV4cCI6MjEwMjkxOTE4Mn0.mG7eKnQHOCxo_cidrOivL0PfAzRFo11Z_3qJZYW1eMk';
 
         // ===== LOGIN HANDLER =====
-        function handleLogin(e) {
+        async function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
+            const loginBtn = document.getElementById('loginBtn');
 
             // Hide previous messages
             errorMsg.classList.remove('show');
             document.getElementById('successMessage').classList.remove('show');
 
-            // Check if email is allowed
-            if (!allowedEmails.includes(email)) {
-                errorText.textContent = 'Email not authorized. Only 5 admin emails allowed.';
+            // Show loading state
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="loading-spinner"></span> Checking...';
+
+            try {
+                // Query Supabase for the user
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network error');
+                }
+
+                const users = await response.json();
+
+                if (users.length === 0) {
+                    errorText.textContent = 'Email not authorized. Only 5 admin emails allowed.';
+                    errorMsg.classList.add('show');
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = 'Login';
+                    return;
+                }
+
+                const user = users[0];
+
+                // Check password
+                if (user.password === password) {
+                    // Login successful
+                    localStorage.setItem('adminEmail', user.email);
+                    localStorage.setItem('adminName', user.display_name || 'Admin');
+                    localStorage.setItem('isMainAdmin', user.is_main_admin ? 'true' : 'false');
+                    localStorage.setItem('adminId', user.id);
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    errorText.textContent = 'Invalid password. Please try again.';
+                    errorMsg.classList.add('show');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                errorText.textContent = 'Connection error. Please try again.';
                 errorMsg.classList.add('show');
-                return;
             }
 
-            // Check credentials
-            const account = adminAccounts[email];
-            if (account && account.password === password) {
-                // Login successful
-                localStorage.setItem('adminEmail', email);
-                localStorage.setItem('adminName', account.displayName);
-                localStorage.setItem('isMainAdmin', account.isMainAdmin);
-                window.location.href = 'admin-dashboard.html';
-            } else {
-                errorText.textContent = 'Invalid password. Please try again.';
-                errorMsg.classList.add('show');
-            }
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = 'Login';
         }
 
         // ===== SHOW RECOVERY =====
@@ -362,7 +374,7 @@
         }
 
         // ===== RECOVERY HANDLER =====
-        function handleRecovery(e) {
+        async function handleRecovery(e) {
             e.preventDefault();
             const email = document.getElementById('recoveryEmail').value.trim();
             const word = document.getElementById('recoveryWord').value.trim();
@@ -374,18 +386,33 @@
             successMsg.classList.remove('show');
             errorMsg.classList.remove('show');
 
-            if (!allowedEmails.includes(email)) {
-                errorText.textContent = 'Email not authorized. Only 5 admin emails allowed.';
-                errorMsg.classList.add('show');
-                return;
-            }
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
 
-            const account = adminAccounts[email];
-            if (account && account.recoveryWord === word) {
-                successText.textContent = `Password recovered! Your password is: ${account.password}`;
-                successMsg.classList.add('show');
-            } else {
-                errorText.textContent = 'Invalid recovery word. Please try again.';
+                const users = await response.json();
+
+                if (users.length === 0) {
+                    errorText.textContent = 'Email not found.';
+                    errorMsg.classList.add('show');
+                    return;
+                }
+
+                const user = users[0];
+
+                if (user.recovery_word === word) {
+                    successText.textContent = `Password recovered! Your password is: ${user.password}`;
+                    successMsg.classList.add('show');
+                } else {
+                    errorText.textContent = 'Invalid recovery word. Please try again.';
+                    errorMsg.classList.add('show');
+                }
+            } catch (error) {
+                errorText.textContent = 'Connection error. Please try again.';
                 errorMsg.classList.add('show');
             }
         }
