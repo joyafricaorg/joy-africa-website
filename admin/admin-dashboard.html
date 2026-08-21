@@ -16,6 +16,7 @@
         .sidebar .logo img { height: 60px; margin-bottom: 8px; }
         .sidebar .logo h2 { color: #F28C28; font-size: 1.1rem; }
         .sidebar .logo p { font-size: 0.65rem; opacity: 0.7; color: #ccc; }
+        .sidebar .logo .home-hint { font-size:0.6rem; opacity:0.4; margin-top:5px; }
 
         .sidebar .user-info { padding: 15px 20px; background: rgba(255,255,255,0.05); margin: 15px; border-radius: 10px; text-align: center; }
         .sidebar .user-info .avatar { width: 50px; height: 50px; border-radius: 50%; background: #F28C28; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 1.5rem; font-weight: 700; color: white; }
@@ -57,7 +58,7 @@
         .stat-card.blue { border-left-color: #0984E3; }
 
         /* ===== UPLOAD BOX (Like Facebook) ===== */
-        .upload-box { border: 3px dashed #d1d5db; border-radius: 16px; padding: 40px 20px; text-align: center; background: #fafafa; transition: all 0.3s ease; cursor: pointer; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .upload-box { border: 3px dashed #d1d5db; border-radius: 16px; padding: 40px 20px; text-align: center; background: #fafafa; transition: all 0.3s ease; cursor: pointer; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .upload-box:hover { border-color: #F28C28; background: rgba(242, 140, 40, 0.05); }
         .upload-box.dragover { border-color: #F28C28; background: rgba(242, 140, 40, 0.1); }
         .upload-box i { font-size: 3rem; color: #9ca3af; margin-bottom: 15px; }
@@ -65,6 +66,7 @@
         .upload-box p { color: #6b7280; font-size: 0.9rem; }
         .upload-box .browse-btn { display: inline-block; margin-top: 15px; padding: 10px 30px; background: #F28C28; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; }
         .upload-box .browse-btn:hover { background: #0B2447; }
+        .upload-box .file-info { font-size:0.8rem; color:#059669; margin-top:8px; }
 
         /* ===== FILE PREVIEW ===== */
         .file-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px; }
@@ -134,7 +136,6 @@
             .file-preview-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* ===== LOADING SPINNER ===== */
         .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
@@ -143,12 +144,11 @@
 
     <!-- ===== SIDEBAR ===== -->
     <nav class="sidebar" id="sidebar">
-        <!-- Logo - Click to go to public website -->
         <div class="logo" onclick="goToHome()">
             <img src="../images/logo.png" alt="JoyRise Africa Foundation" id="sidebarLogo">
             <h2>Admin Panel</h2>
             <p>JoyRise Africa Foundation</p>
-            <p style="font-size:0.6rem; opacity:0.5; margin-top:5px;">← Click to visit website</p>
+            <div class="home-hint">← Click to visit website</div>
         </div>
 
         <div class="user-info">
@@ -161,6 +161,7 @@
         <ul class="nav-menu">
             <li class="nav-section">Main</li>
             <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#" onclick="showSection('verse-cover')"><i class="fas fa-image"></i> Edit Verse Cover</a></li>
             <li><a href="#" onclick="showSection('choir-cover')"><i class="fas fa-film"></i> Edit Choir Cover</a></li>
             <li><a href="#" onclick="showSection('verse')"><i class="fas fa-bible"></i> Weekly Verse</a></li>
             <li><a href="#" onclick="showSection('children')"><i class="fas fa-child"></i> Children</a></li>
@@ -207,6 +208,37 @@
             </div>
         </div>
 
+        <!-- ===== EDIT VERSE COVER ===== -->
+        <div class="content-section" id="section-verse-cover">
+            <h2 class="section-title">📖 Edit Weekly Verse Cover</h2>
+            <p style="color:#666; margin-bottom:20px;">Upload a background image for the Weekly Bible Verse page.</p>
+
+            <!-- Drag & Drop Upload Box for Verse Cover -->
+            <div class="upload-box" id="verseCoverUploadBox" onclick="document.getElementById('verseCoverFileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Verse Cover Image</h3>
+                <p>Click or drag and drop an image here (JPG, PNG, WEBP)</p>
+                <input type="file" id="verseCoverFileInput" accept="image/*" style="display:none;" onchange="handleVerseCoverFileSelect(event)">
+                <div class="browse-btn">Browse Files</div>
+            </div>
+            <div id="verseCoverFilePreview" class="file-preview-grid" style="display:none;"></div>
+
+            <form class="admin-form" onsubmit="saveVerseCover(event)" style="margin-top:20px;">
+                <input type="hidden" id="verseCoverImageUrl" value="">
+                <div class="publish-section">
+                    <button type="submit" class="publish-btn"><i class="fas fa-globe"></i> Publish Verse Cover</button>
+                    <span class="publish-status" id="verseCoverPublishStatus">Ready to publish</span>
+                </div>
+            </form>
+            <div id="verseCoverStatus" style="margin-top:15px; font-weight:700;"></div>
+
+            <hr style="margin:30px 0; border:1px solid #eee;">
+            <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Cover Preview</h3>
+            <div id="verseCoverPreview" style="background:#f8f9fa; border-radius:12px; padding:20px; text-align:center; border:2px dashed #e1e5eb; min-height:150px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                <p style="color:#999;">Loading preview...</p>
+            </div>
+        </div>
+
         <!-- ===== EDIT CHOIR COVER ===== -->
         <div class="content-section" id="section-choir-cover">
             <h2 class="section-title">🎬 Edit Choir Cover</h2>
@@ -216,37 +248,69 @@
                 <div class="form-group">
                     <label>Select Cover Type</label>
                     <div style="display:flex; flex-wrap:wrap; gap:10px;">
-                        <div class="cover-option-card" id="coverTypeVideo" onclick="selectCoverType('video')">
+                        <div class="cover-option-card" id="choirCoverTypeVideo" onclick="selectChoirCoverType('video')">
                             <i class="fas fa-video"></i><span>Video Cover</span>
                         </div>
-                        <div class="cover-option-card selected" id="coverTypeImage" onclick="selectCoverType('image')">
+                        <div class="cover-option-card selected" id="choirCoverTypeImage" onclick="selectChoirCoverType('image')">
                             <i class="fas fa-image"></i><span>Image Cover</span>
                         </div>
-                        <div class="cover-option-card" id="coverTypeSlideshow" onclick="selectCoverType('slideshow')">
+                        <div class="cover-option-card" id="choirCoverTypeSlideshow" onclick="selectChoirCoverType('slideshow')">
                             <i class="fas fa-images"></i><span>Photo Slideshow</span>
                         </div>
                     </div>
-                    <input type="hidden" id="coverType" value="image">
+                    <input type="hidden" id="choirCoverType" value="image">
                 </div>
-                <div class="form-group" id="videoUrlGroup" style="display:none;">
-                    <label>Video URL (MP4 format)</label>
-                    <input type="text" id="videoUrl" placeholder="images/choir-hero.mp4">
+
+                <!-- Video Upload -->
+                <div class="form-group" id="choirVideoGroup" style="display:none;">
+                    <label>Upload Video (MP4)</label>
+                    <div class="upload-box" id="choirVideoUploadBox" onclick="document.getElementById('choirVideoFileInput').click()" style="min-height:120px; padding:20px;">
+                        <i class="fas fa-video" style="font-size:2rem;"></i>
+                        <p style="font-size:0.85rem;">Click or drag and drop a video file</p>
+                        <input type="file" id="choirVideoFileInput" accept="video/*" style="display:none;" onchange="handleChoirVideoFileSelect(event)">
+                        <div class="browse-btn" style="padding:8px 20px; font-size:0.8rem;">Browse Video</div>
+                    </div>
+                    <div id="choirVideoPreview" class="file-preview-grid" style="display:none;"></div>
+                    <input type="hidden" id="choirVideoUrl" value="">
                 </div>
-                <div class="form-group" id="imageUrlGroup">
-                    <label>Image URL</label>
-                    <input type="text" id="imageUrl" placeholder="images/choir-hero.jpg">
+
+                <!-- Image Upload -->
+                <div class="form-group" id="choirImageGroup">
+                    <label>Upload Image</label>
+                    <div class="upload-box" id="choirImageUploadBox" onclick="document.getElementById('choirImageFileInput').click()" style="min-height:120px; padding:20px;">
+                        <i class="fas fa-image" style="font-size:2rem;"></i>
+                        <p style="font-size:0.85rem;">Click or drag and drop an image</p>
+                        <input type="file" id="choirImageFileInput" accept="image/*" style="display:none;" onchange="handleChoirImageFileSelect(event)">
+                        <div class="browse-btn" style="padding:8px 20px; font-size:0.8rem;">Browse Image</div>
+                    </div>
+                    <div id="choirImagePreview" class="file-preview-grid" style="display:none;"></div>
+                    <input type="hidden" id="choirImageUrl" value="">
                 </div>
-                <div class="form-group" id="slideshowGroup" style="display:none;">
-                    <label>Slideshow Images (one URL per line)</label>
-                    <textarea id="slideshowImages" rows="4" placeholder="images/choir1.jpg&#10;images/choir2.jpg"></textarea>
+
+                <!-- Slideshow Images Upload -->
+                <div class="form-group" id="choirSlideshowGroup" style="display:none;">
+                    <label>Upload Slideshow Images (multiple)</label>
+                    <div class="upload-box" id="choirSlideshowUploadBox" onclick="document.getElementById('choirSlideshowFileInput').click()" style="min-height:120px; padding:20px;">
+                        <i class="fas fa-images" style="font-size:2rem;"></i>
+                        <p style="font-size:0.85rem;">Click or drag and drop multiple images</p>
+                        <input type="file" id="choirSlideshowFileInput" accept="image/*" multiple style="display:none;" onchange="handleChoirSlideshowFileSelect(event)">
+                        <div class="browse-btn" style="padding:8px 20px; font-size:0.8rem;">Browse Images</div>
+                    </div>
+                    <div id="choirSlideshowPreview" class="file-preview-grid" style="display:none;"></div>
+                    <input type="hidden" id="choirSlideshowImages" value="">
                 </div>
-                <div class="form-group" id="intervalGroup" style="display:none;">
+
+                <div class="form-group" id="choirIntervalGroup" style="display:none;">
                     <label>Slideshow Interval (seconds)</label>
-                    <input type="number" id="slideshowInterval" value="4" min="2" max="10">
+                    <input type="number" id="choirSlideshowInterval" value="4" min="2" max="10">
                 </div>
-                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Save Cover Settings</button>
+
+                <div class="publish-section">
+                    <button type="submit" class="publish-btn"><i class="fas fa-globe"></i> Publish Choir Cover</button>
+                    <span class="publish-status" id="choirCoverPublishStatus">Ready to publish</span>
+                </div>
             </form>
-            <div id="coverStatus" style="margin-top:15px; font-weight:700;"></div>
+            <div id="choirCoverStatus" style="margin-top:15px; font-weight:700;"></div>
         </div>
 
         <!-- ===== WEEKLY VERSE ===== -->
@@ -271,7 +335,6 @@
         <div class="content-section" id="section-children">
             <h2 class="section-title">👧🏾 Manage Children</h2>
 
-            <!-- Drag & Drop Upload Box -->
             <div class="upload-box" id="childUploadBox" onclick="document.getElementById('childFileInput').click()">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Upload Child Image</h3>
@@ -303,7 +366,6 @@
         <div class="content-section" id="section-choir-media">
             <h2 class="section-title">🎵 Choir Media</h2>
 
-            <!-- Drag & Drop Upload Box for Choir Media -->
             <div class="upload-box" id="choirUploadBox" onclick="document.getElementById('choirFileInput').click()">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Upload Choir Images or Videos</h3>
@@ -334,7 +396,6 @@
         <div class="content-section" id="section-music">
             <h2 class="section-title">🎶 Music Projects</h2>
 
-            <!-- Drag & Drop Upload Box for Music Covers -->
             <div class="upload-box" id="musicUploadBox" onclick="document.getElementById('musicFileInput').click()">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Upload Music Cover Art</h3>
@@ -366,7 +427,6 @@
         <div class="content-section" id="section-tours">
             <h2 class="section-title">🎤 Tours & Events</h2>
 
-            <!-- Drag & Drop Upload Box for Tour Posters -->
             <div class="upload-box" id="tourUploadBox" onclick="document.getElementById('tourFileInput').click()">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Upload Event Poster</h3>
@@ -486,9 +546,6 @@
             const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
             const filePath = `${folder}/${fileName}`;
 
-            const formData = new FormData();
-            formData.append('file', file);
-
             const response = await fetch(`${SUPABASE_URL}/storage/v1/object/website-uploads/${filePath}`, {
                 method: 'POST',
                 headers: {
@@ -503,7 +560,6 @@
                 throw new Error(`Upload failed: ${errorText}`);
             }
 
-            // Get public URL
             const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/website-uploads/${filePath}`;
             return publicUrl;
         }
@@ -544,11 +600,11 @@
                 document.getElementById('mainAdminWarning').style.display = isMainAdmin ? 'none' : 'block';
             }
 
-            // Load data
             if (sectionName === 'dashboard') loadStats();
+            if (sectionName === 'verse-cover') loadVerseCover();
+            if (sectionName === 'choir-cover') loadChoirCover();
             if (sectionName === 'verse') loadVerse();
             if (sectionName === 'children') loadChildren();
-            if (sectionName === 'choir-cover') loadChoirCover();
             if (sectionName === 'choir-media') loadChoirMedia();
             if (sectionName === 'music') loadMusicProjects();
             if (sectionName === 'tours') loadTours();
@@ -576,10 +632,301 @@
         }
 
         // ============================================================
-        // ===== FILE UPLOAD HANDLERS =====
+        // ===== VERSE COVER UPLOAD FUNCTIONS =====
         // ============================================================
+        let verseCoverUploadedFiles = [];
 
-        // --- Child Image Upload ---
+        function handleVerseCoverFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                verseCoverUploadedFiles = Array.from(files);
+                previewVerseCoverFiles();
+            }
+        }
+
+        function previewVerseCoverFiles() {
+            const container = document.getElementById('verseCoverFilePreview');
+            container.innerHTML = '';
+            container.style.display = 'grid';
+
+            verseCoverUploadedFiles.forEach((file, index) => {
+                const url = URL.createObjectURL(file);
+                const div = document.createElement('div');
+                div.className = 'file-preview-item';
+                div.innerHTML = `
+                    <img src="${url}" alt="${file.name}">
+                    <button class="remove-file" onclick="removeVerseCoverFile(${index})">&times;</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function removeVerseCoverFile(index) {
+            verseCoverUploadedFiles.splice(index, 1);
+            if (verseCoverUploadedFiles.length === 0) {
+                document.getElementById('verseCoverFilePreview').style.display = 'none';
+            } else {
+                previewVerseCoverFiles();
+            }
+        }
+
+        async function loadVerseCover() {
+            try {
+                const data = await supabaseFetch('verse_cover?limit=1');
+                if (data && data.length > 0) {
+                    const preview = document.getElementById('verseCoverPreview');
+                    if (data[0].image_url) {
+                        preview.innerHTML = `<img src="${data[0].image_url}" style="max-width:100%; max-height:300px; border-radius:10px; object-fit:cover;">`;
+                    } else {
+                        preview.innerHTML = '<p style="color:#999;">No cover image set.</p>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading verse cover:', error);
+            }
+        }
+
+        async function saveVerseCover(e) {
+            e.preventDefault();
+            const statusEl = document.getElementById('verseCoverPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
+            try {
+                let imageUrl = '';
+
+                if (verseCoverUploadedFiles.length > 0) {
+                    const file = verseCoverUploadedFiles[0];
+                    imageUrl = await uploadFileToSupabase(file, 'verse-covers');
+                    showToast('Image uploaded!', 'success');
+                }
+
+                const data = { image_url: imageUrl, updated_at: new Date().toISOString() };
+
+                const existing = await supabaseFetch('verse_cover?limit=1');
+                if (existing && existing.length > 0) {
+                    await supabaseFetch(`verse_cover?id=eq.${existing[0].id}`, { method: 'PATCH', body: JSON.stringify(data) });
+                } else {
+                    await supabaseFetch('verse_cover', { method: 'POST', body: JSON.stringify(data) });
+                }
+
+                verseCoverUploadedFiles = [];
+                document.getElementById('verseCoverFilePreview').style.display = 'none';
+                document.getElementById('verseCoverFileInput').value = '';
+
+                document.getElementById('verseCoverStatus').textContent = '✅ Verse cover published!';
+                document.getElementById('verseCoverStatus').style.color = '#059669';
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Verse cover published!', 'success');
+                loadVerseCover();
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                document.getElementById('verseCoverStatus').textContent = '❌ Error: ' + error.message;
+                document.getElementById('verseCoverStatus').style.color = '#dc2626';
+                showToast('Error publishing verse cover', 'error');
+            }
+        }
+
+        // ============================================================
+        // ===== CHOIR COVER FUNCTIONS =====
+        // ============================================================
+        let choirVideoUploadedFiles = [];
+        let choirImageUploadedFiles = [];
+        let choirSlideshowUploadedFiles = [];
+
+        function selectChoirCoverType(type) {
+            document.getElementById('choirCoverType').value = type;
+            document.querySelectorAll('#section-choir-cover .cover-option-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById(`choirCoverType${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('selected');
+
+            document.getElementById('choirVideoGroup').style.display = type === 'video' ? 'block' : 'none';
+            document.getElementById('choirImageGroup').style.display = type === 'image' ? 'block' : 'none';
+            document.getElementById('choirSlideshowGroup').style.display = type === 'slideshow' ? 'block' : 'none';
+            document.getElementById('choirIntervalGroup').style.display = type === 'slideshow' ? 'block' : 'none';
+        }
+
+        // --- Choir Video Upload ---
+        function handleChoirVideoFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                choirVideoUploadedFiles = Array.from(files);
+                const container = document.getElementById('choirVideoPreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                choirVideoUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <video src="${url}" muted></video>
+                        <button class="remove-file" onclick="removeChoirVideoFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        function removeChoirVideoFile(index) {
+            choirVideoUploadedFiles.splice(index, 1);
+            if (choirVideoUploadedFiles.length === 0) {
+                document.getElementById('choirVideoPreview').style.display = 'none';
+            }
+        }
+
+        // --- Choir Image Upload ---
+        function handleChoirImageFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                choirImageUploadedFiles = Array.from(files);
+                const container = document.getElementById('choirImagePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                choirImageUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeChoirImageFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        function removeChoirImageFile(index) {
+            choirImageUploadedFiles.splice(index, 1);
+            if (choirImageUploadedFiles.length === 0) {
+                document.getElementById('choirImagePreview').style.display = 'none';
+            }
+        }
+
+        // --- Choir Slideshow Upload ---
+        function handleChoirSlideshowFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                choirSlideshowUploadedFiles = Array.from(files);
+                const container = document.getElementById('choirSlideshowPreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                choirSlideshowUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeChoirSlideshowFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        function removeChoirSlideshowFile(index) {
+            choirSlideshowUploadedFiles.splice(index, 1);
+            if (choirSlideshowUploadedFiles.length === 0) {
+                document.getElementById('choirSlideshowPreview').style.display = 'none';
+            }
+        }
+
+        // --- Load Choir Cover ---
+        async function loadChoirCover() {
+            try {
+                const data = await supabaseFetch('choir_cover?limit=1');
+                if (data && data.length > 0) {
+                    const c = data[0];
+                    selectChoirCoverType(c.cover_type);
+                    document.getElementById('choirSlideshowInterval').value = c.slideshow_interval || 4;
+                    if (c.video_url) document.getElementById('choirVideoUrl').value = c.video_url;
+                    if (c.image_url) document.getElementById('choirImageUrl').value = c.image_url;
+                    if (c.slideshow_images) document.getElementById('choirSlideshowImages').value = c.slideshow_images;
+                }
+            } catch (error) { console.error('Error loading choir cover:', error); }
+        }
+
+        // --- Save Choir Cover ---
+        async function saveChoirCover(e) {
+            e.preventDefault();
+            const statusEl = document.getElementById('choirCoverPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
+            try {
+                let videoUrl = document.getElementById('choirVideoUrl').value;
+                let imageUrl = document.getElementById('choirImageUrl').value;
+                let slideshowImages = document.getElementById('choirSlideshowImages').value;
+
+                // Upload video if selected
+                if (choirVideoUploadedFiles.length > 0) {
+                    const file = choirVideoUploadedFiles[0];
+                    videoUrl = await uploadFileToSupabase(file, 'choir-videos');
+                    showToast('Video uploaded!', 'success');
+                }
+
+                // Upload image if selected
+                if (choirImageUploadedFiles.length > 0) {
+                    const file = choirImageUploadedFiles[0];
+                    imageUrl = await uploadFileToSupabase(file, 'choir-images');
+                    showToast('Image uploaded!', 'success');
+                }
+
+                // Upload slideshow images if selected
+                if (choirSlideshowUploadedFiles.length > 0) {
+                    const urls = [];
+                    for (const file of choirSlideshowUploadedFiles) {
+                        const url = await uploadFileToSupabase(file, 'choir-slideshow');
+                        urls.push(url);
+                    }
+                    slideshowImages = urls.join('\n');
+                    showToast('Slideshow images uploaded!', 'success');
+                }
+
+                const data = {
+                    cover_type: document.getElementById('choirCoverType').value,
+                    video_url: videoUrl,
+                    image_url: imageUrl,
+                    slideshow_images: slideshowImages,
+                    slideshow_interval: parseInt(document.getElementById('choirSlideshowInterval').value) || 4,
+                    updated_at: new Date().toISOString()
+                };
+
+                const existing = await supabaseFetch('choir_cover?limit=1');
+                if (existing && existing.length > 0) {
+                    await supabaseFetch(`choir_cover?id=eq.${existing[0].id}`, { method: 'PATCH', body: JSON.stringify(data) });
+                } else {
+                    await supabaseFetch('choir_cover', { method: 'POST', body: JSON.stringify(data) });
+                }
+
+                // Reset uploads
+                choirVideoUploadedFiles = [];
+                choirImageUploadedFiles = [];
+                choirSlideshowUploadedFiles = [];
+                document.getElementById('choirVideoPreview').style.display = 'none';
+                document.getElementById('choirImagePreview').style.display = 'none';
+                document.getElementById('choirSlideshowPreview').style.display = 'none';
+                document.getElementById('choirVideoFileInput').value = '';
+                document.getElementById('choirImageFileInput').value = '';
+                document.getElementById('choirSlideshowFileInput').value = '';
+
+                document.getElementById('choirCoverStatus').textContent = '✅ Choir cover published!';
+                document.getElementById('choirCoverStatus').style.color = '#059669';
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Choir cover published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                document.getElementById('choirCoverStatus').textContent = '❌ Error: ' + error.message;
+                document.getElementById('choirCoverStatus').style.color = '#dc2626';
+                showToast('Error publishing choir cover', 'error');
+            }
+        }
+
+        // ============================================================
+        // ===== CHILDREN UPLOAD FUNCTIONS =====
+        // ============================================================
         let childUploadedFiles = [];
 
         function handleChildFileSelect(event) {
@@ -594,7 +941,6 @@
             const container = document.getElementById('childFilePreview');
             container.innerHTML = '';
             container.style.display = 'grid';
-
             childUploadedFiles.forEach((file, index) => {
                 const url = URL.createObjectURL(file);
                 const div = document.createElement('div');
@@ -616,115 +962,100 @@
             }
         }
 
-        // --- Choir Media Upload ---
+        // ============================================================
+        // ===== CHOIR MEDIA UPLOAD FUNCTIONS =====
+        // ============================================================
         let choirUploadedFiles = [];
 
         function handleChoirFileSelect(event) {
             const files = event.target.files;
             if (files.length > 0) {
                 choirUploadedFiles = Array.from(files);
-                previewChoirFiles();
+                const container = document.getElementById('choirFilePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                choirUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    const isVideo = file.type.startsWith('video/');
+                    div.innerHTML = `
+                        ${isVideo ? `<video src="${url}" muted></video>` : `<img src="${url}" alt="${file.name}">`}
+                        <button class="remove-file" onclick="removeChoirFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
             }
-        }
-
-        function previewChoirFiles() {
-            const container = document.getElementById('choirFilePreview');
-            container.innerHTML = '';
-            container.style.display = 'grid';
-
-            choirUploadedFiles.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                const div = document.createElement('div');
-                div.className = 'file-preview-item';
-                const isVideo = file.type.startsWith('video/');
-                div.innerHTML = `
-                    ${isVideo ? `<video src="${url}" muted></video>` : `<img src="${url}" alt="${file.name}">`}
-                    <button class="remove-file" onclick="removeChoirFile(${index})">&times;</button>
-                `;
-                container.appendChild(div);
-            });
         }
 
         function removeChoirFile(index) {
             choirUploadedFiles.splice(index, 1);
             if (choirUploadedFiles.length === 0) {
                 document.getElementById('choirFilePreview').style.display = 'none';
-            } else {
-                previewChoirFiles();
             }
         }
 
-        // --- Music Cover Upload ---
+        // ============================================================
+        // ===== MUSIC COVER UPLOAD FUNCTIONS =====
+        // ============================================================
         let musicUploadedFiles = [];
 
         function handleMusicFileSelect(event) {
             const files = event.target.files;
             if (files.length > 0) {
                 musicUploadedFiles = Array.from(files);
-                previewMusicFiles();
+                const container = document.getElementById('musicFilePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                musicUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeMusicFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
             }
-        }
-
-        function previewMusicFiles() {
-            const container = document.getElementById('musicFilePreview');
-            container.innerHTML = '';
-            container.style.display = 'grid';
-
-            musicUploadedFiles.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                const div = document.createElement('div');
-                div.className = 'file-preview-item';
-                div.innerHTML = `
-                    <img src="${url}" alt="${file.name}">
-                    <button class="remove-file" onclick="removeMusicFile(${index})">&times;</button>
-                `;
-                container.appendChild(div);
-            });
         }
 
         function removeMusicFile(index) {
             musicUploadedFiles.splice(index, 1);
             if (musicUploadedFiles.length === 0) {
                 document.getElementById('musicFilePreview').style.display = 'none';
-            } else {
-                previewMusicFiles();
             }
         }
 
-        // --- Tour Poster Upload ---
+        // ============================================================
+        // ===== TOUR POSTER UPLOAD FUNCTIONS =====
+        // ============================================================
         let tourUploadedFiles = [];
 
         function handleTourFileSelect(event) {
             const files = event.target.files;
             if (files.length > 0) {
                 tourUploadedFiles = Array.from(files);
-                previewTourFiles();
+                const container = document.getElementById('tourFilePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                tourUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeTourFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
             }
-        }
-
-        function previewTourFiles() {
-            const container = document.getElementById('tourFilePreview');
-            container.innerHTML = '';
-            container.style.display = 'grid';
-
-            tourUploadedFiles.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                const div = document.createElement('div');
-                div.className = 'file-preview-item';
-                div.innerHTML = `
-                    <img src="${url}" alt="${file.name}">
-                    <button class="remove-file" onclick="removeTourFile(${index})">&times;</button>
-                `;
-                container.appendChild(div);
-            });
         }
 
         function removeTourFile(index) {
             tourUploadedFiles.splice(index, 1);
             if (tourUploadedFiles.length === 0) {
                 document.getElementById('tourFilePreview').style.display = 'none';
-            } else {
-                previewTourFiles();
             }
         }
 
@@ -843,7 +1174,6 @@
 
                 await supabaseFetch('children', { method: 'POST', body: JSON.stringify(data) });
 
-                // Reset form
                 document.getElementById('childName').value = '';
                 document.getElementById('childAge').value = '';
                 document.getElementById('childLocation').value = '';
@@ -855,7 +1185,7 @@
                 loadChildren();
                 statusEl.textContent = '✅ Published successfully!';
                 statusEl.style.color = '#059669';
-                showToast('Child published to website!', 'success');
+                showToast('Child published!', 'success');
             } catch (error) {
                 statusEl.textContent = '❌ Error: ' + error.message;
                 statusEl.style.color = '#dc2626';
@@ -870,61 +1200,6 @@
                 loadChildren();
                 showToast('Child deleted!', 'success');
             } catch (error) { showToast('Error deleting child', 'error'); }
-        }
-
-        // ============================================================
-        // ===== CHOIR COVER =====
-        // ============================================================
-        function selectCoverType(type) {
-            document.getElementById('coverType').value = type;
-            document.querySelectorAll('.cover-option-card').forEach(c => c.classList.remove('selected'));
-            document.getElementById(`coverType${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('selected');
-
-            document.getElementById('videoUrlGroup').style.display = type === 'video' ? 'block' : 'none';
-            document.getElementById('imageUrlGroup').style.display = type === 'image' ? 'block' : 'none';
-            document.getElementById('slideshowGroup').style.display = type === 'slideshow' ? 'block' : 'none';
-            document.getElementById('intervalGroup').style.display = type === 'slideshow' ? 'block' : 'none';
-        }
-
-        async function loadChoirCover() {
-            try {
-                const data = await supabaseFetch('choir_cover?limit=1');
-                if (data && data.length > 0) {
-                    const c = data[0];
-                    selectCoverType(c.cover_type);
-                    document.getElementById('videoUrl').value = c.video_url || '';
-                    document.getElementById('imageUrl').value = c.image_url || '';
-                    document.getElementById('slideshowImages').value = c.slideshow_images || '';
-                    document.getElementById('slideshowInterval').value = c.slideshow_interval || 4;
-                }
-            } catch (error) { console.error('Error loading choir cover:', error); }
-        }
-
-        async function saveChoirCover(e) {
-            e.preventDefault();
-            const data = {
-                cover_type: document.getElementById('coverType').value,
-                video_url: document.getElementById('videoUrl').value,
-                image_url: document.getElementById('imageUrl').value,
-                slideshow_images: document.getElementById('slideshowImages').value,
-                slideshow_interval: parseInt(document.getElementById('slideshowInterval').value) || 4,
-                updated_at: new Date().toISOString()
-            };
-            try {
-                const existing = await supabaseFetch('choir_cover?limit=1');
-                if (existing && existing.length > 0) {
-                    await supabaseFetch(`choir_cover?id=eq.${existing[0].id}`, { method: 'PATCH', body: JSON.stringify(data) });
-                } else {
-                    await supabaseFetch('choir_cover', { method: 'POST', body: JSON.stringify(data) });
-                }
-                document.getElementById('coverStatus').textContent = '✅ Cover saved!';
-                document.getElementById('coverStatus').style.color = '#059669';
-                showToast('Choir cover saved!', 'success');
-            } catch (error) {
-                document.getElementById('coverStatus').textContent = '❌ Error saving';
-                document.getElementById('coverStatus').style.color = '#dc2626';
-                showToast('Error saving cover', 'error');
-            }
         }
 
         // ============================================================
@@ -1206,21 +1481,112 @@
 
                 const files = e.dataTransfer.files;
                 if (files.length > 0) {
-                    // Find which upload box it is
-                    if (this.id === 'childUploadBox') {
+                    if (this.id === 'verseCoverUploadBox') {
+                        verseCoverUploadedFiles = Array.from(files);
+                        previewVerseCoverFiles();
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
+                    } else if (this.id === 'choirVideoUploadBox') {
+                        choirVideoUploadedFiles = Array.from(files);
+                        const container = document.getElementById('choirVideoPreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        choirVideoUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            div.innerHTML = `
+                                <video src="${url}" muted></video>
+                                <button class="remove-file" onclick="removeChoirVideoFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
+                    } else if (this.id === 'choirImageUploadBox') {
+                        choirImageUploadedFiles = Array.from(files);
+                        const container = document.getElementById('choirImagePreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        choirImageUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            div.innerHTML = `
+                                <img src="${url}" alt="${file.name}">
+                                <button class="remove-file" onclick="removeChoirImageFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
+                    } else if (this.id === 'choirSlideshowUploadBox') {
+                        choirSlideshowUploadedFiles = Array.from(files);
+                        const container = document.getElementById('choirSlideshowPreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        choirSlideshowUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            div.innerHTML = `
+                                <img src="${url}" alt="${file.name}">
+                                <button class="remove-file" onclick="removeChoirSlideshowFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
+                    } else if (this.id === 'childUploadBox') {
                         childUploadedFiles = Array.from(files);
                         previewChildFiles();
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
                     } else if (this.id === 'choirUploadBox') {
                         choirUploadedFiles = Array.from(files);
-                        previewChoirFiles();
+                        const container = document.getElementById('choirFilePreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        choirUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            const isVideo = file.type.startsWith('video/');
+                            div.innerHTML = `
+                                ${isVideo ? `<video src="${url}" muted></video>` : `<img src="${url}" alt="${file.name}">`}
+                                <button class="remove-file" onclick="removeChoirFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
                     } else if (this.id === 'musicUploadBox') {
                         musicUploadedFiles = Array.from(files);
-                        previewMusicFiles();
+                        const container = document.getElementById('musicFilePreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        musicUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            div.innerHTML = `
+                                <img src="${url}" alt="${file.name}">
+                                <button class="remove-file" onclick="removeMusicFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
                     } else if (this.id === 'tourUploadBox') {
                         tourUploadedFiles = Array.from(files);
-                        previewTourFiles();
+                        const container = document.getElementById('tourFilePreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        tourUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            div.innerHTML = `
+                                <img src="${url}" alt="${file.name}">
+                                <button class="remove-file" onclick="removeTourFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
+                        showToast(`${files.length} file(s) uploaded!`, 'success');
                     }
-                    showToast(`${files.length} file(s) uploaded!`, 'success');
                 }
             });
         });
