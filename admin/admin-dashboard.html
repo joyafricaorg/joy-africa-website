@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== ADMIN DASHBOARD STYLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Roboto', sans-serif;
@@ -22,8 +21,6 @@
             display: flex;
             min-height: 100vh;
         }
-
-        /* ===== SIDEBAR ===== */
         .sidebar {
             width: 260px;
             background: #0B2447;
@@ -162,8 +159,6 @@
         .sidebar .logout-btn i {
             margin-right: 8px;
         }
-
-        /* ===== MAIN CONTENT ===== */
         .main-content {
             margin-left: 260px;
             padding: 20px 30px;
@@ -227,8 +222,6 @@
             background: #047857;
             transform: scale(1.02);
         }
-
-        /* ===== STATS CARDS ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -266,8 +259,6 @@
         .stat-card.green { border-left-color: #2ECC71; }
         .stat-card.red { border-left-color: #FF6B6B; }
         .stat-card.blue { border-left-color: #0984E3; }
-
-        /* ===== CONTENT SECTIONS ===== */
         .content-section {
             display: none;
             background: white;
@@ -287,8 +278,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
-        /* ===== TABLES ===== */
         .table-container {
             overflow-x: auto;
         }
@@ -341,8 +330,6 @@
         table .actions .delete-btn:hover {
             background: #b91c1c;
         }
-
-        /* ===== FORMS ===== */
         .admin-form {
             max-width: 800px;
         }
@@ -423,8 +410,6 @@
             background: #0B2447;
             transform: scale(1.02);
         }
-
-        /* ===== TOAST NOTIFICATION ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -447,8 +432,6 @@
         .toast.success { background: #059669; }
         .toast.error { background: #dc2626; }
         .toast.info { background: #0984E3; }
-
-        /* ===== MOBILE HAMBURGER ===== */
         .hamburger {
             display: none;
             background: none;
@@ -458,8 +441,20 @@
             cursor: pointer;
             padding: 8px;
         }
-
-        /* ===== RESPONSIVE ===== */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -503,7 +498,7 @@
         <!-- ===== SIDEBAR ===== -->
         <nav class="sidebar" id="sidebar">
             <div class="logo">
-                <img src="images/logo.png" alt="JoyRise Africa Foundation">
+                <img src="../images/logo.png" alt="JoyRise Africa Foundation">
                 <h2>Admin Panel</h2>
                 <p>JoyRise Africa Foundation</p>
             </div>
@@ -511,7 +506,7 @@
                 <div class="avatar" id="userAvatar">SA</div>
                 <div class="name" id="userName">Super Admin</div>
                 <div class="email" id="userEmail">JoyRise.admin001</div>
-                <div class="badge">Main Admin</div>
+                <div class="badge" id="userBadge">Main Admin</div>
             </div>
             <ul class="nav-menu">
                 <li class="nav-section">Main</li>
@@ -523,9 +518,9 @@
                 <li><a href="#" onclick="showSection('music')"><i class="fas fa-music"></i> Music Projects</a></li>
                 <li><a href="#" onclick="showSection('tours')"><i class="fas fa-calendar-alt"></i> Tours & Events</a></li>
                 <li class="nav-section">Submissions</li>
-                <li><a href="#" onclick="showSection('partners')"><i class="fas fa-handshake"></i> Partners <span class="badge-count">3</span></a></li>
-                <li><a href="#" onclick="showSection('volunteers')"><i class="fas fa-hands-helping"></i> Volunteers <span class="badge-count">5</span></a></li>
-                <li><a href="#" onclick="showSection('sponsorships')"><i class="fas fa-heart"></i> Sponsorships <span class="badge-count">2</span></a></li>
+                <li><a href="#" onclick="showSection('partners')"><i class="fas fa-handshake"></i> Partners</a></li>
+                <li><a href="#" onclick="showSection('volunteers')"><i class="fas fa-hands-helping"></i> Volunteers</a></li>
+                <li><a href="#" onclick="showSection('sponsorships')"><i class="fas fa-heart"></i> Sponsorships</a></li>
                 <li class="nav-section">Admin</li>
                 <li><a href="#" onclick="showSection('admins')"><i class="fas fa-users-cog"></i> Manage Admins</a></li>
             </ul>
@@ -534,13 +529,12 @@
 
         <!-- ===== MAIN CONTENT ===== -->
         <div class="main-content">
-            <!-- Page Header -->
             <div class="page-header">
                 <div>
                     <button class="hamburger" onclick="toggleSidebar()">☰</button>
                     <h1 id="pageTitle">Dashboard</h1>
                 </div>
-                <div class="header-actions" id="headerActions">
+                <div class="header-actions">
                     <button class="btn btn-primary" onclick="refreshData()"><i class="fas fa-sync"></i> Refresh</button>
                     <button class="btn btn-success" onclick="previewWebsite()"><i class="fas fa-eye"></i> Preview Site</button>
                 </div>
@@ -548,33 +542,7 @@
 
             <!-- ===== DASHBOARD ===== -->
             <div class="content-section active" id="section-dashboard">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-child"></i></div>
-                        <div class="stat-number" id="statChildren">18</div>
-                        <div class="stat-label">Children Sponsored</div>
-                    </div>
-                    <div class="stat-card purple">
-                        <div class="stat-icon"><i class="fas fa-handshake"></i></div>
-                        <div class="stat-number" id="statPartners">12</div>
-                        <div class="stat-label">Active Partners</div>
-                    </div>
-                    <div class="stat-card green">
-                        <div class="stat-icon"><i class="fas fa-hands-helping"></i></div>
-                        <div class="stat-number" id="statVolunteers">25</div>
-                        <div class="stat-label">Volunteers</div>
-                    </div>
-                    <div class="stat-card red">
-                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
-                        <div class="stat-number" id="statSponsorships">8</div>
-                        <div class="stat-label">Active Sponsorships</div>
-                    </div>
-                    <div class="stat-card blue">
-                        <div class="stat-icon"><i class="fas fa-music"></i></div>
-                        <div class="stat-number" id="statMusic">7</div>
-                        <div class="stat-label">Music Projects</div>
-                    </div>
-                </div>
+                <div class="stats-grid" id="statsGrid"></div>
                 <div style="background:#f8f9fa; border-radius:16px; padding:30px; text-align:center; border:2px dashed #e1e5eb;">
                     <i class="fas fa-chart-line" style="font-size:3rem; color:#ccc;"></i>
                     <h3 style="color:#666; margin-top:10px;">Welcome to the Admin Dashboard</h3>
@@ -588,42 +556,43 @@
                 <form class="admin-form" onsubmit="saveVerse(event)">
                     <div class="form-group">
                         <label>Week Number</label>
-                        <input type="text" id="verseWeek" value="WEEK ONE" required>
+                        <input type="text" id="verseWeek" required>
                     </div>
                     <div class="form-group">
                         <label>Verse Reference</label>
-                        <input type="text" id="verseReference" value="PROVERBS 31:8-9" required>
+                        <input type="text" id="verseReference" required>
                     </div>
                     <div class="form-group">
                         <label>Verse Text</label>
-                        <textarea id="verseText" rows="3" required>"Speak up for those who cannot speak for themselves, for the rights of all who are destitute. Speak up and judge fairly; defend the rights of the poor and needy."</textarea>
+                        <textarea id="verseText" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
                         <label>Explanation (Paragraph 1)</label>
-                        <textarea id="verseExplanation1" rows="4">Proverbs 31:8-9 is a powerful call to advocacy and justice, particularly for the most vulnerable in society...</textarea>
+                        <textarea id="verseExplanation1" rows="4"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Explanation (Paragraph 2)</label>
-                        <textarea id="verseExplanation2" rows="4">The command to "speak up" implies both vocal advocacy and tangible action...</textarea>
+                        <textarea id="verseExplanation2" rows="4"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Explanation (Paragraph 3)</label>
-                        <textarea id="verseExplanation3" rows="4">This passage also challenges modern believers to evaluate their role in systemic justice...</textarea>
+                        <textarea id="verseExplanation3" rows="4"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Explanation (Paragraph 4)</label>
-                        <textarea id="verseExplanation4" rows="4">Practically, Proverbs 31:8-9 invites communities to create environments where children thrive...</textarea>
+                        <textarea id="verseExplanation4" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Application Points (comma separated)</label>
-                        <input type="text" id="verseApplication" value="Advocate: Use your voice in social, legal, or political spheres, Support: Contribute to organizations, Mentor: Engage in relationships, Pray: Seek God's wisdom">
+                        <label>Application Points</label>
+                        <textarea id="verseApplication" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Summary</label>
-                        <textarea id="verseSummary" rows="3">Proverbs 31:8-9 is a divine mandate to actively defend and uplift vulnerable children, combining advocacy, justice, and practical care.</textarea>
+                        <textarea id="verseSummary" rows="3"></textarea>
                     </div>
                     <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Save Verse</button>
                 </form>
+                <div id="verseStatus" style="margin-top:15px; font-weight:700;"></div>
             </div>
 
             <!-- ===== CHILDREN ===== -->
@@ -654,13 +623,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Upload Image</label>
-                        <div class="file-upload" onclick="document.getElementById('childImageInput').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to upload child's image</p>
-                            <input type="file" id="childImageInput" accept="image/*" style="display:none;" onchange="previewChildImage(event)">
-                        </div>
-                        <img class="preview-image" id="childImagePreview" style="display:none;">
+                        <label>Image URL</label>
+                        <input type="text" id="childImageUrl" placeholder="images/child1.jpg">
                     </div>
                     <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Child</button>
                 </form>
@@ -671,11 +635,7 @@
                         <thead>
                             <tr><th>Name</th><th>Age</th><th>Location</th><th>Actions</th></tr>
                         </thead>
-                        <tbody id="childrenTable">
-                            <tr><td>Sarah A.</td><td>8</td><td>Kampala, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                            <tr><td>David M.</td><td>10</td><td>Jinja, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                            <tr><td>Grace N.</td><td>6</td><td>Gulu, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                        </tbody>
+                        <tbody id="childrenTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -704,12 +664,8 @@
                         <input type="text" id="choirMediaTag" placeholder="Rehearsal, Performance, etc.">
                     </div>
                     <div class="form-group">
-                        <label>Upload File (Image or Video)</label>
-                        <div class="file-upload" onclick="document.getElementById('choirMediaInput').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to upload media file</p>
-                            <input type="file" id="choirMediaInput" accept="image/*,video/*" style="display:none;">
-                        </div>
+                        <label>File URL</label>
+                        <input type="text" id="choirMediaUrl" placeholder="images/choir1.jpg or video URL">
                     </div>
                     <button type="submit" class="submit-btn"><i class="fas fa-upload"></i> Upload Media</button>
                 </form>
@@ -720,11 +676,7 @@
                         <thead>
                             <tr><th>Title</th><th>Type</th><th>Tag</th><th>Actions</th></tr>
                         </thead>
-                        <tbody id="choirMediaTable">
-                            <tr><td>Choir Rehearsal - August 2025</td><td>Image</td><td>Rehearsal</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                            <tr><td>Sunday Service Performance</td><td>Image</td><td>Performance</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                            <tr><td>Choir Performance - "Rise Up"</td><td>Video</td><td>Performance</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                        </tbody>
+                        <tbody id="choirMediaTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -754,15 +706,11 @@
                         <input type="number" id="musicProjectYear" value="2025">
                     </div>
                     <div class="form-group">
-                        <label>Cover Image</label>
-                        <div class="file-upload" onclick="document.getElementById('musicCoverInput').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to upload cover image</p>
-                            <input type="file" id="musicCoverInput" accept="image/*" style="display:none;">
-                        </div>
+                        <label>Cover URL</label>
+                        <input type="text" id="musicCoverUrl" placeholder="images/album1.jpg">
                     </div>
                     <div class="form-group">
-                        <label>Streaming Links (comma separated: spotify, apple, youtube-music, amazon, deezer, tidal)</label>
+                        <label>Streaming Links (comma separated)</label>
                         <input type="text" id="musicStreamingLinks" value="spotify, apple, youtube-music">
                     </div>
                     <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Project</button>
@@ -774,11 +722,7 @@
                         <thead>
                             <tr><th>Title</th><th>Type</th><th>Year</th><th>Actions</th></tr>
                         </thead>
-                        <tbody id="musicProjectsTable">
-                            <tr><td>Rise Up</td><td>Single</td><td>2025</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                            <tr><td>Voices of Hope EP</td><td>EP</td><td>2024</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                            <tr><td>Rise & Shine</td><td>Album</td><td>2024</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                        </tbody>
+                        <tbody id="musicProjectsTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -804,12 +748,8 @@
                         <input type="text" id="tourTime" placeholder="7:00 PM EAT">
                     </div>
                     <div class="form-group">
-                        <label>Poster / Flyer Image</label>
-                        <div class="file-upload" onclick="document.getElementById('tourPosterInput').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to upload poster</p>
-                            <input type="file" id="tourPosterInput" accept="image/*" style="display:none;">
-                        </div>
+                        <label>Poster URL</label>
+                        <input type="text" id="tourPosterUrl" placeholder="images/tour1.jpg">
                     </div>
                     <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Event</button>
                 </form>
@@ -820,10 +760,7 @@
                         <thead>
                             <tr><th>Title</th><th>Date</th><th>Location</th><th>Actions</th></tr>
                         </thead>
-                        <tbody id="toursTable">
-                            <tr><td>Christmas Concert 2025</td><td>December 15, 2025</td><td>Kampala, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                            <tr><td>JoyRise Kids Choir Tour - Kampala</td><td>January 20, 2026</td><td>Kampala, Uganda</td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-                        </tbody>
+                        <tbody id="toursTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -834,12 +771,9 @@
                 <div class="table-container">
                     <table>
                         <thead>
-                            <tr><th>Name</th><th>Organization</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+                            <tr><th>Name</th><th>Organization</th><th>Email</th><th>Submitted</th><th>Actions</th></tr>
                         </thead>
-                        <tbody>
-                            <tr><td>John Doe</td><td>ABC Foundation</td><td>john@abc.org</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Approved</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
-                            <tr><td>Jane Smith</td><td>XYZ Charity</td><td>jane@xyz.org</td><td><span style="background:#F28C28; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Pending</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
-                        </tbody>
+                        <tbody id="partnersTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -850,12 +784,9 @@
                 <div class="table-container">
                     <table>
                         <thead>
-                            <tr><th>Name</th><th>Email</th><th>Skills</th><th>Status</th><th>Actions</th></tr>
+                            <tr><th>Name</th><th>Email</th><th>Skills</th><th>Submitted</th><th>Actions</th></tr>
                         </thead>
-                        <tbody>
-                            <tr><td>Mary Johnson</td><td>mary@email.com</td><td>Teaching, Child Care</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Active</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
-                            <tr><td>Peter Ochieng</td><td>peter@email.com</td><td>Medical Assistance</td><td><span style="background:#F28C28; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Pending</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
-                        </tbody>
+                        <tbody id="volunteersTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -866,12 +797,9 @@
                 <div class="table-container">
                     <table>
                         <thead>
-                            <tr><th>Name</th><th>Email</th><th>Child</th><th>Status</th><th>Actions</th></tr>
+                            <tr><th>Name</th><th>Email</th><th>Child</th><th>Submitted</th><th>Actions</th></tr>
                         </thead>
-                        <tbody>
-                            <tr><td>Robert Kato</td><td>robert@email.com</td><td>Sarah A.</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Active</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
-                            <tr><td>Susan Nambi</td><td>susan@email.com</td><td>David M.</td><td><span style="background:#059669; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Active</span></td><td class="actions"><button class="edit-btn">View</button></td></tr>
-                        </tbody>
+                        <tbody id="sponsorshipsTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -888,23 +816,20 @@
                         <thead>
                             <tr><th>Email</th><th>Name</th><th>Role</th><th>Actions</th></tr>
                         </thead>
-                        <tbody>
-                            <tr><td>JoyRise.admin001</td><td>Super Admin</td><td><span style="background:#F28C28; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Main Admin</span></td><td class="actions"><button class="edit-btn">Edit</button></td></tr>
-                            <tr><td>JoyRise.admin002</td><td>Admin 2</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
-                            <tr><td>JoyRise.admin003</td><td>Admin 3</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
-                            <tr><td>JoyRise.admin004</td><td>Admin 4</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
-                            <tr><td>JoyRise.admin005</td><td>Admin 5</td><td><span style="background:#6C5CE7; color:white; padding:2px 12px; border-radius:20px; font-size:0.7rem;">Admin</span></td><td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Remove</button></td></tr>
-                        </tbody>
+                        <tbody id="adminsTable"></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== TOAST NOTIFICATION ===== -->
     <div class="toast" id="toast"></div>
 
     <script>
+        // ===== SUPABASE CONFIGURATION =====
+        const SUPABASE_URL = 'https://lvktwbukgisluhftabra.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2a3R3YnVrZ2lzbHVoZnRhYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczNDMxODIsImV4cCI6MjEwMjkxOTE4Mn0.mG7eKnQHOCxo_cidrOivL0PfAzRFo11Z_3qJZYW1eMk';
+
         // ===== CHECK LOGIN =====
         const adminEmail = localStorage.getItem('adminEmail');
         const isMainAdmin = localStorage.getItem('isMainAdmin') === 'true';
@@ -914,153 +839,91 @@
             window.location.href = 'admin-login.html';
         }
 
-        // ===== SET USER INFO =====
         document.getElementById('userEmail').textContent = adminEmail;
         document.getElementById('userName').textContent = adminName;
         document.getElementById('userAvatar').textContent = adminName.split(' ').map(n => n[0]).join('').toUpperCase();
 
         if (isMainAdmin) {
-            document.querySelector('.badge').textContent = 'Main Admin';
-            document.querySelector('.badge').style.background = '#F28C28';
+            document.getElementById('userBadge').textContent = 'Main Admin';
+            document.getElementById('userBadge').style.background = '#F28C28';
         } else {
-            document.querySelector('.badge').textContent = 'Admin';
-            document.querySelector('.badge').style.background = '#6C5CE7';
+            document.getElementById('userBadge').textContent = 'Admin';
+            document.getElementById('userBadge').style.background = '#6C5CE7';
         }
 
-        // ===== SIDEBAR TOGGLE =====
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
+        async function supabaseFetch(endpoint, options = {}) {
+            const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
+            const headers = {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json'
+            };
+            const config = { headers, ...options };
+            const response = await fetch(url, config);
+            if (!response.ok) throw new Error(await response.text());
+            return response.json();
         }
 
-        // ===== SHOW SECTION =====
-        function showSection(sectionName) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
-
-            // Show selected section
-            const section = document.getElementById(`section-${sectionName}`);
-            if (section) {
-                section.classList.add('active');
-                document.getElementById('pageTitle').textContent = section.querySelector('.section-title')?.textContent || sectionName;
-            }
-
-            // Highlight nav link
-            document.querySelectorAll('.nav-menu a').forEach(a => {
-                if (a.textContent.toLowerCase().includes(sectionName.toLowerCase()) ||
-                    a.textContent.toLowerCase().includes(sectionName.replace('-', ' '))) {
-                    a.classList.add('active');
-                }
-            });
-
-            // Close sidebar on mobile
-            if (window.innerWidth <= 992) {
-                document.getElementById('sidebar').classList.remove('open');
-            }
-
-            // Show/hide admin management warning
-            if (sectionName === 'admins') {
-                const warning = document.getElementById('mainAdminWarning');
-                if (isMainAdmin) {
-                    warning.style.display = 'none';
-                } else {
-                    warning.style.display = 'block';
-                }
-            }
-        }
-
-        // ===== TOAST NOTIFICATION =====
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.className = `toast ${type} show`;
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // ===== REFRESH DATA =====
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        function showSection(sectionName) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+
+            const section = document.getElementById(`section-${sectionName}`);
+            if (section) {
+                section.classList.add('active');
+                const title = section.querySelector('.section-title');
+                document.getElementById('pageTitle').textContent = title ? title.textContent : sectionName;
+            }
+
+            document.querySelectorAll('.nav-menu a').forEach(a => {
+                if (a.textContent.toLowerCase().includes(sectionName.toLowerCase())) {
+                    a.classList.add('active');
+                }
+            });
+
+            if (window.innerWidth <= 992) document.getElementById('sidebar').classList.remove('open');
+            if (sectionName === 'admins') document.getElementById('mainAdminWarning').style.display = isMainAdmin ? 'none' : 'block';
+
+            if (sectionName === 'dashboard') loadStats();
+            if (sectionName === 'verse') loadVerse();
+            if (sectionName === 'children') loadChildren();
+            if (sectionName === 'choir-media') loadChoirMedia();
+            if (sectionName === 'music') loadMusicProjects();
+            if (sectionName === 'tours') loadTours();
+            if (sectionName === 'partners') loadPartners();
+            if (sectionName === 'volunteers') loadVolunteers();
+            if (sectionName === 'sponsorships') loadSponsorships();
+            if (sectionName === 'admins') loadAdmins();
+        }
+
         function refreshData() {
-            showToast('Data refreshed successfully!', 'success');
+            const active = document.querySelector('.content-section.active');
+            if (active) showSection(active.id.replace('section-', ''));
+            showToast('Data refreshed!', 'success');
         }
 
-        // ===== PREVIEW WEBSITE =====
         function previewWebsite() {
             window.open('../index.html', '_blank');
         }
 
-        // ===== SAVE VERSE =====
-        function saveVerse(e) {
-            e.preventDefault();
-            showToast('Weekly Verse saved successfully!', 'success');
-        }
-
-        // ===== ADD CHILD =====
-        function addChild(e) {
-            e.preventDefault();
-            const name = document.getElementById('childName').value;
-            showToast(`Child "${name}" added successfully!`, 'success');
-            document.getElementById('childName').value = '';
-            document.getElementById('childAge').value = '';
-            document.getElementById('childLocation').value = '';
-            document.getElementById('childStory').value = '';
-        }
-
-        // ===== PREVIEW CHILD IMAGE =====
-        function previewChildImage(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const img = document.getElementById('childImagePreview');
-                    img.src = event.target.result;
-                    img.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // ===== ADD CHOIR MEDIA =====
-        function addChoirMedia(e) {
-            e.preventDefault();
-            const title = document.getElementById('choirMediaTitle').value;
-            showToast(`Media "${title}" uploaded successfully!`, 'success');
-            document.getElementById('choirMediaTitle').value = '';
-            document.getElementById('choirMediaDescription').value = '';
-            document.getElementById('choirMediaTag').value = '';
-        }
-
-        // ===== ADD MUSIC PROJECT =====
-        function addMusicProject(e) {
-            e.preventDefault();
-            const title = document.getElementById('musicProjectTitle').value;
-            showToast(`Music project "${title}" added successfully!`, 'success');
-            document.getElementById('musicProjectTitle').value = '';
-            document.getElementById('musicProjectDescription').value = '';
-        }
-
-        // ===== ADD TOUR EVENT =====
-        function addTourEvent(e) {
-            e.preventDefault();
-            const title = document.getElementById('tourTitle').value;
-            showToast(`Event "${title}" added successfully!`, 'success');
-            document.getElementById('tourTitle').value = '';
-            document.getElementById('tourDate').value = '';
-            document.getElementById('tourLocation').value = '';
-            document.getElementById('tourTime').value = '';
-        }
-
-        // ===== LOGOUT =====
         function handleLogout() {
             if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('adminEmail');
-                localStorage.removeItem('adminName');
-                localStorage.removeItem('isMainAdmin');
+                localStorage.clear();
                 window.location.href = 'admin-login.html';
             }
         }
 
-        // ===== CLOSE SIDEBAR ON OUTSIDE CLICK =====
         document.addEventListener('click', function(e) {
             const sidebar = document.getElementById('sidebar');
             const hamburger = document.querySelector('.hamburger');
@@ -1071,13 +934,307 @@
             }
         });
 
-        // ===== UPDATE STATS =====
-        // In a real implementation, these would come from the database
-        document.getElementById('statChildren').textContent = 18;
-        document.getElementById('statPartners').textContent = 12;
-        document.getElementById('statVolunteers').textContent = 25;
-        document.getElementById('statSponsorships').textContent = 8;
-        document.getElementById('statMusic').textContent = 7;
+        // ===== DASHBOARD =====
+        async function loadStats() {
+            try {
+                const [children, partners, volunteers, sponsorships, music] = await Promise.all([
+                    supabaseFetch('children?select=id'),
+                    supabaseFetch('partner_submissions?select=id'),
+                    supabaseFetch('volunteer_submissions?select=id'),
+                    supabaseFetch('sponsorship_submissions?select=id'),
+                    supabaseFetch('music_projects?select=id')
+                ]);
+                document.getElementById('statsGrid').innerHTML = `
+                    <div class="stat-card"><div class="stat-icon"><i class="fas fa-child"></i></div><div class="stat-number">${children.length}</div><div class="stat-label">Children</div></div>
+                    <div class="stat-card purple"><div class="stat-icon"><i class="fas fa-handshake"></i></div><div class="stat-number">${partners.length}</div><div class="stat-label">Partners</div></div>
+                    <div class="stat-card green"><div class="stat-icon"><i class="fas fa-hands-helping"></i></div><div class="stat-number">${volunteers.length}</div><div class="stat-label">Volunteers</div></div>
+                    <div class="stat-card red"><div class="stat-icon"><i class="fas fa-heart"></i></div><div class="stat-number">${sponsorships.length}</div><div class="stat-label">Sponsorships</div></div>
+                    <div class="stat-card blue"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-number">${music.length}</div><div class="stat-label">Music Projects</div></div>
+                `;
+            } catch (error) { console.error('Error loading stats:', error); }
+        }
+
+        // ===== WEEKLY VERSE =====
+        async function loadVerse() {
+            try {
+                const data = await supabaseFetch('weekly_verse?limit=1&order=id.desc');
+                if (data && data.length > 0) {
+                    const v = data[0];
+                    document.getElementById('verseWeek').value = v.week_number || '';
+                    document.getElementById('verseReference').value = v.reference || '';
+                    document.getElementById('verseText').value = v.verse_text || '';
+                    document.getElementById('verseExplanation1').value = v.explanation_1 || '';
+                    document.getElementById('verseExplanation2').value = v.explanation_2 || '';
+                    document.getElementById('verseExplanation3').value = v.explanation_3 || '';
+                    document.getElementById('verseExplanation4').value = v.explanation_4 || '';
+                    document.getElementById('verseApplication').value = v.application || '';
+                    document.getElementById('verseSummary').value = v.summary || '';
+                }
+            } catch (error) { console.error('Error loading verse:', error); }
+        }
+
+        async function saveVerse(e) {
+            e.preventDefault();
+            const data = {
+                week_number: document.getElementById('verseWeek').value,
+                reference: document.getElementById('verseReference').value,
+                verse_text: document.getElementById('verseText').value,
+                explanation_1: document.getElementById('verseExplanation1').value,
+                explanation_2: document.getElementById('verseExplanation2').value,
+                explanation_3: document.getElementById('verseExplanation3').value,
+                explanation_4: document.getElementById('verseExplanation4').value,
+                application: document.getElementById('verseApplication').value,
+                summary: document.getElementById('verseSummary').value,
+                updated_at: new Date().toISOString()
+            };
+            try {
+                const existing = await supabaseFetch('weekly_verse?limit=1');
+                if (existing && existing.length > 0) {
+                    await supabaseFetch(`weekly_verse?id=eq.${existing[0].id}`, { method: 'PATCH', body: JSON.stringify(data) });
+                } else {
+                    await supabaseFetch('weekly_verse', { method: 'POST', body: JSON.stringify(data) });
+                }
+                document.getElementById('verseStatus').textContent = '✅ Verse saved successfully!';
+                document.getElementById('verseStatus').style.color = '#059669';
+                showToast('Weekly Verse saved!', 'success');
+            } catch (error) {
+                console.error('Error saving verse:', error);
+                document.getElementById('verseStatus').textContent = '❌ Error saving verse';
+                document.getElementById('verseStatus').style.color = '#dc2626';
+                showToast('Error saving verse', 'error');
+            }
+        }
+
+        // ===== CHILDREN =====
+        async function loadChildren() {
+            try {
+                const data = await supabaseFetch('children?order=id.desc');
+                document.getElementById('childrenTable').innerHTML = data.map(c => `
+                    <tr><td>${c.name}</td><td>${c.age || '-'}</td><td>${c.location || '-'}</td>
+                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="deleteChild(${c.id})"><i class="fas fa-trash"></i></button></td></tr>
+                `).join('');
+            } catch (error) { console.error('Error loading children:', error); }
+        }
+
+        async function addChild(e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('childName').value,
+                age: parseInt(document.getElementById('childAge').value) || null,
+                location: document.getElementById('childLocation').value,
+                story: document.getElementById('childStory').value,
+                gender: document.getElementById('childGender').value,
+                image_url: document.getElementById('childImageUrl').value || 'images/child-placeholder.jpg',
+                is_sponsored: false
+            };
+            try {
+                await supabaseFetch('children', { method: 'POST', body: JSON.stringify(data) });
+                document.getElementById('childName').value = '';
+                document.getElementById('childAge').value = '';
+                document.getElementById('childLocation').value = '';
+                document.getElementById('childStory').value = '';
+                document.getElementById('childImageUrl').value = '';
+                loadChildren();
+                showToast('Child added!', 'success');
+            } catch (error) { showToast('Error adding child', 'error'); }
+        }
+
+        async function deleteChild(id) {
+            if (!confirm('Delete this child?')) return;
+            try {
+                await supabaseFetch(`children?id=eq.${id}`, { method: 'DELETE' });
+                loadChildren();
+                showToast('Child deleted!', 'success');
+            } catch (error) { showToast('Error deleting child', 'error'); }
+        }
+
+        // ===== CHOIR MEDIA =====
+        async function loadChoirMedia() {
+            try {
+                const data = await supabaseFetch('choir_media?order=id.desc');
+                document.getElementById('choirMediaTable').innerHTML = data.map(item => `
+                    <tr><td>${item.title}</td><td>${item.type}</td><td>${item.tag || '-'}</td>
+                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="deleteChoirMedia(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
+                `).join('');
+            } catch (error) { console.error('Error loading choir media:', error); }
+        }
+
+        async function addChoirMedia(e) {
+            e.preventDefault();
+            const data = {
+                type: document.getElementById('choirMediaType').value,
+                title: document.getElementById('choirMediaTitle').value,
+                description: document.getElementById('choirMediaDescription').value,
+                tag: document.getElementById('choirMediaTag').value,
+                file_url: document.getElementById('choirMediaUrl').value
+            };
+            try {
+                await supabaseFetch('choir_media', { method: 'POST', body: JSON.stringify(data) });
+                document.getElementById('choirMediaTitle').value = '';
+                document.getElementById('choirMediaDescription').value = '';
+                document.getElementById('choirMediaTag').value = '';
+                document.getElementById('choirMediaUrl').value = '';
+                loadChoirMedia();
+                showToast('Media uploaded!', 'success');
+            } catch (error) { showToast('Error uploading media', 'error'); }
+        }
+
+        async function deleteChoirMedia(id) {
+            if (!confirm('Delete this media?')) return;
+            try {
+                await supabaseFetch(`choir_media?id=eq.${id}`, { method: 'DELETE' });
+                loadChoirMedia();
+                showToast('Media deleted!', 'success');
+            } catch (error) { showToast('Error deleting media', 'error'); }
+        }
+
+        // ===== MUSIC PROJECTS =====
+        async function loadMusicProjects() {
+            try {
+                const data = await supabaseFetch('music_projects?order=id.desc');
+                document.getElementById('musicProjectsTable').innerHTML = data.map(item => `
+                    <tr><td>${item.title}</td><td>${item.type}</td><td>${item.year || '-'}</td>
+                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="deleteMusicProject(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
+                `).join('');
+            } catch (error) { console.error('Error loading music projects:', error); }
+        }
+
+        async function addMusicProject(e) {
+            e.preventDefault();
+            const data = {
+                type: document.getElementById('musicProjectType').value,
+                title: document.getElementById('musicProjectTitle').value,
+                description: document.getElementById('musicProjectDescription').value,
+                year: document.getElementById('musicProjectYear').value,
+                cover_url: document.getElementById('musicCoverUrl').value,
+                streaming_links: document.getElementById('musicStreamingLinks').value
+            };
+            try {
+                await supabaseFetch('music_projects', { method: 'POST', body: JSON.stringify(data) });
+                document.getElementById('musicProjectTitle').value = '';
+                document.getElementById('musicProjectDescription').value = '';
+                document.getElementById('musicCoverUrl').value = '';
+                loadMusicProjects();
+                showToast('Music project added!', 'success');
+            } catch (error) { showToast('Error adding music project', 'error'); }
+        }
+
+        async function deleteMusicProject(id) {
+            if (!confirm('Delete this project?')) return;
+            try {
+                await supabaseFetch(`music_projects?id=eq.${id}`, { method: 'DELETE' });
+                loadMusicProjects();
+                showToast('Project deleted!', 'success');
+            } catch (error) { showToast('Error deleting project', 'error'); }
+        }
+
+        // ===== TOURS =====
+        async function loadTours() {
+            try {
+                const data = await supabaseFetch('tours?order=id.desc');
+                document.getElementById('toursTable').innerHTML = data.map(item => `
+                    <tr><td>${item.title}</td><td>${item.date || '-'}</td><td>${item.location || '-'}</td>
+                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" onclick="deleteTour(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
+                `).join('');
+            } catch (error) { console.error('Error loading tours:', error); }
+        }
+
+        async function addTourEvent(e) {
+            e.preventDefault();
+            const data = {
+                title: document.getElementById('tourTitle').value,
+                date: document.getElementById('tourDate').value,
+                location: document.getElementById('tourLocation').value,
+                time: document.getElementById('tourTime').value,
+                poster_url: document.getElementById('tourPosterUrl').value
+            };
+            try {
+                await supabaseFetch('tours', { method: 'POST', body: JSON.stringify(data) });
+                document.getElementById('tourTitle').value = '';
+                document.getElementById('tourDate').value = '';
+                document.getElementById('tourLocation').value = '';
+                document.getElementById('tourTime').value = '';
+                document.getElementById('tourPosterUrl').value = '';
+                loadTours();
+                showToast('Event added!', 'success');
+            } catch (error) { showToast('Error adding event', 'error'); }
+        }
+
+        async function deleteTour(id) {
+            if (!confirm('Delete this event?')) return;
+            try {
+                await supabaseFetch(`tours?id=eq.${id}`, { method: 'DELETE' });
+                loadTours();
+                showToast('Event deleted!', 'success');
+            } catch (error) { showToast('Error deleting event', 'error'); }
+        }
+
+        // ===== SUBMISSIONS =====
+        async function loadPartners() {
+            try {
+                const data = await supabaseFetch('partner_submissions?order=id.desc');
+                document.getElementById('partnersTable').innerHTML = data.length ? data.map(item => `
+                    <tr><td>${item.full_name}</td><td>${item.organization || '-'}</td><td>${item.email}</td>
+                    <td>${new Date(item.submitted_at).toLocaleDateString()}</td>
+                    <td class="actions"><button class="edit-btn" onclick="showToast('View submission','info')"><i class="fas fa-eye"></i></button></td></tr>
+                `).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">No submissions yet.</td></tr>';
+            } catch (error) { console.error('Error loading partners:', error); }
+        }
+
+        async function loadVolunteers() {
+            try {
+                const data = await supabaseFetch('volunteer_submissions?order=id.desc');
+                document.getElementById('volunteersTable').innerHTML = data.length ? data.map(item => `
+                    <tr><td>${item.full_name}</td><td>${item.email}</td><td>${item.skills ? item.skills.substring(0,30)+'...' : '-'}</td>
+                    <td>${new Date(item.submitted_at).toLocaleDateString()}</td>
+                    <td class="actions"><button class="edit-btn" onclick="showToast('View submission','info')"><i class="fas fa-eye"></i></button></td></tr>
+                `).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">No submissions yet.</td></tr>';
+            } catch (error) { console.error('Error loading volunteers:', error); }
+        }
+
+        async function loadSponsorships() {
+            try {
+                const data = await supabaseFetch('sponsorship_submissions?order=id.desc');
+                document.getElementById('sponsorshipsTable').innerHTML = data.length ? data.map(item => `
+                    <tr><td>${item.full_name}</td><td>${item.email}</td><td>${item.child_id ? 'Child #'+item.child_id : 'Not specified'}</td>
+                    <td>${new Date(item.submitted_at).toLocaleDateString()}</td>
+                    <td class="actions"><button class="edit-btn" onclick="showToast('View submission','info')"><i class="fas fa-eye"></i></button></td></tr>
+                `).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">No submissions yet.</td></tr>';
+            } catch (error) { console.error('Error loading sponsorships:', error); }
+        }
+
+        // ===== ADMINS =====
+        async function loadAdmins() {
+            try {
+                const data = await supabaseFetch('users?order=id');
+                document.getElementById('adminsTable').innerHTML = data.map(user => `
+                    <tr>
+                        <td>${user.email}</td>
+                        <td>${user.display_name || '-'}</td>
+                        <td>${user.is_main_admin ? '<span style="background:#F28C28;color:white;padding:2px 12px;border-radius:20px;font-size:0.7rem;">Main Admin</span>' : '<span style="background:#6C5CE7;color:white;padding:2px 12px;border-radius:20px;font-size:0.7rem;">Admin</span>'}</td>
+                        <td class="actions">${!user.is_main_admin && isMainAdmin ? `<button class="delete-btn" onclick="removeAdmin(${user.id})"><i class="fas fa-trash"></i></button>` : '<span style="color:#999;font-size:0.8rem;">Protected</span>'}</td>
+                    </tr>
+                `).join('');
+            } catch (error) { console.error('Error loading admins:', error); }
+        }
+
+        async function removeAdmin(id) {
+            if (!confirm('Remove this admin?')) return;
+            try {
+                await supabaseFetch(`users?id=eq.${id}`, { method: 'DELETE' });
+                loadAdmins();
+                showToast('Admin removed!', 'success');
+            } catch (error) { showToast('Error removing admin', 'error'); }
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStats();
+        });
     </script>
 </body>
 </html>
