@@ -216,6 +216,18 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .note {
+            background: #fef3c7;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #92400e;
+            border-left: 4px solid #F28C28;
+        }
+        .note strong {
+            color: #0B2447;
+        }
         @media (max-width: 480px) {
             .login-box {
                 padding: 30px 20px;
@@ -236,6 +248,11 @@
                 <p>JoyRise Africa Foundation</p>
             </div>
 
+            <!-- Note about usernames -->
+            <div class="note">
+                <i class="fas fa-info-circle"></i> Use your admin username (e.g., <strong>JoyRise.admin001</strong>) — no @ symbol needed!
+            </div>
+
             <!-- Error Message -->
             <div class="error-message" id="errorMessage">
                 <i class="fas fa-exclamation-circle"></i> <span id="errorText">Invalid credentials</span>
@@ -249,8 +266,8 @@
             <!-- Login Form -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> Admin Email</label>
-                    <input type="email" id="email" placeholder="JoyRise.admin001" required>
+                    <label for="username"><i class="fas fa-user"></i> Admin Username</label>
+                    <input type="text" id="username" placeholder="JoyRise.admin001" required>
                 </div>
                 <div class="form-group">
                     <label for="password"><i class="fas fa-lock"></i> Password</label>
@@ -267,11 +284,11 @@
             <!-- Password Recovery Section -->
             <div class="recovery-section" id="recoverySection">
                 <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; font-size:1.2rem; margin-bottom:15px; text-transform:uppercase;">Recover Password</h3>
-                <p style="color:#666; font-size:0.9rem; margin-bottom:20px;">Enter your admin email and recovery word to reset your password.</p>
+                <p style="color:#666; font-size:0.9rem; margin-bottom:20px;">Enter your admin username and recovery word to reset your password.</p>
                 <form onsubmit="handleRecovery(event)">
                     <div class="form-group">
-                        <label for="recoveryEmail"><i class="fas fa-envelope"></i> Admin Email</label>
-                        <input type="email" id="recoveryEmail" placeholder="JoyRise.admin001" required>
+                        <label for="recoveryUsername"><i class="fas fa-user"></i> Admin Username</label>
+                        <input type="text" id="recoveryUsername" placeholder="JoyRise.admin001" required>
                     </div>
                     <div class="form-group">
                         <label for="recoveryWord"><i class="fas fa-shield-alt"></i> Recovery Word</label>
@@ -291,26 +308,42 @@
         const SUPABASE_URL = 'https://lvktwbukgisluhftabra.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2a3R3YnVrZ2lzbHVoZnRhYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczNDMxODIsImV4cCI6MjEwMjkxOTE4Mn0.mG7eKnQHOCxo_cidrOivL0PfAzRFo11Z_3qJZYW1eMk';
 
+        // ===== ALLOWED USERNAMES =====
+        const allowedUsernames = [
+            'JoyRise.admin001',
+            'JoyRise.admin002',
+            'JoyRise.admin003',
+            'JoyRise.admin004',
+            'JoyRise.admin005'
+        ];
+
         // ===== LOGIN HANDLER =====
         async function handleLogin(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value.trim();
+            const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
             const loginBtn = document.getElementById('loginBtn');
 
-            // Hide previous messages
             errorMsg.classList.remove('show');
             document.getElementById('successMessage').classList.remove('show');
 
-            // Show loading state
             loginBtn.disabled = true;
             loginBtn.innerHTML = '<span class="loading-spinner"></span> Checking...';
 
             try {
+                // Check if username is allowed
+                if (!allowedUsernames.includes(username)) {
+                    errorText.textContent = 'Username not authorized. Only 5 admin usernames allowed.';
+                    errorMsg.classList.add('show');
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = 'Login';
+                    return;
+                }
+
                 // Query Supabase for the user
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(username)}`, {
                     headers: {
                         'apikey': SUPABASE_ANON_KEY,
                         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
@@ -324,7 +357,7 @@
                 const users = await response.json();
 
                 if (users.length === 0) {
-                    errorText.textContent = 'Email not authorized. Only 5 admin emails allowed.';
+                    errorText.textContent = 'Username not found. Please check and try again.';
                     errorMsg.classList.add('show');
                     loginBtn.disabled = false;
                     loginBtn.innerHTML = 'Login';
@@ -333,9 +366,7 @@
 
                 const user = users[0];
 
-                // Check password
                 if (user.password === password) {
-                    // Login successful
                     localStorage.setItem('adminEmail', user.email);
                     localStorage.setItem('adminName', user.display_name || 'Admin');
                     localStorage.setItem('isMainAdmin', user.is_main_admin ? 'true' : 'false');
@@ -376,7 +407,7 @@
         // ===== RECOVERY HANDLER =====
         async function handleRecovery(e) {
             e.preventDefault();
-            const email = document.getElementById('recoveryEmail').value.trim();
+            const username = document.getElementById('recoveryUsername').value.trim();
             const word = document.getElementById('recoveryWord').value.trim();
             const successMsg = document.getElementById('successMessage');
             const successText = document.getElementById('successText');
@@ -387,7 +418,7 @@
             errorMsg.classList.remove('show');
 
             try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(username)}`, {
                     headers: {
                         'apikey': SUPABASE_ANON_KEY,
                         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
@@ -397,7 +428,7 @@
                 const users = await response.json();
 
                 if (users.length === 0) {
-                    errorText.textContent = 'Email not found.';
+                    errorText.textContent = 'Username not found.';
                     errorMsg.classList.add('show');
                     return;
                 }
