@@ -1,7 +1,7 @@
 /* ============================================================
    JOYRISE AFRICA FOUNDATION - COMPLETE STYLE SHEET
    Theme: "Joy & Hope" - Gold, Coral, Teal & Cream
-   Version: 4.0
+   Version: 4.1 - FIXED CONTACT BAR VISIBILITY
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
@@ -77,13 +77,13 @@ section {
 }
 
 /* ============================================================
-   CONTACT BAR
+   CONTACT BAR - FIXED VISIBILITY
    ============================================================ */
 .contact-bar {
     background: var(--navy-blue);
     color: var(--white);
-    padding: 8px 0;
-    font-size: 0.8rem;
+    padding: 10px 0;
+    font-size: 0.85rem;
     position: sticky;
     top: 0;
     z-index: 1001;
@@ -94,20 +94,25 @@ section {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
 }
 .contact-bar a {
     color: var(--white);
     text-decoration: none;
-    margin: 0 6px;
+    margin: 0 8px;
     transition: var(--transition);
+    font-weight: 500;
 }
 .contact-bar a:hover {
     color: var(--sunrise-gold);
 }
+.contact-bar i {
+    margin-right: 6px;
+    color: var(--sunrise-gold);
+}
 .contact-bar .social-links a {
-    margin: 0 5px;
-    font-size: 1rem;
+    margin: 0 6px;
+    font-size: 1.1rem;
     transition: var(--transition);
     display: inline-block;
 }
@@ -129,7 +134,7 @@ header {
     background: var(--white);
     padding: 12px 0;
     position: sticky;
-    top: 38px;
+    top: 40px;
     z-index: 1000;
     width: 100%;
     box-shadow: var(--shadow);
@@ -1105,10 +1110,10 @@ footer p {
     }
 
     .contact-bar {
-        font-size: 0.65rem;
+        font-size: 0.7rem;
     }
     .contact-bar .social-links a {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
 
     .page-hero h1 {
