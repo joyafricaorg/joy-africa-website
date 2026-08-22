@@ -6,7 +6,6 @@
     <title>Admin Dashboard - JoyRise Africa Foundation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== COMPLETE ADMIN STYLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; min-height: 100vh; }
 
@@ -61,6 +60,7 @@
         .upload-box h3 { color: #374151; font-size: 1.1rem; margin-bottom: 5px; }
         .upload-box p { color: #6b7280; font-size: 0.9rem; }
         .upload-box .browse-btn { display: inline-block; margin-top: 15px; padding: 10px 30px; background: #F28C28; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; }
+        .upload-box .browse-btn:hover { background: #0B2447; }
 
         .file-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px; }
         .file-preview-item { position: relative; border-radius: 10px; overflow: hidden; background: #f3f4f6; border: 1px solid #e5e7eb; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
@@ -116,8 +116,14 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .edit-form-row { background: #f0fdf4; }
-        .edit-form-row input, .edit-form-row textarea { width: 100%; padding: 6px 10px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; font-family: inherit; }
-        .edit-form-row input:focus, .edit-form-row textarea:focus { outline: none; border-color: #F28C28; }
+        .edit-form-row input, .edit-form-row textarea, .edit-form-row select { width: 100%; padding: 6px 10px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; font-family: inherit; }
+        .edit-form-row input:focus, .edit-form-row textarea:focus, .edit-form-row select:focus { outline: none; border-color: #F28C28; }
+
+        .edit-form-row .edit-upload-box { border: 2px dashed #d1d5db; border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; background: #fafafa; transition: all 0.3s ease; }
+        .edit-form-row .edit-upload-box:hover { border-color: #F28C28; background: rgba(242, 140, 40, 0.05); }
+        .edit-form-row .edit-upload-box i { font-size: 1.5rem; color: #9ca3af; }
+        .edit-form-row .edit-upload-box p { font-size: 0.8rem; color: #6b7280; }
+        .edit-form-row .edit-preview-img { max-width: 80px; max-height: 80px; border-radius: 8px; object-fit: cover; margin-top: 8px; border: 2px solid #e5e7eb; }
 
         @media (max-width: 768px) {
             .sidebar { transform: translateX(-100%); width: 280px; }
@@ -126,6 +132,7 @@
             .hamburger { display: block; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
             table td, table th { padding: 8px; font-size: 0.75rem; }
+            .edit-form-row input, .edit-form-row textarea, .edit-form-row select { font-size: 0.8rem; padding: 4px 6px; }
         }
         @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr; }
@@ -523,10 +530,7 @@
                 'Content-Type': 'application/json'
             };
             const response = await fetch(url, { headers, ...options });
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(errorText);
-            }
+            if (!response.ok) throw new Error(await response.text());
             return response.json();
         }
 
@@ -547,13 +551,9 @@
                 body: file
             });
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Upload failed: ${errorText}`);
-            }
+            if (!response.ok) throw new Error(await response.text());
 
-            const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/website-uploads/${filePath}`;
-            return publicUrl;
+            return `${SUPABASE_URL}/storage/v1/object/public/website-uploads/${filePath}`;
         }
 
         // ============================================================
@@ -670,18 +670,10 @@
         }
 
         async function loadVerseCover() {
+            // This is just a placeholder - the actual cover is loaded in the public page
             try {
                 const data = await supabaseFetch('verse_cover?limit=1');
-                if (data && data.length > 0) {
-                    const preview = document.getElementById('verseCoverPreview');
-                    if (preview) {
-                        if (data[0].image_url) {
-                            preview.innerHTML = `<img src="${data[0].image_url}" style="max-width:100%; max-height:300px; border-radius:10px; object-fit:cover;">`;
-                        } else {
-                            preview.innerHTML = '<p style="color:#999;">No cover image set.</p>';
-                        }
-                    }
-                }
+                // No preview needed in admin
             } catch (error) { console.error('Error loading verse cover:', error); }
         }
 
@@ -721,7 +713,6 @@
                 statusEl.textContent = '✅ Published successfully!';
                 statusEl.style.color = '#059669';
                 showToast('Verse cover published!', 'success');
-                loadVerseCover();
             } catch (error) {
                 statusEl.textContent = '❌ Error: ' + error.message;
                 statusEl.style.color = '#dc2626';
@@ -932,6 +923,7 @@
         // ============================================================
         let childUploadedFiles = [];
         let editingChildId = null;
+        let editingChildImageFile = null;
 
         function handleChildFileSelect(event) {
             const files = event.target.files;
@@ -1041,20 +1033,59 @@
             }
         }
 
+        // ===== EDIT CHILD WITH IMAGE UPLOAD =====
         async function editChild(id) {
             editingChildId = id;
+            editingChildImageFile = null;
+
             try {
                 const data = await supabaseFetch(`children?id=eq.${id}`);
                 if (data && data.length > 0) {
                     const child = data[0];
                     const row = document.getElementById(`child-row-${id}`);
+
+                    const currentImage = child.image_url || 'images/child-placeholder.jpg';
+
                     row.innerHTML = `
-                        <td><input type="text" id="edit-name-${id}" value="${child.name}"></td>
-                        <td><input type="number" id="edit-age-${id}" value="${child.age || ''}"></td>
-                        <td><input type="text" id="edit-location-${id}" value="${child.location || ''}"></td>
-                        <td class="actions">
-                            <button class="save-btn" onclick="saveChild(${id})"><i class="fas fa-save"></i> Save</button>
-                            <button class="cancel-btn" onclick="cancelEdit(${id})"><i class="fas fa-times"></i> Cancel</button>
+                        <td>
+                            <input type="text" id="edit-name-${id}" value="${child.name}">
+                        </td>
+                        <td>
+                            <input type="number" id="edit-age-${id}" value="${child.age || ''}">
+                        </td>
+                        <td>
+                            <input type="text" id="edit-location-${id}" value="${child.location || ''}">
+                            <input type="hidden" id="edit-gender-${id}" value="${child.gender || 'Female'}">
+                        </td>
+                        <td class="actions" style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+                            <!-- Edit Form Fields -->
+                            <div style="display:flex; flex-wrap:wrap; gap:8px; width:100%;">
+                                <div style="flex:1; min-width:120px;">
+                                    <label style="font-size:0.7rem; color:#666;">Story</label>
+                                    <textarea id="edit-story-${id}" rows="2" style="width:100%; padding:4px 8px; border:2px solid #d1d5db; border-radius:6px; font-size:0.8rem;">${child.story || ''}</textarea>
+                                </div>
+                                <div style="flex:1; min-width:120px;">
+                                    <label style="font-size:0.7rem; color:#666;">Gender</label>
+                                    <select id="edit-gender-select-${id}" style="width:100%; padding:4px 8px; border:2px solid #d1d5db; border-radius:6px; font-size:0.8rem;">
+                                        <option value="Female" ${child.gender === 'Female' ? 'selected' : ''}>Female</option>
+                                        <option value="Male" ${child.gender === 'Male' ? 'selected' : ''}>Male</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Image Upload -->
+                            <div style="width:100%; margin-top:5px;">
+                                <div class="edit-upload-box" onclick="document.getElementById('edit-image-input-${id}').click()" style="border:2px dashed #d1d5db; border-radius:10px; padding:10px; text-align:center; cursor:pointer; background:#fafafa; transition:all 0.3s ease;">
+                                    <i class="fas fa-cloud-upload-alt" style="font-size:1.2rem; color:#9ca3af;"></i>
+                                    <p style="font-size:0.7rem; color:#6b7280;">Click to change image</p>
+                                    <input type="file" id="edit-image-input-${id}" accept="image/*" style="display:none;" onchange="handleEditImageSelect(event, ${id})">
+                                    <img id="edit-image-preview-${id}" src="${currentImage}" alt="Current image" class="edit-preview-img" style="max-width:80px; max-height:80px; border-radius:8px; object-fit:cover; margin-top:5px; border:2px solid #e5e7eb;">
+                                </div>
+                            </div>
+                            <!-- Action Buttons -->
+                            <div style="display:flex; gap:8px; margin-top:5px;">
+                                <button class="save-btn" onclick="saveChild(${id})"><i class="fas fa-save"></i> Save</button>
+                                <button class="cancel-btn" onclick="cancelEdit(${id})"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
                         </td>
                     `;
                 }
@@ -1063,25 +1094,58 @@
             }
         }
 
+        function handleEditImageSelect(event, id) {
+            const file = event.target.files[0];
+            if (file) {
+                editingChildImageFile = file;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(`edit-image-preview-${id}`);
+                    if (preview) {
+                        preview.src = e.target.result;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         async function saveChild(id) {
             const name = document.getElementById(`edit-name-${id}`).value;
             const age = parseInt(document.getElementById(`edit-age-${id}`).value) || null;
             const location = document.getElementById(`edit-location-${id}`).value;
+            const story = document.getElementById(`edit-story-${id}`).value;
+            const gender = document.getElementById(`edit-gender-select-${id}`).value;
 
             try {
+                let imageUrl = null;
+
+                // If a new image was uploaded, upload it to Supabase
+                if (editingChildImageFile) {
+                    imageUrl = await uploadFileToSupabase(editingChildImageFile, 'children');
+                    showToast('New image uploaded!', 'success');
+                }
+
+                const updateData = { name, age, location, story, gender };
+                if (imageUrl) {
+                    updateData.image_url = imageUrl;
+                }
+
                 await supabaseFetch(`children?id=eq.${id}`, {
                     method: 'PATCH',
-                    body: JSON.stringify({ name, age, location })
+                    body: JSON.stringify(updateData)
                 });
+
+                editingChildImageFile = null;
                 showToast('Child updated successfully!', 'success');
                 loadChildren();
                 editingChildId = null;
             } catch (error) {
-                showToast('Error updating child', 'error');
+                showToast('Error updating child: ' + error.message, 'error');
             }
         }
 
         function cancelEdit(id) {
+            editingChildImageFile = null;
             loadChildren();
             editingChildId = null;
         }
