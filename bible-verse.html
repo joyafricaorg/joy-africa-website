@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== HEAVENLY COLOR SCHEME ===== */
+        /* ===== BIBLE VERSE STYLES ===== */
         :root {
             --heaven-gold: #F7DC6F;
             --heaven-light-gold: #F9E79F;
@@ -116,8 +116,7 @@
         }
         .logo img { height: 50px; margin-right: 12px; filter: brightness(0) invert(1); }
         .logo span { color: var(--white); }
-        
-        /* ===== FULL NAVIGATION - VISIBLE ON ALL PAGES ===== */
+
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -201,7 +200,6 @@
             z-index: 1;
             opacity: 0.6;
         }
-        /* Heavenly glow overlay */
         .verse-hero .hero-overlay {
             position: absolute;
             top: 0;
@@ -216,7 +214,6 @@
             );
             z-index: 2;
         }
-        /* Heavenly glow effect */
         .verse-hero .heavenly-glow {
             position: absolute;
             top: -50%;
@@ -231,7 +228,6 @@
             0%, 100% { transform: scale(1); opacity: 0.5; }
             50% { transform: scale(1.1); opacity: 1; }
         }
-        /* Floating heavenly particles */
         .verse-hero .heavenly-particles {
             position: absolute;
             top: 0;
@@ -635,7 +631,7 @@
 
         <!-- ===== VERSE HERO WITH BIBLE VERSE IMAGE BACKGROUND ===== -->
         <section class="verse-hero" id="verseHero">
-            <!-- Bible Verse Image Background - Uploaded by Admin -->
+            <!-- Bible Verse Image Background - Loaded from Supabase -->
             <img src="images/bibleverse.jpg" alt="Bible Verse Background" class="hero-bg-image" id="heroBgImage">
             <div class="heavenly-glow"></div>
             
@@ -725,7 +721,16 @@
 
     <!-- ===== SCRIPTS ===== -->
     <script>
+        // ============================================================
+        // ===== SUPABASE CONFIGURATION =====
+        // ============================================================
+        const SUPABASE_URL = 'https://lvktwbukgisluhftabra.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2a3R3YnVrZ2lzbHVoZnRhYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczNDMxODIsImV4cCI6MjEwMjkxOTE4Mn0.mG7eKnQHOCxo_cidrOivL0PfAzRFo11Z_3qJZYW1eMk';
+
+        // ============================================================
         // ===== VERSE DATA (Admin can edit via admin panel) =====
+        // ============================================================
+        // This data is also editable in the admin panel
         const verseData = {
             weekNumber: 'WEEK ONE',
             reference: 'PROVERBS 31:8-9',
@@ -749,15 +754,46 @@
             summary: 'Proverbs 31:8-9 is a divine mandate to actively defend and uplift vulnerable children, combining advocacy, justice, and practical care. By embracing this scripture, we align ourselves with God\'s passion for the marginalized and commit to transforming hopelessness into hope.'
         };
 
+        // ============================================================
+        // ===== LOAD VERSE COVER FROM SUPABASE =====
+        // ============================================================
+        async function loadVerseCover() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/verse_cover?limit=1`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+                const data = await response.json();
+                if (data && data.length > 0 && data[0].image_url) {
+                    document.getElementById('heroBgImage').src = data[0].image_url;
+                }
+            } catch (error) {
+                console.error('Error loading verse cover:', error);
+                // Fallback to default image if Supabase fails
+                document.getElementById('heroBgImage').src = 'images/bibleverse.jpg';
+            }
+        }
+
+        // ============================================================
         // ===== LOAD VERSE DATA =====
+        // ============================================================
         function loadVerseData() {
+            // Update Week Title
             document.getElementById('verseWeekTitle').textContent = verseData.weekNumber;
+            
+            // Update Verse Reference
             document.getElementById('verseReference').textContent = verseData.reference;
+            
+            // Update Verse Text
             document.getElementById('verseText').textContent = verseData.verseText;
             
+            // Update Intro
             const introContainer = document.getElementById('verseIntro');
             introContainer.innerHTML = verseData.intro.map(p => `<p>${p}</p>`).join('');
             
+            // Update Explanation
             const explanationParagraphs = document.querySelectorAll('#explanationText, #explanationText2, #explanationText3, #explanationText4');
             verseData.explanation.forEach((text, index) => {
                 if (explanationParagraphs[index]) {
@@ -765,29 +801,28 @@
                 }
             });
             
-            document.getElementById('applicationList').innerHTML = verseData.application.map(item => `<li>${item}</li>`).join('');
+            // Update Application
+            const applicationList = document.getElementById('applicationList');
+            applicationList.innerHTML = verseData.application.map(item => `<li>${item}</li>`).join('');
+            
+            // Update Summary
             document.getElementById('summaryText').textContent = verseData.summary;
         }
 
-        // ===== ADMIN CAN CHANGE BACKGROUND IMAGE =====
-        // To change the background image, update this variable:
-        const bgImageUrl = 'images/bibleverse.jpg';
-        document.addEventListener('DOMContentLoaded', function() {
-            const bgImage = document.getElementById('heroBgImage');
-            if (bgImage) {
-                bgImage.src = bgImageUrl;
-                bgImage.onerror = function() {
-                    // If image fails to load, use gradient fallback
-                    this.style.display = 'none';
-                };
-            }
-            loadVerseData();
-        });
-
+        // ============================================================
         // ===== BACK BUTTON LOGIC =====
+        // ============================================================
         if (window.history.length <= 1 || document.referrer === "") {
             document.getElementById('backButtonContainer').style.display = 'none';
         }
+
+        // ============================================================
+        // ===== INITIALIZE =====
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVerseData();
+            loadVerseCover();
+        });
     </script>
 </body>
 </html>
