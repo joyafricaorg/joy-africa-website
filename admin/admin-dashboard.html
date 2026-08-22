@@ -10,7 +10,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; min-height: 100vh; }
 
-        /* ===== SIDEBAR ===== */
         .sidebar { width: 260px; background: #0B2447; color: white; padding: 20px 0; position: fixed; height: 100vh; overflow-y: auto; z-index: 100; transition: all 0.3s ease; }
         .sidebar .logo { text-align: center; padding: 0 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
         .sidebar .logo img { height: 60px; margin-bottom: 8px; }
@@ -35,7 +34,6 @@
         .sidebar .logout-btn { margin: 20px 15px; padding: 12px; background: rgba(220, 38, 38, 0.2); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease; font-weight: 700; font-size: 0.9rem; }
         .sidebar .logout-btn:hover { background: rgba(220, 38, 38, 0.3); }
 
-        /* ===== MAIN CONTENT ===== */
         .main-content { margin-left: 260px; padding: 30px; width: calc(100% - 260px); min-height: 100vh; }
         .main-content .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
         .main-content .page-header h1 { font-size: 2rem; color: #0B2447; }
@@ -46,7 +44,6 @@
         .content-section.active { display: block; }
         .content-section .section-title { font-size: 1.5rem; color: #0B2447; margin-bottom: 20px; }
 
-        /* ===== STATS ===== */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: white; padding: 20px 25px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 4px solid #F28C28; }
         .stat-card .stat-number { font-size: 2.2rem; font-weight: 700; color: #0B2447; }
@@ -57,7 +54,6 @@
         .stat-card.red { border-left-color: #FF6B6B; }
         .stat-card.blue { border-left-color: #0984E3; }
 
-        /* ===== UPLOAD BOX (Like Facebook) ===== */
         .upload-box { border: 3px dashed #d1d5db; border-radius: 16px; padding: 40px 20px; text-align: center; background: #fafafa; transition: all 0.3s ease; cursor: pointer; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .upload-box:hover { border-color: #F28C28; background: rgba(242, 140, 40, 0.05); }
         .upload-box.dragover { border-color: #F28C28; background: rgba(242, 140, 40, 0.1); }
@@ -65,27 +61,19 @@
         .upload-box h3 { color: #374151; font-size: 1.1rem; margin-bottom: 5px; }
         .upload-box p { color: #6b7280; font-size: 0.9rem; }
         .upload-box .browse-btn { display: inline-block; margin-top: 15px; padding: 10px 30px; background: #F28C28; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; }
-        .upload-box .browse-btn:hover { background: #0B2447; }
-        .upload-box .file-info { font-size:0.8rem; color:#059669; margin-top:8px; }
 
-        /* ===== FILE PREVIEW ===== */
         .file-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px; }
         .file-preview-item { position: relative; border-radius: 10px; overflow: hidden; background: #f3f4f6; border: 1px solid #e5e7eb; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
         .file-preview-item img, .file-preview-item video { width: 100%; height: 100%; object-fit: cover; }
-        .file-preview-item .file-icon { font-size: 2.5rem; color: #9ca3af; }
         .file-preview-item .remove-file { position: absolute; top: 5px; right: 5px; background: rgba(220, 38, 38, 0.8); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
         .file-preview-item .remove-file:hover { background: #dc2626; }
 
-        .file-name { font-size: 0.7rem; color: #6b7280; text-align: center; margin-top: 4px; word-break: break-all; }
-
-        /* ===== PUBLISH BUTTON ===== */
         .publish-section { margin-top: 20px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
         .publish-btn { padding: 14px 40px; background: #2ECC71; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
         .publish-btn:hover { background: #27AE60; transform: scale(1.02); }
         .publish-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .publish-status { font-size: 0.9rem; color: #6b7280; }
 
-        /* ===== FORMS ===== */
         .admin-form { max-width: 800px; }
         .admin-form .form-group { margin-bottom: 20px; }
         .admin-form .form-group label { display: block; font-weight: 700; color: #0B2447; margin-bottom: 6px; font-size: 0.9rem; }
@@ -95,49 +83,56 @@
         .admin-form .submit-btn { padding: 14px 40px; background: #F28C28; color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
         .admin-form .submit-btn:hover { background: #0B2447; }
 
-        /* ===== TABLES ===== */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         table th { background: #f8f9fa; text-align: left; padding: 12px 15px; font-weight: 700; color: #0B2447; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
         table td { padding: 12px 15px; border-bottom: 1px solid #f0f0f0; }
         table tr:hover { background: #f8f9fa; }
-        table .actions { display: flex; gap: 8px; }
+        table .actions { display: flex; gap: 8px; flex-wrap: wrap; }
         table .actions button { padding: 5px 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 700; transition: all 0.3s ease; }
         table .actions .edit-btn { background: #F28C28; color: white; }
         table .actions .edit-btn:hover { background: #0B2447; }
         table .actions .delete-btn { background: #dc2626; color: white; }
         table .actions .delete-btn:hover { background: #b91c1c; }
+        table .actions .save-btn { background: #059669; color: white; }
+        table .actions .save-btn:hover { background: #047857; }
+        table .actions .cancel-btn { background: #6b7280; color: white; }
+        table .actions .cancel-btn:hover { background: #4b5563; }
 
-        /* ===== COVER OPTIONS ===== */
-        .cover-option-card { display: inline-block; padding: 15px 25px; margin: 5px; border: 3px solid #e1e5eb; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: #f8f9fa; text-align: center; min-width: 150px; }
-        .cover-option-card:hover { border-color: #F28C28; background: rgba(242, 140, 40, 0.05); }
-        .cover-option-card.selected { border-color: #F28C28; background: rgba(242, 140, 40, 0.1); }
-        .cover-option-card i { font-size: 2rem; display: block; margin-bottom: 8px; color: #0B2447; }
-        .cover-option-card span { font-weight: 700; font-size: 0.9rem; color: #0B2447; }
-
-        /* ===== TOAST ===== */
         .toast { position: fixed; bottom: 30px; right: 30px; padding: 16px 25px; border-radius: 12px; color: white; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transform: translateY(100px); opacity: 0; transition: all 0.4s ease; z-index: 999; max-width: 400px; }
         .toast.show { transform: translateY(0); opacity: 1; }
         .toast.success { background: #059669; }
         .toast.error { background: #dc2626; }
         .toast.info { background: #0984E3; }
 
-        /* ===== RESPONSIVE ===== */
+        .cover-option-card { display: inline-block; padding: 15px 25px; margin: 5px; border: 3px solid #e1e5eb; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: #f8f9fa; text-align: center; min-width: 150px; }
+        .cover-option-card:hover { border-color: #F28C28; background: rgba(242, 140, 40, 0.05); }
+        .cover-option-card.selected { border-color: #F28C28; background: rgba(242, 140, 40, 0.1); }
+        .cover-option-card i { font-size: 2rem; display: block; margin-bottom: 8px; color: #0B2447; }
+        .cover-option-card span { font-weight: 700; font-size: 0.9rem; color: #0B2447; }
+
         .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: #0B2447; cursor: pointer; padding: 8px; }
+        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .edit-form-row { background: #f0fdf4; }
+        .edit-form-row input, .edit-form-row textarea { width: 100%; padding: 6px 10px; border: 2px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; font-family: inherit; }
+        .edit-form-row input:focus, .edit-form-row textarea:focus { outline: none; border-color: #F28C28; }
+
         @media (max-width: 768px) {
             .sidebar { transform: translateX(-100%); width: 280px; }
             .sidebar.open { transform: translateX(0); }
             .main-content { margin-left: 0; width: 100%; padding: 15px; }
             .hamburger { display: block; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
+            table td, table th { padding: 8px; font-size: 0.75rem; }
         }
         @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr; }
             .file-preview-grid { grid-template-columns: repeat(2, 1fr); }
+            table td, table th { padding: 5px; font-size: 0.65rem; }
+            .actions button { padding: 3px 6px; font-size: 0.6rem; }
         }
-
-        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -213,7 +208,6 @@
             <h2 class="section-title">📖 Edit Weekly Verse Cover</h2>
             <p style="color:#666; margin-bottom:20px;">Upload a background image for the Weekly Bible Verse page.</p>
 
-            <!-- Drag & Drop Upload Box for Verse Cover -->
             <div class="upload-box" id="verseCoverUploadBox" onclick="document.getElementById('verseCoverFileInput').click()">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Upload Verse Cover Image</h3>
@@ -231,12 +225,6 @@
                 </div>
             </form>
             <div id="verseCoverStatus" style="margin-top:15px; font-weight:700;"></div>
-
-            <hr style="margin:30px 0; border:1px solid #eee;">
-            <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Cover Preview</h3>
-            <div id="verseCoverPreview" style="background:#f8f9fa; border-radius:12px; padding:20px; text-align:center; border:2px dashed #e1e5eb; min-height:150px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
-                <p style="color:#999;">Loading preview...</p>
-            </div>
         </div>
 
         <!-- ===== EDIT CHOIR COVER ===== -->
@@ -261,7 +249,6 @@
                     <input type="hidden" id="choirCoverType" value="image">
                 </div>
 
-                <!-- Video Upload -->
                 <div class="form-group" id="choirVideoGroup" style="display:none;">
                     <label>Upload Video (MP4)</label>
                     <div class="upload-box" id="choirVideoUploadBox" onclick="document.getElementById('choirVideoFileInput').click()" style="min-height:120px; padding:20px;">
@@ -274,7 +261,6 @@
                     <input type="hidden" id="choirVideoUrl" value="">
                 </div>
 
-                <!-- Image Upload -->
                 <div class="form-group" id="choirImageGroup">
                     <label>Upload Image</label>
                     <div class="upload-box" id="choirImageUploadBox" onclick="document.getElementById('choirImageFileInput').click()" style="min-height:120px; padding:20px;">
@@ -287,7 +273,6 @@
                     <input type="hidden" id="choirImageUrl" value="">
                 </div>
 
-                <!-- Slideshow Images Upload -->
                 <div class="form-group" id="choirSlideshowGroup" style="display:none;">
                     <label>Upload Slideshow Images (multiple)</label>
                     <div class="upload-box" id="choirSlideshowUploadBox" onclick="document.getElementById('choirSlideshowFileInput').click()" style="min-height:120px; padding:20px;">
@@ -359,7 +344,14 @@
 
             <hr style="margin:30px 0; border:1px solid #eee;">
             <h3 style="font-family:'Oswald',sans-serif; color:#0B2447; margin-bottom:15px;">Current Children</h3>
-            <div class="table-container"><table><thead><tr><th>Name</th><th>Age</th><th>Location</th><th>Actions</th></tr></thead><tbody id="childrenTable"></tbody></table></div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Name</th><th>Age</th><th>Location</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody id="childrenTable"></tbody>
+                </table>
+            </div>
         </div>
 
         <!-- ===== CHOIR MEDIA ===== -->
@@ -503,9 +495,6 @@
             window.location.href = 'admin-login.html';
         }
 
-        // ============================================================
-        // ===== SET USER INFO =====
-        // ============================================================
         document.getElementById('userEmail').textContent = adminEmail;
         document.getElementById('userName').textContent = adminName;
         document.getElementById('userAvatar').textContent = adminName.split(' ').map(n => n[0]).join('').toUpperCase();
@@ -534,7 +523,10 @@
                 'Content-Type': 'application/json'
             };
             const response = await fetch(url, { headers, ...options });
-            if (!response.ok) throw new Error(await response.text());
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
             return response.json();
         }
 
@@ -632,7 +624,7 @@
         }
 
         // ============================================================
-        // ===== VERSE COVER UPLOAD FUNCTIONS =====
+        // ===== VERSE COVER FUNCTIONS =====
         // ============================================================
         let verseCoverUploadedFiles = [];
 
@@ -640,25 +632,20 @@
             const files = event.target.files;
             if (files.length > 0) {
                 verseCoverUploadedFiles = Array.from(files);
-                previewVerseCoverFiles();
+                const container = document.getElementById('verseCoverFilePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                verseCoverUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeVerseCoverFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
             }
-        }
-
-        function previewVerseCoverFiles() {
-            const container = document.getElementById('verseCoverFilePreview');
-            container.innerHTML = '';
-            container.style.display = 'grid';
-
-            verseCoverUploadedFiles.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                const div = document.createElement('div');
-                div.className = 'file-preview-item';
-                div.innerHTML = `
-                    <img src="${url}" alt="${file.name}">
-                    <button class="remove-file" onclick="removeVerseCoverFile(${index})">&times;</button>
-                `;
-                container.appendChild(div);
-            });
         }
 
         function removeVerseCoverFile(index) {
@@ -666,7 +653,19 @@
             if (verseCoverUploadedFiles.length === 0) {
                 document.getElementById('verseCoverFilePreview').style.display = 'none';
             } else {
-                previewVerseCoverFiles();
+                const container = document.getElementById('verseCoverFilePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                verseCoverUploadedFiles.forEach((file, idx) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeVerseCoverFile(${idx})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
             }
         }
 
@@ -675,15 +674,15 @@
                 const data = await supabaseFetch('verse_cover?limit=1');
                 if (data && data.length > 0) {
                     const preview = document.getElementById('verseCoverPreview');
-                    if (data[0].image_url) {
-                        preview.innerHTML = `<img src="${data[0].image_url}" style="max-width:100%; max-height:300px; border-radius:10px; object-fit:cover;">`;
-                    } else {
-                        preview.innerHTML = '<p style="color:#999;">No cover image set.</p>';
+                    if (preview) {
+                        if (data[0].image_url) {
+                            preview.innerHTML = `<img src="${data[0].image_url}" style="max-width:100%; max-height:300px; border-radius:10px; object-fit:cover;">`;
+                        } else {
+                            preview.innerHTML = '<p style="color:#999;">No cover image set.</p>';
+                        }
                     }
                 }
-            } catch (error) {
-                console.error('Error loading verse cover:', error);
-            }
+            } catch (error) { console.error('Error loading verse cover:', error); }
         }
 
         async function saveVerseCover(e) {
@@ -714,8 +713,11 @@
                 document.getElementById('verseCoverFilePreview').style.display = 'none';
                 document.getElementById('verseCoverFileInput').value = '';
 
-                document.getElementById('verseCoverStatus').textContent = '✅ Verse cover published!';
-                document.getElementById('verseCoverStatus').style.color = '#059669';
+                const status = document.getElementById('verseCoverStatus');
+                if (status) {
+                    status.textContent = '✅ Verse cover published!';
+                    status.style.color = '#059669';
+                }
                 statusEl.textContent = '✅ Published successfully!';
                 statusEl.style.color = '#059669';
                 showToast('Verse cover published!', 'success');
@@ -723,8 +725,11 @@
             } catch (error) {
                 statusEl.textContent = '❌ Error: ' + error.message;
                 statusEl.style.color = '#dc2626';
-                document.getElementById('verseCoverStatus').textContent = '❌ Error: ' + error.message;
-                document.getElementById('verseCoverStatus').style.color = '#dc2626';
+                const status = document.getElementById('verseCoverStatus');
+                if (status) {
+                    status.textContent = '❌ Error: ' + error.message;
+                    status.style.color = '#dc2626';
+                }
                 showToast('Error publishing verse cover', 'error');
             }
         }
@@ -739,7 +744,8 @@
         function selectChoirCoverType(type) {
             document.getElementById('choirCoverType').value = type;
             document.querySelectorAll('#section-choir-cover .cover-option-card').forEach(c => c.classList.remove('selected'));
-            document.getElementById(`choirCoverType${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('selected');
+            const el = document.getElementById(`choirCoverType${type.charAt(0).toUpperCase() + type.slice(1)}`);
+            if (el) el.classList.add('selected');
 
             document.getElementById('choirVideoGroup').style.display = type === 'video' ? 'block' : 'none';
             document.getElementById('choirImageGroup').style.display = type === 'image' ? 'block' : 'none';
@@ -747,7 +753,6 @@
             document.getElementById('choirIntervalGroup').style.display = type === 'slideshow' ? 'block' : 'none';
         }
 
-        // --- Choir Video Upload ---
         function handleChoirVideoFileSelect(event) {
             const files = event.target.files;
             if (files.length > 0) {
@@ -775,7 +780,6 @@
             }
         }
 
-        // --- Choir Image Upload ---
         function handleChoirImageFileSelect(event) {
             const files = event.target.files;
             if (files.length > 0) {
@@ -803,7 +807,6 @@
             }
         }
 
-        // --- Choir Slideshow Upload ---
         function handleChoirSlideshowFileSelect(event) {
             const files = event.target.files;
             if (files.length > 0) {
@@ -831,7 +834,6 @@
             }
         }
 
-        // --- Load Choir Cover ---
         async function loadChoirCover() {
             try {
                 const data = await supabaseFetch('choir_cover?limit=1');
@@ -846,7 +848,6 @@
             } catch (error) { console.error('Error loading choir cover:', error); }
         }
 
-        // --- Save Choir Cover ---
         async function saveChoirCover(e) {
             e.preventDefault();
             const statusEl = document.getElementById('choirCoverPublishStatus');
@@ -858,21 +859,18 @@
                 let imageUrl = document.getElementById('choirImageUrl').value;
                 let slideshowImages = document.getElementById('choirSlideshowImages').value;
 
-                // Upload video if selected
                 if (choirVideoUploadedFiles.length > 0) {
                     const file = choirVideoUploadedFiles[0];
                     videoUrl = await uploadFileToSupabase(file, 'choir-videos');
                     showToast('Video uploaded!', 'success');
                 }
 
-                // Upload image if selected
                 if (choirImageUploadedFiles.length > 0) {
                     const file = choirImageUploadedFiles[0];
                     imageUrl = await uploadFileToSupabase(file, 'choir-images');
                     showToast('Image uploaded!', 'success');
                 }
 
-                // Upload slideshow images if selected
                 if (choirSlideshowUploadedFiles.length > 0) {
                     const urls = [];
                     for (const file of choirSlideshowUploadedFiles) {
@@ -899,7 +897,6 @@
                     await supabaseFetch('choir_cover', { method: 'POST', body: JSON.stringify(data) });
                 }
 
-                // Reset uploads
                 choirVideoUploadedFiles = [];
                 choirImageUploadedFiles = [];
                 choirSlideshowUploadedFiles = [];
@@ -910,47 +907,50 @@
                 document.getElementById('choirImageFileInput').value = '';
                 document.getElementById('choirSlideshowFileInput').value = '';
 
-                document.getElementById('choirCoverStatus').textContent = '✅ Choir cover published!';
-                document.getElementById('choirCoverStatus').style.color = '#059669';
+                const status = document.getElementById('choirCoverStatus');
+                if (status) {
+                    status.textContent = '✅ Choir cover published!';
+                    status.style.color = '#059669';
+                }
                 statusEl.textContent = '✅ Published successfully!';
                 statusEl.style.color = '#059669';
                 showToast('Choir cover published!', 'success');
             } catch (error) {
                 statusEl.textContent = '❌ Error: ' + error.message;
                 statusEl.style.color = '#dc2626';
-                document.getElementById('choirCoverStatus').textContent = '❌ Error: ' + error.message;
-                document.getElementById('choirCoverStatus').style.color = '#dc2626';
+                const status = document.getElementById('choirCoverStatus');
+                if (status) {
+                    status.textContent = '❌ Error: ' + error.message;
+                    status.style.color = '#dc2626';
+                }
                 showToast('Error publishing choir cover', 'error');
             }
         }
 
         // ============================================================
-        // ===== CHILDREN UPLOAD FUNCTIONS =====
+        // ===== CHILDREN FUNCTIONS =====
         // ============================================================
         let childUploadedFiles = [];
+        let editingChildId = null;
 
         function handleChildFileSelect(event) {
             const files = event.target.files;
             if (files.length > 0) {
                 childUploadedFiles = Array.from(files);
-                previewChildFiles();
+                const container = document.getElementById('childFilePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                childUploadedFiles.forEach((file, index) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeChildFile(${index})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
             }
-        }
-
-        function previewChildFiles() {
-            const container = document.getElementById('childFilePreview');
-            container.innerHTML = '';
-            container.style.display = 'grid';
-            childUploadedFiles.forEach((file, index) => {
-                const url = URL.createObjectURL(file);
-                const div = document.createElement('div');
-                div.className = 'file-preview-item';
-                div.innerHTML = `
-                    <img src="${url}" alt="${file.name}">
-                    <button class="remove-file" onclick="removeChildFile(${index})">&times;</button>
-                `;
-                container.appendChild(div);
-            });
         }
 
         function removeChildFile(index) {
@@ -958,12 +958,147 @@
             if (childUploadedFiles.length === 0) {
                 document.getElementById('childFilePreview').style.display = 'none';
             } else {
-                previewChildFiles();
+                const container = document.getElementById('childFilePreview');
+                container.innerHTML = '';
+                container.style.display = 'grid';
+                childUploadedFiles.forEach((file, idx) => {
+                    const url = URL.createObjectURL(file);
+                    const div = document.createElement('div');
+                    div.className = 'file-preview-item';
+                    div.innerHTML = `
+                        <img src="${url}" alt="${file.name}">
+                        <button class="remove-file" onclick="removeChildFile(${idx})">&times;</button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        async function loadChildren() {
+            try {
+                const data = await supabaseFetch('children?order=id.desc');
+                const table = document.getElementById('childrenTable');
+                table.innerHTML = data.map(c => `
+                    <tr id="child-row-${c.id}">
+                        <td>${c.name}</td>
+                        <td>${c.age || '-'}</td>
+                        <td>${c.location || '-'}</td>
+                        <td class="actions">
+                            <button class="edit-btn" onclick="editChild(${c.id})"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="delete-btn" onclick="deleteChild(${c.id})"><i class="fas fa-trash"></i> Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading children:', error);
+                showToast('Error loading children', 'error');
+            }
+        }
+
+        async function addChild(e) {
+            e.preventDefault();
+            const statusEl = document.getElementById('childPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
+            try {
+                let imageUrl = '';
+
+                if (childUploadedFiles.length > 0) {
+                    const file = childUploadedFiles[0];
+                    imageUrl = await uploadFileToSupabase(file, 'children');
+                    showToast('Image uploaded!', 'success');
+                }
+
+                const data = {
+                    name: document.getElementById('childName').value,
+                    age: parseInt(document.getElementById('childAge').value) || null,
+                    location: document.getElementById('childLocation').value,
+                    story: document.getElementById('childStory').value,
+                    gender: document.getElementById('childGender').value,
+                    image_url: imageUrl,
+                    is_sponsored: false
+                };
+
+                await supabaseFetch('children', { method: 'POST', body: JSON.stringify(data) });
+
+                document.getElementById('childName').value = '';
+                document.getElementById('childAge').value = '';
+                document.getElementById('childLocation').value = '';
+                document.getElementById('childStory').value = '';
+                childUploadedFiles = [];
+                document.getElementById('childFilePreview').style.display = 'none';
+                document.getElementById('childFileInput').value = '';
+
+                loadChildren();
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Child published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing child: ' + error.message, 'error');
+            }
+        }
+
+        async function editChild(id) {
+            editingChildId = id;
+            try {
+                const data = await supabaseFetch(`children?id=eq.${id}`);
+                if (data && data.length > 0) {
+                    const child = data[0];
+                    const row = document.getElementById(`child-row-${id}`);
+                    row.innerHTML = `
+                        <td><input type="text" id="edit-name-${id}" value="${child.name}"></td>
+                        <td><input type="number" id="edit-age-${id}" value="${child.age || ''}"></td>
+                        <td><input type="text" id="edit-location-${id}" value="${child.location || ''}"></td>
+                        <td class="actions">
+                            <button class="save-btn" onclick="saveChild(${id})"><i class="fas fa-save"></i> Save</button>
+                            <button class="cancel-btn" onclick="cancelEdit(${id})"><i class="fas fa-times"></i> Cancel</button>
+                        </td>
+                    `;
+                }
+            } catch (error) {
+                showToast('Error loading child data', 'error');
+            }
+        }
+
+        async function saveChild(id) {
+            const name = document.getElementById(`edit-name-${id}`).value;
+            const age = parseInt(document.getElementById(`edit-age-${id}`).value) || null;
+            const location = document.getElementById(`edit-location-${id}`).value;
+
+            try {
+                await supabaseFetch(`children?id=eq.${id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ name, age, location })
+                });
+                showToast('Child updated successfully!', 'success');
+                loadChildren();
+                editingChildId = null;
+            } catch (error) {
+                showToast('Error updating child', 'error');
+            }
+        }
+
+        function cancelEdit(id) {
+            loadChildren();
+            editingChildId = null;
+        }
+
+        async function deleteChild(id) {
+            if (!confirm('Are you sure you want to delete this child? This cannot be undone.')) return;
+            try {
+                await supabaseFetch(`children?id=eq.${id}`, { method: 'DELETE' });
+                loadChildren();
+                showToast('Child deleted successfully!', 'success');
+            } catch (error) {
+                showToast('Error deleting child', 'error');
             }
         }
 
         // ============================================================
-        // ===== CHOIR MEDIA UPLOAD FUNCTIONS =====
+        // ===== CHOIR MEDIA FUNCTIONS =====
         // ============================================================
         let choirUploadedFiles = [];
 
@@ -995,8 +1130,78 @@
             }
         }
 
+        async function loadChoirMedia() {
+            try {
+                const data = await supabaseFetch('choir_media?order=id.desc');
+                document.getElementById('choirMediaTable').innerHTML = data.map(item => `
+                    <tr>
+                        <td>${item.title}</td>
+                        <td>${item.type}</td>
+                        <td>${item.tag || '-'}</td>
+                        <td class="actions">
+                            <button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn" onclick="deleteChoirMedia(${item.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) { console.error('Error loading choir media:', error); }
+        }
+
+        async function addChoirMedia(e) {
+            e.preventDefault();
+            const statusEl = document.getElementById('choirPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
+            try {
+                let fileUrl = '';
+
+                if (choirUploadedFiles.length > 0) {
+                    const file = choirUploadedFiles[0];
+                    const folder = file.type.startsWith('video/') ? 'choir-videos' : 'choir-images';
+                    fileUrl = await uploadFileToSupabase(file, folder);
+                    showToast('File uploaded!', 'success');
+                }
+
+                const data = {
+                    type: document.getElementById('choirMediaType').value,
+                    title: document.getElementById('choirMediaTitle').value,
+                    description: document.getElementById('choirMediaDescription').value,
+                    tag: document.getElementById('choirMediaTag').value,
+                    file_url: fileUrl
+                };
+
+                await supabaseFetch('choir_media', { method: 'POST', body: JSON.stringify(data) });
+
+                document.getElementById('choirMediaTitle').value = '';
+                document.getElementById('choirMediaDescription').value = '';
+                document.getElementById('choirMediaTag').value = '';
+                choirUploadedFiles = [];
+                document.getElementById('choirFilePreview').style.display = 'none';
+                document.getElementById('choirFileInput').value = '';
+
+                loadChoirMedia();
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Choir media published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing media', 'error');
+            }
+        }
+
+        async function deleteChoirMedia(id) {
+            if (!confirm('Delete this media?')) return;
+            try {
+                await supabaseFetch(`choir_media?id=eq.${id}`, { method: 'DELETE' });
+                loadChoirMedia();
+                showToast('Media deleted!', 'success');
+            } catch (error) { showToast('Error deleting media', 'error'); }
+        }
+
         // ============================================================
-        // ===== MUSIC COVER UPLOAD FUNCTIONS =====
+        // ===== MUSIC PROJECTS FUNCTIONS =====
         // ============================================================
         let musicUploadedFiles = [];
 
@@ -1027,8 +1232,77 @@
             }
         }
 
+        async function loadMusicProjects() {
+            try {
+                const data = await supabaseFetch('music_projects?order=id.desc');
+                document.getElementById('musicProjectsTable').innerHTML = data.map(item => `
+                    <tr>
+                        <td>${item.title}</td>
+                        <td>${item.type}</td>
+                        <td>${item.year || '-'}</td>
+                        <td class="actions">
+                            <button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn" onclick="deleteMusicProject(${item.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) { console.error('Error loading music projects:', error); }
+        }
+
+        async function addMusicProject(e) {
+            e.preventDefault();
+            const statusEl = document.getElementById('musicPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
+            try {
+                let coverUrl = '';
+
+                if (musicUploadedFiles.length > 0) {
+                    const file = musicUploadedFiles[0];
+                    coverUrl = await uploadFileToSupabase(file, 'music-covers');
+                    showToast('Cover uploaded!', 'success');
+                }
+
+                const data = {
+                    type: document.getElementById('musicProjectType').value,
+                    title: document.getElementById('musicProjectTitle').value,
+                    description: document.getElementById('musicProjectDescription').value,
+                    year: document.getElementById('musicProjectYear').value,
+                    cover_url: coverUrl,
+                    streaming_links: document.getElementById('musicStreamingLinks').value
+                };
+
+                await supabaseFetch('music_projects', { method: 'POST', body: JSON.stringify(data) });
+
+                document.getElementById('musicProjectTitle').value = '';
+                document.getElementById('musicProjectDescription').value = '';
+                musicUploadedFiles = [];
+                document.getElementById('musicFilePreview').style.display = 'none';
+                document.getElementById('musicFileInput').value = '';
+
+                loadMusicProjects();
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Music project published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing project', 'error');
+            }
+        }
+
+        async function deleteMusicProject(id) {
+            if (!confirm('Delete this project?')) return;
+            try {
+                await supabaseFetch(`music_projects?id=eq.${id}`, { method: 'DELETE' });
+                loadMusicProjects();
+                showToast('Project deleted!', 'success');
+            } catch (error) { showToast('Error deleting project', 'error'); }
+        }
+
         // ============================================================
-        // ===== TOUR POSTER UPLOAD FUNCTIONS =====
+        // ===== TOURS FUNCTIONS =====
         // ============================================================
         let tourUploadedFiles = [];
 
@@ -1059,8 +1333,78 @@
             }
         }
 
+        async function loadTours() {
+            try {
+                const data = await supabaseFetch('tours?order=id.desc');
+                document.getElementById('toursTable').innerHTML = data.map(item => `
+                    <tr>
+                        <td>${item.title}</td>
+                        <td>${item.date || '-'}</td>
+                        <td>${item.location || '-'}</td>
+                        <td class="actions">
+                            <button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn" onclick="deleteTour(${item.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) { console.error('Error loading tours:', error); }
+        }
+
+        async function addTourEvent(e) {
+            e.preventDefault();
+            const statusEl = document.getElementById('tourPublishStatus');
+            statusEl.textContent = '⏳ Uploading...';
+            statusEl.style.color = '#0984E3';
+
+            try {
+                let posterUrl = '';
+
+                if (tourUploadedFiles.length > 0) {
+                    const file = tourUploadedFiles[0];
+                    posterUrl = await uploadFileToSupabase(file, 'tour-posters');
+                    showToast('Poster uploaded!', 'success');
+                }
+
+                const data = {
+                    title: document.getElementById('tourTitle').value,
+                    date: document.getElementById('tourDate').value,
+                    location: document.getElementById('tourLocation').value,
+                    time: document.getElementById('tourTime').value,
+                    poster_url: posterUrl
+                };
+
+                await supabaseFetch('tours', { method: 'POST', body: JSON.stringify(data) });
+
+                document.getElementById('tourTitle').value = '';
+                document.getElementById('tourDate').value = '';
+                document.getElementById('tourLocation').value = '';
+                document.getElementById('tourTime').value = '';
+                tourUploadedFiles = [];
+                document.getElementById('tourFilePreview').style.display = 'none';
+                document.getElementById('tourFileInput').value = '';
+
+                loadTours();
+                statusEl.textContent = '✅ Published successfully!';
+                statusEl.style.color = '#059669';
+                showToast('Event published!', 'success');
+            } catch (error) {
+                statusEl.textContent = '❌ Error: ' + error.message;
+                statusEl.style.color = '#dc2626';
+                showToast('Error publishing event', 'error');
+            }
+        }
+
+        async function deleteTour(id) {
+            if (!confirm('Delete this event?')) return;
+            try {
+                await supabaseFetch(`tours?id=eq.${id}`, { method: 'DELETE' });
+                loadTours();
+                showToast('Event deleted!', 'success');
+            } catch (error) { showToast('Error deleting event', 'error'); }
+        }
+
         // ============================================================
-        // ===== DASHBOARD =====
+        // ===== STATS =====
         // ============================================================
         async function loadStats() {
             try {
@@ -1134,276 +1478,7 @@
         }
 
         // ============================================================
-        // ===== CHILDREN =====
-        // ============================================================
-        async function loadChildren() {
-            try {
-                const data = await supabaseFetch('children?order=id.desc');
-                document.getElementById('childrenTable').innerHTML = data.map(c => `
-                    <tr><td>${c.name}</td><td>${c.age || '-'}</td><td>${c.location || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteChild(${c.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading children:', error); }
-        }
-
-        async function addChild(e) {
-            e.preventDefault();
-            const statusEl = document.getElementById('childPublishStatus');
-            statusEl.textContent = '⏳ Uploading...';
-            statusEl.style.color = '#0984E3';
-
-            try {
-                let imageUrl = 'images/child-placeholder.jpg';
-
-                if (childUploadedFiles.length > 0) {
-                    const file = childUploadedFiles[0];
-                    imageUrl = await uploadFileToSupabase(file, 'children');
-                    showToast('Image uploaded!', 'success');
-                }
-
-                const data = {
-                    name: document.getElementById('childName').value,
-                    age: parseInt(document.getElementById('childAge').value) || null,
-                    location: document.getElementById('childLocation').value,
-                    story: document.getElementById('childStory').value,
-                    gender: document.getElementById('childGender').value,
-                    image_url: imageUrl,
-                    is_sponsored: false
-                };
-
-                await supabaseFetch('children', { method: 'POST', body: JSON.stringify(data) });
-
-                document.getElementById('childName').value = '';
-                document.getElementById('childAge').value = '';
-                document.getElementById('childLocation').value = '';
-                document.getElementById('childStory').value = '';
-                childUploadedFiles = [];
-                document.getElementById('childFilePreview').style.display = 'none';
-                document.getElementById('childFileInput').value = '';
-
-                loadChildren();
-                statusEl.textContent = '✅ Published successfully!';
-                statusEl.style.color = '#059669';
-                showToast('Child published!', 'success');
-            } catch (error) {
-                statusEl.textContent = '❌ Error: ' + error.message;
-                statusEl.style.color = '#dc2626';
-                showToast('Error publishing child', 'error');
-            }
-        }
-
-        async function deleteChild(id) {
-            if (!confirm('Delete this child?')) return;
-            try {
-                await supabaseFetch(`children?id=eq.${id}`, { method: 'DELETE' });
-                loadChildren();
-                showToast('Child deleted!', 'success');
-            } catch (error) { showToast('Error deleting child', 'error'); }
-        }
-
-        // ============================================================
-        // ===== CHOIR MEDIA =====
-        // ============================================================
-        async function loadChoirMedia() {
-            try {
-                const data = await supabaseFetch('choir_media?order=id.desc');
-                document.getElementById('choirMediaTable').innerHTML = data.map(item => `
-                    <tr><td>${item.title}</td><td>${item.type}</td><td>${item.tag || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteChoirMedia(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading choir media:', error); }
-        }
-
-        async function addChoirMedia(e) {
-            e.preventDefault();
-            const statusEl = document.getElementById('choirPublishStatus');
-            statusEl.textContent = '⏳ Uploading...';
-            statusEl.style.color = '#0984E3';
-
-            try {
-                let fileUrl = '';
-
-                if (choirUploadedFiles.length > 0) {
-                    const file = choirUploadedFiles[0];
-                    const folder = file.type.startsWith('video/') ? 'choir-videos' : 'choir-images';
-                    fileUrl = await uploadFileToSupabase(file, folder);
-                    showToast('File uploaded!', 'success');
-                }
-
-                const data = {
-                    type: document.getElementById('choirMediaType').value,
-                    title: document.getElementById('choirMediaTitle').value,
-                    description: document.getElementById('choirMediaDescription').value,
-                    tag: document.getElementById('choirMediaTag').value,
-                    file_url: fileUrl
-                };
-
-                await supabaseFetch('choir_media', { method: 'POST', body: JSON.stringify(data) });
-
-                document.getElementById('choirMediaTitle').value = '';
-                document.getElementById('choirMediaDescription').value = '';
-                document.getElementById('choirMediaTag').value = '';
-                choirUploadedFiles = [];
-                document.getElementById('choirFilePreview').style.display = 'none';
-                document.getElementById('choirFileInput').value = '';
-
-                loadChoirMedia();
-                statusEl.textContent = '✅ Published successfully!';
-                statusEl.style.color = '#059669';
-                showToast('Choir media published!', 'success');
-            } catch (error) {
-                statusEl.textContent = '❌ Error: ' + error.message;
-                statusEl.style.color = '#dc2626';
-                showToast('Error publishing media', 'error');
-            }
-        }
-
-        async function deleteChoirMedia(id) {
-            if (!confirm('Delete this media?')) return;
-            try {
-                await supabaseFetch(`choir_media?id=eq.${id}`, { method: 'DELETE' });
-                loadChoirMedia();
-                showToast('Media deleted!', 'success');
-            } catch (error) { showToast('Error deleting media', 'error'); }
-        }
-
-        // ============================================================
-        // ===== MUSIC PROJECTS =====
-        // ============================================================
-        async function loadMusicProjects() {
-            try {
-                const data = await supabaseFetch('music_projects?order=id.desc');
-                document.getElementById('musicProjectsTable').innerHTML = data.map(item => `
-                    <tr><td>${item.title}</td><td>${item.type}</td><td>${item.year || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteMusicProject(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading music projects:', error); }
-        }
-
-        async function addMusicProject(e) {
-            e.preventDefault();
-            const statusEl = document.getElementById('musicPublishStatus');
-            statusEl.textContent = '⏳ Uploading...';
-            statusEl.style.color = '#0984E3';
-
-            try {
-                let coverUrl = '';
-
-                if (musicUploadedFiles.length > 0) {
-                    const file = musicUploadedFiles[0];
-                    coverUrl = await uploadFileToSupabase(file, 'music-covers');
-                    showToast('Cover uploaded!', 'success');
-                }
-
-                const data = {
-                    type: document.getElementById('musicProjectType').value,
-                    title: document.getElementById('musicProjectTitle').value,
-                    description: document.getElementById('musicProjectDescription').value,
-                    year: document.getElementById('musicProjectYear').value,
-                    cover_url: coverUrl,
-                    streaming_links: document.getElementById('musicStreamingLinks').value
-                };
-
-                await supabaseFetch('music_projects', { method: 'POST', body: JSON.stringify(data) });
-
-                document.getElementById('musicProjectTitle').value = '';
-                document.getElementById('musicProjectDescription').value = '';
-                musicUploadedFiles = [];
-                document.getElementById('musicFilePreview').style.display = 'none';
-                document.getElementById('musicFileInput').value = '';
-
-                loadMusicProjects();
-                statusEl.textContent = '✅ Published successfully!';
-                statusEl.style.color = '#059669';
-                showToast('Music project published!', 'success');
-            } catch (error) {
-                statusEl.textContent = '❌ Error: ' + error.message;
-                statusEl.style.color = '#dc2626';
-                showToast('Error publishing project', 'error');
-            }
-        }
-
-        async function deleteMusicProject(id) {
-            if (!confirm('Delete this project?')) return;
-            try {
-                await supabaseFetch(`music_projects?id=eq.${id}`, { method: 'DELETE' });
-                loadMusicProjects();
-                showToast('Project deleted!', 'success');
-            } catch (error) { showToast('Error deleting project', 'error'); }
-        }
-
-        // ============================================================
-        // ===== TOURS =====
-        // ============================================================
-        async function loadTours() {
-            try {
-                const data = await supabaseFetch('tours?order=id.desc');
-                document.getElementById('toursTable').innerHTML = data.map(item => `
-                    <tr><td>${item.title}</td><td>${item.date || '-'}</td><td>${item.location || '-'}</td>
-                    <td class="actions"><button class="edit-btn" onclick="showToast('Edit coming soon!','info')"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" onclick="deleteTour(${item.id})"><i class="fas fa-trash"></i></button></td></tr>
-                `).join('');
-            } catch (error) { console.error('Error loading tours:', error); }
-        }
-
-        async function addTourEvent(e) {
-            e.preventDefault();
-            const statusEl = document.getElementById('tourPublishStatus');
-            statusEl.textContent = '⏳ Uploading...';
-            statusEl.style.color = '#0984E3';
-
-            try {
-                let posterUrl = '';
-
-                if (tourUploadedFiles.length > 0) {
-                    const file = tourUploadedFiles[0];
-                    posterUrl = await uploadFileToSupabase(file, 'tour-posters');
-                    showToast('Poster uploaded!', 'success');
-                }
-
-                const data = {
-                    title: document.getElementById('tourTitle').value,
-                    date: document.getElementById('tourDate').value,
-                    location: document.getElementById('tourLocation').value,
-                    time: document.getElementById('tourTime').value,
-                    poster_url: posterUrl
-                };
-
-                await supabaseFetch('tours', { method: 'POST', body: JSON.stringify(data) });
-
-                document.getElementById('tourTitle').value = '';
-                document.getElementById('tourDate').value = '';
-                document.getElementById('tourLocation').value = '';
-                document.getElementById('tourTime').value = '';
-                tourUploadedFiles = [];
-                document.getElementById('tourFilePreview').style.display = 'none';
-                document.getElementById('tourFileInput').value = '';
-
-                loadTours();
-                statusEl.textContent = '✅ Published successfully!';
-                statusEl.style.color = '#059669';
-                showToast('Event published!', 'success');
-            } catch (error) {
-                statusEl.textContent = '❌ Error: ' + error.message;
-                statusEl.style.color = '#dc2626';
-                showToast('Error publishing event', 'error');
-            }
-        }
-
-        async function deleteTour(id) {
-            if (!confirm('Delete this event?')) return;
-            try {
-                await supabaseFetch(`tours?id=eq.${id}`, { method: 'DELETE' });
-                loadTours();
-                showToast('Event deleted!', 'success');
-            } catch (error) { showToast('Error deleting event', 'error'); }
-        }
-
-        // ============================================================
-        // ===== SUBMISSIONS =====
+        // ===== PARTNERS, VOLUNTEERS, SPONSORSHIPS =====
         // ============================================================
         async function loadPartners() {
             try {
@@ -1478,12 +1553,23 @@
             box.addEventListener('drop', function(e) {
                 e.preventDefault();
                 this.classList.remove('dragover');
-
                 const files = e.dataTransfer.files;
                 if (files.length > 0) {
                     if (this.id === 'verseCoverUploadBox') {
                         verseCoverUploadedFiles = Array.from(files);
-                        previewVerseCoverFiles();
+                        const container = document.getElementById('verseCoverFilePreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        verseCoverUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            div.innerHTML = `
+                                <img src="${url}" alt="${file.name}">
+                                <button class="remove-file" onclick="removeVerseCoverFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
                         showToast(`${files.length} file(s) uploaded!`, 'success');
                     } else if (this.id === 'choirVideoUploadBox') {
                         choirVideoUploadedFiles = Array.from(files);
@@ -1535,7 +1621,19 @@
                         showToast(`${files.length} file(s) uploaded!`, 'success');
                     } else if (this.id === 'childUploadBox') {
                         childUploadedFiles = Array.from(files);
-                        previewChildFiles();
+                        const container = document.getElementById('childFilePreview');
+                        container.innerHTML = '';
+                        container.style.display = 'grid';
+                        childUploadedFiles.forEach((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            const div = document.createElement('div');
+                            div.className = 'file-preview-item';
+                            div.innerHTML = `
+                                <img src="${url}" alt="${file.name}">
+                                <button class="remove-file" onclick="removeChildFile(${index})">&times;</button>
+                            `;
+                            container.appendChild(div);
+                        });
                         showToast(`${files.length} file(s) uploaded!`, 'success');
                     } else if (this.id === 'choirUploadBox') {
                         choirUploadedFiles = Array.from(files);
@@ -1609,6 +1707,7 @@
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             loadStats();
+            loadChildren();
         });
     </script>
 </body>
