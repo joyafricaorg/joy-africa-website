@@ -1,21 +1,27 @@
 /* ===== JOYRISE AFRICA FOUNDATION - COMPLETE STYLE SHEET ===== */
-/* ===== Version 2.0 - Updated with all new pages ===== */
+/* ===== Version 2.0 - Updated with Logo Colors ===== */
 
 /* -- 1. SETUP: FONTS, COLORS, AND GENERAL STYLES -- */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
 
 :root {
-    --primary-blue: #0B2447;
-    --accent-orange: #F28C28;
+    /* Logo Colors - Theme */
+    --primary-blue: #0A2463;
+    --secondary-orange: #F28C28;
+    --accent-red: #E31E24;
+    --highlight-gold: #FDCB6E;
+    --dark-bg: #1a1a1a;
     --light-background: #F8F7F4;
     --white: #ffffff;
-    --text-color: #333333;
+    --text-color: #2d3436;
     --text-light: #f1f1f1;
-    --dark-bg: #1a1a1a;
-    --shadow: 0 2px 20px rgba(0,0,0,0.07);
-    --shadow-hover: 0 20px 60px rgba(11, 36, 71, 0.12);
+    --shadow: 0 2px 20px rgba(10, 36, 99, 0.1);
+    --shadow-hover: 0 20px 60px rgba(10, 36, 99, 0.15);
     --border-radius: 16px;
     --transition: all 0.3s ease;
+    --gradient-primary: linear-gradient(135deg, #0A2463, #1a3a7a);
+    --gradient-accent: linear-gradient(135deg, #F28C28, #E31E24);
+    --gradient-gold: linear-gradient(135deg, #FDCB6E, #F7DC6F);
 }
 
 * {
@@ -32,7 +38,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     color: var(--text-color);
-    background-color: var(--white);
+    background-color: var(--light-background);
     line-height: 1.8;
     font-size: 18px;
     -webkit-font-smoothing: antialiased;
@@ -74,6 +80,7 @@ section {
     position: sticky;
     top: 0;
     z-index: 1001;
+    border-bottom: 2px solid var(--highlight-gold);
 }
 .contact-bar .container {
     display: flex;
@@ -86,15 +93,15 @@ section {
     color: var(--white);
     text-decoration: none;
     margin: 0 6px;
-    transition: color 0.3s ease;
+    transition: var(--transition);
 }
 .contact-bar a:hover {
-    color: var(--accent-orange);
+    color: var(--highlight-gold);
 }
 .contact-bar .social-links a {
     margin: 0 5px;
     font-size: 1rem;
-    transition: transform 0.3s ease;
+    transition: var(--transition);
     display: inline-block;
 }
 .contact-bar .social-links a:hover {
@@ -162,24 +169,23 @@ nav a {
     white-space: nowrap;
 }
 nav a:hover {
-    color: var(--accent-orange);
+    color: var(--secondary-orange);
     background: rgba(242, 140, 40, 0.1);
 }
 nav a.active {
-    color: var(--accent-orange);
+    color: var(--secondary-orange);
     background: rgba(242, 140, 40, 0.15);
 }
 .nav-button {
-    background-color: var(--accent-orange);
+    background: var(--gradient-accent);
     color: var(--white) !important;
     padding: 6px 16px;
     border-radius: 50px;
     transition: var(--transition);
 }
 .nav-button:hover {
-    background-color: var(--primary-blue);
-    color: var(--white) !important;
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(227, 30, 36, 0.4);
 }
 
 /* ===== BACK BUTTON ===== */
@@ -197,7 +203,7 @@ nav a.active {
     transition: var(--transition);
     padding: 8px 16px;
     border-radius: 8px;
-    background: rgba(11, 36, 71, 0.08);
+    background: rgba(10, 36, 99, 0.08);
 }
 .back-button:hover {
     background: var(--primary-blue);
@@ -228,7 +234,7 @@ nav a.active {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(11, 36, 71, 0.75);
+    background: linear-gradient(135deg, rgba(10, 36, 99, 0.85), rgba(227, 30, 36, 0.6));
 }
 .hero-content {
     position: relative;
@@ -241,6 +247,9 @@ nav a.active {
     margin: 0 0 20px 0;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
+.hero-content h1 .highlight {
+    color: var(--highlight-gold);
+}
 .hero-content p {
     font-size: 1.4rem;
     font-family: 'Roboto', sans-serif;
@@ -248,7 +257,7 @@ nav a.active {
     opacity: 0.9;
 }
 .hero-button {
-    background: var(--accent-orange);
+    background: var(--gradient-accent);
     color: var(--white);
     padding: 20px 45px;
     border-radius: 50px;
@@ -261,14 +270,15 @@ nav a.active {
     display: inline-block;
 }
 .hero-button:hover {
-    background: var(--white);
+    background: var(--gradient-gold);
     color: var(--primary-blue);
     transform: scale(1.05);
+    box-shadow: 0 10px 40px rgba(253, 203, 110, 0.3);
 }
 
 /* ===== ABOUT FOUNDATION ===== */
 #about-foundation {
-    background-color: var(--white);
+    background-color: var(--light-background);
 }
 
 .history-timeline {
@@ -281,7 +291,7 @@ nav a.active {
     background: var(--white);
     padding: 30px;
     border-radius: 8px;
-    border-top: 5px solid var(--accent-orange);
+    border-top: 5px solid var(--secondary-orange);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     transition: var(--transition);
 }
@@ -292,20 +302,21 @@ nav a.active {
 .timeline-item h3 {
     margin-top: 0;
     font-size: 1.5rem;
+    color: var(--primary-blue);
 }
 
 .mission-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 50px;
-    background: var(--primary-blue);
+    background: var(--gradient-primary);
     color: var(--white);
     padding: 50px;
     border-radius: var(--border-radius);
     margin-top: 40px;
 }
 .mission-grid h3 {
-    color: var(--accent-orange);
+    color: var(--highlight-gold);
 }
 .mission-grid p {
     color: rgba(255,255,255,0.9);
@@ -324,7 +335,7 @@ nav a.active {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    color: var(--accent-orange);
+    color: var(--highlight-gold);
     position: absolute;
     left: 0;
 }
@@ -334,12 +345,12 @@ nav a.active {
     max-width: 100%;
     margin: 40px auto;
     border-radius: var(--border-radius);
-    box-shadow: 0 15px 40px rgba(11, 36, 71, 0.1);
+    box-shadow: 0 15px 40px rgba(10, 36, 99, 0.15);
 }
 
 /* ===== LEADERSHIP ===== */
 #leadership {
-    background-color: var(--light-background);
+    background-color: var(--white);
 }
 
 .team-member-card {
@@ -361,32 +372,34 @@ nav a.active {
     border-radius: var(--border-radius);
     box-shadow: 0 20px 50px -20px rgba(0,0,0,0.3);
     transition: var(--transition);
+    border: 4px solid var(--highlight-gold);
 }
 .team-member-image img:hover {
     transform: scale(1.02);
 }
 .team-member-info h3 {
     font-size: 1.2rem;
-    color: var(--accent-orange);
+    color: var(--secondary-orange);
     letter-spacing: 2px;
 }
 .team-member-info h4 {
     font-size: 2.5rem;
     margin: 10px 0;
+    color: var(--primary-blue);
 }
 
 .message-box {
     margin-top: 20px;
     padding: 25px;
-    background: var(--white);
-    border-left: 5px solid var(--accent-orange);
+    background: var(--light-background);
+    border-left: 5px solid var(--secondary-orange);
     border-radius: 0 8px 8px 0;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 .message-box h5 {
     margin: 0 0 10px 0;
     font-size: 1rem;
-    color: #888;
+    color: var(--accent-red);
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -401,11 +414,11 @@ nav a.active {
 
 /* ===== COMMUNITY SHOWCASE ===== */
 #community-showcase {
-    background-color: var(--white);
+    background-color: var(--light-background);
 }
 #community-showcase img {
     border-radius: var(--border-radius);
-    box-shadow: 0 15px 40px rgba(11, 36, 71, 0.1);
+    box-shadow: 0 15px 40px rgba(10, 36, 99, 0.15);
 }
 
 /* ===== PROJECTS SECTION ===== */
@@ -422,9 +435,9 @@ nav a.active {
     background: var(--white);
     border-radius: var(--border-radius);
     margin-bottom: 50px;
-    box-shadow: 0 15px 40px rgba(11, 36, 71, 0.08);
+    box-shadow: 0 15px 40px rgba(10, 36, 99, 0.08);
     overflow: hidden;
-    border: 1px solid #eee;
+    border: 1px solid rgba(10, 36, 99, 0.05);
     transition: var(--transition);
 }
 .project-card:hover {
@@ -460,7 +473,7 @@ nav a.active {
 }
 .project-content h4 {
     font-size: 1.1rem;
-    color: var(--accent-orange);
+    color: var(--secondary-orange);
     margin-top: 20px;
     margin-bottom: 8px;
 }
@@ -486,7 +499,7 @@ nav a.active {
     padding: 20px 25px;
     background: var(--light-background);
     border-radius: 10px;
-    border-left: 4px solid var(--accent-orange);
+    border-left: 4px solid var(--secondary-orange);
 }
 .budget h4 {
     margin: 0 0 10px 0;
@@ -517,7 +530,7 @@ nav a.active {
     display: inline-block;
     margin-top: 20px;
     padding: 14px 35px;
-    background: var(--accent-orange);
+    background: var(--gradient-accent);
     color: var(--white);
     border-radius: 50px;
     text-decoration: none;
@@ -529,8 +542,9 @@ nav a.active {
     margin-right: 8px;
 }
 .project-donate-button:hover {
-    background: var(--primary-blue);
+    background: var(--gradient-primary);
     transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(10, 36, 99, 0.3);
 }
 
 /* ===== PAGE HERO ===== */
@@ -543,7 +557,7 @@ nav a.active {
     justify-content: center;
     text-align: center;
     color: var(--white);
-    background: linear-gradient(135deg, var(--primary-blue), #1a3a5c);
+    background: var(--gradient-primary);
     overflow: hidden;
 }
 .page-hero .hero-overlay {
@@ -552,7 +566,7 @@ nav a.active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(11, 36, 71, 0.7);
+    background: rgba(10, 36, 99, 0.6);
 }
 .page-hero .hero-content {
     position: relative;
@@ -574,7 +588,7 @@ nav a.active {
 
 /* ===== FORM PAGE STYLES ===== */
 .form-page-hero {
-    background: linear-gradient(135deg, var(--primary-blue), #1a3a5c);
+    background: var(--gradient-primary);
     color: white;
     padding: 80px 20px 60px;
     text-align: center;
@@ -603,13 +617,13 @@ nav a.active {
     padding: 40px 50px;
     border-radius: var(--border-radius);
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    border: 1px solid #eee;
+    border: 1px solid rgba(10, 36, 99, 0.05);
 }
 .form-container form h3 {
     margin-top: 30px;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 3px solid var(--accent-orange);
+    border-bottom: 3px solid var(--secondary-orange);
     font-size: 1.8rem;
     color: var(--primary-blue);
 }
@@ -642,7 +656,7 @@ nav a.active {
 .form-container form input:focus,
 .form-container form textarea:focus,
 .form-container form select:focus {
-    border-color: var(--accent-orange);
+    border-color: var(--secondary-orange);
     outline: none;
     box-shadow: 0 0 8px rgba(242, 140, 40, 0.3);
 }
@@ -697,7 +711,7 @@ nav a.active {
 .form-container form .submit-btn {
     width: 100%;
     padding: 18px;
-    background: var(--accent-orange);
+    background: var(--gradient-accent);
     color: var(--white);
     border: none;
     border-radius: 12px;
@@ -710,19 +724,25 @@ nav a.active {
     margin-top: 10px;
 }
 .form-container form .submit-btn:hover {
-    background: var(--primary-blue);
+    background: var(--gradient-primary);
     transform: scale(1.02);
-    box-shadow: 0 5px 20px rgba(11, 36, 71, 0.3);
+    box-shadow: 0 5px 20px rgba(10, 36, 99, 0.3);
 }
 
 /* ===== DONATE SECTION ===== */
 #donate {
-    background-color: var(--primary-blue);
+    background: var(--gradient-primary);
     color: var(--white);
 }
 #donate h2,
 #donate .section-intro {
     color: var(--white);
+}
+#donate h2 {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 .donation-methods {
     display: grid;
@@ -731,31 +751,35 @@ nav a.active {
     margin-top: 50px;
 }
 .method-card {
-    background: var(--white);
-    color: var(--text-color);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: var(--white);
     padding: 40px;
     border-radius: var(--border-radius);
     text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
     transition: var(--transition);
 }
 .method-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    border-color: var(--highlight-gold);
 }
 .method-card h3 {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    color: var(--primary-blue);
+    color: var(--highlight-gold);
 }
 .method-card .fa-university,
 .method-card .fa-mobile-alt {
-    color: var(--accent-orange);
+    color: var(--secondary-orange);
     font-size: 1.5rem;
 }
 .method-card p {
-    color: #666;
+    color: rgba(255,255,255,0.8);
 }
 .paypal-button {
     display: inline-block;
@@ -775,17 +799,18 @@ nav a.active {
 /* ===== FOOTER ===== */
 footer {
     background-color: var(--dark-bg);
-    color: #a0a0a0;
+    color: rgba(255,255,255,0.6);
     padding: 60px 0 30px;
     text-align: center;
+    border-top: 3px solid var(--highlight-gold);
 }
 footer h3 {
-    color: var(--white);
+    color: var(--highlight-gold);
     font-family: 'Oswald', sans-serif;
     font-size: 1.5rem;
 }
 footer p {
-    color: #a0a0a0;
+    color: rgba(255,255,255,0.5);
 }
 .footer-icons {
     margin: 30px 0;
@@ -809,9 +834,9 @@ footer p {
 .copyright {
     font-size: 0.9rem;
     margin-top: 30px;
-    border-top: 1px solid #444;
+    border-top: 1px solid rgba(255,255,255,0.05);
     padding-top: 30px;
-    color: #a0a0a0;
+    color: rgba(255,255,255,0.4);
 }
 
 /* ===== IMAGE MODAL ===== */
@@ -848,7 +873,7 @@ footer p {
     cursor: pointer;
 }
 .modal .close-modal:hover {
-    color: var(--accent-orange);
+    color: var(--highlight-gold);
 }
 
 /* ===== EXPANDABLE IMAGE ===== */
