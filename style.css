@@ -1,27 +1,28 @@
-/* ===== JOYRISE AFRICA FOUNDATION - COMPLETE STYLE SHEET ===== */
-/* ===== Version 2.0 - Updated with Logo Colors ===== */
+/* ============================================================
+   JOYRISE AFRICA FOUNDATION - COMPLETE STYLE SHEET
+   Theme: Dark Green, White & Dark Blue
+   Version: 3.0
+   ============================================================ */
 
-/* -- 1. SETUP: FONTS, COLORS, AND GENERAL STYLES -- */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
 
 :root {
-    /* Logo Colors - Theme */
-    --primary-blue: #0A2463;
-    --secondary-orange: #F28C28;
-    --accent-red: #E31E24;
-    --highlight-gold: #FDCB6E;
-    --dark-bg: #1a1a1a;
-    --light-background: #F8F7F4;
-    --white: #ffffff;
-    --text-color: #2d3436;
+    /* Primary Theme Colors */
+    --dark-green: #1B5E20;
+    --dark-blue: #0A2463;
+    --white: #FFFFFF;
+    --green-accent: #2E7D32;
+    --light-bg: #F5F7F8;
+    --dark-bg: #0D1B2A;
+    --text-dark: #1a1a1a;
     --text-light: #f1f1f1;
-    --shadow: 0 2px 20px rgba(10, 36, 99, 0.1);
-    --shadow-hover: 0 20px 60px rgba(10, 36, 99, 0.15);
+    --gold: #FDCB6E;
+    --shadow: 0 2px 20px rgba(27, 94, 32, 0.15);
+    --shadow-hover: 0 20px 60px rgba(27, 94, 32, 0.2);
     --border-radius: 16px;
     --transition: all 0.3s ease;
-    --gradient-primary: linear-gradient(135deg, #0A2463, #1a3a7a);
-    --gradient-accent: linear-gradient(135deg, #F28C28, #E31E24);
-    --gradient-gold: linear-gradient(135deg, #FDCB6E, #F7DC6F);
+    --gradient-primary: linear-gradient(135deg, #1B5E20, #0A2463);
+    --gradient-green: linear-gradient(135deg, #1B5E20, #2E7D32);
 }
 
 * {
@@ -37,8 +38,8 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    color: var(--text-color);
-    background-color: var(--light-background);
+    color: var(--text-dark);
+    background-color: var(--light-bg);
     line-height: 1.8;
     font-size: 18px;
     -webkit-font-smoothing: antialiased;
@@ -54,7 +55,6 @@ h1, h2, h3, h4 {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
     line-height: 1.2;
-    color: var(--primary-blue);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -71,16 +71,18 @@ section {
     padding: 100px 0;
 }
 
-/* ===== CONTACT BAR ===== */
+/* ============================================================
+   CONTACT BAR
+   ============================================================ */
 .contact-bar {
-    background: var(--primary-blue);
+    background: var(--dark-blue);
     color: var(--white);
     padding: 8px 0;
     font-size: 0.8rem;
     position: sticky;
     top: 0;
     z-index: 1001;
-    border-bottom: 2px solid var(--highlight-gold);
+    border-bottom: 2px solid var(--dark-green);
 }
 .contact-bar .container {
     display: flex;
@@ -96,7 +98,7 @@ section {
     transition: var(--transition);
 }
 .contact-bar a:hover {
-    color: var(--highlight-gold);
+    color: var(--dark-green);
 }
 .contact-bar .social-links a {
     margin: 0 5px;
@@ -115,7 +117,9 @@ section {
 .contact-bar .social-links .fa-envelope { color: #EA4335; }
 .contact-bar .social-links .fa-phone { color: #34B7F1; }
 
-/* ===== HEADER & NAVIGATION ===== */
+/* ============================================================
+   HEADER & NAVIGATION
+   ============================================================ */
 header {
     background: var(--white);
     padding: 12px 0;
@@ -137,7 +141,7 @@ header .container {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: var(--primary-blue);
+    color: var(--dark-green);
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 0.85em;
@@ -149,7 +153,7 @@ header .container {
     margin-right: 12px;
 }
 .logo span {
-    color: var(--primary-blue);
+    color: var(--dark-green);
 }
 
 nav {
@@ -160,7 +164,7 @@ nav {
 }
 nav a {
     text-decoration: none;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
     padding: 6px 10px;
     font-weight: 700;
     font-size: 0.78rem;
@@ -169,15 +173,15 @@ nav a {
     white-space: nowrap;
 }
 nav a:hover {
-    color: var(--secondary-orange);
-    background: rgba(242, 140, 40, 0.1);
+    color: var(--dark-green);
+    background: rgba(27, 94, 32, 0.1);
 }
 nav a.active {
-    color: var(--secondary-orange);
-    background: rgba(242, 140, 40, 0.15);
+    color: var(--dark-green);
+    background: rgba(27, 94, 32, 0.15);
 }
 .nav-button {
-    background: var(--gradient-accent);
+    background: var(--gradient-green);
     color: var(--white) !important;
     padding: 6px 16px;
     border-radius: 50px;
@@ -185,10 +189,12 @@ nav a.active {
 }
 .nav-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(227, 30, 36, 0.4);
+    box-shadow: 0 0 20px rgba(27, 94, 32, 0.4);
 }
 
-/* ===== BACK BUTTON ===== */
+/* ============================================================
+   BACK BUTTON
+   ============================================================ */
 .back-button-container {
     padding: 12px 0 0 0;
 }
@@ -196,7 +202,7 @@ nav a.active {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
     text-decoration: none;
     font-weight: 700;
     font-size: 0.9rem;
@@ -206,7 +212,7 @@ nav a.active {
     background: rgba(10, 36, 99, 0.08);
 }
 .back-button:hover {
-    background: var(--primary-blue);
+    background: var(--dark-blue);
     color: var(--white);
     transform: translateX(-3px);
 }
@@ -214,7 +220,9 @@ nav a.active {
     font-size: 1rem;
 }
 
-/* ===== HERO SECTION ===== */
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
 #hero {
     position: relative;
     height: 90vh;
@@ -234,7 +242,7 @@ nav a.active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10, 36, 99, 0.85), rgba(227, 30, 36, 0.6));
+    background: linear-gradient(135deg, rgba(10, 36, 99, 0.75), rgba(27, 94, 32, 0.6));
 }
 .hero-content {
     position: relative;
@@ -248,7 +256,7 @@ nav a.active {
     text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 .hero-content h1 .highlight {
-    color: var(--highlight-gold);
+    color: var(--dark-green);
 }
 .hero-content p {
     font-size: 1.4rem;
@@ -257,7 +265,7 @@ nav a.active {
     opacity: 0.9;
 }
 .hero-button {
-    background: var(--gradient-accent);
+    background: var(--gradient-green);
     color: var(--white);
     padding: 20px 45px;
     border-radius: 50px;
@@ -270,15 +278,17 @@ nav a.active {
     display: inline-block;
 }
 .hero-button:hover {
-    background: var(--gradient-gold);
-    color: var(--primary-blue);
+    background: var(--dark-blue);
+    color: var(--white);
     transform: scale(1.05);
-    box-shadow: 0 10px 40px rgba(253, 203, 110, 0.3);
+    box-shadow: 0 10px 40px rgba(10, 36, 99, 0.3);
 }
 
-/* ===== ABOUT FOUNDATION ===== */
+/* ============================================================
+   ABOUT FOUNDATION
+   ============================================================ */
 #about-foundation {
-    background-color: var(--light-background);
+    background-color: var(--white);
 }
 
 .history-timeline {
@@ -291,7 +301,7 @@ nav a.active {
     background: var(--white);
     padding: 30px;
     border-radius: 8px;
-    border-top: 5px solid var(--secondary-orange);
+    border-top: 5px solid var(--dark-green);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     transition: var(--transition);
 }
@@ -302,7 +312,7 @@ nav a.active {
 .timeline-item h3 {
     margin-top: 0;
     font-size: 1.5rem;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
 }
 
 .mission-grid {
@@ -316,7 +326,7 @@ nav a.active {
     margin-top: 40px;
 }
 .mission-grid h3 {
-    color: var(--highlight-gold);
+    color: var(--dark-green);
 }
 .mission-grid p {
     color: rgba(255,255,255,0.9);
@@ -335,7 +345,7 @@ nav a.active {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    color: var(--highlight-gold);
+    color: var(--dark-green);
     position: absolute;
     left: 0;
 }
@@ -348,9 +358,11 @@ nav a.active {
     box-shadow: 0 15px 40px rgba(10, 36, 99, 0.15);
 }
 
-/* ===== LEADERSHIP ===== */
+/* ============================================================
+   LEADERSHIP
+   ============================================================ */
 #leadership {
-    background-color: var(--white);
+    background-color: var(--light-bg);
 }
 
 .team-member-card {
@@ -372,34 +384,33 @@ nav a.active {
     border-radius: var(--border-radius);
     box-shadow: 0 20px 50px -20px rgba(0,0,0,0.3);
     transition: var(--transition);
-    border: 4px solid var(--highlight-gold);
 }
 .team-member-image img:hover {
     transform: scale(1.02);
 }
 .team-member-info h3 {
     font-size: 1.2rem;
-    color: var(--secondary-orange);
+    color: var(--dark-green);
     letter-spacing: 2px;
 }
 .team-member-info h4 {
     font-size: 2.5rem;
     margin: 10px 0;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
 }
 
 .message-box {
     margin-top: 20px;
     padding: 25px;
-    background: var(--light-background);
-    border-left: 5px solid var(--secondary-orange);
+    background: var(--white);
+    border-left: 5px solid var(--dark-green);
     border-radius: 0 8px 8px 0;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 .message-box h5 {
     margin: 0 0 10px 0;
     font-size: 1rem;
-    color: var(--accent-red);
+    color: var(--dark-green);
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -412,19 +423,23 @@ nav a.active {
     line-height: 1.8;
 }
 
-/* ===== COMMUNITY SHOWCASE ===== */
+/* ============================================================
+   COMMUNITY SHOWCASE
+   ============================================================ */
 #community-showcase {
-    background-color: var(--light-background);
+    background-color: var(--white);
 }
 #community-showcase img {
     border-radius: var(--border-radius);
     box-shadow: 0 15px 40px rgba(10, 36, 99, 0.15);
 }
 
-/* ===== PROJECTS SECTION ===== */
+/* ============================================================
+   PROJECTS SECTION
+   ============================================================ */
 #projects-list {
     padding: 60px 20px;
-    background: var(--light-background);
+    background: var(--light-bg);
 }
 #projects-list .container {
     max-width: 1100px;
@@ -437,7 +452,7 @@ nav a.active {
     margin-bottom: 50px;
     box-shadow: 0 15px 40px rgba(10, 36, 99, 0.08);
     overflow: hidden;
-    border: 1px solid rgba(10, 36, 99, 0.05);
+    border: 1px solid rgba(27, 94, 32, 0.05);
     transition: var(--transition);
 }
 .project-card:hover {
@@ -469,11 +484,11 @@ nav a.active {
 .project-content h3 {
     margin-top: 0;
     font-size: 2rem;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
 }
 .project-content h4 {
     font-size: 1.1rem;
-    color: var(--secondary-orange);
+    color: var(--dark-green);
     margin-top: 20px;
     margin-bottom: 8px;
 }
@@ -497,20 +512,20 @@ nav a.active {
 .budget {
     margin-top: 20px;
     padding: 20px 25px;
-    background: var(--light-background);
+    background: var(--light-bg);
     border-radius: 10px;
-    border-left: 4px solid var(--secondary-orange);
+    border-left: 4px solid var(--dark-green);
 }
 .budget h4 {
     margin: 0 0 10px 0;
     font-size: 1rem;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
 }
 .budget p {
     margin: 0;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
 }
 .budget ul {
     list-style: none;
@@ -530,7 +545,7 @@ nav a.active {
     display: inline-block;
     margin-top: 20px;
     padding: 14px 35px;
-    background: var(--gradient-accent);
+    background: var(--gradient-green);
     color: var(--white);
     border-radius: 50px;
     text-decoration: none;
@@ -542,12 +557,14 @@ nav a.active {
     margin-right: 8px;
 }
 .project-donate-button:hover {
-    background: var(--gradient-primary);
+    background: var(--dark-blue);
     transform: scale(1.05);
     box-shadow: 0 0 30px rgba(10, 36, 99, 0.3);
 }
 
-/* ===== PAGE HERO ===== */
+/* ============================================================
+   PAGE HERO
+   ============================================================ */
 .page-hero {
     position: relative;
     height: 50vh;
@@ -586,7 +603,9 @@ nav a.active {
     margin: 0 auto;
 }
 
-/* ===== FORM PAGE STYLES ===== */
+/* ============================================================
+   FORM PAGE STYLES
+   ============================================================ */
 .form-page-hero {
     background: var(--gradient-primary);
     color: white;
@@ -617,15 +636,15 @@ nav a.active {
     padding: 40px 50px;
     border-radius: var(--border-radius);
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    border: 1px solid rgba(10, 36, 99, 0.05);
+    border: 1px solid rgba(27, 94, 32, 0.05);
 }
 .form-container form h3 {
     margin-top: 30px;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 3px solid var(--secondary-orange);
+    border-bottom: 3px solid var(--dark-green);
     font-size: 1.8rem;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
 }
 .form-container form h3:first-of-type {
     margin-top: 0;
@@ -633,7 +652,7 @@ nav a.active {
 .form-container form label {
     font-family: 'Oswald', sans-serif;
     font-size: 1.1rem;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
     margin-bottom: 8px;
     display: block;
 }
@@ -656,9 +675,9 @@ nav a.active {
 .form-container form input:focus,
 .form-container form textarea:focus,
 .form-container form select:focus {
-    border-color: var(--secondary-orange);
+    border-color: var(--dark-green);
     outline: none;
-    box-shadow: 0 0 8px rgba(242, 140, 40, 0.3);
+    box-shadow: 0 0 8px rgba(27, 94, 32, 0.3);
 }
 .form-container form textarea {
     min-height: 120px;
@@ -673,14 +692,14 @@ nav a.active {
 .form-container form fieldset legend {
     font-family: 'Oswald', sans-serif;
     font-size: 1.1rem;
-    color: var(--primary-blue);
+    color: var(--dark-blue);
     padding: 0 12px;
     font-weight: 700;
 }
 .form-container form fieldset label {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: var(--text-color);
+    color: var(--text-dark);
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -711,7 +730,7 @@ nav a.active {
 .form-container form .submit-btn {
     width: 100%;
     padding: 18px;
-    background: var(--gradient-accent);
+    background: var(--gradient-green);
     color: var(--white);
     border: none;
     border-radius: 12px;
@@ -724,12 +743,14 @@ nav a.active {
     margin-top: 10px;
 }
 .form-container form .submit-btn:hover {
-    background: var(--gradient-primary);
+    background: var(--dark-blue);
     transform: scale(1.02);
     box-shadow: 0 5px 20px rgba(10, 36, 99, 0.3);
 }
 
-/* ===== DONATE SECTION ===== */
+/* ============================================================
+   DONATE SECTION
+   ============================================================ */
 #donate {
     background: var(--gradient-primary);
     color: var(--white);
@@ -737,12 +758,6 @@ nav a.active {
 #donate h2,
 #donate .section-intro {
     color: var(--white);
-}
-#donate h2 {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 .donation-methods {
     display: grid;
@@ -764,18 +779,18 @@ nav a.active {
 .method-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    border-color: var(--highlight-gold);
+    border-color: var(--dark-green);
 }
 .method-card h3 {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    color: var(--highlight-gold);
+    color: var(--dark-green);
 }
 .method-card .fa-university,
 .method-card .fa-mobile-alt {
-    color: var(--secondary-orange);
+    color: var(--dark-green);
     font-size: 1.5rem;
 }
 .method-card p {
@@ -796,16 +811,18 @@ nav a.active {
     transform: scale(1.05);
 }
 
-/* ===== FOOTER ===== */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 footer {
     background-color: var(--dark-bg);
     color: rgba(255,255,255,0.6);
     padding: 60px 0 30px;
     text-align: center;
-    border-top: 3px solid var(--highlight-gold);
+    border-top: 3px solid var(--dark-green);
 }
 footer h3 {
-    color: var(--highlight-gold);
+    color: var(--dark-green);
     font-family: 'Oswald', sans-serif;
     font-size: 1.5rem;
 }
@@ -839,7 +856,9 @@ footer p {
     color: rgba(255,255,255,0.4);
 }
 
-/* ===== IMAGE MODAL ===== */
+/* ============================================================
+   IMAGE MODAL
+   ============================================================ */
 .modal {
     display: none;
     position: fixed;
@@ -873,10 +892,12 @@ footer p {
     cursor: pointer;
 }
 .modal .close-modal:hover {
-    color: var(--highlight-gold);
+    color: var(--dark-green);
 }
 
-/* ===== EXPANDABLE IMAGE ===== */
+/* ============================================================
+   EXPANDABLE IMAGE
+   ============================================================ */
 .expandable-image {
     cursor: pointer;
     transition: 0.3s;
@@ -885,7 +906,9 @@ footer p {
     opacity: 0.7;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 992px) {
     nav a {
         font-size: 0.7rem;
@@ -898,7 +921,6 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    /* Contact Bar */
     .contact-bar .container {
         flex-direction: column;
         text-align: center;
@@ -907,7 +929,6 @@ footer p {
         margin-top: 4px;
     }
 
-    /* Header */
     header .container {
         flex-direction: column;
         align-items: stretch;
@@ -934,7 +955,6 @@ footer p {
         font-size: 0.65rem;
     }
 
-    /* Hero */
     .hero-content h1 {
         font-size: 2.5rem;
     }
@@ -950,7 +970,6 @@ footer p {
         background-attachment: scroll;
     }
 
-    /* Sections */
     section {
         padding: 60px 0;
     }
@@ -959,13 +978,11 @@ footer p {
         font-size: 1rem;
     }
 
-    /* Mission Grid */
     .mission-grid {
         grid-template-columns: 1fr;
         padding: 30px;
     }
 
-    /* Team Cards */
     .team-member-card {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -982,7 +999,6 @@ footer p {
         font-size: 2rem;
     }
 
-    /* Projects */
     .project-images {
         grid-template-columns: 1fr;
     }
@@ -999,7 +1015,6 @@ footer p {
         font-size: 1.5rem;
     }
 
-    /* Page Hero */
     .page-hero h1 {
         font-size: 2.5rem;
     }
@@ -1008,12 +1023,9 @@ footer p {
         height: 40vh;
     }
 
-    /* Form Page Hero */
     .form-page-hero h1 {
         font-size: 2.5rem;
     }
-
-    /* Forms */
     .form-container form {
         padding: 25px;
     }
@@ -1021,7 +1033,6 @@ footer p {
         padding: 15px;
     }
 
-    /* Donation */
     .donation-methods {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -1030,20 +1041,16 @@ footer p {
         padding: 30px;
     }
 
-    /* Back Button */
     .back-button {
         font-size: 0.8rem;
         padding: 6px 12px;
     }
-
-    /* Timeline */
     .history-timeline {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 480px) {
-    /* Navigation */
     nav a {
         font-size: 0.55rem;
         padding: 3px 4px;
@@ -1053,7 +1060,6 @@ footer p {
         font-size: 0.55rem;
     }
 
-    /* Hero */
     .hero-content h1 {
         font-size: 1.8rem;
     }
@@ -1065,7 +1071,6 @@ footer p {
         min-height: 400px;
     }
 
-    /* Headings */
     h1 {
         font-size: 1.8rem !important;
     }
@@ -1073,7 +1078,6 @@ footer p {
         font-size: 1.5rem !important;
     }
 
-    /* Forms */
     .form-container form {
         padding: 15px;
     }
@@ -1090,7 +1094,6 @@ footer p {
         font-size: 0.9rem;
     }
 
-    /* Contact Bar */
     .contact-bar {
         font-size: 0.65rem;
     }
@@ -1098,7 +1101,6 @@ footer p {
         font-size: 0.8rem;
     }
 
-    /* Page Hero */
     .page-hero h1 {
         font-size: 1.8rem !important;
     }
@@ -1109,7 +1111,6 @@ footer p {
         padding: 60px 15px 40px;
     }
 
-    /* Projects */
     .project-content h3 {
         font-size: 1.3rem;
     }
@@ -1120,21 +1121,15 @@ footer p {
         padding: 12px 25px;
         font-size: 0.9rem;
     }
-
-    /* Donate */
     .method-card {
         padding: 20px;
     }
-
-    /* Timeline */
     .timeline-item {
         padding: 20px;
     }
     .timeline-item h3 {
         font-size: 1.2rem;
     }
-
-    /* Message Box */
     .message-box {
         padding: 15px;
     }
