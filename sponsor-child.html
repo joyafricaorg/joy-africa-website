@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== ALL STYLES IN ONE FILE ===== */
+        /* ===== SPONSOR PAGE STYLES ===== */
         :root {
             --sponsor-orange: #FF6B35;
             --sponsor-gold: #F7C948;
@@ -108,6 +108,8 @@
             flex-shrink: 0;
         }
         .logo img { height: 50px; margin-right: 12px; }
+        .logo span { color: var(--primary-blue); }
+
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -230,10 +232,14 @@
         .sponsor-option-card.ask-admin .icon { color: var(--sponsor-orange); }
         .sponsor-option-card.choose-child .icon { color: var(--sponsor-gold); }
 
-        /* ===== PAGE SECTIONS (Hidden by default) ===== */
+        /* ===== PAGE SECTIONS ===== */
         .page-section {
             display: none;
             padding: 40px 20px;
+            background: var(--sponsor-cream);
+            border-radius: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
         }
         .page-section.active {
             display: block;
@@ -325,26 +331,6 @@
         .child-card .btn-sponsor-now:hover {
             background: #27AE60;
             transform: scale(1.02);
-        }
-        /* Load More Button */
-        .load-more-container {
-            text-align: center;
-            margin-top: 40px;
-        }
-        .load-more-btn {
-            padding: 15px 50px;
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .load-more-btn:hover {
-            background: var(--sponsor-orange);
-            transform: scale(1.05);
         }
 
         /* ===== FORMS CONTAINER ===== */
@@ -497,6 +483,27 @@
         .form-container form .submit-btn:hover {
             background: var(--primary-blue);
             transform: scale(1.02);
+        }
+
+        /* ===== LOAD MORE ===== */
+        .load-more-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .load-more-btn {
+            padding: 15px 50px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .load-more-btn:hover {
+            background: var(--sponsor-orange);
+            transform: scale(1.05);
         }
 
         /* ===== DONATE SECTION ===== */
@@ -655,7 +662,7 @@
 
         <!-- ===== SPONSOR OPTIONS ===== -->
         <section class="sponsor-options" id="mainOptions">
-            <div class="sponsor-option-card ask-admin" onclick="showSection('ask-admin-section')">
+            <div class="sponsor-option-card ask-admin" onclick="showSection('ask-admin-form')">
                 <span class="icon">🤝</span>
                 <h3>Ask Admin to Decide</h3>
                 <p>Let our team match you with a child who needs your support the most.</p>
@@ -671,11 +678,11 @@
         </section>
 
         <!-- ===== SECTION: ASK ADMIN FORM ===== -->
-        <div class="page-section" id="ask-admin-section">
+        <div class="page-section" id="ask-admin-form">
             <div class="form-container">
                 <div class="form-header">
                     <h2>🤝 Ask Admin to Decide</h2>
-                    <button class="close-form" onclick="hideSection('ask-admin-section')">&times;</button>
+                    <button class="close-form" onclick="hideSection('ask-admin-form')">&times;</button>
                 </div>
                 <p class="form-subtitle">Fill in your details and our team will match you with a child.</p>
                 <form action="https://formspree.io/f/xqaljaqv" method="POST">
@@ -740,7 +747,7 @@
                     <button class="close-gallery" onclick="hideSection('children-section')">&times; Close</button>
                 </div>
                 <div class="children-grid" id="childrenGrid">
-                    <!-- Children loaded from JavaScript -->
+                    <!-- Children will be loaded dynamically from Supabase -->
                 </div>
                 <div class="load-more-container" id="loadMoreContainer" style="display:none;">
                     <button class="load-more-btn" onclick="loadMoreChildren()">Load More Children</button>
@@ -757,7 +764,6 @@
                 </div>
                 <p class="form-subtitle">Complete this form to sponsor a child directly.</p>
                 
-                <!-- Child Info Box with Image -->
                 <div class="child-info-box" id="childInfoBox">
                     <img src="images/child-placeholder.jpg" alt="Child" class="child-avatar" id="childAvatar">
                     <div class="child-details">
@@ -850,85 +856,71 @@
 
     <!-- ===== SCRIPTS ===== -->
     <script>
-        // ===== 18 CHILDREN DATA (Admin can edit/upload via admin panel) =====
-        const allChildrenData = [
-            // First 6 - Initially visible
-            { id: 1, name: 'Sarah A.', location: 'Kampala, Uganda', story: 'Sarah loves school and wants to become a doctor. She needs support for her education.', image: 'images/child1.jpg', age: '8', gender: 'Female' },
-            { id: 2, name: 'David M.', location: 'Jinja, Uganda', story: 'David is passionate about soccer and dreams of playing professionally.', image: 'images/child2.jpg', age: '10', gender: 'Male' },
-            { id: 3, name: 'Grace N.', location: 'Gulu, Uganda', story: 'Grace is a bright and curious child who loves reading and drawing.', image: 'images/child3.jpg', age: '6', gender: 'Female' },
-            { id: 4, name: 'James O.', location: 'Mbale, Uganda', story: 'James is a talented musician who leads his school\'s choir.', image: 'images/child4.jpg', age: '12', gender: 'Male' },
-            { id: 5, name: 'Faith K.', location: 'Mbarara, Uganda', story: 'Faith dreams of becoming a teacher and helping other children learn.', image: 'images/child5.jpg', age: '9', gender: 'Female' },
-            { id: 6, name: 'Peter W.', location: 'Entebbe, Uganda', story: 'Peter loves science and wants to be an engineer.', image: 'images/child6.jpg', age: '7', gender: 'Male' },
-            // Next 6 - Load More
-            { id: 7, name: 'Mary A.', location: 'Kampala, Uganda', story: 'Mary loves art and wants to become a painter. She needs support for her education.', image: 'images/child7.jpg', age: '11', gender: 'Female' },
-            { id: 8, name: 'John K.', location: 'Jinja, Uganda', story: 'John is a brilliant student who wants to become a pilot.', image: 'images/child8.jpg', age: '9', gender: 'Male' },
-            { id: 9, name: 'Esther N.', location: 'Gulu, Uganda', story: 'Esther loves music and dreams of becoming a singer.', image: 'images/child9.jpg', age: '7', gender: 'Female' },
-            { id: 10, name: 'Samuel O.', location: 'Mbale, Uganda', story: 'Samuel is passionate about helping others and wants to be a doctor.', image: 'images/child10.jpg', age: '10', gender: 'Male' },
-            { id: 11, name: 'Ruth K.', location: 'Mbarara, Uganda', story: 'Ruth loves reading and wants to become a writer.', image: 'images/child11.jpg', age: '8', gender: 'Female' },
-            { id: 12, name: 'Daniel W.', location: 'Entebbe, Uganda', story: 'Daniel loves nature and wants to be a farmer.', image: 'images/child12.jpg', age: '6', gender: 'Male' },
-            // Final 6 - Load More
-            { id: 13, name: 'Eunice A.', location: 'Kampala, Uganda', story: 'Eunice loves sports and wants to become a professional athlete.', image: 'images/child13.jpg', age: '10', gender: 'Female' },
-            { id: 14, name: 'Isaac K.', location: 'Jinja, Uganda', story: 'Isaac is a great leader and wants to become a lawyer.', image: 'images/child14.jpg', age: '11', gender: 'Male' },
-            { id: 15, name: 'Deborah N.', location: 'Gulu, Uganda', story: 'Deborah loves helping others and wants to be a nurse.', image: 'images/child15.jpg', age: '9', gender: 'Female' },
-            { id: 16, name: 'Joseph O.', location: 'Mbale, Uganda', story: 'Joseph is a hardworking child who wants to become a teacher.', image: 'images/child16.jpg', age: '8', gender: 'Male' },
-            { id: 17, name: 'Miriam K.', location: 'Mbarara, Uganda', story: 'Miriam loves cooking and wants to become a chef.', image: 'images/child17.jpg', age: '10', gender: 'Female' },
-            { id: 18, name: 'Timothy W.', location: 'Entebbe, Uganda', story: 'Timothy loves technology and wants to become an engineer.', image: 'images/child18.jpg', age: '7', gender: 'Male' }
-        ];
+        // ============================================================
+        // ===== SUPABASE CONFIGURATION =====
+        // ============================================================
+        const SUPABASE_URL = 'https://lvktwbukgisluhftabra.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2a3R3YnVrZ2lzbHVoZnRhYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczNDMxODIsImV4cCI6MjEwMjkxOTE4Mn0.mG7eKnQHOCxo_cidrOivL0PfAzRFo11Z_3qJZYW1eMk';
 
+        // ============================================================
         // ===== STATE =====
+        // ============================================================
+        let allChildrenData = [];
         let currentDisplayCount = 6;
         const loadMoreCount = 6;
 
-        // ===== SECTION NAVIGATION =====
-        function showSection(sectionId, childId = null) {
-            // Hide all sections
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-            
-            // Hide main options and hero
-            document.getElementById('mainOptions').style.display = 'none';
-            document.getElementById('mainHero').style.display = 'none';
-            
-            // Show selected section
-            const section = document.getElementById(sectionId);
-            section.classList.add('active');
-            
-            // If child ID provided, populate child info with image
-            if (childId && sectionId === 'sponsor-form-section') {
-                populateChildInfoWithImage(childId);
-            }
-            
-            // If children section, load children
-            if (sectionId === 'children-section') {
+        // ============================================================
+        // ===== FETCH CHILDREN FROM SUPABASE =====
+        // ============================================================
+        async function fetchChildren() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/children?select=*&order=id.desc`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+                const data = await response.json();
+                
+                allChildrenData = data.map(child => ({
+                    id: child.id,
+                    name: child.name || 'Unnamed Child',
+                    location: child.location || 'Uganda',
+                    story: child.story || 'A child waiting for your sponsorship.',
+                    image: child.image_url || 'images/child-placeholder.jpg',
+                    age: child.age || 'N/A',
+                    gender: child.gender || 'Not specified'
+                }));
+                
+                // If no children, show message
+                if (allChildrenData.length === 0) {
+                    const grid = document.getElementById('childrenGrid');
+                    grid.innerHTML = '<div style="text-align:center; padding:40px; color:#999; grid-column:1/-1;">No children available yet. Please check back soon.</div>';
+                }
+                
                 loadChildren();
+            } catch (error) {
+                console.error('Error fetching children:', error);
+                const grid = document.getElementById('childrenGrid');
+                grid.innerHTML = '<div style="text-align:center; padding:40px; color:#dc2626; grid-column:1/-1;">Error loading children. Please refresh the page.</div>';
             }
-            
-            // Scroll to section
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function hideSection(sectionId) {
-            document.getElementById(sectionId).classList.remove('active');
-            
-            // Reset display count when closing
-            if (sectionId === 'children-section') {
-                currentDisplayCount = 6;
-            }
-            
-            // Show main options again
-            document.getElementById('mainOptions').style.display = 'grid';
-            document.getElementById('mainHero').style.display = 'block';
-            
-            // Scroll to top
-            document.getElementById('mainHero').scrollIntoView({ behavior: 'smooth' });
-        }
-
+        // ============================================================
         // ===== LOAD CHILDREN =====
+        // ============================================================
         function loadChildren() {
             const grid = document.getElementById('childrenGrid');
             const loadMoreContainer = document.getElementById('loadMoreContainer');
             const visibleChildren = allChildrenData.slice(0, currentDisplayCount);
             
             grid.innerHTML = '';
+            
+            if (visibleChildren.length === 0) {
+                grid.innerHTML = '<div style="text-align:center; padding:40px; color:#999; grid-column:1/-1;">No children available. Please check back soon.</div>';
+                loadMoreContainer.style.display = 'none';
+                return;
+            }
             
             visibleChildren.forEach(child => {
                 const card = document.createElement('div');
@@ -938,9 +930,9 @@
                     <img src="${child.image}" alt="${child.name}" onerror="this.src='images/child-placeholder.jpg'">
                     <div class="child-info">
                         <h3>${child.name}</h3>
-                        <p class="age-location">Age ${child.age} • ${child.location}</p>
+                        <p class="age-location">${child.age} • ${child.location}</p>
                         <p class="story">${child.story}</p>
-                        <button class="btn-sponsor-now" onclick="showSection('sponsor-form-section', ${child.id})">SPONSOR NOW</button>
+                        <button class="btn-sponsor-now" onclick="showSponsorForm(${child.id})">SPONSOR NOW</button>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -954,68 +946,98 @@
             }
         }
 
+        // ============================================================
         // ===== LOAD MORE CHILDREN =====
+        // ============================================================
         function loadMoreChildren() {
             currentDisplayCount += loadMoreCount;
             if (currentDisplayCount > allChildrenData.length) {
                 currentDisplayCount = allChildrenData.length;
             }
             loadChildren();
-            
-            // Smooth scroll to show new children
             document.getElementById('childrenGrid').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // ===== POPULATE CHILD INFO WITH IMAGE =====
-        function populateChildInfoWithImage(childId) {
+        // ============================================================
+        // ===== SHOW SPONSOR FORM =====
+        // ============================================================
+        function showSponsorForm(childId) {
+            hideAllSections();
+            const form = document.getElementById('sponsor-form-section');
+            form.classList.add('active');
+            
             const child = allChildrenData.find(c => c.id === childId);
             if (child) {
-                // Update hidden fields
                 document.getElementById('childId').value = childId;
                 document.getElementById('childNameHidden').value = child.name;
-                
-                // Update visible info box
                 document.getElementById('childName').textContent = child.name;
-                document.getElementById('childLocation').textContent = `Age ${child.age} • ${child.location} • ${child.gender}`;
+                document.getElementById('childLocation').textContent = `${child.age} • ${child.location} • ${child.gender}`;
                 document.getElementById('childStory').textContent = child.story;
                 
-                // Update image
                 const avatar = document.getElementById('childAvatar');
                 avatar.src = child.image;
-                avatar.alt = child.name;
-                avatar.onerror = function() {
-                    this.src = 'images/child-placeholder.jpg';
-                };
-            } else {
-                document.getElementById('childId').value = 'Not specified';
-                document.getElementById('childNameHidden').value = 'Not specified';
-                document.getElementById('childName').textContent = 'Not specified';
-                document.getElementById('childLocation').textContent = 'To be determined';
-                document.getElementById('childStory').textContent = 'Please contact us for more information.';
-                document.getElementById('childAvatar').src = 'images/child-placeholder.jpg';
+                avatar.onerror = function() { this.src = 'images/child-placeholder.jpg'; };
             }
+            form.scrollIntoView({ behavior: 'smooth' });
         }
 
+        // ============================================================
+        // ===== SECTION NAVIGATION =====
+        // ============================================================
+        function showSection(sectionId) {
+            hideAllSections();
+            const section = document.getElementById(sectionId);
+            section.classList.add('active');
+            
+            // Hide main options and hero
+            document.getElementById('mainOptions').style.display = 'none';
+            document.getElementById('mainHero').style.display = 'none';
+            
+            // If children section, load children
+            if (sectionId === 'children-section' && allChildrenData.length === 0) {
+                fetchChildren();
+            }
+            
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideSection(sectionId) {
+            document.getElementById(sectionId).classList.remove('active');
+            
+            // Show main options again
+            document.getElementById('mainOptions').style.display = 'grid';
+            document.getElementById('mainHero').style.display = 'block';
+            
+            document.getElementById('mainHero').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideAllSections() {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+        }
+
+        // ============================================================
         // ===== BACK BUTTON LOGIC =====
+        // ============================================================
         if (window.history.length <= 1 || document.referrer === "") {
             document.getElementById('backButtonContainer').style.display = 'none';
         }
 
-        // ===== INITIALIZE =====
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load initial children if section is visible
-            if (document.getElementById('children-section').classList.contains('active')) {
-                loadChildren();
-            }
-        });
-
+        // ============================================================
         // ===== CLOSE SECTIONS ON ESCAPE =====
+        // ============================================================
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 document.querySelectorAll('.page-section.active').forEach(s => {
                     hideSection(s.id);
                 });
             }
+        });
+
+        // ============================================================
+        // ===== INITIALIZE =====
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchChildren();
         });
     </script>
 </body>
