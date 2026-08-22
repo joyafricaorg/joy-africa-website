@@ -1,28 +1,30 @@
 /* ============================================================
    JOYRISE AFRICA FOUNDATION - COMPLETE STYLE SHEET
-   Theme: Dark Green, White & Dark Blue
-   Version: 3.0
+   Theme: "Joy & Hope" - Gold, Coral, Teal & Cream
+   Version: 4.0
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
 
 :root {
-    /* Primary Theme Colors */
-    --dark-green: #1B5E20;
-    --dark-blue: #0A2463;
+    /* ===== JOY & HOPE COLOR PALETTE ===== */
+    --sunrise-gold: #FFB800;
+    --warm-coral: #FF6B6B;
+    --deep-teal: #1A8A8A;
+    --soft-cream: #FFF8F0;
+    --navy-blue: #1A2A6C;
+    --leaf-green: #2ECC71;
     --white: #FFFFFF;
-    --green-accent: #2E7D32;
-    --light-bg: #F5F7F8;
-    --dark-bg: #0D1B2A;
-    --text-dark: #1a1a1a;
-    --text-light: #f1f1f1;
-    --gold: #FDCB6E;
-    --shadow: 0 2px 20px rgba(27, 94, 32, 0.15);
-    --shadow-hover: 0 20px 60px rgba(27, 94, 32, 0.2);
+    --dark-text: #2D3436;
+    --light-text: #FFFFFF;
+    --shadow: 0 2px 20px rgba(26, 138, 138, 0.15);
+    --shadow-hover: 0 20px 60px rgba(26, 138, 138, 0.2);
     --border-radius: 16px;
     --transition: all 0.3s ease;
-    --gradient-primary: linear-gradient(135deg, #1B5E20, #0A2463);
-    --gradient-green: linear-gradient(135deg, #1B5E20, #2E7D32);
+    --gradient-hero: linear-gradient(135deg, #1A2A6C 0%, #1A8A8A 50%, #FFB800 100%);
+    --gradient-primary: linear-gradient(135deg, #1A2A6C, #1A8A8A);
+    --gradient-accent: linear-gradient(135deg, #FFB800, #FF6B6B);
+    --gradient-green: linear-gradient(135deg, #2ECC71, #1A8A8A);
 }
 
 * {
@@ -38,8 +40,8 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    color: var(--text-dark);
-    background-color: var(--light-bg);
+    color: var(--dark-text);
+    background-color: var(--soft-cream);
     line-height: 1.8;
     font-size: 18px;
     -webkit-font-smoothing: antialiased;
@@ -59,6 +61,9 @@ h1, h2, h3, h4 {
     letter-spacing: 1px;
 }
 
+h1 .highlight { color: var(--sunrise-gold); }
+h2 .highlight { color: var(--warm-coral); }
+
 .section-intro {
     text-align: center;
     max-width: 700px;
@@ -75,14 +80,14 @@ section {
    CONTACT BAR
    ============================================================ */
 .contact-bar {
-    background: var(--dark-blue);
+    background: var(--navy-blue);
     color: var(--white);
     padding: 8px 0;
     font-size: 0.8rem;
     position: sticky;
     top: 0;
     z-index: 1001;
-    border-bottom: 2px solid var(--dark-green);
+    border-bottom: 3px solid var(--sunrise-gold);
 }
 .contact-bar .container {
     display: flex;
@@ -98,7 +103,7 @@ section {
     transition: var(--transition);
 }
 .contact-bar a:hover {
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
 }
 .contact-bar .social-links a {
     margin: 0 5px;
@@ -141,7 +146,7 @@ header .container {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: var(--dark-green);
+    color: var(--navy-blue);
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 0.85em;
@@ -153,7 +158,7 @@ header .container {
     margin-right: 12px;
 }
 .logo span {
-    color: var(--dark-green);
+    color: var(--navy-blue);
 }
 
 nav {
@@ -164,7 +169,7 @@ nav {
 }
 nav a {
     text-decoration: none;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
     padding: 6px 10px;
     font-weight: 700;
     font-size: 0.78rem;
@@ -173,23 +178,24 @@ nav a {
     white-space: nowrap;
 }
 nav a:hover {
-    color: var(--dark-green);
-    background: rgba(27, 94, 32, 0.1);
+    color: var(--warm-coral);
+    background: rgba(255, 107, 107, 0.1);
 }
 nav a.active {
-    color: var(--dark-green);
-    background: rgba(27, 94, 32, 0.15);
+    color: var(--deep-teal);
+    background: rgba(26, 138, 138, 0.15);
 }
 .nav-button {
-    background: var(--gradient-green);
+    background: var(--gradient-accent);
     color: var(--white) !important;
     padding: 6px 16px;
     border-radius: 50px;
     transition: var(--transition);
+    font-weight: 700;
 }
 .nav-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(27, 94, 32, 0.4);
+    box-shadow: 0 0 25px rgba(255, 107, 107, 0.4);
 }
 
 /* ============================================================
@@ -202,17 +208,17 @@ nav a.active {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
     text-decoration: none;
     font-weight: 700;
     font-size: 0.9rem;
     transition: var(--transition);
     padding: 8px 16px;
     border-radius: 8px;
-    background: rgba(10, 36, 99, 0.08);
+    background: rgba(26, 42, 108, 0.08);
 }
 .back-button:hover {
-    background: var(--dark-blue);
+    background: var(--navy-blue);
     color: var(--white);
     transform: translateX(-3px);
 }
@@ -242,7 +248,7 @@ nav a.active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10, 36, 99, 0.75), rgba(27, 94, 32, 0.6));
+    background: linear-gradient(135deg, rgba(26, 42, 108, 0.7), rgba(26, 138, 138, 0.5), rgba(255, 184, 0, 0.3));
 }
 .hero-content {
     position: relative;
@@ -256,7 +262,7 @@ nav a.active {
     text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 .hero-content h1 .highlight {
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
 }
 .hero-content p {
     font-size: 1.4rem;
@@ -265,7 +271,7 @@ nav a.active {
     opacity: 0.9;
 }
 .hero-button {
-    background: var(--gradient-green);
+    background: var(--gradient-accent);
     color: var(--white);
     padding: 20px 45px;
     border-radius: 50px;
@@ -278,17 +284,17 @@ nav a.active {
     display: inline-block;
 }
 .hero-button:hover {
-    background: var(--dark-blue);
-    color: var(--white);
     transform: scale(1.05);
-    box-shadow: 0 10px 40px rgba(10, 36, 99, 0.3);
+    box-shadow: 0 10px 40px rgba(255, 107, 107, 0.3);
+    background: var(--white);
+    color: var(--navy-blue);
 }
 
 /* ============================================================
    ABOUT FOUNDATION
    ============================================================ */
 #about-foundation {
-    background-color: var(--white);
+    background-color: var(--soft-cream);
 }
 
 .history-timeline {
@@ -301,7 +307,7 @@ nav a.active {
     background: var(--white);
     padding: 30px;
     border-radius: 8px;
-    border-top: 5px solid var(--dark-green);
+    border-top: 5px solid var(--sunrise-gold);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     transition: var(--transition);
 }
@@ -312,7 +318,7 @@ nav a.active {
 .timeline-item h3 {
     margin-top: 0;
     font-size: 1.5rem;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
 }
 
 .mission-grid {
@@ -326,7 +332,7 @@ nav a.active {
     margin-top: 40px;
 }
 .mission-grid h3 {
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
 }
 .mission-grid p {
     color: rgba(255,255,255,0.9);
@@ -345,7 +351,7 @@ nav a.active {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
     position: absolute;
     left: 0;
 }
@@ -355,14 +361,14 @@ nav a.active {
     max-width: 100%;
     margin: 40px auto;
     border-radius: var(--border-radius);
-    box-shadow: 0 15px 40px rgba(10, 36, 99, 0.15);
+    box-shadow: 0 15px 40px rgba(26, 42, 108, 0.15);
 }
 
 /* ============================================================
    LEADERSHIP
    ============================================================ */
 #leadership {
-    background-color: var(--light-bg);
+    background-color: var(--white);
 }
 
 .team-member-card {
@@ -384,33 +390,34 @@ nav a.active {
     border-radius: var(--border-radius);
     box-shadow: 0 20px 50px -20px rgba(0,0,0,0.3);
     transition: var(--transition);
+    border: 4px solid var(--sunrise-gold);
 }
 .team-member-image img:hover {
     transform: scale(1.02);
 }
 .team-member-info h3 {
     font-size: 1.2rem;
-    color: var(--dark-green);
+    color: var(--warm-coral);
     letter-spacing: 2px;
 }
 .team-member-info h4 {
     font-size: 2.5rem;
     margin: 10px 0;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
 }
 
 .message-box {
     margin-top: 20px;
     padding: 25px;
-    background: var(--white);
-    border-left: 5px solid var(--dark-green);
+    background: var(--soft-cream);
+    border-left: 5px solid var(--sunrise-gold);
     border-radius: 0 8px 8px 0;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 .message-box h5 {
     margin: 0 0 10px 0;
     font-size: 1rem;
-    color: var(--dark-green);
+    color: var(--warm-coral);
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -427,11 +434,11 @@ nav a.active {
    COMMUNITY SHOWCASE
    ============================================================ */
 #community-showcase {
-    background-color: var(--white);
+    background-color: var(--soft-cream);
 }
 #community-showcase img {
     border-radius: var(--border-radius);
-    box-shadow: 0 15px 40px rgba(10, 36, 99, 0.15);
+    box-shadow: 0 15px 40px rgba(26, 42, 108, 0.15);
 }
 
 /* ============================================================
@@ -439,7 +446,7 @@ nav a.active {
    ============================================================ */
 #projects-list {
     padding: 60px 20px;
-    background: var(--light-bg);
+    background: var(--soft-cream);
 }
 #projects-list .container {
     max-width: 1100px;
@@ -450,9 +457,9 @@ nav a.active {
     background: var(--white);
     border-radius: var(--border-radius);
     margin-bottom: 50px;
-    box-shadow: 0 15px 40px rgba(10, 36, 99, 0.08);
+    box-shadow: 0 15px 40px rgba(26, 42, 108, 0.08);
     overflow: hidden;
-    border: 1px solid rgba(27, 94, 32, 0.05);
+    border: 1px solid rgba(26, 138, 138, 0.05);
     transition: var(--transition);
 }
 .project-card:hover {
@@ -484,11 +491,11 @@ nav a.active {
 .project-content h3 {
     margin-top: 0;
     font-size: 2rem;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
 }
 .project-content h4 {
     font-size: 1.1rem;
-    color: var(--dark-green);
+    color: var(--deep-teal);
     margin-top: 20px;
     margin-bottom: 8px;
 }
@@ -512,20 +519,20 @@ nav a.active {
 .budget {
     margin-top: 20px;
     padding: 20px 25px;
-    background: var(--light-bg);
+    background: var(--soft-cream);
     border-radius: 10px;
-    border-left: 4px solid var(--dark-green);
+    border-left: 4px solid var(--sunrise-gold);
 }
 .budget h4 {
     margin: 0 0 10px 0;
     font-size: 1rem;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
 }
 .budget p {
     margin: 0;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
 }
 .budget ul {
     list-style: none;
@@ -545,7 +552,7 @@ nav a.active {
     display: inline-block;
     margin-top: 20px;
     padding: 14px 35px;
-    background: var(--gradient-green);
+    background: var(--gradient-accent);
     color: var(--white);
     border-radius: 50px;
     text-decoration: none;
@@ -557,9 +564,9 @@ nav a.active {
     margin-right: 8px;
 }
 .project-donate-button:hover {
-    background: var(--dark-blue);
+    background: var(--navy-blue);
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(10, 36, 99, 0.3);
+    box-shadow: 0 0 30px rgba(26, 42, 108, 0.3);
 }
 
 /* ============================================================
@@ -583,7 +590,7 @@ nav a.active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 36, 99, 0.6);
+    background: rgba(26, 42, 108, 0.5);
 }
 .page-hero .hero-content {
     position: relative;
@@ -636,15 +643,15 @@ nav a.active {
     padding: 40px 50px;
     border-radius: var(--border-radius);
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    border: 1px solid rgba(27, 94, 32, 0.05);
+    border: 1px solid rgba(26, 138, 138, 0.05);
 }
 .form-container form h3 {
     margin-top: 30px;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 3px solid var(--dark-green);
+    border-bottom: 3px solid var(--sunrise-gold);
     font-size: 1.8rem;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
 }
 .form-container form h3:first-of-type {
     margin-top: 0;
@@ -652,7 +659,7 @@ nav a.active {
 .form-container form label {
     font-family: 'Oswald', sans-serif;
     font-size: 1.1rem;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
     margin-bottom: 8px;
     display: block;
 }
@@ -675,9 +682,9 @@ nav a.active {
 .form-container form input:focus,
 .form-container form textarea:focus,
 .form-container form select:focus {
-    border-color: var(--dark-green);
+    border-color: var(--deep-teal);
     outline: none;
-    box-shadow: 0 0 8px rgba(27, 94, 32, 0.3);
+    box-shadow: 0 0 8px rgba(26, 138, 138, 0.3);
 }
 .form-container form textarea {
     min-height: 120px;
@@ -692,14 +699,14 @@ nav a.active {
 .form-container form fieldset legend {
     font-family: 'Oswald', sans-serif;
     font-size: 1.1rem;
-    color: var(--dark-blue);
+    color: var(--navy-blue);
     padding: 0 12px;
     font-weight: 700;
 }
 .form-container form fieldset label {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: var(--text-dark);
+    color: var(--dark-text);
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -730,7 +737,7 @@ nav a.active {
 .form-container form .submit-btn {
     width: 100%;
     padding: 18px;
-    background: var(--gradient-green);
+    background: var(--gradient-accent);
     color: var(--white);
     border: none;
     border-radius: 12px;
@@ -743,9 +750,9 @@ nav a.active {
     margin-top: 10px;
 }
 .form-container form .submit-btn:hover {
-    background: var(--dark-blue);
+    background: var(--gradient-primary);
     transform: scale(1.02);
-    box-shadow: 0 5px 20px rgba(10, 36, 99, 0.3);
+    box-shadow: 0 5px 20px rgba(26, 42, 108, 0.3);
 }
 
 /* ============================================================
@@ -758,6 +765,9 @@ nav a.active {
 #donate h2,
 #donate .section-intro {
     color: var(--white);
+}
+#donate h2 .highlight {
+    color: var(--sunrise-gold);
 }
 .donation-methods {
     display: grid;
@@ -779,18 +789,18 @@ nav a.active {
 .method-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    border-color: var(--dark-green);
+    border-color: var(--sunrise-gold);
 }
 .method-card h3 {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
 }
 .method-card .fa-university,
 .method-card .fa-mobile-alt {
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
     font-size: 1.5rem;
 }
 .method-card p {
@@ -815,14 +825,14 @@ nav a.active {
    FOOTER
    ============================================================ */
 footer {
-    background-color: var(--dark-bg);
+    background-color: var(--navy-blue);
     color: rgba(255,255,255,0.6);
     padding: 60px 0 30px;
     text-align: center;
-    border-top: 3px solid var(--dark-green);
+    border-top: 3px solid var(--sunrise-gold);
 }
 footer h3 {
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
     font-family: 'Oswald', sans-serif;
     font-size: 1.5rem;
 }
@@ -851,7 +861,7 @@ footer p {
 .copyright {
     font-size: 0.9rem;
     margin-top: 30px;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 30px;
     color: rgba(255,255,255,0.4);
 }
@@ -892,7 +902,7 @@ footer p {
     cursor: pointer;
 }
 .modal .close-modal:hover {
-    color: var(--dark-green);
+    color: var(--sunrise-gold);
 }
 
 /* ============================================================
